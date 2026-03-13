@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sentry.io/schemas/organization.json",
+  "title": "Sentry Organization",
+  "description": "Represents an organization in Sentry. Organizations are the top-level entity that contain projects, teams, and members.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique identifier of the organization."
+    },
+    "slug": {
+      "type": "string",
+      "description": "The URL-friendly slug of the organization.",
+      "pattern": "^[a-z0-9_-]+$"
+    },
+    "name": {
+      "type": "string",
+      "description": "The human-readable name of the organization."
+    },
+    "dateCreated": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the organization was created."
+    },
+    "status": {
+      "type": "object",
+      "description": "The status of the organization.",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "isEarlyAdopter": {
+      "type": "boolean",
+      "description": "Whether the organization opted in to early adopter features."
+    },
+    "avatar": {
+      "type": "object",
+      "description": "The organization's avatar settings.",
+      "properties": {
+        "avatarType": {
+          "type": "string",
+          "description": "The type of avatar (e.g., letter_avatar, upload)."
+        },
+        "avatarUuid": {
+          "type": ["string", "null"],
+          "description": "The UUID of the uploaded avatar, if any."
+        }
+      }
+    },
+    "features": {
+      "type": "array",
+      "description": "A list of feature flags enabled for this organization.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "quota": {
+      "type": "object",
+      "description": "The organization's quota settings.",
+      "properties": {
+        "maxRate": {
+          "type": ["integer", "null"],
+          "description": "The maximum event rate."
+        },
+        "maxRateInterval": {
+          "type": "integer",
+          "description": "The interval in seconds for the max rate."
+        },
+        "accountLimit": {
+          "type": "integer",
+          "description": "The account-level event limit."
+        },
+        "projectLimit": {
+          "type": "integer",
+          "description": "The per-project event limit."
+        }
+      }
+    }
+  },
+  "required": ["id", "slug", "name"]
+}

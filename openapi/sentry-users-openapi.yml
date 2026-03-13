@@ -1,0 +1,93 @@
+openapi: 3.1.0
+info:
+  title: Sentry Users API
+  description: >-
+    The Users API provides endpoints for retrieving user-related information in
+    Sentry, including listing the organizations that the authenticated user
+    belongs to.
+  version: 0.0.1
+  contact:
+    name: Sentry Support
+    url: https://sentry.io/support/
+    email: support@sentry.io
+servers:
+  - url: https://sentry.io/api/0
+    description: Sentry Production API
+security:
+  - BearerAuth: []
+tags:
+  - name: Users
+    description: Retrieve user-related information
+paths:
+  /organizations/:
+    get:
+      operationId: listUserOrganizations
+      summary: List your organizations
+      description: >-
+        Returns a list of organizations available to the authenticated session.
+        This is particularly useful for tokens with access to multiple
+        organizations.
+      tags:
+        - Users
+      parameters:
+        - name: owner
+          in: query
+          description: Restrict results to organizations owned by the authenticated user.
+          schema:
+            type: boolean
+        - name: cursor
+          in: query
+          description: Pagination cursor.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of organizations.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Organization'
+        '401':
+          description: Unauthorized.
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: Authentication token for the Sentry API.
+  schemas:
+    Organization:
+      type: object
+      properties:
+        id:
+          type: string
+        slug:
+          type: string
+        name:
+          type: string
+        dateCreated:
+          type: string
+          format: date-time
+        status:
+          type: object
+          properties:
+            id:
+              type: string
+            name:
+              type: string
+        isEarlyAdopter:
+          type: boolean
+        avatar:
+          type: object
+          properties:
+            avatarType:
+              type: string
+            avatarUuid:
+              type: string
+              nullable: true
+      required:
+        - id
+        - slug
+        - name

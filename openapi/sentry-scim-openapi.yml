@@ -1,0 +1,491 @@
+openapi: 3.1.0
+info:
+  title: Sentry SCIM API
+  description: >-
+    The SCIM API provides endpoints for federated identity management in Sentry,
+    enabling automated provisioning and deprovisioning of organization members
+    and teams using the System for Cross-Domain Identity Management standard.
+    Requires a Business Plan with SAML2 enabled.
+  version: 0.0.1
+  contact:
+    name: Sentry Support
+    url: https://sentry.io/support/
+    email: support@sentry.io
+servers:
+  - url: https://sentry.io/api/0
+    description: Sentry Production API
+security:
+  - BearerAuth: []
+tags:
+  - name: SCIM Members
+    description: Provision and manage organization members via SCIM
+  - name: SCIM Teams
+    description: Provision and manage teams via SCIM
+paths:
+  /organizations/{organization_id_or_slug}/scim/v2/Users:
+    get:
+      operationId: listScimMembers
+      summary: List an organization's SCIM members
+      description: Returns a paginated list of organization members using the SCIM protocol.
+      tags:
+        - SCIM Members
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - name: startIndex
+          in: query
+          description: SCIM 1-indexed starting result number.
+          schema:
+            type: integer
+        - name: count
+          in: query
+          description: Maximum number of results to return.
+          schema:
+            type: integer
+        - name: filter
+          in: query
+          description: SCIM filter expression (e.g., userName eq "user@example.com").
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A SCIM list response of members.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScimListResponse'
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden. Requires Business Plan with SAML2 enabled.
+    post:
+      operationId: provisionScimMember
+      summary: Provision a new organization member
+      description: Creates a new organization member via SCIM provisioning.
+      tags:
+        - SCIM Members
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - schemas
+                - userName
+              properties:
+                schemas:
+                  type: array
+                  items:
+                    type: string
+                userName:
+                  type: string
+                  description: The email address of the user to provision.
+                active:
+                  type: boolean
+                  description: Whether the user account is active.
+                name:
+                  type: object
+                  properties:
+                    givenName:
+                      type: string
+                    familyName:
+                      type: string
+                emails:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      primary:
+                        type: boolean
+                      value:
+                        type: string
+                      type:
+                        type: string
+      responses:
+        '201':
+          description: Member provisioned.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScimUser'
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+        '409':
+          description: User already exists.
+  /organizations/{organization_id_or_slug}/scim/v2/Users/{scim_user_id}:
+    get:
+      operationId: queryScimMember
+      summary: Query an individual organization member
+      description: Returns a specific organization member using the SCIM protocol.
+      tags:
+        - SCIM Members
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/ScimUserId'
+      responses:
+        '200':
+          description: SCIM user details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScimUser'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: User not found.
+    patch:
+      operationId: updateScimMember
+      summary: Update an organization member's attributes
+      description: >-
+        Updates attributes of a SCIM member. Currently supports setting the
+        active attribute to deactivate members.
+      tags:
+        - SCIM Members
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/ScimUserId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - schemas
+                - Operations
+              properties:
+                schemas:
+                  type: array
+                  items:
+                    type: string
+                Operations:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      op:
+                        type: string
+                        enum:
+                          - replace
+                      value:
+                        type: object
+                        properties:
+                          active:
+                            type: boolean
+      responses:
+        '204':
+          description: Member updated.
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized.
+        '404':
+          description: User not found.
+    delete:
+      operationId: deleteScimMember
+      summary: Delete an organization member via SCIM
+      description: Removes/deactivates an organization member via SCIM.
+      tags:
+        - SCIM Members
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/ScimUserId'
+      responses:
+        '204':
+          description: Member removed.
+        '401':
+          description: Unauthorized.
+        '404':
+          description: User not found.
+  /organizations/{organization_id_or_slug}/scim/v2/Groups:
+    get:
+      operationId: listScimTeams
+      summary: List an organization's paginated teams
+      description: Returns a paginated list of teams using the SCIM protocol.
+      tags:
+        - SCIM Teams
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - name: startIndex
+          in: query
+          description: SCIM 1-indexed starting result number.
+          schema:
+            type: integer
+        - name: count
+          in: query
+          description: Maximum number of results.
+          schema:
+            type: integer
+        - name: filter
+          in: query
+          description: SCIM filter expression.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A SCIM list response of teams.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScimListResponse'
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+    post:
+      operationId: provisionScimTeam
+      summary: Provision a new team
+      description: Creates a new team via SCIM provisioning.
+      tags:
+        - SCIM Teams
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - schemas
+                - displayName
+              properties:
+                schemas:
+                  type: array
+                  items:
+                    type: string
+                displayName:
+                  type: string
+                  description: The name of the team.
+                members:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      value:
+                        type: string
+                      display:
+                        type: string
+      responses:
+        '201':
+          description: Team provisioned.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScimGroup'
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized.
+        '409':
+          description: Team already exists.
+  /organizations/{organization_id_or_slug}/scim/v2/Groups/{scim_group_id}:
+    get:
+      operationId: queryScimTeam
+      summary: Query an individual team
+      description: Returns a specific team using the SCIM protocol.
+      tags:
+        - SCIM Teams
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/ScimGroupId'
+      responses:
+        '200':
+          description: SCIM team details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScimGroup'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Team not found.
+    patch:
+      operationId: updateScimTeam
+      summary: Update a team's attributes
+      description: Updates team attributes via SCIM, including managing members.
+      tags:
+        - SCIM Teams
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/ScimGroupId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - schemas
+                - Operations
+              properties:
+                schemas:
+                  type: array
+                  items:
+                    type: string
+                Operations:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      op:
+                        type: string
+                        enum:
+                          - replace
+                          - add
+                          - remove
+                      path:
+                        type: string
+                      value:
+                        type: object
+      responses:
+        '204':
+          description: Team updated.
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Team not found.
+    delete:
+      operationId: deleteScimTeam
+      summary: Delete an individual team
+      description: Deletes a team via SCIM.
+      tags:
+        - SCIM Teams
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/ScimGroupId'
+      responses:
+        '204':
+          description: Team deleted.
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Team not found.
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: >-
+        Bearer token authentication. Sentry SaaS customers must be on a
+        Business Plan with SAML2 enabled.
+  parameters:
+    OrganizationIdOrSlug:
+      name: organization_id_or_slug
+      in: path
+      required: true
+      description: The ID or slug of the organization.
+      schema:
+        type: string
+    ScimUserId:
+      name: scim_user_id
+      in: path
+      required: true
+      description: The SCIM user ID.
+      schema:
+        type: string
+    ScimGroupId:
+      name: scim_group_id
+      in: path
+      required: true
+      description: The SCIM group (team) ID.
+      schema:
+        type: string
+  schemas:
+    ScimListResponse:
+      type: object
+      properties:
+        schemas:
+          type: array
+          items:
+            type: string
+        totalResults:
+          type: integer
+        startIndex:
+          type: integer
+        itemsPerPage:
+          type: integer
+        Resources:
+          type: array
+          items:
+            type: object
+      required:
+        - schemas
+        - totalResults
+        - Resources
+    ScimUser:
+      type: object
+      properties:
+        schemas:
+          type: array
+          items:
+            type: string
+        id:
+          type: string
+        userName:
+          type: string
+        name:
+          type: object
+          properties:
+            givenName:
+              type: string
+            familyName:
+              type: string
+        emails:
+          type: array
+          items:
+            type: object
+            properties:
+              primary:
+                type: boolean
+              value:
+                type: string
+              type:
+                type: string
+        active:
+          type: boolean
+        meta:
+          type: object
+          properties:
+            resourceType:
+              type: string
+      required:
+        - id
+        - userName
+        - active
+    ScimGroup:
+      type: object
+      properties:
+        schemas:
+          type: array
+          items:
+            type: string
+        id:
+          type: string
+        displayName:
+          type: string
+        members:
+          type: array
+          items:
+            type: object
+            properties:
+              value:
+                type: string
+              display:
+                type: string
+        meta:
+          type: object
+          properties:
+            resourceType:
+              type: string
+      required:
+        - id
+        - displayName

@@ -1,0 +1,136 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sentry.io/schemas/issue.json",
+  "title": "Sentry Issue",
+  "description": "Represents an issue (group) in Sentry. Issues are aggregated groups of similar error events, providing a deduplicated view of recurring problems in an application.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique identifier of the issue."
+    },
+    "shortId": {
+      "type": "string",
+      "description": "The short ID for the issue (e.g., PROJECT-123), used in the Sentry UI."
+    },
+    "title": {
+      "type": "string",
+      "description": "The title of the issue, typically the error type and message."
+    },
+    "culprit": {
+      "type": "string",
+      "description": "The function or module where the issue originated."
+    },
+    "permalink": {
+      "type": "string",
+      "format": "uri",
+      "description": "The permanent URL to view this issue in the Sentry UI."
+    },
+    "level": {
+      "type": "string",
+      "description": "The severity level of the issue.",
+      "enum": ["fatal", "error", "warning", "info", "debug"]
+    },
+    "status": {
+      "type": "string",
+      "description": "The current status of the issue.",
+      "enum": ["resolved", "unresolved", "ignored"]
+    },
+    "platform": {
+      "type": "string",
+      "description": "The platform that generated the issue."
+    },
+    "firstSeen": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the issue was first seen."
+    },
+    "lastSeen": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the issue was most recently seen."
+    },
+    "count": {
+      "type": "string",
+      "description": "The total number of events for this issue."
+    },
+    "userCount": {
+      "type": "integer",
+      "description": "The number of unique users affected by this issue."
+    },
+    "type": {
+      "type": "string",
+      "description": "The type of issue.",
+      "enum": ["error", "default"]
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Additional metadata about the issue.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The error type (e.g., ValueError, TypeError)."
+        },
+        "value": {
+          "type": "string",
+          "description": "The error message or value."
+        },
+        "filename": {
+          "type": "string",
+          "description": "The filename where the error occurred."
+        },
+        "function": {
+          "type": "string",
+          "description": "The function where the error occurred."
+        }
+      }
+    },
+    "assignedTo": {
+      "type": ["object", "null"],
+      "description": "The user or team assigned to this issue.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["user", "team"]
+        },
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        }
+      }
+    },
+    "isPublic": {
+      "type": "boolean",
+      "description": "Whether the issue is publicly visible."
+    },
+    "hasSeen": {
+      "type": "boolean",
+      "description": "Whether the authenticated user has seen this issue."
+    },
+    "isBookmarked": {
+      "type": "boolean",
+      "description": "Whether the issue is bookmarked by the authenticated user."
+    },
+    "project": {
+      "type": "object",
+      "description": "The project this issue belongs to.",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "slug": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "required": ["id", "title", "status"]
+}

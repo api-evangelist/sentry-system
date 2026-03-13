@@ -1,0 +1,366 @@
+openapi: 3.1.0
+info:
+  title: Sentry Integration Platform API
+  description: >-
+    The Integration Platform API provides endpoints for managing custom
+    integrations in Sentry, including creating and updating external issues,
+    managing integration configurations, listing installations, and retrieving
+    organization-level custom integration details.
+  version: 0.0.1
+  contact:
+    name: Sentry Support
+    url: https://sentry.io/support/
+    email: support@sentry.io
+servers:
+  - url: https://sentry.io/api/0
+    description: Sentry Production API
+security:
+  - BearerAuth: []
+tags:
+  - name: Custom Integrations
+    description: Manage custom integrations
+  - name: External Issues
+    description: Manage external issue links
+  - name: Installations
+    description: Manage integration installations
+paths:
+  /organizations/{organization_id_or_slug}/sentry-app-installations/:
+    get:
+      operationId: listOrganizationInstallations
+      summary: List an organization's Integration Platform installations
+      description: Returns a list of Integration Platform installations for the organization.
+      tags:
+        - Installations
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      responses:
+        '200':
+          description: A list of installations.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Installation'
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+  /organizations/{organization_id_or_slug}/sentry-apps/:
+    get:
+      operationId: listOrganizationCustomIntegrations
+      summary: Retrieve the custom integrations created by an organization
+      description: Returns a list of custom integrations built by the organization.
+      tags:
+        - Custom Integrations
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      responses:
+        '200':
+          description: A list of custom integrations.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SentryApp'
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+  /sentry-apps/{sentry_app_id_or_slug}/:
+    get:
+      operationId: retrieveCustomIntegration
+      summary: Retrieve a custom integration by ID or slug
+      description: Returns details for a specific custom integration (Sentry App).
+      tags:
+        - Custom Integrations
+      parameters:
+        - $ref: '#/components/parameters/SentryAppIdOrSlug'
+      responses:
+        '200':
+          description: Custom integration details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SentryApp'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Integration not found.
+    put:
+      operationId: updateCustomIntegration
+      summary: Update an existing custom integration
+      description: Updates an existing custom integration.
+      tags:
+        - Custom Integrations
+      parameters:
+        - $ref: '#/components/parameters/SentryAppIdOrSlug'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                scopes:
+                  type: array
+                  items:
+                    type: string
+                webhookUrl:
+                  type: string
+                  format: uri
+                redirectUrl:
+                  type: string
+                  format: uri
+                overview:
+                  type: string
+      responses:
+        '200':
+          description: Integration updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SentryApp'
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Integration not found.
+    delete:
+      operationId: deleteCustomIntegration
+      summary: Delete a custom integration
+      description: Deletes a custom integration.
+      tags:
+        - Custom Integrations
+      parameters:
+        - $ref: '#/components/parameters/SentryAppIdOrSlug'
+      responses:
+        '204':
+          description: Integration deleted.
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Integration not found.
+  /sentry-app-installations/{uuid}/external-issues/:
+    post:
+      operationId: createExternalIssue
+      summary: Create or update an external issue
+      description: Creates or updates a link between a Sentry issue and an external issue.
+      tags:
+        - External Issues
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          description: The UUID of the installation.
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - issueId
+                - webUrl
+                - project
+                - identifier
+              properties:
+                issueId:
+                  type: integer
+                  description: The Sentry issue ID to link.
+                webUrl:
+                  type: string
+                  format: uri
+                  description: The URL of the external issue.
+                project:
+                  type: string
+                  description: The project identifier on the external service.
+                identifier:
+                  type: string
+                  description: The identifier for the external issue.
+                label:
+                  type: string
+                  description: Display label for the link.
+      responses:
+        '200':
+          description: External issue created or updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExternalIssue'
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized.
+  /sentry-app-installations/{uuid}/external-issues/{external_issue_id}/:
+    delete:
+      operationId: deleteExternalIssue
+      summary: Delete an external issue
+      description: Removes a link between a Sentry issue and an external issue.
+      tags:
+        - External Issues
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          description: The UUID of the installation.
+          schema:
+            type: string
+            format: uuid
+        - name: external_issue_id
+          in: path
+          required: true
+          description: The ID of the external issue link.
+          schema:
+            type: string
+      responses:
+        '204':
+          description: External issue link deleted.
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Not found.
+  /groups/{issue_id}/external-issues/:
+    get:
+      operationId: listIssueExternalLinks
+      summary: Retrieve custom integration issue links for a Sentry issue
+      description: Returns a list of external issue links for a given Sentry issue.
+      tags:
+        - External Issues
+      parameters:
+        - name: issue_id
+          in: path
+          required: true
+          description: The ID of the Sentry issue.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of external issue links.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ExternalIssue'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Issue not found.
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: Authentication token for the Sentry API.
+  parameters:
+    OrganizationIdOrSlug:
+      name: organization_id_or_slug
+      in: path
+      required: true
+      description: The ID or slug of the organization.
+      schema:
+        type: string
+    SentryAppIdOrSlug:
+      name: sentry_app_id_or_slug
+      in: path
+      required: true
+      description: The ID or slug of the custom integration.
+      schema:
+        type: string
+  schemas:
+    SentryApp:
+      type: object
+      properties:
+        uuid:
+          type: string
+          format: uuid
+        slug:
+          type: string
+        name:
+          type: string
+        scopes:
+          type: array
+          items:
+            type: string
+        status:
+          type: string
+        webhookUrl:
+          type: string
+          format: uri
+        redirectUrl:
+          type: string
+          format: uri
+          nullable: true
+        overview:
+          type: string
+          nullable: true
+        schema:
+          type: object
+        datePublished:
+          type: string
+          format: date-time
+          nullable: true
+        owner:
+          type: object
+          properties:
+            id:
+              type: string
+            slug:
+              type: string
+      required:
+        - uuid
+        - slug
+        - name
+    Installation:
+      type: object
+      properties:
+        uuid:
+          type: string
+          format: uuid
+        app:
+          type: object
+          properties:
+            uuid:
+              type: string
+              format: uuid
+            slug:
+              type: string
+        organization:
+          type: object
+          properties:
+            slug:
+              type: string
+        status:
+          type: string
+        dateCreated:
+          type: string
+          format: date-time
+      required:
+        - uuid
+        - app
+    ExternalIssue:
+      type: object
+      properties:
+        id:
+          type: string
+        issueId:
+          type: integer
+        serviceType:
+          type: string
+        displayName:
+          type: string
+        webUrl:
+          type: string
+          format: uri
+      required:
+        - id
+        - issueId
+        - webUrl

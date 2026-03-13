@@ -1,0 +1,183 @@
+openapi: 3.1.0
+info:
+  title: Sentry Seer API
+  description: >-
+    The Seer API provides endpoints for AI-powered issue analysis in Sentry,
+    including listing available AI models, starting AI-assisted issue fixes, and
+    retrieving the state of ongoing fix analyses.
+  version: 0.0.1
+  contact:
+    name: Sentry Support
+    url: https://sentry.io/support/
+    email: support@sentry.io
+servers:
+  - url: https://sentry.io/api/0
+    description: Sentry Production API
+security:
+  - BearerAuth: []
+tags:
+  - name: Seer
+    description: AI-powered issue analysis and fix suggestions
+paths:
+  /organizations/{organization_id_or_slug}/seer/models/:
+    get:
+      operationId: listSeerModels
+      summary: List Seer AI models
+      description: Returns a list of available AI models for Seer issue analysis.
+      tags:
+        - Seer
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      responses:
+        '200':
+          description: A list of available AI models.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SeerModel'
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+  /issues/{issue_id}/seer/autofix/:
+    post:
+      operationId: startSeerIssueFix
+      summary: Start Seer issue fix
+      description: >-
+        Initiates an AI-powered issue fix analysis using Seer. The fix runs
+        asynchronously and its state can be polled.
+      tags:
+        - Seer
+      parameters:
+        - $ref: '#/components/parameters/IssueId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                instruction:
+                  type: string
+                  description: Optional instruction to guide the AI fix.
+      responses:
+        '202':
+          description: Fix analysis started.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  autofix:
+                    $ref: '#/components/schemas/SeerAutofixState'
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Issue not found.
+    get:
+      operationId: retrieveSeerIssueFixState
+      summary: Retrieve Seer issue fix state
+      description: Returns the current state of a Seer issue fix analysis.
+      tags:
+        - Seer
+      parameters:
+        - $ref: '#/components/parameters/IssueId'
+      responses:
+        '200':
+          description: The current state of the fix analysis.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  autofix:
+                    $ref: '#/components/schemas/SeerAutofixState'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Issue or fix state not found.
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: Authentication token for the Sentry API.
+  parameters:
+    OrganizationIdOrSlug:
+      name: organization_id_or_slug
+      in: path
+      required: true
+      description: The ID or slug of the organization.
+      schema:
+        type: string
+    IssueId:
+      name: issue_id
+      in: path
+      required: true
+      description: The ID of the issue.
+      schema:
+        type: string
+  schemas:
+    SeerModel:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        isAvailable:
+          type: boolean
+      required:
+        - id
+        - name
+    SeerAutofixState:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+            - pending
+            - processing
+            - completed
+            - error
+        createdAt:
+          type: string
+          format: date-time
+        completedAt:
+          type: string
+          format: date-time
+          nullable: true
+        steps:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              title:
+                type: string
+              status:
+                type: string
+              completedMessage:
+                type: string
+                nullable: true
+        fix:
+          type: object
+          nullable: true
+          properties:
+            title:
+              type: string
+            description:
+              type: string
+            pr_url:
+              type: string
+              format: uri
+              nullable: true
+      required:
+        - status
+        - createdAt

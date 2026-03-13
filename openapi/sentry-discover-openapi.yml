@@ -1,0 +1,275 @@
+openapi: 3.1.0
+info:
+  title: Sentry Discover API
+  description: >-
+    The Discover and Performance API provides endpoints for managing saved
+    queries in Sentry, allowing you to create, list, retrieve, edit, and delete
+    organization-level Discover saved queries for slicing and analyzing error
+    and transaction event data.
+  version: 0.0.1
+  contact:
+    name: Sentry Support
+    url: https://sentry.io/support/
+    email: support@sentry.io
+servers:
+  - url: https://sentry.io/api/0
+    description: Sentry Production API
+security:
+  - BearerAuth: []
+tags:
+  - name: Discover
+    description: Manage saved Discover queries
+paths:
+  /organizations/{organization_id_or_slug}/discover/saved/:
+    get:
+      operationId: listDiscoverSavedQueries
+      summary: List an organization's Discover saved queries
+      description: Returns a list of saved Discover queries for the given organization.
+      tags:
+        - Discover
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - name: cursor
+          in: query
+          description: Pagination cursor.
+          schema:
+            type: string
+        - name: query
+          in: query
+          description: Search by query name.
+          schema:
+            type: string
+        - name: sortBy
+          in: query
+          description: Sort by field (e.g., dateCreated, dateUpdated, name).
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of saved queries.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SavedQuery'
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+    post:
+      operationId: createDiscoverSavedQuery
+      summary: Create a new saved query
+      description: Creates a new saved Discover query for the given organization.
+      tags:
+        - Discover
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - fields
+              properties:
+                name:
+                  type: string
+                  description: The name of the saved query.
+                fields:
+                  type: array
+                  items:
+                    type: string
+                  description: The fields to select in the query.
+                query:
+                  type: string
+                  description: The Sentry search query.
+                projects:
+                  type: array
+                  items:
+                    type: integer
+                  description: Project IDs to filter by.
+                environment:
+                  type: array
+                  items:
+                    type: string
+                  description: Environment names to filter by.
+                range:
+                  type: string
+                  description: Time range (e.g., 24h, 14d, 30d).
+                orderby:
+                  type: string
+                  description: The field to order by.
+                version:
+                  type: integer
+                  description: The Discover query version.
+      responses:
+        '201':
+          description: Saved query created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SavedQuery'
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+  /organizations/{organization_id_or_slug}/discover/saved/{query_id}/:
+    get:
+      operationId: retrieveDiscoverSavedQuery
+      summary: Retrieve an organization's Discover saved query
+      description: Returns a specific saved Discover query.
+      tags:
+        - Discover
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/QueryId'
+      responses:
+        '200':
+          description: Saved query details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SavedQuery'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Saved query not found.
+    put:
+      operationId: editDiscoverSavedQuery
+      summary: Edit an organization's Discover saved query
+      description: Updates a saved Discover query.
+      tags:
+        - Discover
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/QueryId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                fields:
+                  type: array
+                  items:
+                    type: string
+                query:
+                  type: string
+                projects:
+                  type: array
+                  items:
+                    type: integer
+                environment:
+                  type: array
+                  items:
+                    type: string
+                range:
+                  type: string
+                orderby:
+                  type: string
+      responses:
+        '200':
+          description: Saved query updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SavedQuery'
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Saved query not found.
+    delete:
+      operationId: deleteDiscoverSavedQuery
+      summary: Delete an organization's Discover saved query
+      description: Deletes a saved Discover query.
+      tags:
+        - Discover
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/QueryId'
+      responses:
+        '204':
+          description: Saved query deleted.
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Saved query not found.
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: Authentication token for the Sentry API.
+  parameters:
+    OrganizationIdOrSlug:
+      name: organization_id_or_slug
+      in: path
+      required: true
+      description: The ID or slug of the organization.
+      schema:
+        type: string
+    QueryId:
+      name: query_id
+      in: path
+      required: true
+      description: The ID of the saved query.
+      schema:
+        type: integer
+  schemas:
+    SavedQuery:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        fields:
+          type: array
+          items:
+            type: string
+        query:
+          type: string
+        projects:
+          type: array
+          items:
+            type: integer
+        environment:
+          type: array
+          items:
+            type: string
+        range:
+          type: string
+          nullable: true
+        orderby:
+          type: string
+        version:
+          type: integer
+        dateCreated:
+          type: string
+          format: date-time
+        dateUpdated:
+          type: string
+          format: date-time
+        createdBy:
+          type: object
+          properties:
+            id:
+              type: string
+            name:
+              type: string
+            email:
+              type: string
+      required:
+        - id
+        - name
+        - fields

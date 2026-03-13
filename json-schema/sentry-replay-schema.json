@@ -1,0 +1,134 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sentry.io/schemas/replay.json",
+  "title": "Sentry Replay",
+  "description": "Represents a session replay in Sentry. Replays are recorded user sessions that capture DOM interactions, network requests, and console output, providing video-like playback of user experiences that led to errors.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The unique identifier of the replay."
+    },
+    "title": {
+      "type": "string",
+      "description": "The title of the replay, typically the page URL."
+    },
+    "projectId": {
+      "type": "string",
+      "description": "The project ID the replay belongs to."
+    },
+    "duration": {
+      "type": "integer",
+      "description": "Duration of the replay in seconds."
+    },
+    "countErrors": {
+      "type": "integer",
+      "description": "Number of errors that occurred during the replay."
+    },
+    "countSegments": {
+      "type": "integer",
+      "description": "Number of recording segments."
+    },
+    "countUrls": {
+      "type": "integer",
+      "description": "Number of unique URLs visited during the replay."
+    },
+    "startedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the replay session started."
+    },
+    "finishedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the replay session ended."
+    },
+    "platform": {
+      "type": "string",
+      "description": "The platform (e.g., javascript)."
+    },
+    "environment": {
+      "type": "string",
+      "description": "The environment the replay was recorded in."
+    },
+    "urls": {
+      "type": "array",
+      "description": "URLs visited during the replay.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "user": {
+      "type": "object",
+      "description": "Information about the user whose session was recorded.",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "ip_address": {
+          "type": "string"
+        }
+      }
+    },
+    "browser": {
+      "type": "object",
+      "description": "Browser information.",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      }
+    },
+    "os": {
+      "type": "object",
+      "description": "Operating system information.",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      }
+    },
+    "device": {
+      "type": "object",
+      "description": "Device information.",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "brand": {
+          "type": "string"
+        },
+        "model": {
+          "type": "string"
+        },
+        "family": {
+          "type": "string"
+        }
+      }
+    },
+    "tags": {
+      "type": "object",
+      "description": "Tags associated with the replay.",
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "required": ["id", "startedAt", "finishedAt"]
+}

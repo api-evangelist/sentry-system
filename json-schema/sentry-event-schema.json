@@ -1,0 +1,147 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sentry.io/schemas/event.json",
+  "title": "Sentry Event",
+  "description": "Represents an individual error or transaction event in Sentry. Events are individual occurrences that get grouped into issues based on fingerprinting rules.",
+  "type": "object",
+  "properties": {
+    "eventID": {
+      "type": "string",
+      "description": "The unique identifier of the event."
+    },
+    "context": {
+      "type": "object",
+      "description": "Additional context data attached to the event."
+    },
+    "dateCreated": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the event was created."
+    },
+    "dateReceived": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the event was received by Sentry."
+    },
+    "entries": {
+      "type": "array",
+      "description": "The structured data entries of the event (exception, request, breadcrumbs, etc.).",
+      "items": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "The type of entry (e.g., exception, request, breadcrumbs, message)."
+          },
+          "data": {
+            "type": "object",
+            "description": "The entry data, structure varies by type."
+          }
+        }
+      }
+    },
+    "message": {
+      "type": "string",
+      "description": "The event message."
+    },
+    "title": {
+      "type": "string",
+      "description": "The title of the event."
+    },
+    "platform": {
+      "type": "string",
+      "description": "The platform that generated the event."
+    },
+    "tags": {
+      "type": "array",
+      "description": "Tags associated with the event.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "type": {
+      "type": "string",
+      "description": "The type of event (e.g., error, default, transaction)."
+    },
+    "groupID": {
+      "type": "string",
+      "description": "The issue ID this event belongs to."
+    },
+    "sdk": {
+      "type": "object",
+      "description": "Information about the SDK that captured the event.",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      }
+    },
+    "user": {
+      "type": "object",
+      "description": "Information about the user who triggered the event.",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string",
+          "format": "email"
+        },
+        "username": {
+          "type": "string"
+        },
+        "ip_address": {
+          "type": "string"
+        }
+      }
+    },
+    "contexts": {
+      "type": "object",
+      "description": "Structured context data (device, os, browser, runtime, etc.).",
+      "properties": {
+        "device": {
+          "type": "object",
+          "properties": {
+            "name": { "type": "string" },
+            "family": { "type": "string" },
+            "model": { "type": "string" },
+            "arch": { "type": "string" }
+          }
+        },
+        "os": {
+          "type": "object",
+          "properties": {
+            "name": { "type": "string" },
+            "version": { "type": "string" }
+          }
+        },
+        "browser": {
+          "type": "object",
+          "properties": {
+            "name": { "type": "string" },
+            "version": { "type": "string" }
+          }
+        },
+        "runtime": {
+          "type": "object",
+          "properties": {
+            "name": { "type": "string" },
+            "version": { "type": "string" }
+          }
+        }
+      }
+    }
+  },
+  "required": ["eventID", "dateCreated"]
+}

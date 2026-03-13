@@ -1,0 +1,467 @@
+openapi: 3.1.0
+info:
+  title: Sentry Monitors API
+  description: >-
+    The Monitors and Alerts API provides beta endpoints for managing monitors
+    and alerts in Sentry, including creating, retrieving, updating, and deleting
+    monitors and alerts, as well as bulk operations at the organization level.
+    These endpoints are currently in beta and may be subject to change.
+  version: 0.0.1
+  contact:
+    name: Sentry Support
+    url: https://sentry.io/support/
+    email: support@sentry.io
+servers:
+  - url: https://sentry.io/api/0
+    description: Sentry Production API
+security:
+  - BearerAuth: []
+tags:
+  - name: Monitors
+    description: Manage uptime monitors (beta)
+  - name: Alerts
+    description: Manage alerts (beta)
+paths:
+  /organizations/{organization_id_or_slug}/monitors/:
+    get:
+      operationId: listOrganizationMonitors
+      summary: Fetch an organization's monitors
+      description: >-
+        Returns a list of monitors for the organization. This endpoint is in
+        beta and may change.
+      tags:
+        - Monitors
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - name: cursor
+          in: query
+          description: Pagination cursor.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of monitors.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UptimeMonitor'
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+    put:
+      operationId: mutateOrganizationMonitors
+      summary: Mutate an organization's monitors
+      description: Bulk update monitors for an organization.
+      tags:
+        - Monitors
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ids:
+                  type: array
+                  items:
+                    type: string
+                status:
+                  type: string
+      responses:
+        '200':
+          description: Monitors updated.
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+    delete:
+      operationId: bulkDeleteMonitors
+      summary: Bulk delete monitors
+      description: Bulk delete monitors for an organization.
+      tags:
+        - Monitors
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - name: id
+          in: query
+          description: IDs of monitors to delete.
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '204':
+          description: Monitors deleted.
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+  /projects/{organization_id_or_slug}/{project_id_or_slug}/uptime-monitors/:
+    post:
+      operationId: createProjectMonitor
+      summary: Create a monitor for a project
+      description: Creates a new uptime monitor for a specific project.
+      tags:
+        - Monitors
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/ProjectIdOrSlug'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - url
+              properties:
+                name:
+                  type: string
+                  description: The name of the monitor.
+                url:
+                  type: string
+                  format: uri
+                  description: The URL to monitor.
+                intervalSeconds:
+                  type: integer
+                  description: Check interval in seconds.
+      responses:
+        '201':
+          description: Monitor created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UptimeMonitor'
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized.
+  /organizations/{organization_id_or_slug}/uptime-monitors/{monitor_id}/:
+    get:
+      operationId: fetchMonitor
+      summary: Fetch a monitor
+      description: Returns details for a specific uptime monitor.
+      tags:
+        - Monitors
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/MonitorId'
+      responses:
+        '200':
+          description: Monitor details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UptimeMonitor'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Monitor not found.
+    put:
+      operationId: updateMonitor
+      summary: Update a monitor by ID
+      description: Updates an uptime monitor.
+      tags:
+        - Monitors
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/MonitorId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                url:
+                  type: string
+                  format: uri
+                intervalSeconds:
+                  type: integer
+      responses:
+        '200':
+          description: Monitor updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UptimeMonitor'
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Monitor not found.
+    delete:
+      operationId: deleteMonitor
+      summary: Delete a monitor
+      description: Deletes an uptime monitor.
+      tags:
+        - Monitors
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/MonitorId'
+      responses:
+        '204':
+          description: Monitor deleted.
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Monitor not found.
+  /organizations/{organization_id_or_slug}/alerts/:
+    get:
+      operationId: fetchAlerts
+      summary: Fetch alerts
+      description: Returns a list of alerts for the organization.
+      tags:
+        - Alerts
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - name: cursor
+          in: query
+          description: Pagination cursor.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of alerts.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MonitorAlert'
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+    post:
+      operationId: createAlert
+      summary: Create an alert for an organization
+      description: Creates a new alert for the organization.
+      tags:
+        - Alerts
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+              properties:
+                name:
+                  type: string
+                  description: The name of the alert.
+      responses:
+        '201':
+          description: Alert created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonitorAlert'
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized.
+    put:
+      operationId: mutateOrganizationAlerts
+      summary: Mutate an organization's alerts
+      description: Bulk update alerts for an organization.
+      tags:
+        - Alerts
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ids:
+                  type: array
+                  items:
+                    type: string
+                status:
+                  type: string
+      responses:
+        '200':
+          description: Alerts updated.
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+    delete:
+      operationId: bulkDeleteAlerts
+      summary: Bulk delete alerts
+      description: Bulk delete alerts for an organization.
+      tags:
+        - Alerts
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - name: id
+          in: query
+          description: IDs of alerts to delete.
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '204':
+          description: Alerts deleted.
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+  /organizations/{organization_id_or_slug}/alerts/{alert_id}/:
+    get:
+      operationId: fetchAlert
+      summary: Fetch an alert
+      description: Returns details for a specific alert.
+      tags:
+        - Alerts
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/AlertId'
+      responses:
+        '200':
+          description: Alert details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonitorAlert'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Alert not found.
+    put:
+      operationId: updateAlert
+      summary: Update an alert by ID
+      description: Updates an alert.
+      tags:
+        - Alerts
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/AlertId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+      responses:
+        '200':
+          description: Alert updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonitorAlert'
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Alert not found.
+    delete:
+      operationId: deleteAlert
+      summary: Delete an alert
+      description: Deletes an alert.
+      tags:
+        - Alerts
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/AlertId'
+      responses:
+        '204':
+          description: Alert deleted.
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Alert not found.
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: Authentication token for the Sentry API.
+  parameters:
+    OrganizationIdOrSlug:
+      name: organization_id_or_slug
+      in: path
+      required: true
+      description: The ID or slug of the organization.
+      schema:
+        type: string
+    ProjectIdOrSlug:
+      name: project_id_or_slug
+      in: path
+      required: true
+      description: The ID or slug of the project.
+      schema:
+        type: string
+    MonitorId:
+      name: monitor_id
+      in: path
+      required: true
+      description: The ID of the monitor.
+      schema:
+        type: string
+    AlertId:
+      name: alert_id
+      in: path
+      required: true
+      description: The ID of the alert.
+      schema:
+        type: string
+  schemas:
+    UptimeMonitor:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        url:
+          type: string
+          format: uri
+        status:
+          type: string
+        intervalSeconds:
+          type: integer
+        projectSlug:
+          type: string
+        dateCreated:
+          type: string
+          format: date-time
+      required:
+        - id
+        - name
+        - url
+    MonitorAlert:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        status:
+          type: string
+        dateCreated:
+          type: string
+          format: date-time
+      required:
+        - id
+        - name

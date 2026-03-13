@@ -1,0 +1,217 @@
+openapi: 3.1.0
+info:
+  title: Sentry Explore API
+  description: >-
+    The Explore API provides endpoints for querying and analyzing event data in
+    Sentry, allowing you to slice and dice events in both table and timeseries
+    formats for flexible data analysis and visualization.
+  version: 0.0.1
+  contact:
+    name: Sentry Support
+    url: https://sentry.io/support/
+    email: support@sentry.io
+servers:
+  - url: https://sentry.io/api/0
+    description: Sentry Production API
+security:
+  - BearerAuth: []
+tags:
+  - name: Explore
+    description: Query and analyze event data
+paths:
+  /organizations/{organization_id_or_slug}/events/:
+    get:
+      operationId: queryExploreEventsTable
+      summary: Query Explore events in table format
+      description: >-
+        Returns event data in table format, allowing you to slice and dice your
+        events using various fields and aggregations.
+      tags:
+        - Explore
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - name: field
+          in: query
+          required: true
+          description: The fields to select (may be specified multiple times).
+          schema:
+            type: array
+            items:
+              type: string
+        - name: query
+          in: query
+          description: An optional Sentry search query to filter events.
+          schema:
+            type: string
+        - name: statsPeriod
+          in: query
+          description: Stats period (e.g., 24h, 14d).
+          schema:
+            type: string
+        - name: start
+          in: query
+          description: Start date for the query range.
+          schema:
+            type: string
+            format: date-time
+        - name: end
+          in: query
+          description: End date for the query range.
+          schema:
+            type: string
+            format: date-time
+        - name: sort
+          in: query
+          description: Field to sort by (prefix with - for descending).
+          schema:
+            type: string
+        - name: project
+          in: query
+          description: Project IDs to filter by.
+          schema:
+            type: array
+            items:
+              type: integer
+        - name: environment
+          in: query
+          description: Environment name to filter by.
+          schema:
+            type: string
+        - name: per_page
+          in: query
+          description: Number of results per page.
+          schema:
+            type: integer
+        - name: cursor
+          in: query
+          description: Pagination cursor.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Event data in table format.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                  meta:
+                    type: object
+                    properties:
+                      fields:
+                        type: object
+        '400':
+          description: Bad request or invalid query.
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+  /organizations/{organization_id_or_slug}/events-stats/:
+    get:
+      operationId: queryExploreEventsTimeseries
+      summary: Query Explore events in timeseries format
+      description: >-
+        Returns event data in timeseries format, suitable for charting and
+        visualization over time.
+      tags:
+        - Explore
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - name: yAxis
+          in: query
+          required: true
+          description: The aggregate field to chart (e.g., count(), p50(transaction.duration)).
+          schema:
+            type: array
+            items:
+              type: string
+        - name: query
+          in: query
+          description: An optional search query to filter events.
+          schema:
+            type: string
+        - name: statsPeriod
+          in: query
+          description: Stats period (e.g., 24h, 14d).
+          schema:
+            type: string
+        - name: start
+          in: query
+          description: Start date for the query range.
+          schema:
+            type: string
+            format: date-time
+        - name: end
+          in: query
+          description: End date for the query range.
+          schema:
+            type: string
+            format: date-time
+        - name: interval
+          in: query
+          description: Resolution interval (e.g., 1h, 1d).
+          schema:
+            type: string
+        - name: project
+          in: query
+          description: Project IDs to filter by.
+          schema:
+            type: array
+            items:
+              type: integer
+        - name: environment
+          in: query
+          description: Environment name to filter by.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Event data in timeseries format.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: array
+                      items:
+                        type: object
+                  meta:
+                    type: object
+                  start:
+                    type: string
+                    format: date-time
+                  end:
+                    type: string
+                    format: date-time
+                  intervals:
+                    type: array
+                    items:
+                      type: string
+                      format: date-time
+        '400':
+          description: Bad request or invalid query.
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: Authentication token for the Sentry API.
+  parameters:
+    OrganizationIdOrSlug:
+      name: organization_id_or_slug
+      in: path
+      required: true
+      description: The ID or slug of the organization.
+      schema:
+        type: string

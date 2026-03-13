@@ -1,0 +1,583 @@
+openapi: 3.1.0
+info:
+  title: Sentry Alerts API
+  description: >-
+    The Alerts API provides endpoints for managing alert rules in Sentry,
+    including creating, retrieving, updating, and deleting metric alert rules
+    and issue alert rules, as well as managing spike protection notification
+    actions.
+  version: 0.0.1
+  contact:
+    name: Sentry Support
+    url: https://sentry.io/support/
+    email: support@sentry.io
+servers:
+  - url: https://sentry.io/api/0
+    description: Sentry Production API
+security:
+  - BearerAuth: []
+tags:
+  - name: Metric Alerts
+    description: Manage metric alert rules at the organization level
+  - name: Issue Alerts
+    description: Manage issue alert rules at the project level
+  - name: Spike Protection
+    description: Manage spike protection notification actions
+paths:
+  /organizations/{organization_id_or_slug}/alert-rules/:
+    get:
+      operationId: listMetricAlertRules
+      summary: List an organization's metric alert rules
+      description: Returns a list of metric alert rules for an organization.
+      tags:
+        - Metric Alerts
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - name: cursor
+          in: query
+          description: Pagination cursor.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of metric alert rules.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MetricAlertRule'
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+    post:
+      operationId: createMetricAlertRule
+      summary: Create a metric alert rule for an organization
+      description: Creates a new metric alert rule for the given organization.
+      tags:
+        - Metric Alerts
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - aggregate
+                - timeWindow
+                - triggers
+              properties:
+                name:
+                  type: string
+                  description: The name of the alert rule.
+                aggregate:
+                  type: string
+                  description: The aggregation function (e.g., count(), p50(transaction.duration)).
+                dataset:
+                  type: string
+                  description: The dataset to query (e.g., events, transactions, sessions).
+                query:
+                  type: string
+                  description: An optional Sentry search query to filter events.
+                timeWindow:
+                  type: integer
+                  description: The time window in minutes to evaluate the alert.
+                environment:
+                  type: string
+                  description: The environment to filter by.
+                projects:
+                  type: array
+                  items:
+                    type: string
+                  description: The project slugs to apply the alert to.
+                triggers:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      label:
+                        type: string
+                      alertThreshold:
+                        type: number
+                      actions:
+                        type: array
+                        items:
+                          type: object
+                  description: The trigger conditions for the alert.
+                owner:
+                  type: string
+                  description: The owner of the alert (user:id or team:id).
+      responses:
+        '201':
+          description: Metric alert rule created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetricAlertRule'
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+  /organizations/{organization_id_or_slug}/alert-rules/{alert_rule_id}/:
+    get:
+      operationId: retrieveMetricAlertRule
+      summary: Retrieve a metric alert rule for an organization
+      description: Returns a specific metric alert rule.
+      tags:
+        - Metric Alerts
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/AlertRuleId'
+      responses:
+        '200':
+          description: Metric alert rule details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetricAlertRule'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Alert rule not found.
+    put:
+      operationId: updateMetricAlertRule
+      summary: Update a metric alert rule
+      description: Updates a metric alert rule.
+      tags:
+        - Metric Alerts
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/AlertRuleId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                aggregate:
+                  type: string
+                query:
+                  type: string
+                timeWindow:
+                  type: integer
+                triggers:
+                  type: array
+                  items:
+                    type: object
+                owner:
+                  type: string
+      responses:
+        '200':
+          description: Metric alert rule updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetricAlertRule'
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Alert rule not found.
+    delete:
+      operationId: deleteMetricAlertRule
+      summary: Delete a metric alert rule
+      description: Deletes a metric alert rule.
+      tags:
+        - Metric Alerts
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/AlertRuleId'
+      responses:
+        '204':
+          description: Alert rule deleted.
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Alert rule not found.
+  /projects/{organization_id_or_slug}/{project_id_or_slug}/rules/:
+    get:
+      operationId: listIssueAlertRules
+      summary: List a project's issue alert rules
+      description: Returns a list of issue alert rules for a project.
+      tags:
+        - Issue Alerts
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/ProjectIdOrSlug'
+      responses:
+        '200':
+          description: A list of issue alert rules.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/IssueAlertRule'
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+    post:
+      operationId: createIssueAlertRule
+      summary: Create an issue alert rule for a project
+      description: Creates a new issue alert rule for the given project.
+      tags:
+        - Issue Alerts
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/ProjectIdOrSlug'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - conditions
+                - actions
+                - actionMatch
+                - frequency
+              properties:
+                name:
+                  type: string
+                  description: The name of the alert rule.
+                conditions:
+                  type: array
+                  items:
+                    type: object
+                  description: The conditions for the alert to trigger.
+                actions:
+                  type: array
+                  items:
+                    type: object
+                  description: The actions to perform when conditions are met.
+                filters:
+                  type: array
+                  items:
+                    type: object
+                  description: Optional filters to apply.
+                actionMatch:
+                  type: string
+                  enum:
+                    - all
+                    - any
+                    - none
+                  description: How to match conditions.
+                filterMatch:
+                  type: string
+                  enum:
+                    - all
+                    - any
+                    - none
+                frequency:
+                  type: integer
+                  description: How often to trigger in minutes.
+                environment:
+                  type: string
+                owner:
+                  type: string
+      responses:
+        '201':
+          description: Issue alert rule created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IssueAlertRule'
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+  /projects/{organization_id_or_slug}/{project_id_or_slug}/rules/{rule_id}/:
+    get:
+      operationId: retrieveIssueAlertRule
+      summary: Retrieve an issue alert rule for a project
+      description: Returns a specific issue alert rule.
+      tags:
+        - Issue Alerts
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/ProjectIdOrSlug'
+        - $ref: '#/components/parameters/RuleId'
+      responses:
+        '200':
+          description: Issue alert rule details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IssueAlertRule'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Alert rule not found.
+    put:
+      operationId: updateIssueAlertRule
+      summary: Update an issue alert rule
+      description: Updates an issue alert rule.
+      tags:
+        - Issue Alerts
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/ProjectIdOrSlug'
+        - $ref: '#/components/parameters/RuleId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                conditions:
+                  type: array
+                  items:
+                    type: object
+                actions:
+                  type: array
+                  items:
+                    type: object
+                actionMatch:
+                  type: string
+                frequency:
+                  type: integer
+      responses:
+        '200':
+          description: Issue alert rule updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IssueAlertRule'
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Alert rule not found.
+    delete:
+      operationId: deleteIssueAlertRule
+      summary: Delete an issue alert rule
+      description: Deletes an issue alert rule.
+      tags:
+        - Issue Alerts
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/ProjectIdOrSlug'
+        - $ref: '#/components/parameters/RuleId'
+      responses:
+        '204':
+          description: Alert rule deleted.
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Alert rule not found.
+  /organizations/{organization_id_or_slug}/spike-protections/:
+    get:
+      operationId: listSpikeProtectionNotifications
+      summary: List spike protection notifications
+      description: Returns a list of spike protection notification actions.
+      tags:
+        - Spike Protection
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      responses:
+        '200':
+          description: A list of spike protection notification actions.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SpikeProtectionAction'
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+    post:
+      operationId: createSpikeProtectionNotification
+      summary: Create a spike protection notification action
+      description: Creates a new spike protection notification action.
+      tags:
+        - Spike Protection
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - projects
+              properties:
+                projects:
+                  type: array
+                  items:
+                    type: string
+                  description: Project slugs to enable spike protection for.
+      responses:
+        '201':
+          description: Spike protection notification created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SpikeProtectionAction'
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized.
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: Authentication token for the Sentry API.
+  parameters:
+    OrganizationIdOrSlug:
+      name: organization_id_or_slug
+      in: path
+      required: true
+      description: The ID or slug of the organization.
+      schema:
+        type: string
+    ProjectIdOrSlug:
+      name: project_id_or_slug
+      in: path
+      required: true
+      description: The ID or slug of the project.
+      schema:
+        type: string
+    AlertRuleId:
+      name: alert_rule_id
+      in: path
+      required: true
+      description: The ID of the metric alert rule.
+      schema:
+        type: integer
+    RuleId:
+      name: rule_id
+      in: path
+      required: true
+      description: The ID of the issue alert rule.
+      schema:
+        type: integer
+  schemas:
+    MetricAlertRule:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        aggregate:
+          type: string
+        dataset:
+          type: string
+        query:
+          type: string
+        timeWindow:
+          type: integer
+        environment:
+          type: string
+          nullable: true
+        projects:
+          type: array
+          items:
+            type: string
+        triggers:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              label:
+                type: string
+              alertThreshold:
+                type: number
+              resolveThreshold:
+                type: number
+                nullable: true
+              thresholdType:
+                type: integer
+              actions:
+                type: array
+                items:
+                  type: object
+        owner:
+          type: string
+          nullable: true
+        dateCreated:
+          type: string
+          format: date-time
+        dateModified:
+          type: string
+          format: date-time
+      required:
+        - id
+        - name
+        - aggregate
+    IssueAlertRule:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        conditions:
+          type: array
+          items:
+            type: object
+        actions:
+          type: array
+          items:
+            type: object
+        filters:
+          type: array
+          items:
+            type: object
+        actionMatch:
+          type: string
+        filterMatch:
+          type: string
+        frequency:
+          type: integer
+        environment:
+          type: string
+          nullable: true
+        owner:
+          type: string
+          nullable: true
+        dateCreated:
+          type: string
+          format: date-time
+      required:
+        - id
+        - name
+    SpikeProtectionAction:
+      type: object
+      properties:
+        id:
+          type: string
+        projects:
+          type: array
+          items:
+            type: string
+        dateCreated:
+          type: string
+          format: date-time
+      required:
+        - id
+        - projects

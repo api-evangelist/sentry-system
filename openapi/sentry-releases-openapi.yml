@@ -1,0 +1,737 @@
+openapi: 3.1.0
+info:
+  title: Sentry Releases API
+  description: >-
+    The Releases API provides endpoints for managing software releases in
+    Sentry, including creating and managing releases, uploading release files,
+    listing commits, managing deployments, and retrieving release health session
+    statistics.
+  version: 0.0.1
+  contact:
+    name: Sentry Support
+    url: https://sentry.io/support/
+    email: support@sentry.io
+servers:
+  - url: https://sentry.io/api/0
+    description: Sentry Production API
+security:
+  - BearerAuth: []
+tags:
+  - name: Releases
+    description: Manage software releases
+  - name: Release Files
+    description: Manage files associated with releases
+  - name: Deploys
+    description: Manage deployments of releases
+  - name: Commits
+    description: Manage commits associated with releases
+  - name: Sessions
+    description: Retrieve release health session statistics
+paths:
+  /organizations/{organization_id_or_slug}/releases/:
+    get:
+      operationId: listOrganizationReleases
+      summary: List an organization's releases
+      description: Returns a list of releases for a given organization.
+      tags:
+        - Releases
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - name: query
+          in: query
+          description: Filter releases by search query.
+          schema:
+            type: string
+        - name: cursor
+          in: query
+          description: Pagination cursor.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of releases.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Release'
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+    post:
+      operationId: createOrganizationRelease
+      summary: Create a new release for an organization
+      description: Creates a new release for the given organization.
+      tags:
+        - Releases
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - version
+                - projects
+              properties:
+                version:
+                  type: string
+                  description: A version identifier for this release, unique within the organization.
+                ref:
+                  type: string
+                  description: An optional commit reference.
+                url:
+                  type: string
+                  description: A URL that points to the release, often a CI build URL.
+                projects:
+                  type: array
+                  items:
+                    type: string
+                  description: A list of project slugs this release is for.
+                dateReleased:
+                  type: string
+                  format: date-time
+                  description: An optional date indicating when the release went live.
+                commits:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      repository:
+                        type: string
+                  description: An optional list of commit data to associate with the release.
+      responses:
+        '201':
+          description: Release created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Release'
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+  /organizations/{organization_id_or_slug}/releases/{version}/:
+    get:
+      operationId: retrieveOrganizationRelease
+      summary: Retrieve an organization's release
+      description: Returns a release for a given organization.
+      tags:
+        - Releases
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/Version'
+      responses:
+        '200':
+          description: Release details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Release'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Release not found.
+    put:
+      operationId: updateOrganizationRelease
+      summary: Update an organization's release
+      description: Updates a release for a given organization.
+      tags:
+        - Releases
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/Version'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ref:
+                  type: string
+                url:
+                  type: string
+                dateReleased:
+                  type: string
+                  format: date-time
+                commits:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      repository:
+                        type: string
+      responses:
+        '200':
+          description: Release updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Release'
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Release not found.
+    delete:
+      operationId: deleteOrganizationRelease
+      summary: Delete an organization's release
+      description: Deletes a release for a given organization.
+      tags:
+        - Releases
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/Version'
+      responses:
+        '204':
+          description: Release deleted.
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Release not found.
+  /organizations/{organization_id_or_slug}/releases/{version}/deploys/:
+    get:
+      operationId: listReleaseDeploys
+      summary: List a release's deploys
+      description: Returns a list of deploys for a given release.
+      tags:
+        - Deploys
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/Version'
+      responses:
+        '200':
+          description: A list of deploys.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Deploy'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Release not found.
+    post:
+      operationId: createReleaseDeploy
+      summary: Create a deploy
+      description: Creates a deploy for a given release.
+      tags:
+        - Deploys
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/Version'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - environment
+              properties:
+                environment:
+                  type: string
+                  description: The environment to deploy to (e.g., production, staging).
+                url:
+                  type: string
+                  description: An optional URL associated with this deploy.
+                dateStarted:
+                  type: string
+                  format: date-time
+                dateFinished:
+                  type: string
+                  format: date-time
+      responses:
+        '201':
+          description: Deploy created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Deploy'
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Release not found.
+  /organizations/{organization_id_or_slug}/releases/{version}/commits/:
+    get:
+      operationId: listOrganizationReleaseCommits
+      summary: List an organization release's commits
+      description: Returns a list of commits associated with a release.
+      tags:
+        - Commits
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/Version'
+        - name: cursor
+          in: query
+          description: Pagination cursor.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of commits.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Commit'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Release not found.
+  /organizations/{organization_id_or_slug}/releases/{version}/commitfiles/:
+    get:
+      operationId: listReleaseCommitFiles
+      summary: Retrieve files changed in a release's commits
+      description: Returns a list of files changed in the commits associated with a release.
+      tags:
+        - Commits
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/Version'
+        - name: cursor
+          in: query
+          description: Pagination cursor.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of changed files.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    filename:
+                      type: string
+                    type:
+                      type: string
+                      enum:
+                        - A
+                        - M
+                        - D
+                    id:
+                      type: string
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Release not found.
+  /organizations/{organization_id_or_slug}/releases/{version}/files/:
+    get:
+      operationId: listOrganizationReleaseFiles
+      summary: List an organization's release files
+      description: Returns a list of files associated with an organization release.
+      tags:
+        - Release Files
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/Version'
+        - name: cursor
+          in: query
+          description: Pagination cursor.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of release files.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ReleaseFile'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Release not found.
+    post:
+      operationId: uploadOrganizationReleaseFile
+      summary: Upload a new organization release file
+      description: Uploads a new file for the given release.
+      tags:
+        - Release Files
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/Version'
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+                - file
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: The file to upload.
+                name:
+                  type: string
+                  description: The name (full path) of the file.
+                header:
+                  type: string
+                  description: The content-type header for the file.
+      responses:
+        '201':
+          description: Release file uploaded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReleaseFile'
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Release not found.
+  /organizations/{organization_id_or_slug}/releases/{version}/files/{file_id}/:
+    get:
+      operationId: retrieveOrganizationReleaseFile
+      summary: Retrieve an organization release's file
+      description: Returns a file associated with an organization release.
+      tags:
+        - Release Files
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/Version'
+        - $ref: '#/components/parameters/FileId'
+      responses:
+        '200':
+          description: Release file details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReleaseFile'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: File not found.
+    put:
+      operationId: updateOrganizationReleaseFile
+      summary: Update an organization release file
+      description: Updates an organization release file.
+      tags:
+        - Release Files
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/Version'
+        - $ref: '#/components/parameters/FileId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: The new name for the file.
+      responses:
+        '200':
+          description: Release file updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReleaseFile'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: File not found.
+    delete:
+      operationId: deleteOrganizationReleaseFile
+      summary: Delete an organization release's file
+      description: Deletes a release file from an organization release.
+      tags:
+        - Release Files
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/Version'
+        - $ref: '#/components/parameters/FileId'
+      responses:
+        '204':
+          description: Release file deleted.
+        '401':
+          description: Unauthorized.
+        '404':
+          description: File not found.
+  /organizations/{organization_id_or_slug}/sessions/:
+    get:
+      operationId: retrieveReleaseHealthSessions
+      summary: Retrieve release health session statistics
+      description: Returns release health session statistics for an organization.
+      tags:
+        - Sessions
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - name: field
+          in: query
+          required: true
+          description: The session field to query (e.g., sum(session), count_unique(user)).
+          schema:
+            type: string
+        - name: statsPeriod
+          in: query
+          description: Stats period (e.g., 24h, 14d).
+          schema:
+            type: string
+        - name: project
+          in: query
+          description: Project IDs to filter by.
+          schema:
+            type: array
+            items:
+              type: integer
+        - name: environment
+          in: query
+          description: Environment name to filter by.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Session statistics.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  groups:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        by:
+                          type: object
+                        totals:
+                          type: object
+                        series:
+                          type: object
+                  start:
+                    type: string
+                    format: date-time
+                  end:
+                    type: string
+                    format: date-time
+                  intervals:
+                    type: array
+                    items:
+                      type: string
+                      format: date-time
+        '401':
+          description: Unauthorized.
+        '400':
+          description: Bad request.
+  /organizations/{organization_id_or_slug}/release-thresholds/:
+    get:
+      operationId: listReleaseThresholdStatuses
+      summary: Retrieve statuses of release thresholds (Alpha)
+      description: >-
+        Returns the current status of release thresholds for the organization.
+        This endpoint is in alpha and may change.
+      tags:
+        - Releases
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      responses:
+        '200':
+          description: Release threshold statuses.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    thresholdType:
+                      type: string
+                    triggerType:
+                      type: string
+                    value:
+                      type: number
+                    status:
+                      type: string
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: Authentication token for the Sentry API.
+  parameters:
+    OrganizationIdOrSlug:
+      name: organization_id_or_slug
+      in: path
+      required: true
+      description: The ID or slug of the organization.
+      schema:
+        type: string
+    Version:
+      name: version
+      in: path
+      required: true
+      description: The version identifier of the release.
+      schema:
+        type: string
+    FileId:
+      name: file_id
+      in: path
+      required: true
+      description: The ID of the file.
+      schema:
+        type: string
+  schemas:
+    Release:
+      type: object
+      properties:
+        id:
+          type: integer
+        version:
+          type: string
+        shortVersion:
+          type: string
+        ref:
+          type: string
+          nullable: true
+        url:
+          type: string
+          nullable: true
+        dateCreated:
+          type: string
+          format: date-time
+        dateReleased:
+          type: string
+          format: date-time
+          nullable: true
+        firstEvent:
+          type: string
+          format: date-time
+          nullable: true
+        lastEvent:
+          type: string
+          format: date-time
+          nullable: true
+        newGroups:
+          type: integer
+        projects:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+              slug:
+                type: string
+              name:
+                type: string
+        authors:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              email:
+                type: string
+        commitCount:
+          type: integer
+        lastDeploy:
+          $ref: '#/components/schemas/Deploy'
+      required:
+        - version
+        - dateCreated
+    Deploy:
+      type: object
+      properties:
+        id:
+          type: string
+        environment:
+          type: string
+        name:
+          type: string
+          nullable: true
+        url:
+          type: string
+          nullable: true
+        dateStarted:
+          type: string
+          format: date-time
+          nullable: true
+        dateFinished:
+          type: string
+          format: date-time
+          nullable: true
+      required:
+        - id
+        - environment
+    Commit:
+      type: object
+      properties:
+        id:
+          type: string
+        message:
+          type: string
+        dateCreated:
+          type: string
+          format: date-time
+        author:
+          type: object
+          properties:
+            name:
+              type: string
+            email:
+              type: string
+              format: email
+        repository:
+          type: object
+          properties:
+            id:
+              type: string
+            name:
+              type: string
+      required:
+        - id
+    ReleaseFile:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        sha1:
+          type: string
+        dist:
+          type: string
+          nullable: true
+        size:
+          type: integer
+        dateCreated:
+          type: string
+          format: date-time
+        headers:
+          type: object
+      required:
+        - id
+        - name

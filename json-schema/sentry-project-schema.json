@@ -1,0 +1,108 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sentry.io/schemas/project.json",
+  "title": "Sentry Project",
+  "description": "Represents a project in Sentry. Projects belong to an organization and a team, and contain issues and events for a specific application or service.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique identifier of the project."
+    },
+    "slug": {
+      "type": "string",
+      "description": "The URL-friendly slug of the project.",
+      "pattern": "^[a-z0-9_-]+$"
+    },
+    "name": {
+      "type": "string",
+      "description": "The human-readable name of the project."
+    },
+    "platform": {
+      "type": ["string", "null"],
+      "description": "The platform identifier (e.g., python, javascript, react-native)."
+    },
+    "dateCreated": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the project was created."
+    },
+    "isBookmarked": {
+      "type": "boolean",
+      "description": "Whether the project is bookmarked by the authenticated user."
+    },
+    "isMember": {
+      "type": "boolean",
+      "description": "Whether the authenticated user is a member of this project."
+    },
+    "features": {
+      "type": "array",
+      "description": "A list of feature flags enabled for this project.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "firstEvent": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "The timestamp of the first event received for this project."
+    },
+    "firstTransactionEvent": {
+      "type": "boolean",
+      "description": "Whether the project has received a transaction event."
+    },
+    "hasAccess": {
+      "type": "boolean",
+      "description": "Whether the authenticated user has access to this project."
+    },
+    "team": {
+      "type": "object",
+      "description": "The primary team associated with this project.",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "slug": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "teams": {
+      "type": "array",
+      "description": "All teams that have access to this project.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "slug": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "organization": {
+      "type": "object",
+      "description": "The organization this project belongs to.",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "slug": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "required": ["id", "slug", "name"]
+}

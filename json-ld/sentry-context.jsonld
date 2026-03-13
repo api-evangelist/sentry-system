@@ -1,0 +1,307 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "sentry": "https://sentry.io/api/0/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "foaf": "http://xmlns.com/foaf/0.1/",
+    "org": "http://www.w3.org/ns/org#",
+    "vcard": "http://www.w3.org/2006/vcard/ns#",
+    "doap": "http://usefulinc.com/ns/doap#",
+    "sioc": "http://rdfs.org/sioc/ns#",
+
+    "Organization": {
+      "@id": "schema:Organization",
+      "@context": {
+        "id": "schema:identifier",
+        "slug": "schema:alternateName",
+        "name": "schema:name",
+        "dateCreated": "schema:foundingDate",
+        "url": "schema:url",
+        "avatar": "schema:image",
+        "isEarlyAdopter": "schema:additionalProperty",
+        "features": "schema:additionalProperty",
+        "members": {
+          "@id": "org:hasMember",
+          "@type": "@id"
+        },
+        "teams": {
+          "@id": "org:hasUnit",
+          "@type": "@id"
+        },
+        "projects": {
+          "@id": "schema:hasPart",
+          "@type": "@id"
+        }
+      }
+    },
+
+    "Project": {
+      "@id": "doap:Project",
+      "@context": {
+        "id": "schema:identifier",
+        "slug": "schema:alternateName",
+        "name": "schema:name",
+        "platform": "schema:applicationCategory",
+        "dateCreated": "dcterms:created",
+        "isBookmarked": "schema:additionalProperty",
+        "isMember": "schema:additionalProperty",
+        "hasAccess": "schema:additionalProperty",
+        "firstEvent": "schema:additionalProperty",
+        "organization": {
+          "@id": "schema:isPartOf",
+          "@type": "@id"
+        },
+        "team": {
+          "@id": "org:unitOf",
+          "@type": "@id"
+        },
+        "teams": {
+          "@id": "org:unitOf",
+          "@type": "@id"
+        }
+      }
+    },
+
+    "Team": {
+      "@id": "org:OrganizationalUnit",
+      "@context": {
+        "id": "schema:identifier",
+        "slug": "schema:alternateName",
+        "name": "schema:name",
+        "dateCreated": "dcterms:created",
+        "memberCount": "schema:numberOfEmployees",
+        "isMember": "schema:additionalProperty",
+        "organization": {
+          "@id": "org:unitOf",
+          "@type": "@id"
+        },
+        "members": {
+          "@id": "org:hasMember",
+          "@type": "@id"
+        },
+        "projects": {
+          "@id": "schema:hasPart",
+          "@type": "@id"
+        }
+      }
+    },
+
+    "Member": {
+      "@id": "org:Membership",
+      "@context": {
+        "id": "schema:identifier",
+        "email": "schema:email",
+        "name": "schema:name",
+        "role": "org:role",
+        "pending": "schema:additionalProperty",
+        "expired": "schema:additionalProperty",
+        "dateCreated": "dcterms:created",
+        "user": {
+          "@id": "org:member",
+          "@type": "@id"
+        },
+        "teams": {
+          "@id": "org:organization",
+          "@type": "@id"
+        }
+      }
+    },
+
+    "Issue": {
+      "@id": "schema:Report",
+      "@context": {
+        "id": "schema:identifier",
+        "shortId": "schema:alternateName",
+        "title": "schema:name",
+        "culprit": "schema:description",
+        "permalink": "schema:url",
+        "level": "schema:severity",
+        "status": "schema:status",
+        "platform": "schema:applicationCategory",
+        "firstSeen": "dcterms:created",
+        "lastSeen": "dcterms:modified",
+        "count": "schema:interactionCount",
+        "userCount": "schema:additionalProperty",
+        "type": "dcterms:type",
+        "metadata": "schema:additionalProperty",
+        "assignedTo": {
+          "@id": "schema:accountablePerson",
+          "@type": "@id"
+        },
+        "project": {
+          "@id": "schema:isPartOf",
+          "@type": "@id"
+        }
+      }
+    },
+
+    "Event": {
+      "@id": "schema:Event",
+      "@context": {
+        "eventID": "schema:identifier",
+        "dateCreated": "dcterms:created",
+        "dateReceived": "dcterms:dateAccepted",
+        "message": "schema:description",
+        "title": "schema:name",
+        "platform": "schema:applicationCategory",
+        "type": "dcterms:type",
+        "groupID": "schema:isPartOf",
+        "tags": "schema:keywords",
+        "entries": "schema:hasPart",
+        "user": {
+          "@id": "schema:actor",
+          "@type": "@id"
+        },
+        "sdk": "schema:softwareRequirements",
+        "contexts": "schema:additionalProperty"
+      }
+    },
+
+    "Release": {
+      "@id": "schema:SoftwareApplication",
+      "@context": {
+        "id": "schema:identifier",
+        "version": "schema:softwareVersion",
+        "shortVersion": "schema:alternateName",
+        "ref": "schema:codeRepository",
+        "url": "schema:url",
+        "dateCreated": "dcterms:created",
+        "dateReleased": "schema:datePublished",
+        "firstEvent": "schema:additionalProperty",
+        "lastEvent": "schema:additionalProperty",
+        "newGroups": "schema:additionalProperty",
+        "commitCount": "schema:additionalProperty",
+        "projects": {
+          "@id": "schema:isPartOf",
+          "@type": "@id"
+        },
+        "authors": {
+          "@id": "schema:author",
+          "@type": "@id"
+        }
+      }
+    },
+
+    "Deploy": {
+      "@id": "schema:Action",
+      "@context": {
+        "id": "schema:identifier",
+        "environment": "schema:additionalProperty",
+        "name": "schema:name",
+        "url": "schema:url",
+        "dateStarted": "schema:startDate",
+        "dateFinished": "schema:endDate"
+      }
+    },
+
+    "AlertRule": {
+      "@id": "schema:Thing",
+      "@context": {
+        "id": "schema:identifier",
+        "name": "schema:name",
+        "aggregate": "schema:additionalProperty",
+        "dataset": "schema:additionalProperty",
+        "query": "schema:query",
+        "timeWindow": "schema:duration",
+        "environment": "schema:additionalProperty",
+        "dateCreated": "dcterms:created",
+        "dateModified": "dcterms:modified",
+        "owner": {
+          "@id": "schema:accountablePerson",
+          "@type": "@id"
+        }
+      }
+    },
+
+    "Monitor": {
+      "@id": "schema:Thing",
+      "@context": {
+        "id": "schema:identifier",
+        "slug": "schema:alternateName",
+        "name": "schema:name",
+        "type": "dcterms:type",
+        "config": "schema:additionalProperty",
+        "status": "schema:status",
+        "dateCreated": "dcterms:created",
+        "project": {
+          "@id": "schema:isPartOf",
+          "@type": "@id"
+        }
+      }
+    },
+
+    "Replay": {
+      "@id": "schema:VideoObject",
+      "@context": {
+        "id": "schema:identifier",
+        "title": "schema:name",
+        "duration": "schema:duration",
+        "startedAt": "schema:startDate",
+        "finishedAt": "schema:endDate",
+        "platform": "schema:applicationCategory",
+        "environment": "schema:additionalProperty",
+        "urls": "schema:url",
+        "countErrors": "schema:additionalProperty",
+        "user": {
+          "@id": "schema:actor",
+          "@type": "@id"
+        },
+        "browser": "schema:browserRequirements",
+        "os": "schema:operatingSystem",
+        "device": "schema:device"
+      }
+    },
+
+    "Dashboard": {
+      "@id": "schema:WebPage",
+      "@context": {
+        "id": "schema:identifier",
+        "title": "schema:name",
+        "dateCreated": "dcterms:created",
+        "widgets": "schema:hasPart",
+        "createdBy": {
+          "@id": "schema:author",
+          "@type": "@id"
+        }
+      }
+    },
+
+    "SavedQuery": {
+      "@id": "schema:DataCatalog",
+      "@context": {
+        "id": "schema:identifier",
+        "name": "schema:name",
+        "fields": "schema:additionalProperty",
+        "query": "schema:query",
+        "dateCreated": "dcterms:created",
+        "dateUpdated": "dcterms:modified",
+        "createdBy": {
+          "@id": "schema:author",
+          "@type": "@id"
+        }
+      }
+    },
+
+    "Integration": {
+      "@id": "schema:SoftwareApplication",
+      "@context": {
+        "id": "schema:identifier",
+        "name": "schema:name",
+        "provider": "schema:provider",
+        "status": "schema:status",
+        "dateCreated": "dcterms:created"
+      }
+    },
+
+    "Environment": {
+      "@id": "schema:Place",
+      "@context": {
+        "id": "schema:identifier",
+        "name": "schema:name",
+        "isHidden": "schema:additionalProperty",
+        "dateCreated": "dcterms:created"
+      }
+    }
+  }
+}

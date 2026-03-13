@@ -1,0 +1,392 @@
+openapi: 3.1.0
+info:
+  title: Sentry Prevent API
+  description: >-
+    The Prevent API provides endpoints for managing repository integrations and
+    test results in Sentry, including syncing repositories, managing branches,
+    generating upload tokens, and retrieving test result metrics and test suites.
+  version: 0.0.1
+  contact:
+    name: Sentry Support
+    url: https://sentry.io/support/
+    email: support@sentry.io
+servers:
+  - url: https://sentry.io/api/0
+    description: Sentry Production API
+security:
+  - BearerAuth: []
+tags:
+  - name: Repositories
+    description: Manage repository integrations
+  - name: Test Results
+    description: Retrieve test result metrics and test suites
+  - name: Tokens
+    description: Manage repository upload tokens
+paths:
+  /organizations/{organization_id_or_slug}/prevent/repositories/:
+    get:
+      operationId: listRepositories
+      summary: Retrieve list of repositories for a given owner
+      description: Returns a list of repositories for the organization.
+      tags:
+        - Repositories
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - name: cursor
+          in: query
+          description: Pagination cursor.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of repositories.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PreventRepository'
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+  /organizations/{organization_id_or_slug}/prevent/repositories/{repo_id}/:
+    get:
+      operationId: retrieveRepository
+      summary: Retrieve a single repository for a given owner
+      description: Returns details for a specific repository.
+      tags:
+        - Repositories
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/RepoId'
+      responses:
+        '200':
+          description: Repository details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreventRepository'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Repository not found.
+  /organizations/{organization_id_or_slug}/prevent/repositories/{repo_id}/branches/:
+    get:
+      operationId: listRepositoryBranches
+      summary: Retrieve list of branches for a given owner and repository
+      description: Returns a list of branches for a specific repository.
+      tags:
+        - Repositories
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/RepoId'
+        - name: cursor
+          in: query
+          description: Pagination cursor.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of branches.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    sha:
+                      type: string
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Repository not found.
+  /organizations/{organization_id_or_slug}/prevent/sync/:
+    post:
+      operationId: syncRepositories
+      summary: Sync repositories from an integrated org with GitHub
+      description: Triggers a sync of repositories from the integrated organization's GitHub.
+      tags:
+        - Repositories
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      responses:
+        '202':
+          description: Sync initiated.
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+  /organizations/{organization_id_or_slug}/prevent/sync-status/:
+    get:
+      operationId: getSyncStatus
+      summary: Get syncing status for repositories for an integrated org
+      description: Returns the current sync status for repositories.
+      tags:
+        - Repositories
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      responses:
+        '200':
+          description: Sync status.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  lastSync:
+                    type: string
+                    format: date-time
+                    nullable: true
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+  /organizations/{organization_id_or_slug}/prevent/tokens/:
+    get:
+      operationId: listRepositoryTokens
+      summary: Retrieve a paginated list of repository tokens for a given owner
+      description: Returns repository upload tokens.
+      tags:
+        - Tokens
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - name: cursor
+          in: query
+          description: Pagination cursor.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of tokens.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    token:
+                      type: string
+                    repositoryId:
+                      type: string
+                    dateCreated:
+                      type: string
+                      format: date-time
+        '401':
+          description: Unauthorized.
+  /organizations/{organization_id_or_slug}/prevent/tokens/regenerate/:
+    post:
+      operationId: regenerateToken
+      summary: Regenerate a repository upload token and return the new token
+      description: Regenerates a repository upload token.
+      tags:
+        - Tokens
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - repositoryId
+              properties:
+                repositoryId:
+                  type: string
+                  description: The ID of the repository to regenerate the token for.
+      responses:
+        '200':
+          description: New token generated.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Repository not found.
+  /organizations/{organization_id_or_slug}/prevent/test-results/:
+    get:
+      operationId: listTestResults
+      summary: Retrieve paginated list of test results for repository, owner, and organization
+      description: Returns paginated test results for the organization.
+      tags:
+        - Test Results
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - name: repositoryId
+          in: query
+          description: Filter by repository ID.
+          schema:
+            type: string
+        - name: cursor
+          in: query
+          description: Pagination cursor.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of test results.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TestResult'
+        '401':
+          description: Unauthorized.
+  /organizations/{organization_id_or_slug}/prevent/test-results/metrics/:
+    get:
+      operationId: retrieveTestResultMetrics
+      summary: Retrieve aggregated test result metrics for repository, owner, and organization
+      description: Returns aggregated test result metrics.
+      tags:
+        - Test Results
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - name: repositoryId
+          in: query
+          description: Filter by repository ID.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Aggregated test result metrics.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  totalTests:
+                    type: integer
+                  passedTests:
+                    type: integer
+                  failedTests:
+                    type: integer
+                  skippedTests:
+                    type: integer
+                  avgDuration:
+                    type: number
+                  passRate:
+                    type: number
+        '401':
+          description: Unauthorized.
+  /organizations/{organization_id_or_slug}/prevent/test-results/suites/:
+    get:
+      operationId: listTestSuites
+      summary: Retrieve test suites belonging to a repository's test results
+      description: Returns test suites for a repository's test results.
+      tags:
+        - Test Results
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - name: repositoryId
+          in: query
+          description: Filter by repository ID.
+          schema:
+            type: string
+        - name: cursor
+          in: query
+          description: Pagination cursor.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of test suites.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    totalTests:
+                      type: integer
+                    passedTests:
+                      type: integer
+                    failedTests:
+                      type: integer
+                    duration:
+                      type: number
+        '401':
+          description: Unauthorized.
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: Authentication token for the Sentry API.
+  parameters:
+    OrganizationIdOrSlug:
+      name: organization_id_or_slug
+      in: path
+      required: true
+      description: The ID or slug of the organization.
+      schema:
+        type: string
+    RepoId:
+      name: repo_id
+      in: path
+      required: true
+      description: The ID of the repository.
+      schema:
+        type: string
+  schemas:
+    PreventRepository:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        provider:
+          type: string
+        url:
+          type: string
+          nullable: true
+        dateCreated:
+          type: string
+          format: date-time
+      required:
+        - id
+        - name
+    TestResult:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        status:
+          type: string
+          enum:
+            - passed
+            - failed
+            - skipped
+            - error
+        duration:
+          type: number
+          description: Duration in seconds.
+        suite:
+          type: string
+        dateCreated:
+          type: string
+          format: date-time
+      required:
+        - id
+        - name
+        - status

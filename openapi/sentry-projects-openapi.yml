@@ -1,0 +1,896 @@
+openapi: 3.1.0
+info:
+  title: Sentry Projects API
+  description: >-
+    The Projects API provides endpoints for managing Sentry projects, including
+    creating, retrieving, updating, and deleting projects, as well as managing
+    client keys, debug files, service hooks, filters, and user feedback.
+  version: 0.0.1
+  contact:
+    name: Sentry Support
+    url: https://sentry.io/support/
+    email: support@sentry.io
+servers:
+  - url: https://sentry.io/api/0
+    description: Sentry Production API
+security:
+  - BearerAuth: []
+tags:
+  - name: Projects
+    description: Manage projects and their settings
+  - name: Client Keys
+    description: Manage project client keys (DSNs)
+  - name: Service Hooks
+    description: Manage project service hooks
+  - name: Debug Files
+    description: Manage debug information files
+  - name: Filters
+    description: Manage inbound data filters
+  - name: User Feedback
+    description: Manage user feedback submissions
+paths:
+  /teams/{organization_id_or_slug}/{team_id_or_slug}/projects/:
+    post:
+      operationId: createProject
+      summary: Create a new project
+      description: Creates a new project bound to a team.
+      tags:
+        - Projects
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/TeamIdOrSlug'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+              properties:
+                name:
+                  type: string
+                  description: The human-readable name of the project.
+                slug:
+                  type: string
+                  description: Optionally set a unique slug for the project.
+                platform:
+                  type: string
+                  description: The platform identifier (e.g., python, javascript).
+      responses:
+        '201':
+          description: Project created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectDetail'
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+        '404':
+          description: Team not found.
+        '409':
+          description: A project with this slug already exists.
+  /projects/{organization_id_or_slug}/{project_id_or_slug}/:
+    get:
+      operationId: retrieveProject
+      summary: Retrieve a project
+      description: Returns details for a specific project.
+      tags:
+        - Projects
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/ProjectIdOrSlug'
+      responses:
+        '200':
+          description: Project details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectDetail'
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+        '404':
+          description: Project not found.
+    put:
+      operationId: updateProject
+      summary: Update a project
+      description: Updates various attributes and configurable settings for the given project.
+      tags:
+        - Projects
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/ProjectIdOrSlug'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: The human-readable name of the project.
+                slug:
+                  type: string
+                  description: The new slug for the project.
+                platform:
+                  type: string
+                  description: The platform identifier.
+                isBookmarked:
+                  type: boolean
+                  description: Toggle bookmarked status.
+                digestsMinDelay:
+                  type: integer
+                  description: Minimum delivery interval for digests in seconds.
+                digestsMaxDelay:
+                  type: integer
+                  description: Maximum delivery interval for digests in seconds.
+      responses:
+        '200':
+          description: Project updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectDetail'
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+        '404':
+          description: Project not found.
+    delete:
+      operationId: deleteProject
+      summary: Delete a project
+      description: Schedules a project for deletion. This action is irreversible.
+      tags:
+        - Projects
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/ProjectIdOrSlug'
+      responses:
+        '204':
+          description: Project scheduled for deletion.
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+        '404':
+          description: Project not found.
+  /projects/{organization_id_or_slug}/{project_id_or_slug}/keys/:
+    get:
+      operationId: listProjectClientKeys
+      summary: List a project's client keys
+      description: Returns a list of client keys bound to a project.
+      tags:
+        - Client Keys
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/ProjectIdOrSlug'
+        - name: cursor
+          in: query
+          description: Pagination cursor.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of client keys.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ClientKey'
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+    post:
+      operationId: createProjectClientKey
+      summary: Create a new client key
+      description: Creates a new client key bound to a project.
+      tags:
+        - Client Keys
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/ProjectIdOrSlug'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+              properties:
+                name:
+                  type: string
+                  description: The name for the new key.
+      responses:
+        '201':
+          description: Client key created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientKey'
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+  /projects/{organization_id_or_slug}/{project_id_or_slug}/keys/{key_id}/:
+    get:
+      operationId: retrieveProjectClientKey
+      summary: Retrieve a client key
+      description: Returns a client key bound to a project.
+      tags:
+        - Client Keys
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/ProjectIdOrSlug'
+        - $ref: '#/components/parameters/KeyId'
+      responses:
+        '200':
+          description: Client key details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientKey'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Client key not found.
+    put:
+      operationId: updateProjectClientKey
+      summary: Update a client key
+      description: Updates a client key.
+      tags:
+        - Client Keys
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/ProjectIdOrSlug'
+        - $ref: '#/components/parameters/KeyId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: The new name for the client key.
+                isActive:
+                  type: boolean
+                  description: Toggle key active status.
+      responses:
+        '200':
+          description: Client key updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientKey'
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Client key not found.
+    delete:
+      operationId: deleteProjectClientKey
+      summary: Delete a client key
+      description: Deletes a client key.
+      tags:
+        - Client Keys
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/ProjectIdOrSlug'
+        - $ref: '#/components/parameters/KeyId'
+      responses:
+        '204':
+          description: Client key deleted.
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Client key not found.
+  /projects/{organization_id_or_slug}/{project_id_or_slug}/hooks/:
+    get:
+      operationId: listProjectServiceHooks
+      summary: List a project's service hooks
+      description: Returns a list of service hooks bound to a project.
+      tags:
+        - Service Hooks
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/ProjectIdOrSlug'
+        - name: cursor
+          in: query
+          description: Pagination cursor.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of service hooks.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ServiceHook'
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+    post:
+      operationId: createProjectServiceHook
+      summary: Register a new service hook
+      description: Creates a new service hook for a project.
+      tags:
+        - Service Hooks
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/ProjectIdOrSlug'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - url
+                - events
+              properties:
+                url:
+                  type: string
+                  format: uri
+                  description: The URL to send webhook events to.
+                events:
+                  type: array
+                  items:
+                    type: string
+                  description: The events to subscribe to.
+      responses:
+        '201':
+          description: Service hook created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceHook'
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+  /projects/{organization_id_or_slug}/{project_id_or_slug}/hooks/{hook_id}/:
+    get:
+      operationId: retrieveProjectServiceHook
+      summary: Retrieve a service hook
+      description: Returns a service hook bound to a project.
+      tags:
+        - Service Hooks
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/ProjectIdOrSlug'
+        - $ref: '#/components/parameters/HookId'
+      responses:
+        '200':
+          description: Service hook details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceHook'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Service hook not found.
+    put:
+      operationId: updateProjectServiceHook
+      summary: Update a service hook
+      description: Updates a service hook.
+      tags:
+        - Service Hooks
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/ProjectIdOrSlug'
+        - $ref: '#/components/parameters/HookId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                url:
+                  type: string
+                  format: uri
+                events:
+                  type: array
+                  items:
+                    type: string
+      responses:
+        '200':
+          description: Service hook updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceHook'
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Service hook not found.
+    delete:
+      operationId: deleteProjectServiceHook
+      summary: Remove a service hook
+      description: Removes a service hook from a project.
+      tags:
+        - Service Hooks
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/ProjectIdOrSlug'
+        - $ref: '#/components/parameters/HookId'
+      responses:
+        '204':
+          description: Service hook removed.
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Service hook not found.
+  /projects/{organization_id_or_slug}/{project_id_or_slug}/files/dsyms/:
+    get:
+      operationId: listProjectDebugFiles
+      summary: List a project's debug information files
+      description: Returns a list of debug information files for a given project.
+      tags:
+        - Debug Files
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/ProjectIdOrSlug'
+      responses:
+        '200':
+          description: A list of debug files.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DebugFile'
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+  /projects/{organization_id_or_slug}/{project_id_or_slug}/filters/:
+    get:
+      operationId: listProjectFilters
+      summary: List a project's data filters
+      description: Returns a list of active inbound data filters for a project.
+      tags:
+        - Filters
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/ProjectIdOrSlug'
+      responses:
+        '200':
+          description: A list of data filters.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    active:
+                      type: boolean
+                      description: Whether the filter is enabled.
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+  /projects/{organization_id_or_slug}/{project_id_or_slug}/filters/{filter_id}/:
+    put:
+      operationId: updateProjectFilter
+      summary: Update an inbound data filter
+      description: Updates a project's inbound data filter.
+      tags:
+        - Filters
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/ProjectIdOrSlug'
+        - name: filter_id
+          in: path
+          required: true
+          description: The ID of the filter to update.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                active:
+                  type: boolean
+                  description: Toggle filter active status.
+      responses:
+        '200':
+          description: Filter updated.
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+  /projects/{organization_id_or_slug}/{project_id_or_slug}/user-feedback/:
+    get:
+      operationId: listProjectUserFeedback
+      summary: List a project's user feedback
+      description: Returns a list of user feedback items for a project.
+      tags:
+        - User Feedback
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/ProjectIdOrSlug'
+      responses:
+        '200':
+          description: A list of user feedback.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserFeedback'
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+    post:
+      operationId: submitProjectUserFeedback
+      summary: Submit user feedback
+      description: Submits a new user feedback item for a project.
+      tags:
+        - User Feedback
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/ProjectIdOrSlug'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - event_id
+                - name
+                - email
+                - comments
+              properties:
+                event_id:
+                  type: string
+                  description: The event ID associated with this feedback.
+                name:
+                  type: string
+                  description: The name of the user submitting feedback.
+                email:
+                  type: string
+                  format: email
+                  description: The email of the user.
+                comments:
+                  type: string
+                  description: The feedback comments.
+      responses:
+        '200':
+          description: User feedback submitted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserFeedback'
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized.
+  /projects/{organization_id_or_slug}/{project_id_or_slug}/users/:
+    get:
+      operationId: listProjectUsers
+      summary: List a project's users
+      description: Returns a list of users seen within a project.
+      tags:
+        - Projects
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/ProjectIdOrSlug'
+        - name: query
+          in: query
+          description: Filter by user search query.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of users.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    username:
+                      type: string
+                    email:
+                      type: string
+                    ip:
+                      type: string
+                    dateCreated:
+                      type: string
+                      format: date-time
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+  /projects/{organization_id_or_slug}/{project_id_or_slug}/teams/{team_id_or_slug}/:
+    post:
+      operationId: addTeamToProject
+      summary: Add a team to a project
+      description: Grants a team access to a project.
+      tags:
+        - Projects
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/ProjectIdOrSlug'
+        - $ref: '#/components/parameters/TeamIdOrSlug'
+      responses:
+        '201':
+          description: Team added to project.
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+        '404':
+          description: Not found.
+    delete:
+      operationId: removeTeamFromProject
+      summary: Delete a team from a project
+      description: Revokes a team's access to a project.
+      tags:
+        - Projects
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/ProjectIdOrSlug'
+        - $ref: '#/components/parameters/TeamIdOrSlug'
+      responses:
+        '200':
+          description: Team removed from project.
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+        '404':
+          description: Not found.
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: Authentication token for the Sentry API.
+  parameters:
+    OrganizationIdOrSlug:
+      name: organization_id_or_slug
+      in: path
+      required: true
+      description: The ID or slug of the organization.
+      schema:
+        type: string
+    ProjectIdOrSlug:
+      name: project_id_or_slug
+      in: path
+      required: true
+      description: The ID or slug of the project.
+      schema:
+        type: string
+    TeamIdOrSlug:
+      name: team_id_or_slug
+      in: path
+      required: true
+      description: The ID or slug of the team.
+      schema:
+        type: string
+    KeyId:
+      name: key_id
+      in: path
+      required: true
+      description: The ID of the client key.
+      schema:
+        type: string
+    HookId:
+      name: hook_id
+      in: path
+      required: true
+      description: The ID of the service hook.
+      schema:
+        type: string
+  schemas:
+    ProjectDetail:
+      type: object
+      properties:
+        id:
+          type: string
+        slug:
+          type: string
+        name:
+          type: string
+        platform:
+          type: string
+          nullable: true
+        dateCreated:
+          type: string
+          format: date-time
+        isBookmarked:
+          type: boolean
+        isMember:
+          type: boolean
+        features:
+          type: array
+          items:
+            type: string
+        firstEvent:
+          type: string
+          format: date-time
+          nullable: true
+        firstTransactionEvent:
+          type: boolean
+        hasAccess:
+          type: boolean
+        team:
+          type: object
+          properties:
+            id:
+              type: string
+            slug:
+              type: string
+            name:
+              type: string
+        teams:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              slug:
+                type: string
+              name:
+                type: string
+        organization:
+          type: object
+          properties:
+            id:
+              type: string
+            slug:
+              type: string
+            name:
+              type: string
+      required:
+        - id
+        - slug
+        - name
+    ClientKey:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        label:
+          type: string
+        public:
+          type: string
+          description: The public key portion of the DSN.
+        secret:
+          type: string
+          description: The secret key portion of the DSN.
+        projectId:
+          type: integer
+        isActive:
+          type: boolean
+        dateCreated:
+          type: string
+          format: date-time
+        dsn:
+          type: object
+          properties:
+            secret:
+              type: string
+            public:
+              type: string
+            csp:
+              type: string
+            security:
+              type: string
+            minidump:
+              type: string
+            unreal:
+              type: string
+            cdn:
+              type: string
+      required:
+        - id
+        - name
+        - public
+    ServiceHook:
+      type: object
+      properties:
+        id:
+          type: string
+        url:
+          type: string
+          format: uri
+        secret:
+          type: string
+        status:
+          type: string
+        events:
+          type: array
+          items:
+            type: string
+        dateCreated:
+          type: string
+          format: date-time
+      required:
+        - id
+        - url
+        - events
+    DebugFile:
+      type: object
+      properties:
+        id:
+          type: string
+        debugId:
+          type: string
+        cpuName:
+          type: string
+        objectName:
+          type: string
+        symbolType:
+          type: string
+        size:
+          type: integer
+        dateCreated:
+          type: string
+          format: date-time
+        data:
+          type: object
+      required:
+        - id
+    UserFeedback:
+      type: object
+      properties:
+        id:
+          type: string
+        eventID:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        comments:
+          type: string
+        dateCreated:
+          type: string
+          format: date-time
+      required:
+        - id
+        - eventID
+        - comments

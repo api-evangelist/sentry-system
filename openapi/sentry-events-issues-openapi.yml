@@ -1,0 +1,772 @@
+openapi: 3.1.0
+info:
+  title: Sentry Events and Issues API
+  description: >-
+    The Events and Issues API provides endpoints for managing error events and
+    issues in Sentry, including listing, retrieving, updating, and
+    bulk-mutating issues and their associated events, tags, and hashes.
+  version: 0.0.1
+  contact:
+    name: Sentry Support
+    url: https://sentry.io/support/
+    email: support@sentry.io
+servers:
+  - url: https://sentry.io/api/0
+    description: Sentry Production API
+security:
+  - BearerAuth: []
+tags:
+  - name: Events
+    description: Access and manage error and transaction events
+  - name: Issues
+    description: Manage error issues and their lifecycle
+paths:
+  /organizations/{organization_id_or_slug}/issues/:
+    get:
+      operationId: listOrganizationIssues
+      summary: List an organization's issues
+      description: >-
+        Returns a list of issues bound to an organization. All parameters are
+        supplied as query string parameters.
+      tags:
+        - Issues
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - name: query
+          in: query
+          description: An optional Sentry structured search query.
+          schema:
+            type: string
+        - name: cursor
+          in: query
+          description: A pointer to the last object fetched and its sort order for pagination.
+          schema:
+            type: string
+        - name: statsPeriod
+          in: query
+          description: An optional stat period (can be one of 24h, 14d, or empty string).
+          schema:
+            type: string
+        - name: shortIdLookup
+          in: query
+          description: If this is set to true then short IDs are looked up by this criteria.
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: A list of issues matching the query.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Issue'
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+    put:
+      operationId: bulkMutateOrganizationIssues
+      summary: Bulk mutate an organization's issues
+      description: >-
+        Bulk mutate various attributes on issues. The list of issues to modify
+        is given through the query string parameters.
+      tags:
+        - Issues
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - name: id
+          in: query
+          description: A list of IDs of the issues to be mutated.
+          schema:
+            type: array
+            items:
+              type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  enum:
+                    - resolved
+                    - unresolved
+                    - ignored
+                  description: The new status for the issues.
+                assignedTo:
+                  type: string
+                  description: The username or team to assign the issues to.
+                isPublic:
+                  type: boolean
+                  description: Whether the issues should be public.
+                hasSeen:
+                  type: boolean
+                  description: Whether the issues have been seen.
+                isBookmarked:
+                  type: boolean
+                  description: Whether the issues should be bookmarked.
+      responses:
+        '200':
+          description: Issues updated successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+    delete:
+      operationId: bulkRemoveOrganizationIssues
+      summary: Bulk remove an organization's issues
+      description: >-
+        Permanently remove the given issues. The list of issues to modify is
+        given through the id query string parameter.
+      tags:
+        - Issues
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - name: id
+          in: query
+          description: A list of IDs of the issues to be removed.
+          schema:
+            type: array
+            items:
+              type: integer
+      responses:
+        '204':
+          description: Issues removed successfully.
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+        '404':
+          description: Issues not found.
+  /projects/{organization_id_or_slug}/{project_id_or_slug}/issues/:
+    get:
+      operationId: listProjectIssues
+      summary: List a project's issues
+      description: Returns a list of issues bound to a project.
+      tags:
+        - Issues
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/ProjectIdOrSlug'
+        - name: query
+          in: query
+          description: An optional Sentry structured search query.
+          schema:
+            type: string
+        - name: cursor
+          in: query
+          description: Pagination cursor.
+          schema:
+            type: string
+        - name: statsPeriod
+          in: query
+          description: An optional stat period.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of issues.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Issue'
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+        '404':
+          description: Project not found.
+    put:
+      operationId: bulkMutateProjectIssues
+      summary: Bulk mutate a list of issues
+      description: >-
+        Bulk mutate various attributes on issues for a given project. The list
+        of issues to modify is given through the id query string parameter.
+      tags:
+        - Issues
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/ProjectIdOrSlug'
+        - name: id
+          in: query
+          description: A list of IDs of the issues to be mutated.
+          schema:
+            type: array
+            items:
+              type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  enum:
+                    - resolved
+                    - unresolved
+                    - ignored
+                assignedTo:
+                  type: string
+                isPublic:
+                  type: boolean
+                hasSeen:
+                  type: boolean
+                isBookmarked:
+                  type: boolean
+      responses:
+        '200':
+          description: Issues updated successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+    delete:
+      operationId: bulkRemoveProjectIssues
+      summary: Bulk remove a list of issues
+      description: >-
+        Permanently remove the given issues from a project. The list of issues
+        to modify is given through the id query string parameter.
+      tags:
+        - Issues
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/ProjectIdOrSlug'
+        - name: id
+          in: query
+          description: A list of IDs of the issues to be removed.
+          schema:
+            type: array
+            items:
+              type: integer
+      responses:
+        '204':
+          description: Issues removed successfully.
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+  /issues/{issue_id}/:
+    get:
+      operationId: retrieveIssue
+      summary: Retrieve an issue
+      description: Returns details on an individual issue including a representative event.
+      tags:
+        - Issues
+      parameters:
+        - $ref: '#/components/parameters/IssueId'
+      responses:
+        '200':
+          description: Issue details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Issue'
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+        '404':
+          description: Issue not found.
+    put:
+      operationId: updateIssue
+      summary: Update an issue
+      description: Updates an individual issue's attributes. Only the attributes submitted are modified.
+      tags:
+        - Issues
+      parameters:
+        - $ref: '#/components/parameters/IssueId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  enum:
+                    - resolved
+                    - unresolved
+                    - ignored
+                assignedTo:
+                  type: string
+                hasSeen:
+                  type: boolean
+                isBookmarked:
+                  type: boolean
+                isPublic:
+                  type: boolean
+      responses:
+        '200':
+          description: Issue updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Issue'
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+        '404':
+          description: Issue not found.
+    delete:
+      operationId: removeIssue
+      summary: Remove an issue
+      description: Removes an individual issue.
+      tags:
+        - Issues
+      parameters:
+        - $ref: '#/components/parameters/IssueId'
+      responses:
+        '202':
+          description: Issue scheduled for deletion.
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+        '404':
+          description: Issue not found.
+  /issues/{issue_id}/events/:
+    get:
+      operationId: listIssueEvents
+      summary: List an issue's events
+      description: Returns a list of events bound to an issue.
+      tags:
+        - Events
+      parameters:
+        - $ref: '#/components/parameters/IssueId'
+        - name: cursor
+          in: query
+          description: Pagination cursor.
+          schema:
+            type: string
+        - name: full
+          in: query
+          description: If true, the event payload will include the full event body.
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: A list of events.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Event'
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+        '404':
+          description: Issue not found.
+  /issues/{issue_id}/hashes/:
+    get:
+      operationId: listIssueHashes
+      summary: List an issue's hashes
+      description: Returns a list of hashes (fingerprints) that are assigned to an issue.
+      tags:
+        - Issues
+      parameters:
+        - $ref: '#/components/parameters/IssueId'
+        - name: cursor
+          in: query
+          description: Pagination cursor.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of hashes.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    latestEvent:
+                      $ref: '#/components/schemas/Event'
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+        '404':
+          description: Issue not found.
+  /issues/{issue_id}/tags/{key}/:
+    get:
+      operationId: retrieveIssueTagDetails
+      summary: Retrieve tag details for an issue
+      description: Returns details for a given tag key related to an issue.
+      tags:
+        - Issues
+      parameters:
+        - $ref: '#/components/parameters/IssueId'
+        - name: key
+          in: path
+          required: true
+          description: The tag key to look up.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Tag details.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  key:
+                    type: string
+                  name:
+                    type: string
+                  uniqueValues:
+                    type: integer
+                  totalValues:
+                    type: integer
+                  topValues:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        key:
+                          type: string
+                        name:
+                          type: string
+                        value:
+                          type: string
+                        count:
+                          type: integer
+                        lastSeen:
+                          type: string
+                          format: date-time
+                        firstSeen:
+                          type: string
+                          format: date-time
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Not found.
+  /issues/{issue_id}/tags/{key}/values/:
+    get:
+      operationId: listIssueTagValues
+      summary: List a tag's values for an issue
+      description: Returns a list of unique tag values for the given tag key on an issue.
+      tags:
+        - Issues
+      parameters:
+        - $ref: '#/components/parameters/IssueId'
+        - name: key
+          in: path
+          required: true
+          description: The tag key to look up.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of tag values.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    key:
+                      type: string
+                    name:
+                      type: string
+                    value:
+                      type: string
+                    count:
+                      type: integer
+                    lastSeen:
+                      type: string
+                      format: date-time
+                    firstSeen:
+                      type: string
+                      format: date-time
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Not found.
+  /projects/{organization_id_or_slug}/{project_id_or_slug}/events/:
+    get:
+      operationId: listProjectEvents
+      summary: List a project's error events
+      description: Returns a list of events bound to a project.
+      tags:
+        - Events
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/ProjectIdOrSlug'
+        - name: cursor
+          in: query
+          description: Pagination cursor.
+          schema:
+            type: string
+        - name: full
+          in: query
+          description: If true, include full event body.
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: A list of events.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Event'
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+        '404':
+          description: Project not found.
+  /projects/{organization_id_or_slug}/{project_id_or_slug}/events/{event_id}/:
+    get:
+      operationId: retrieveProjectEvent
+      summary: Retrieve an event for a project
+      description: Returns a specific event bound to a project.
+      tags:
+        - Events
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/ProjectIdOrSlug'
+        - name: event_id
+          in: path
+          required: true
+          description: The ID of the event to retrieve.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Event details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+        '404':
+          description: Event not found.
+  /issues/{issue_id}/events/{event_id}/:
+    get:
+      operationId: retrieveIssueEvent
+      summary: Retrieve an issue event
+      description: Returns a specific event bound to an issue.
+      tags:
+        - Events
+      parameters:
+        - $ref: '#/components/parameters/IssueId'
+        - name: event_id
+          in: path
+          required: true
+          description: The ID of the event to retrieve.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Event details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+        '404':
+          description: Event not found.
+  /projects/{organization_id_or_slug}/{project_id_or_slug}/events/{event_id}/source-map-debug/:
+    get:
+      operationId: debugSourceMaps
+      summary: Debug issues related to source maps for a given event
+      description: >-
+        Returns information about source map processing for a specific event,
+        helping to troubleshoot source map issues.
+      tags:
+        - Events
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/ProjectIdOrSlug'
+        - name: event_id
+          in: path
+          required: true
+          description: The ID of the event to debug.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Source map debug information.
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Event not found.
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: Authentication token for the Sentry API.
+  parameters:
+    OrganizationIdOrSlug:
+      name: organization_id_or_slug
+      in: path
+      required: true
+      description: The ID or slug of the organization.
+      schema:
+        type: string
+    ProjectIdOrSlug:
+      name: project_id_or_slug
+      in: path
+      required: true
+      description: The ID or slug of the project.
+      schema:
+        type: string
+    IssueId:
+      name: issue_id
+      in: path
+      required: true
+      description: The ID of the issue.
+      schema:
+        type: string
+  schemas:
+    Issue:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier of the issue.
+        shortId:
+          type: string
+          description: The short ID for the issue (e.g., PROJECT-123).
+        title:
+          type: string
+          description: The title of the issue.
+        culprit:
+          type: string
+          description: The function or module where the issue originated.
+        permalink:
+          type: string
+          format: uri
+        level:
+          type: string
+          enum:
+            - fatal
+            - error
+            - warning
+            - info
+            - debug
+        status:
+          type: string
+          enum:
+            - resolved
+            - unresolved
+            - ignored
+        platform:
+          type: string
+        firstSeen:
+          type: string
+          format: date-time
+        lastSeen:
+          type: string
+          format: date-time
+        count:
+          type: string
+        userCount:
+          type: integer
+        type:
+          type: string
+          enum:
+            - error
+            - default
+        metadata:
+          type: object
+          properties:
+            type:
+              type: string
+            value:
+              type: string
+      required:
+        - id
+        - title
+        - status
+    Event:
+      type: object
+      properties:
+        eventID:
+          type: string
+          description: The unique identifier of the event.
+        context:
+          type: object
+          description: Additional context data attached to the event.
+        dateCreated:
+          type: string
+          format: date-time
+        dateReceived:
+          type: string
+          format: date-time
+        entries:
+          type: array
+          items:
+            type: object
+        message:
+          type: string
+        title:
+          type: string
+        platform:
+          type: string
+        tags:
+          type: array
+          items:
+            type: object
+            properties:
+              key:
+                type: string
+              value:
+                type: string
+        type:
+          type: string
+        groupID:
+          type: string
+          description: The issue ID this event belongs to.
+      required:
+        - eventID
+        - dateCreated

@@ -1,0 +1,470 @@
+openapi: 3.1.0
+info:
+  title: Sentry Replays API
+  description: >-
+    The Replays API provides endpoints for managing session replays in Sentry,
+    including listing, retrieving, and deleting replay instances, accessing
+    recording segments, listing clicked nodes and selectors, and retrieving
+    replay counts for issues or transactions.
+  version: 0.0.1
+  contact:
+    name: Sentry Support
+    url: https://sentry.io/support/
+    email: support@sentry.io
+servers:
+  - url: https://sentry.io/api/0
+    description: Sentry Production API
+security:
+  - BearerAuth: []
+tags:
+  - name: Replays
+    description: Manage session replays
+  - name: Recording Segments
+    description: Access replay recording segments
+  - name: Interactions
+    description: View user interactions within replays
+paths:
+  /organizations/{organization_id_or_slug}/replays/:
+    get:
+      operationId: listOrganizationReplays
+      summary: List an organization's replays
+      description: Returns a list of replays for the given organization.
+      tags:
+        - Replays
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - name: cursor
+          in: query
+          description: Pagination cursor.
+          schema:
+            type: string
+        - name: query
+          in: query
+          description: A search query to filter replays.
+          schema:
+            type: string
+        - name: statsPeriod
+          in: query
+          description: Stats period (e.g., 24h, 14d).
+          schema:
+            type: string
+        - name: project
+          in: query
+          description: Project IDs to filter by.
+          schema:
+            type: array
+            items:
+              type: integer
+        - name: environment
+          in: query
+          description: Environment to filter by.
+          schema:
+            type: string
+        - name: sort
+          in: query
+          description: Sort order for results.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of replays.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Replay'
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+  /projects/{organization_id_or_slug}/{project_id_or_slug}/replays/{replay_id}/:
+    get:
+      operationId: retrieveReplay
+      summary: Retrieve a replay instance
+      description: Returns details for a specific session replay.
+      tags:
+        - Replays
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/ProjectIdOrSlug'
+        - $ref: '#/components/parameters/ReplayId'
+      responses:
+        '200':
+          description: Replay details.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Replay'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Replay not found.
+    delete:
+      operationId: deleteReplay
+      summary: Delete a replay instance
+      description: Deletes a session replay.
+      tags:
+        - Replays
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/ProjectIdOrSlug'
+        - $ref: '#/components/parameters/ReplayId'
+      responses:
+        '204':
+          description: Replay deleted.
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Replay not found.
+  /projects/{organization_id_or_slug}/{project_id_or_slug}/replays/{replay_id}/recording-segments/:
+    get:
+      operationId: listRecordingSegments
+      summary: List recording segments
+      description: Returns a list of recording segments for a given replay.
+      tags:
+        - Recording Segments
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/ProjectIdOrSlug'
+        - $ref: '#/components/parameters/ReplayId'
+        - name: cursor
+          in: query
+          description: Pagination cursor.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of recording segments.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RecordingSegment'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Replay not found.
+  /projects/{organization_id_or_slug}/{project_id_or_slug}/replays/{replay_id}/recording-segments/{segment_id}/:
+    get:
+      operationId: retrieveRecordingSegment
+      summary: Retrieve a recording segment
+      description: Returns a specific recording segment.
+      tags:
+        - Recording Segments
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/ProjectIdOrSlug'
+        - $ref: '#/components/parameters/ReplayId'
+        - name: segment_id
+          in: path
+          required: true
+          description: The ID of the recording segment.
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Recording segment data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecordingSegment'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Segment not found.
+  /organizations/{organization_id_or_slug}/replays/selectors/:
+    get:
+      operationId: listOrganizationSelectors
+      summary: List an organization's selectors
+      description: Returns a list of DOM selectors tracked across organization replays.
+      tags:
+        - Interactions
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - name: project
+          in: query
+          description: Project IDs to filter by.
+          schema:
+            type: array
+            items:
+              type: integer
+        - name: statsPeriod
+          in: query
+          description: Stats period.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of selectors.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        dom_element:
+                          type: string
+                        count:
+                          type: integer
+                        dead_click_count:
+                          type: integer
+                        rage_click_count:
+                          type: integer
+        '401':
+          description: Unauthorized.
+  /organizations/{organization_id_or_slug}/replays/{replay_id}/clicks/:
+    get:
+      operationId: listClickedNodes
+      summary: List clicked nodes
+      description: Returns a list of clicked DOM nodes within a replay.
+      tags:
+        - Interactions
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/ReplayId'
+      responses:
+        '200':
+          description: A list of clicked nodes.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        node_id:
+                          type: integer
+                        timestamp:
+                          type: string
+                          format: date-time
+                        element:
+                          type: object
+                          properties:
+                            tag:
+                              type: string
+                            id:
+                              type: string
+                            class:
+                              type: array
+                              items:
+                                type: string
+                            text:
+                              type: string
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Replay not found.
+  /projects/{organization_id_or_slug}/{project_id_or_slug}/replays/{replay_id}/viewed-by/:
+    get:
+      operationId: listReplayViewers
+      summary: List users who have viewed a replay
+      description: Returns a list of users who have viewed a specific replay.
+      tags:
+        - Replays
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/ProjectIdOrSlug'
+        - $ref: '#/components/parameters/ReplayId'
+      responses:
+        '200':
+          description: A list of users who have viewed the replay.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        name:
+                          type: string
+                        email:
+                          type: string
+                        dateViewed:
+                          type: string
+                          format: date-time
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Replay not found.
+  /organizations/{organization_id_or_slug}/replay-count/:
+    get:
+      operationId: getReplayCount
+      summary: Retrieve a count of replays for a given issue or transaction
+      description: Returns the count of replays associated with specified issues or transactions.
+      tags:
+        - Replays
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - name: query
+          in: query
+          description: The search query (e.g., issue.id or transaction).
+          schema:
+            type: string
+        - name: statsPeriod
+          in: query
+          description: Stats period.
+          schema:
+            type: string
+        - name: project
+          in: query
+          description: Project IDs.
+          schema:
+            type: array
+            items:
+              type: integer
+      responses:
+        '200':
+          description: Replay counts.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: integer
+        '401':
+          description: Unauthorized.
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: Authentication token for the Sentry API.
+  parameters:
+    OrganizationIdOrSlug:
+      name: organization_id_or_slug
+      in: path
+      required: true
+      description: The ID or slug of the organization.
+      schema:
+        type: string
+    ProjectIdOrSlug:
+      name: project_id_or_slug
+      in: path
+      required: true
+      description: The ID or slug of the project.
+      schema:
+        type: string
+    ReplayId:
+      name: replay_id
+      in: path
+      required: true
+      description: The ID of the replay.
+      schema:
+        type: string
+        format: uuid
+  schemas:
+    Replay:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        title:
+          type: string
+        projectId:
+          type: string
+        duration:
+          type: integer
+          description: Duration in seconds.
+        countErrors:
+          type: integer
+        countSegments:
+          type: integer
+        countUrls:
+          type: integer
+        startedAt:
+          type: string
+          format: date-time
+        finishedAt:
+          type: string
+          format: date-time
+        platform:
+          type: string
+        environment:
+          type: string
+        urls:
+          type: array
+          items:
+            type: string
+        user:
+          type: object
+          properties:
+            id:
+              type: string
+            name:
+              type: string
+            email:
+              type: string
+            ip_address:
+              type: string
+        browser:
+          type: object
+          properties:
+            name:
+              type: string
+            version:
+              type: string
+        os:
+          type: object
+          properties:
+            name:
+              type: string
+            version:
+              type: string
+        device:
+          type: object
+          properties:
+            name:
+              type: string
+            brand:
+              type: string
+            model:
+              type: string
+            family:
+              type: string
+        tags:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+      required:
+        - id
+        - startedAt
+        - finishedAt
+    RecordingSegment:
+      type: object
+      properties:
+        id:
+          type: integer
+        replayId:
+          type: string
+          format: uuid
+        segmentId:
+          type: integer
+        dateAdded:
+          type: string
+          format: date-time
+      required:
+        - id
+        - segmentId

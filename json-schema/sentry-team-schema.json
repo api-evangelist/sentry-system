@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sentry.io/schemas/team.json",
+  "title": "Sentry Team",
+  "description": "Represents a team in Sentry. Teams belong to an organization and are used to manage access to projects and assign ownership of issues.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique identifier of the team."
+    },
+    "slug": {
+      "type": "string",
+      "description": "The URL-friendly slug of the team.",
+      "pattern": "^[a-z0-9_-]+$"
+    },
+    "name": {
+      "type": "string",
+      "description": "The human-readable name of the team."
+    },
+    "dateCreated": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the team was created."
+    },
+    "isMember": {
+      "type": "boolean",
+      "description": "Whether the authenticated user is a member of this team."
+    },
+    "memberCount": {
+      "type": "integer",
+      "description": "The number of members in this team."
+    },
+    "avatar": {
+      "type": "object",
+      "description": "The team's avatar settings.",
+      "properties": {
+        "avatarType": {
+          "type": "string"
+        },
+        "avatarUuid": {
+          "type": ["string", "null"]
+        }
+      }
+    },
+    "organization": {
+      "type": "object",
+      "description": "The organization this team belongs to.",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "slug": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "projects": {
+      "type": "array",
+      "description": "Projects associated with this team.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "slug": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "required": ["id", "slug", "name"]
+}

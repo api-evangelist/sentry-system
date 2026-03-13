@@ -1,0 +1,108 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sentry.io/schemas/release.json",
+  "title": "Sentry Release",
+  "description": "Represents a release in Sentry. Releases track deployments of application versions and link error events to specific code changes, commits, and deployment environments.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "The internal unique identifier of the release."
+    },
+    "version": {
+      "type": "string",
+      "description": "The version identifier of the release, unique within the organization."
+    },
+    "shortVersion": {
+      "type": "string",
+      "description": "A shortened version string for display purposes."
+    },
+    "ref": {
+      "type": ["string", "null"],
+      "description": "An optional commit reference (SHA)."
+    },
+    "url": {
+      "type": ["string", "null"],
+      "description": "A URL pointing to the release (often a CI build URL)."
+    },
+    "dateCreated": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the release was created."
+    },
+    "dateReleased": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "When the release went live."
+    },
+    "firstEvent": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "Timestamp of the first event for this release."
+    },
+    "lastEvent": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "Timestamp of the last event for this release."
+    },
+    "newGroups": {
+      "type": "integer",
+      "description": "The count of new issues introduced by this release."
+    },
+    "projects": {
+      "type": "array",
+      "description": "Projects associated with this release.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "slug": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "authors": {
+      "type": "array",
+      "description": "Authors of commits in this release.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string",
+            "format": "email"
+          }
+        }
+      }
+    },
+    "commitCount": {
+      "type": "integer",
+      "description": "The number of commits associated with this release."
+    },
+    "lastDeploy": {
+      "type": ["object", "null"],
+      "description": "The most recent deployment of this release.",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "environment": {
+          "type": "string"
+        },
+        "dateFinished": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        }
+      }
+    }
+  },
+  "required": ["version", "dateCreated"]
+}

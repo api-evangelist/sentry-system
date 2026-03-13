@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sentry.io/schemas/alert-rule.json",
+  "title": "Sentry Alert Rule",
+  "description": "Represents an alert rule in Sentry. Alert rules define conditions that trigger notifications when error or performance thresholds are breached. Includes both metric alert rules and issue alert rules.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique identifier of the alert rule."
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of the alert rule."
+    },
+    "aggregate": {
+      "type": "string",
+      "description": "The aggregation function for metric alerts (e.g., count(), p50(transaction.duration))."
+    },
+    "dataset": {
+      "type": "string",
+      "description": "The dataset to query (e.g., events, transactions, sessions)."
+    },
+    "query": {
+      "type": "string",
+      "description": "An optional Sentry search query to filter events."
+    },
+    "timeWindow": {
+      "type": "integer",
+      "description": "The time window in minutes to evaluate the alert."
+    },
+    "environment": {
+      "type": ["string", "null"],
+      "description": "The environment to filter by."
+    },
+    "projects": {
+      "type": "array",
+      "description": "The project slugs the alert applies to.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "triggers": {
+      "type": "array",
+      "description": "The trigger conditions for the alert.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string",
+            "description": "Trigger label (e.g., critical, warning)."
+          },
+          "alertThreshold": {
+            "type": "number",
+            "description": "The threshold value that triggers the alert."
+          },
+          "resolveThreshold": {
+            "type": ["number", "null"],
+            "description": "The threshold value that resolves the alert."
+          },
+          "thresholdType": {
+            "type": "integer",
+            "description": "0 for above, 1 for below."
+          },
+          "actions": {
+            "type": "array",
+            "description": "Actions to perform when triggered.",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "owner": {
+      "type": ["string", "null"],
+      "description": "The owner of the alert (user:id or team:id)."
+    },
+    "dateCreated": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the alert rule was created."
+    },
+    "dateModified": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the alert rule was last modified."
+    }
+  },
+  "required": ["id", "name"]
+}

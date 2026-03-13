@@ -1,0 +1,112 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sentry.io/schemas/monitor.json",
+  "title": "Sentry Monitor",
+  "description": "Represents a cron job monitor in Sentry. Monitors track scheduled tasks and alert when check-ins are missed or fail, providing visibility into the health of background jobs and cron tasks.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique identifier of the monitor."
+    },
+    "slug": {
+      "type": "string",
+      "description": "The URL-friendly slug of the monitor."
+    },
+    "name": {
+      "type": "string",
+      "description": "The human-readable name of the monitor."
+    },
+    "type": {
+      "type": "string",
+      "description": "The type of monitor.",
+      "enum": ["cron_job"]
+    },
+    "config": {
+      "type": "object",
+      "description": "The monitor's schedule configuration.",
+      "properties": {
+        "schedule_type": {
+          "type": "string",
+          "description": "The type of schedule.",
+          "enum": ["crontab", "interval"]
+        },
+        "schedule": {
+          "description": "The schedule definition. A crontab string or interval array.",
+          "oneOf": [
+            {
+              "type": "string",
+              "description": "Crontab expression (e.g., '*/5 * * * *')."
+            },
+            {
+              "type": "array",
+              "description": "Interval as [value, unit] (e.g., [1, 'hour']).",
+              "items": {}
+            }
+          ]
+        },
+        "checkin_margin": {
+          "type": ["integer", "null"],
+          "description": "Margin of minutes before a check-in is marked as missed."
+        },
+        "max_runtime": {
+          "type": ["integer", "null"],
+          "description": "Maximum runtime in minutes before a check-in is marked as timed out."
+        },
+        "timezone": {
+          "type": "string",
+          "description": "The timezone for the schedule (e.g., UTC, America/New_York)."
+        }
+      },
+      "required": ["schedule_type", "schedule"]
+    },
+    "status": {
+      "type": "string",
+      "description": "The current status of the monitor."
+    },
+    "dateCreated": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the monitor was created."
+    },
+    "project": {
+      "type": "object",
+      "description": "The project associated with this monitor.",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "slug": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "environments": {
+      "type": "array",
+      "description": "Environment-specific monitor statuses.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "lastCheckIn": {
+            "type": ["string", "null"],
+            "format": "date-time"
+          },
+          "nextCheckIn": {
+            "type": ["string", "null"],
+            "format": "date-time"
+          }
+        }
+      }
+    }
+  },
+  "required": ["id", "name", "type", "config"]
+}

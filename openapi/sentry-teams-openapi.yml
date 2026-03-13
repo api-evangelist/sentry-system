@@ -1,0 +1,494 @@
+openapi: 3.1.0
+info:
+  title: Sentry Teams API
+  description: >-
+    The Teams API provides endpoints for managing teams within Sentry
+    organizations, including creating, retrieving, updating, and deleting teams,
+    managing team members and their roles, and listing projects associated with
+    teams.
+  version: 0.0.1
+  contact:
+    name: Sentry Support
+    url: https://sentry.io/support/
+    email: support@sentry.io
+servers:
+  - url: https://sentry.io/api/0
+    description: Sentry Production API
+security:
+  - BearerAuth: []
+tags:
+  - name: Teams
+    description: Manage teams and team settings
+  - name: Members
+    description: Manage team members and their roles
+paths:
+  /organizations/{organization_id_or_slug}/teams/:
+    get:
+      operationId: listOrganizationTeams
+      summary: List an organization's teams
+      description: Returns a list of teams bound to an organization.
+      tags:
+        - Teams
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - name: cursor
+          in: query
+          description: Pagination cursor.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of teams.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Team'
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+    post:
+      operationId: createTeam
+      summary: Create a new team
+      description: Creates a new team bound to an organization.
+      tags:
+        - Teams
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+              properties:
+                name:
+                  type: string
+                  description: The human-readable name of the team.
+                slug:
+                  type: string
+                  description: Optionally set a unique slug for the team.
+      responses:
+        '201':
+          description: Team created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Team'
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+        '409':
+          description: A team with this slug already exists.
+  /teams/{organization_id_or_slug}/{team_id_or_slug}/:
+    get:
+      operationId: retrieveTeam
+      summary: Retrieve a team
+      description: Returns details for a specific team.
+      tags:
+        - Teams
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/TeamIdOrSlug'
+      responses:
+        '200':
+          description: Team details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeamDetail'
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+        '404':
+          description: Team not found.
+    put:
+      operationId: updateTeam
+      summary: Update a team
+      description: Updates various attributes of the given team.
+      tags:
+        - Teams
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/TeamIdOrSlug'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: The new name for the team.
+                slug:
+                  type: string
+                  description: The new slug for the team.
+      responses:
+        '200':
+          description: Team updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeamDetail'
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+        '404':
+          description: Team not found.
+    delete:
+      operationId: deleteTeam
+      summary: Delete a team
+      description: Schedules a team for deletion.
+      tags:
+        - Teams
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/TeamIdOrSlug'
+      responses:
+        '204':
+          description: Team scheduled for deletion.
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+        '404':
+          description: Team not found.
+  /teams/{organization_id_or_slug}/{team_id_or_slug}/members/:
+    get:
+      operationId: listTeamMembers
+      summary: List a team's members
+      description: Returns a list of members bound to a team.
+      tags:
+        - Members
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/TeamIdOrSlug'
+        - name: cursor
+          in: query
+          description: Pagination cursor.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of team members.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TeamMember'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Team not found.
+  /organizations/{organization_id_or_slug}/members/{member_id}/teams/{team_id_or_slug}/:
+    post:
+      operationId: addMemberToTeam
+      summary: Add an organization member to a team
+      description: Adds an existing organization member to a team.
+      tags:
+        - Members
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/MemberId'
+        - $ref: '#/components/parameters/TeamIdOrSlug'
+      responses:
+        '201':
+          description: Member added to team.
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+        '404':
+          description: Member or team not found.
+    delete:
+      operationId: removeMemberFromTeam
+      summary: Delete an organization member from a team
+      description: Removes a member from a team.
+      tags:
+        - Members
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/MemberId'
+        - $ref: '#/components/parameters/TeamIdOrSlug'
+      responses:
+        '200':
+          description: Member removed from team.
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+        '404':
+          description: Member or team not found.
+    put:
+      operationId: updateMemberTeamRole
+      summary: Update an organization member's team role
+      description: Updates the role of a member within a specific team.
+      tags:
+        - Members
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/MemberId'
+        - $ref: '#/components/parameters/TeamIdOrSlug'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                teamRole:
+                  type: string
+                  description: The new team-level role for the member.
+      responses:
+        '200':
+          description: Team role updated.
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+  /teams/{organization_id_or_slug}/{team_id_or_slug}/projects/:
+    get:
+      operationId: listTeamProjects
+      summary: List a team's projects
+      description: Returns a list of projects bound to a team.
+      tags:
+        - Teams
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - $ref: '#/components/parameters/TeamIdOrSlug'
+        - name: cursor
+          in: query
+          description: Pagination cursor.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of projects.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Project'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Team not found.
+  /projects/{organization_id_or_slug}/{project_id_or_slug}/teams/:
+    get:
+      operationId: listProjectTeams
+      summary: List a project's teams
+      description: Returns a list of teams bound to a project.
+      tags:
+        - Teams
+      parameters:
+        - name: organization_id_or_slug
+          in: path
+          required: true
+          description: The ID or slug of the organization.
+          schema:
+            type: string
+        - name: project_id_or_slug
+          in: path
+          required: true
+          description: The ID or slug of the project.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of teams.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Team'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Project not found.
+  /organizations/{organization_id_or_slug}/users/{user_id}/teams/:
+    get:
+      operationId: listUserTeams
+      summary: List a user's teams for an organization
+      description: Returns a list of teams the specified user belongs to within an organization.
+      tags:
+        - Members
+      parameters:
+        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+        - name: user_id
+          in: path
+          required: true
+          description: The ID of the user.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of teams.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Team'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: User not found.
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: Authentication token for the Sentry API.
+  parameters:
+    OrganizationIdOrSlug:
+      name: organization_id_or_slug
+      in: path
+      required: true
+      description: The ID or slug of the organization.
+      schema:
+        type: string
+    TeamIdOrSlug:
+      name: team_id_or_slug
+      in: path
+      required: true
+      description: The ID or slug of the team.
+      schema:
+        type: string
+    MemberId:
+      name: member_id
+      in: path
+      required: true
+      description: The ID of the organization member.
+      schema:
+        type: string
+  schemas:
+    Team:
+      type: object
+      properties:
+        id:
+          type: string
+        slug:
+          type: string
+        name:
+          type: string
+        dateCreated:
+          type: string
+          format: date-time
+        isMember:
+          type: boolean
+        memberCount:
+          type: integer
+        avatar:
+          type: object
+          properties:
+            avatarType:
+              type: string
+            avatarUuid:
+              type: string
+              nullable: true
+      required:
+        - id
+        - slug
+        - name
+    TeamDetail:
+      type: object
+      properties:
+        id:
+          type: string
+        slug:
+          type: string
+        name:
+          type: string
+        dateCreated:
+          type: string
+          format: date-time
+        isMember:
+          type: boolean
+        memberCount:
+          type: integer
+        avatar:
+          type: object
+          properties:
+            avatarType:
+              type: string
+            avatarUuid:
+              type: string
+              nullable: true
+        organization:
+          type: object
+          properties:
+            id:
+              type: string
+            slug:
+              type: string
+            name:
+              type: string
+        projects:
+          type: array
+          items:
+            $ref: '#/components/schemas/Project'
+      required:
+        - id
+        - slug
+        - name
+    TeamMember:
+      type: object
+      properties:
+        id:
+          type: string
+        email:
+          type: string
+          format: email
+        name:
+          type: string
+        role:
+          type: string
+        teamRole:
+          type: string
+          nullable: true
+        pending:
+          type: boolean
+        expired:
+          type: boolean
+        dateCreated:
+          type: string
+          format: date-time
+      required:
+        - id
+        - email
+    Project:
+      type: object
+      properties:
+        id:
+          type: string
+        slug:
+          type: string
+        name:
+          type: string
+        platform:
+          type: string
+          nullable: true
+        dateCreated:
+          type: string
+          format: date-time
+      required:
+        - id
+        - slug
+        - name
