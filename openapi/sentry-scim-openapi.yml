@@ -25,7 +25,7 @@ paths:
   /organizations/{organization_id_or_slug}/scim/v2/Users:
     get:
       operationId: listScimMembers
-      summary: List an organization's SCIM members
+      summary: Sentry List an organization's SCIM members
       description: Returns a paginated list of organization members using the SCIM protocol.
       tags:
         - SCIM Members
@@ -59,7 +59,7 @@ paths:
           description: Forbidden. Requires Business Plan with SAML2 enabled.
     post:
       operationId: provisionScimMember
-      summary: Provision a new organization member
+      summary: Sentry Provision a new organization member
       description: Creates a new organization member via SCIM provisioning.
       tags:
         - SCIM Members
@@ -121,7 +121,7 @@ paths:
   /organizations/{organization_id_or_slug}/scim/v2/Users/{scim_user_id}:
     get:
       operationId: queryScimMember
-      summary: Query an individual organization member
+      summary: Sentry Query an individual organization member
       description: Returns a specific organization member using the SCIM protocol.
       tags:
         - SCIM Members
@@ -141,7 +141,7 @@ paths:
           description: User not found.
     patch:
       operationId: updateScimMember
-      summary: Update an organization member's attributes
+      summary: Sentry Update an organization member's attributes
       description: >-
         Updates attributes of a SCIM member. Currently supports setting the
         active attribute to deactivate members.
@@ -189,7 +189,7 @@ paths:
           description: User not found.
     delete:
       operationId: deleteScimMember
-      summary: Delete an organization member via SCIM
+      summary: Sentry Delete an organization member via SCIM
       description: Removes/deactivates an organization member via SCIM.
       tags:
         - SCIM Members
@@ -206,7 +206,7 @@ paths:
   /organizations/{organization_id_or_slug}/scim/v2/Groups:
     get:
       operationId: listScimTeams
-      summary: List an organization's paginated teams
+      summary: Sentry List an organization's paginated teams
       description: Returns a paginated list of teams using the SCIM protocol.
       tags:
         - SCIM Teams
@@ -240,7 +240,7 @@ paths:
           description: Forbidden.
     post:
       operationId: provisionScimTeam
-      summary: Provision a new team
+      summary: Sentry Provision a new team
       description: Creates a new team via SCIM provisioning.
       tags:
         - SCIM Teams
@@ -288,7 +288,7 @@ paths:
   /organizations/{organization_id_or_slug}/scim/v2/Groups/{scim_group_id}:
     get:
       operationId: queryScimTeam
-      summary: Query an individual team
+      summary: Sentry Query an individual team
       description: Returns a specific team using the SCIM protocol.
       tags:
         - SCIM Teams
@@ -308,7 +308,7 @@ paths:
           description: Team not found.
     patch:
       operationId: updateScimTeam
-      summary: Update a team's attributes
+      summary: Sentry Update a team's attributes
       description: Updates team attributes via SCIM, including managing members.
       tags:
         - SCIM Teams
@@ -355,7 +355,7 @@ paths:
           description: Team not found.
     delete:
       operationId: deleteScimTeam
-      summary: Delete an individual team
+      summary: Sentry Delete an individual team
       description: Deletes a team via SCIM.
       tags:
         - SCIM Teams

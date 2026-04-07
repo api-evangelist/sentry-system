@@ -32,7 +32,7 @@ paths:
   /teams/{organization_id_or_slug}/{team_id_or_slug}/projects/:
     post:
       operationId: createProject
-      summary: Create a new project
+      summary: Sentry Create a new project
       description: Creates a new project bound to a team.
       tags:
         - Projects
@@ -77,7 +77,7 @@ paths:
   /projects/{organization_id_or_slug}/{project_id_or_slug}/:
     get:
       operationId: retrieveProject
-      summary: Retrieve a project
+      summary: Sentry Retrieve a project
       description: Returns details for a specific project.
       tags:
         - Projects
@@ -99,7 +99,7 @@ paths:
           description: Project not found.
     put:
       operationId: updateProject
-      summary: Update a project
+      summary: Sentry Update a project
       description: Updates various attributes and configurable settings for the given project.
       tags:
         - Projects
@@ -148,7 +148,7 @@ paths:
           description: Project not found.
     delete:
       operationId: deleteProject
-      summary: Delete a project
+      summary: Sentry Delete a project
       description: Schedules a project for deletion. This action is irreversible.
       tags:
         - Projects
@@ -167,7 +167,7 @@ paths:
   /projects/{organization_id_or_slug}/{project_id_or_slug}/keys/:
     get:
       operationId: listProjectClientKeys
-      summary: List a project's client keys
+      summary: Sentry List a project's client keys
       description: Returns a list of client keys bound to a project.
       tags:
         - Client Keys
@@ -194,7 +194,7 @@ paths:
           description: Forbidden.
     post:
       operationId: createProjectClientKey
-      summary: Create a new client key
+      summary: Sentry Create a new client key
       description: Creates a new client key bound to a project.
       tags:
         - Client Keys
@@ -229,7 +229,7 @@ paths:
   /projects/{organization_id_or_slug}/{project_id_or_slug}/keys/{key_id}/:
     get:
       operationId: retrieveProjectClientKey
-      summary: Retrieve a client key
+      summary: Sentry Retrieve a client key
       description: Returns a client key bound to a project.
       tags:
         - Client Keys
@@ -250,7 +250,7 @@ paths:
           description: Client key not found.
     put:
       operationId: updateProjectClientKey
-      summary: Update a client key
+      summary: Sentry Update a client key
       description: Updates a client key.
       tags:
         - Client Keys
@@ -286,7 +286,7 @@ paths:
           description: Client key not found.
     delete:
       operationId: deleteProjectClientKey
-      summary: Delete a client key
+      summary: Sentry Delete a client key
       description: Deletes a client key.
       tags:
         - Client Keys
@@ -304,7 +304,7 @@ paths:
   /projects/{organization_id_or_slug}/{project_id_or_slug}/hooks/:
     get:
       operationId: listProjectServiceHooks
-      summary: List a project's service hooks
+      summary: Sentry List a project's service hooks
       description: Returns a list of service hooks bound to a project.
       tags:
         - Service Hooks
@@ -331,7 +331,7 @@ paths:
           description: Forbidden.
     post:
       operationId: createProjectServiceHook
-      summary: Register a new service hook
+      summary: Sentry Register a new service hook
       description: Creates a new service hook for a project.
       tags:
         - Service Hooks
@@ -373,7 +373,7 @@ paths:
   /projects/{organization_id_or_slug}/{project_id_or_slug}/hooks/{hook_id}/:
     get:
       operationId: retrieveProjectServiceHook
-      summary: Retrieve a service hook
+      summary: Sentry Retrieve a service hook
       description: Returns a service hook bound to a project.
       tags:
         - Service Hooks
@@ -394,7 +394,7 @@ paths:
           description: Service hook not found.
     put:
       operationId: updateProjectServiceHook
-      summary: Update a service hook
+      summary: Sentry Update a service hook
       description: Updates a service hook.
       tags:
         - Service Hooks
@@ -431,7 +431,7 @@ paths:
           description: Service hook not found.
     delete:
       operationId: deleteProjectServiceHook
-      summary: Remove a service hook
+      summary: Sentry Remove a service hook
       description: Removes a service hook from a project.
       tags:
         - Service Hooks
@@ -449,7 +449,7 @@ paths:
   /projects/{organization_id_or_slug}/{project_id_or_slug}/files/dsyms/:
     get:
       operationId: listProjectDebugFiles
-      summary: List a project's debug information files
+      summary: Sentry List a project's debug information files
       description: Returns a list of debug information files for a given project.
       tags:
         - Debug Files
@@ -472,7 +472,7 @@ paths:
   /projects/{organization_id_or_slug}/{project_id_or_slug}/filters/:
     get:
       operationId: listProjectFilters
-      summary: List a project's data filters
+      summary: Sentry List a project's data filters
       description: Returns a list of active inbound data filters for a project.
       tags:
         - Filters
@@ -501,7 +501,7 @@ paths:
   /projects/{organization_id_or_slug}/{project_id_or_slug}/filters/{filter_id}/:
     put:
       operationId: updateProjectFilter
-      summary: Update an inbound data filter
+      summary: Sentry Update an inbound data filter
       description: Updates a project's inbound data filter.
       tags:
         - Filters
@@ -534,7 +534,7 @@ paths:
   /projects/{organization_id_or_slug}/{project_id_or_slug}/user-feedback/:
     get:
       operationId: listProjectUserFeedback
-      summary: List a project's user feedback
+      summary: Sentry List a project's user feedback
       description: Returns a list of user feedback items for a project.
       tags:
         - User Feedback
@@ -556,7 +556,7 @@ paths:
           description: Forbidden.
     post:
       operationId: submitProjectUserFeedback
-      summary: Submit user feedback
+      summary: Sentry Submit user feedback
       description: Submits a new user feedback item for a project.
       tags:
         - User Feedback
@@ -602,7 +602,7 @@ paths:
   /projects/{organization_id_or_slug}/{project_id_or_slug}/users/:
     get:
       operationId: listProjectUsers
-      summary: List a project's users
+      summary: Sentry List a project's users
       description: Returns a list of users seen within a project.
       tags:
         - Projects
@@ -642,7 +642,7 @@ paths:
   /projects/{organization_id_or_slug}/{project_id_or_slug}/teams/{team_id_or_slug}/:
     post:
       operationId: addTeamToProject
-      summary: Add a team to a project
+      summary: Sentry Add a team to a project
       description: Grants a team access to a project.
       tags:
         - Projects
@@ -661,7 +661,7 @@ paths:
           description: Not found.
     delete:
       operationId: removeTeamFromProject
-      summary: Delete a team from a project
+      summary: Sentry Delete a team from a project
       description: Revokes a team's access to a project.
       tags:
         - Projects

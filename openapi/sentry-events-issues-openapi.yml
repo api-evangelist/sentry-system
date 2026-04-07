@@ -24,7 +24,7 @@ paths:
   /organizations/{organization_id_or_slug}/issues/:
     get:
       operationId: listOrganizationIssues
-      summary: List an organization's issues
+      summary: Sentry List an organization's issues
       description: >-
         Returns a list of issues bound to an organization. All parameters are
         supplied as query string parameters.
@@ -67,7 +67,7 @@ paths:
           description: Forbidden.
     put:
       operationId: bulkMutateOrganizationIssues
-      summary: Bulk mutate an organization's issues
+      summary: Sentry Bulk mutate an organization's issues
       description: >-
         Bulk mutate various attributes on issues. The list of issues to modify
         is given through the query string parameters.
@@ -126,7 +126,7 @@ paths:
           description: Forbidden.
     delete:
       operationId: bulkRemoveOrganizationIssues
-      summary: Bulk remove an organization's issues
+      summary: Sentry Bulk remove an organization's issues
       description: >-
         Permanently remove the given issues. The list of issues to modify is
         given through the id query string parameter.
@@ -153,7 +153,7 @@ paths:
   /projects/{organization_id_or_slug}/{project_id_or_slug}/issues/:
     get:
       operationId: listProjectIssues
-      summary: List a project's issues
+      summary: Sentry List a project's issues
       description: Returns a list of issues bound to a project.
       tags:
         - Issues
@@ -192,7 +192,7 @@ paths:
           description: Project not found.
     put:
       operationId: bulkMutateProjectIssues
-      summary: Bulk mutate a list of issues
+      summary: Sentry Bulk mutate a list of issues
       description: >-
         Bulk mutate various attributes on issues for a given project. The list
         of issues to modify is given through the id query string parameter.
@@ -247,7 +247,7 @@ paths:
           description: Forbidden.
     delete:
       operationId: bulkRemoveProjectIssues
-      summary: Bulk remove a list of issues
+      summary: Sentry Bulk remove a list of issues
       description: >-
         Permanently remove the given issues from a project. The list of issues
         to modify is given through the id query string parameter.
@@ -273,7 +273,7 @@ paths:
   /issues/{issue_id}/:
     get:
       operationId: retrieveIssue
-      summary: Retrieve an issue
+      summary: Sentry Retrieve an issue
       description: Returns details on an individual issue including a representative event.
       tags:
         - Issues
@@ -294,7 +294,7 @@ paths:
           description: Issue not found.
     put:
       operationId: updateIssue
-      summary: Update an issue
+      summary: Sentry Update an issue
       description: Updates an individual issue's attributes. Only the attributes submitted are modified.
       tags:
         - Issues
@@ -338,7 +338,7 @@ paths:
           description: Issue not found.
     delete:
       operationId: removeIssue
-      summary: Remove an issue
+      summary: Sentry Remove an issue
       description: Removes an individual issue.
       tags:
         - Issues
@@ -356,7 +356,7 @@ paths:
   /issues/{issue_id}/events/:
     get:
       operationId: listIssueEvents
-      summary: List an issue's events
+      summary: Sentry List an issue's events
       description: Returns a list of events bound to an issue.
       tags:
         - Events
@@ -390,7 +390,7 @@ paths:
   /issues/{issue_id}/hashes/:
     get:
       operationId: listIssueHashes
-      summary: List an issue's hashes
+      summary: Sentry List an issue's hashes
       description: Returns a list of hashes (fingerprints) that are assigned to an issue.
       tags:
         - Issues
@@ -424,7 +424,7 @@ paths:
   /issues/{issue_id}/tags/{key}/:
     get:
       operationId: retrieveIssueTagDetails
-      summary: Retrieve tag details for an issue
+      summary: Sentry Retrieve tag details for an issue
       description: Returns details for a given tag key related to an issue.
       tags:
         - Issues
@@ -478,7 +478,7 @@ paths:
   /issues/{issue_id}/tags/{key}/values/:
     get:
       operationId: listIssueTagValues
-      summary: List a tag's values for an issue
+      summary: Sentry List a tag's values for an issue
       description: Returns a list of unique tag values for the given tag key on an issue.
       tags:
         - Issues
@@ -521,7 +521,7 @@ paths:
   /projects/{organization_id_or_slug}/{project_id_or_slug}/events/:
     get:
       operationId: listProjectEvents
-      summary: List a project's error events
+      summary: Sentry List a project's error events
       description: Returns a list of events bound to a project.
       tags:
         - Events
@@ -556,7 +556,7 @@ paths:
   /projects/{organization_id_or_slug}/{project_id_or_slug}/events/{event_id}/:
     get:
       operationId: retrieveProjectEvent
-      summary: Retrieve an event for a project
+      summary: Sentry Retrieve an event for a project
       description: Returns a specific event bound to a project.
       tags:
         - Events
@@ -585,7 +585,7 @@ paths:
   /issues/{issue_id}/events/{event_id}/:
     get:
       operationId: retrieveIssueEvent
-      summary: Retrieve an issue event
+      summary: Sentry Retrieve an issue event
       description: Returns a specific event bound to an issue.
       tags:
         - Events
@@ -613,7 +613,7 @@ paths:
   /projects/{organization_id_or_slug}/{project_id_or_slug}/events/{event_id}/source-map-debug/:
     get:
       operationId: debugSourceMaps
-      summary: Debug issues related to source maps for a given event
+      summary: Sentry Debug issues related to source maps for a given event
       description: >-
         Returns information about source map processing for a specific event,
         helping to troubleshoot source map issues.
