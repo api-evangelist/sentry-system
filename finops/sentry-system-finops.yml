@@ -1,0 +1,299 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+provider: Sentry
+providerId: sentry-system
+publisherName: Sentry
+serviceCategory: API
+created: '2026-05-04'
+modified: '2026-05-04'
+tags:
+  - APM
+  - Application Monitoring
+  - Bug Tracking
+  - Developer Tools
+  - Error Tracking
+  - Observability
+  - Performance Monitoring
+  - Real-Time Monitoring
+  - FinOps
+  - Cost Management
+  - FOCUS
+description: FinOps framework definition for the Sentry API surface. Provides a FOCUS-aligned mapping
+  for cost allocation, usage measurement, and unit-economics reporting across the provider's APIs.
+principles:
+  - name: Visibility
+    description: Make API consumption costs visible to engineering, product, and finance teams in near
+      real-time.
+  - name: Allocation
+    description: Tag every chargeable API call with the consuming team, environment, application, and
+      feature so cost can be allocated.
+  - name: Optimization
+    description: Continuously evaluate request patterns, caching, batching, and tier selection to reduce
+      cost per useful unit of work.
+  - name: Accountability
+    description: Establish budget owners and chargeback or showback flows for each consuming team.
+domains:
+  - name: Understand Usage and Cost
+    capabilities:
+      - Data Ingestion
+      - Allocation
+      - Reporting and Analytics
+      - Anomaly Management
+  - name: Quantify Business Value
+    capabilities:
+      - Planning and Estimating
+      - Forecasting
+      - Budgeting
+      - Benchmarking
+      - Unit Economics
+  - name: Optimize Usage and Cost
+    capabilities:
+      - Architecting for Cloud
+      - Rate Optimization
+      - Workload Optimization
+      - Cloud Sustainability
+      - Licensing and SaaS
+  - name: Manage the FinOps Practice
+    capabilities:
+      - FinOps Practice Operations
+      - FinOps Education and Enablement
+      - Invoicing and Chargeback
+      - Onboarding Workloads
+      - Intersecting Disciplines
+billingModel:
+  pricingCategory: Usage-Based
+  billingFrequency: Monthly
+  billingCurrency: USD
+  chargeCategories:
+    - Usage
+    - Purchase
+    - Tax
+    - Credit
+    - Adjustment
+  chargeFrequency: Recurring
+focusColumns:
+  ServiceName: Sentry
+  ServiceCategory: Developer Tools / API
+  ProviderName: Sentry
+  PublisherName: Sentry
+  InvoiceIssuerName: Sentry
+  PricingCategory: Usage-Based
+  PricingUnit: request
+  BillingCurrency: USD
+  ChargeCategory: Usage
+meters:
+  - name: api_requests
+    description: Count of billable API requests
+    unit: request
+    aggregation: sum
+    dimensions:
+      - api
+      - endpoint
+      - tier
+      - region
+      - consumer
+  - name: data_egress
+    description: Bytes returned over the network in API responses
+    unit: GB
+    aggregation: sum
+    dimensions:
+      - api
+      - region
+      - consumer
+  - name: compute_seconds
+    description: Server-side compute consumed by the request, where applicable
+    unit: second
+    aggregation: sum
+    dimensions:
+      - api
+      - endpoint
+      - tier
+apis:
+  - name: Sentry API
+    baseURL: https://sentry.io/api/0
+    tags:
+      - Error Tracking
+      - Monitoring
+      - Observability
+      - Performance
+    serviceName: Sentry API
+    serviceCategory: API
+  - name: Sentry Events and Issues API
+    baseURL: https://sentry.io/api/0
+    tags:
+      - Debugging
+      - Error Tracking
+      - Events
+      - Issues
+    serviceName: Sentry Events and Issues API
+    serviceCategory: API
+  - name: Sentry Organizations API
+    baseURL: https://sentry.io/api/0
+    tags:
+      - Administration
+      - Members
+      - Organizations
+    serviceName: Sentry Organizations API
+    serviceCategory: API
+  - name: Sentry Projects API
+    baseURL: https://sentry.io/api/0
+    tags:
+      - Configuration
+      - Management
+      - Projects
+    serviceName: Sentry Projects API
+    serviceCategory: API
+  - name: Sentry Teams API
+    baseURL: https://sentry.io/api/0
+    tags:
+      - Collaboration
+      - Members
+      - Teams
+    serviceName: Sentry Teams API
+    serviceCategory: API
+  - name: Sentry Releases API
+    baseURL: https://sentry.io/api/0
+    tags:
+      - Deployments
+      - Releases
+      - Version Management
+    serviceName: Sentry Releases API
+    serviceCategory: API
+  - name: Sentry Alerts API
+    baseURL: https://sentry.io/api/0
+    tags:
+      - Alerts
+      - Monitoring
+      - Notifications
+    serviceName: Sentry Alerts API
+    serviceCategory: API
+  - name: Sentry Crons API
+    baseURL: https://sentry.io/api/0
+    tags:
+      - Crons
+      - Monitoring
+      - Scheduled Tasks
+    serviceName: Sentry Crons API
+    serviceCategory: API
+  - name: Sentry Dashboards API
+    baseURL: https://sentry.io/api/0
+    tags:
+      - Analytics
+      - Dashboards
+      - Visualization
+    serviceName: Sentry Dashboards API
+    serviceCategory: API
+  - name: Sentry Discover API
+    baseURL: https://sentry.io/api/0
+    tags:
+      - Analytics
+      - Discover
+      - Performance
+      - Queries
+    serviceName: Sentry Discover API
+    serviceCategory: API
+  - name: Sentry Environments API
+    baseURL: https://sentry.io/api/0
+    tags:
+      - Configuration
+      - Environments
+      - Management
+    serviceName: Sentry Environments API
+    serviceCategory: API
+  - name: Sentry Explore API
+    baseURL: https://sentry.io/api/0
+    tags:
+      - Analytics
+      - Events
+      - Explore
+    serviceName: Sentry Explore API
+    serviceCategory: API
+  - name: Sentry Integration Platform API
+    baseURL: https://sentry.io/api/0
+    tags:
+      - Integrations
+      - Platform
+      - Webhooks
+    serviceName: Sentry Integration Platform API
+    serviceCategory: API
+  - name: Sentry Integrations API
+    baseURL: https://sentry.io/api/0
+    tags:
+      - Configuration
+      - Data Forwarding
+      - Integrations
+    serviceName: Sentry Integrations API
+    serviceCategory: API
+  - name: Sentry Mobile Builds API
+    baseURL: https://sentry.io/api/0
+    tags:
+      - Artifacts
+      - Builds
+      - Mobile
+    serviceName: Sentry Mobile Builds API
+    serviceCategory: API
+  - name: Sentry Monitors API
+    baseURL: https://sentry.io/api/0
+    tags:
+      - Alerts
+      - Monitors
+      - Uptime
+    serviceName: Sentry Monitors API
+    serviceCategory: API
+  - name: Sentry Prevent API
+    baseURL: https://sentry.io/api/0
+    tags:
+      - Quality Assurance
+      - Repositories
+      - Testing
+    serviceName: Sentry Prevent API
+    serviceCategory: API
+  - name: Sentry Replays API
+    baseURL: https://sentry.io/api/0
+    tags:
+      - Replays
+      - Session Recording
+      - User Experience
+    serviceName: Sentry Replays API
+    serviceCategory: API
+  - name: Sentry SCIM API
+    baseURL: https://sentry.io/api/0
+    tags:
+      - Enterprise
+      - Identity Management
+      - Provisioning
+      - SCIM
+    serviceName: Sentry SCIM API
+    serviceCategory: API
+  - name: Sentry Seer API
+    baseURL: https://sentry.io/api/0
+    tags:
+      - AI
+      - Automation
+      - Issue Analysis
+    serviceName: Sentry Seer API
+    serviceCategory: API
+  - name: Sentry Users API
+    baseURL: https://sentry.io/api/0
+    tags:
+      - Accounts
+      - Authentication
+      - Users
+    serviceName: Sentry Users API
+    serviceCategory: API
+unitEconomics:
+  - name: Cost per 1K Requests
+    metric: billed_cost / (api_requests / 1000)
+    target: TBD
+  - name: Cost per Active Consumer
+    metric: billed_cost / active_consumers
+    target: TBD
+maintainers:
+  - name: Kin Lane
+    email: kin@apievangelist.com
