@@ -1,0 +1,399 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Sentry Alerts API
+  description: The Alerts API provides endpoints for managing alert rules in Sentry, including creating, retrieving, updating,
+    and deleting metric alert rules and issue alert rules, as well as managing spike protection notification actions.
+  tags:
+  - Sentry
+  - System
+  - API
+  created: '2026-05-06'
+  modified: '2026-05-06'
+capability:
+  consumes:
+  - type: http
+    namespace: sentry-system
+    baseUri: https://sentry.io/api/0
+    description: Sentry Alerts API HTTP API.
+    authentication:
+      type: bearer
+      token: '{{SENTRY_SYSTEM_TOKEN}}'
+    resources:
+    - name: organizations-organization-id-or-slug-alert-rule
+      path: /organizations/{organization_id_or_slug}/alert-rules/
+      operations:
+      - name: listmetricalertrules
+        method: GET
+        description: Sentry List an organization's metric alert rules
+        inputParameters:
+        - name: cursor
+          in: query
+          type: string
+          description: Pagination cursor.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createmetricalertrule
+        method: POST
+        description: Sentry Create a metric alert rule for an organization
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: organizations-organization-id-or-slug-alert-rule
+      path: /organizations/{organization_id_or_slug}/alert-rules/{alert_rule_id}/
+      operations:
+      - name: retrievemetricalertrule
+        method: GET
+        description: Sentry Retrieve a metric alert rule for an organization
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updatemetricalertrule
+        method: PUT
+        description: Sentry Update a metric alert rule
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: deletemetricalertrule
+        method: DELETE
+        description: Sentry Delete a metric alert rule
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: projects-organization-id-or-slug-project-id-or-s
+      path: /projects/{organization_id_or_slug}/{project_id_or_slug}/rules/
+      operations:
+      - name: listissuealertrules
+        method: GET
+        description: Sentry List a project's issue alert rules
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createissuealertrule
+        method: POST
+        description: Sentry Create an issue alert rule for a project
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: projects-organization-id-or-slug-project-id-or-s
+      path: /projects/{organization_id_or_slug}/{project_id_or_slug}/rules/{rule_id}/
+      operations:
+      - name: retrieveissuealertrule
+        method: GET
+        description: Sentry Retrieve an issue alert rule for a project
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateissuealertrule
+        method: PUT
+        description: Sentry Update an issue alert rule
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: deleteissuealertrule
+        method: DELETE
+        description: Sentry Delete an issue alert rule
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: organizations-organization-id-or-slug-spike-prot
+      path: /organizations/{organization_id_or_slug}/spike-protections/
+      operations:
+      - name: listspikeprotectionnotifications
+        method: GET
+        description: Sentry List spike protection notifications
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createspikeprotectionnotification
+        method: POST
+        description: Sentry Create a spike protection notification action
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    port: 8080
+    namespace: sentry-system-rest
+    description: REST adapter for Sentry Alerts API.
+    resources:
+    - path: /organizations/{organization_id_or_slug}/alert-rules/
+      name: listmetricalertrules
+      operations:
+      - method: GET
+        name: listmetricalertrules
+        description: Sentry List an organization's metric alert rules
+        call: sentry-system.listmetricalertrules
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /organizations/{organization_id_or_slug}/alert-rules/
+      name: createmetricalertrule
+      operations:
+      - method: POST
+        name: createmetricalertrule
+        description: Sentry Create a metric alert rule for an organization
+        call: sentry-system.createmetricalertrule
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /organizations/{organization_id_or_slug}/alert-rules/{alert_rule_id}/
+      name: retrievemetricalertrule
+      operations:
+      - method: GET
+        name: retrievemetricalertrule
+        description: Sentry Retrieve a metric alert rule for an organization
+        call: sentry-system.retrievemetricalertrule
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /organizations/{organization_id_or_slug}/alert-rules/{alert_rule_id}/
+      name: updatemetricalertrule
+      operations:
+      - method: PUT
+        name: updatemetricalertrule
+        description: Sentry Update a metric alert rule
+        call: sentry-system.updatemetricalertrule
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /organizations/{organization_id_or_slug}/alert-rules/{alert_rule_id}/
+      name: deletemetricalertrule
+      operations:
+      - method: DELETE
+        name: deletemetricalertrule
+        description: Sentry Delete a metric alert rule
+        call: sentry-system.deletemetricalertrule
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /projects/{organization_id_or_slug}/{project_id_or_slug}/rules/
+      name: listissuealertrules
+      operations:
+      - method: GET
+        name: listissuealertrules
+        description: Sentry List a project's issue alert rules
+        call: sentry-system.listissuealertrules
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /projects/{organization_id_or_slug}/{project_id_or_slug}/rules/
+      name: createissuealertrule
+      operations:
+      - method: POST
+        name: createissuealertrule
+        description: Sentry Create an issue alert rule for a project
+        call: sentry-system.createissuealertrule
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /projects/{organization_id_or_slug}/{project_id_or_slug}/rules/{rule_id}/
+      name: retrieveissuealertrule
+      operations:
+      - method: GET
+        name: retrieveissuealertrule
+        description: Sentry Retrieve an issue alert rule for a project
+        call: sentry-system.retrieveissuealertrule
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /projects/{organization_id_or_slug}/{project_id_or_slug}/rules/{rule_id}/
+      name: updateissuealertrule
+      operations:
+      - method: PUT
+        name: updateissuealertrule
+        description: Sentry Update an issue alert rule
+        call: sentry-system.updateissuealertrule
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /projects/{organization_id_or_slug}/{project_id_or_slug}/rules/{rule_id}/
+      name: deleteissuealertrule
+      operations:
+      - method: DELETE
+        name: deleteissuealertrule
+        description: Sentry Delete an issue alert rule
+        call: sentry-system.deleteissuealertrule
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /organizations/{organization_id_or_slug}/spike-protections/
+      name: listspikeprotectionnotifications
+      operations:
+      - method: GET
+        name: listspikeprotectionnotifications
+        description: Sentry List spike protection notifications
+        call: sentry-system.listspikeprotectionnotifications
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /organizations/{organization_id_or_slug}/spike-protections/
+      name: createspikeprotectionnotification
+      operations:
+      - method: POST
+        name: createspikeprotectionnotification
+        description: Sentry Create a spike protection notification action
+        call: sentry-system.createspikeprotectionnotification
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9090
+    namespace: sentry-system-mcp
+    transport: http
+    description: MCP adapter for Sentry Alerts API for AI agent use.
+    tools:
+    - name: listmetricalertrules
+      description: Sentry List an organization's metric alert rules
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sentry-system.listmetricalertrules
+      with:
+        cursor: tools.cursor
+      inputParameters:
+      - name: cursor
+        type: string
+        description: Pagination cursor.
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: createmetricalertrule
+      description: Sentry Create a metric alert rule for an organization
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: sentry-system.createmetricalertrule
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrievemetricalertrule
+      description: Sentry Retrieve a metric alert rule for an organization
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sentry-system.retrievemetricalertrule
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: updatemetricalertrule
+      description: Sentry Update a metric alert rule
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: sentry-system.updatemetricalertrule
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: deletemetricalertrule
+      description: Sentry Delete a metric alert rule
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: sentry-system.deletemetricalertrule
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listissuealertrules
+      description: Sentry List a project's issue alert rules
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sentry-system.listissuealertrules
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: createissuealertrule
+      description: Sentry Create an issue alert rule for a project
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: sentry-system.createissuealertrule
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieveissuealertrule
+      description: Sentry Retrieve an issue alert rule for a project
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sentry-system.retrieveissuealertrule
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: updateissuealertrule
+      description: Sentry Update an issue alert rule
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: sentry-system.updateissuealertrule
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: deleteissuealertrule
+      description: Sentry Delete an issue alert rule
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: sentry-system.deleteissuealertrule
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listspikeprotectionnotifications
+      description: Sentry List spike protection notifications
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sentry-system.listspikeprotectionnotifications
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: createspikeprotectionnotification
+      description: Sentry Create a spike protection notification action
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: sentry-system.createspikeprotectionnotification
+      outputParameters:
+      - type: object
+        mapping: $.
+binds:
+- namespace: env
+  keys:
+    SENTRY_SYSTEM_TOKEN: SENTRY_SYSTEM_TOKEN
