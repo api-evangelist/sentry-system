@@ -4,189 +4,51 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Sentry
 providerId: sentry-system
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: true
 tags:
-  - APM
-  - Application Monitoring
-  - Bug Tracking
-  - Developer Tools
   - Error Tracking
   - Observability
-  - Performance Monitoring
-  - Real-Time Monitoring
   - Rate Limiting
-  - Quotas
-  - Throttling
-description: Machine-readable rate limit definitions for the Sentry API surface. Captures per-tier quotas,
-  burst behavior, response signaling, and recovery semantics. Defaults are scaffold values to be replaced
-  with published provider limits.
+description: Sentry's REST API enforces two complementary mechanisms — fixed-window requests-per-second
+  and concurrent in-flight requests. Limits are scoped per unique caller + endpoint combination (not per
+  token, so generating extra tokens does not bypass them). Specific numeric thresholds are not published
+  globally and vary per endpoint; current state is exposed via X-Sentry-Rate-Limit-* headers on every
+  response. Sentry recommends webhooks over polling to avoid throttling.
+sources:
+  - https://docs.sentry.io/api/ratelimits/
 headers:
-  limit: X-RateLimit-Limit
-  remaining: X-RateLimit-Remaining
-  reset: X-RateLimit-Reset
-  retryAfter: Retry-After
-  policy: RateLimit-Policy
+  limit: X-Sentry-Rate-Limit-Limit
+  remaining: X-Sentry-Rate-Limit-Remaining
+  reset: X-Sentry-Rate-Limit-Reset
+  concurrentLimit: X-Sentry-Rate-Limit-ConcurrentLimit
+  concurrentRemaining: X-Sentry-Rate-Limit-ConcurrentRemaining
 responseCodes:
   throttled: 429
-  quotaExceeded: 429
-  serviceUnavailable: 503
 limits:
-  - tier: free
-    name: Free Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 10
-    burst: 20
-    timeFrame: minute
-    applies:
-      - Sentry API
-      - Sentry Events and Issues API
-      - Sentry Organizations API
-      - Sentry Projects API
-      - Sentry Teams API
-      - Sentry Releases API
-      - Sentry Alerts API
-      - Sentry Crons API
-      - Sentry Dashboards API
-      - Sentry Discover API
-      - Sentry Environments API
-      - Sentry Explore API
-      - Sentry Integration Platform API
-      - Sentry Integrations API
-      - Sentry Mobile Builds API
-      - Sentry Monitors API
-      - Sentry Prevent API
-      - Sentry Replays API
-      - Sentry SCIM API
-      - Sentry Seer API
-      - Sentry Users API
-  - tier: free
-    name: Free Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 1000
-    timeFrame: month
-    applies:
-      - Sentry API
-      - Sentry Events and Issues API
-      - Sentry Organizations API
-      - Sentry Projects API
-      - Sentry Teams API
-      - Sentry Releases API
-      - Sentry Alerts API
-      - Sentry Crons API
-      - Sentry Dashboards API
-      - Sentry Discover API
-      - Sentry Environments API
-      - Sentry Explore API
-      - Sentry Integration Platform API
-      - Sentry Integrations API
-      - Sentry Mobile Builds API
-      - Sentry Monitors API
-      - Sentry Prevent API
-      - Sentry Replays API
-      - Sentry SCIM API
-      - Sentry Seer API
-      - Sentry Users API
-  - tier: professional
-    name: Professional Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 100
-    burst: 200
-    timeFrame: minute
-    applies:
-      - Sentry API
-      - Sentry Events and Issues API
-      - Sentry Organizations API
-      - Sentry Projects API
-      - Sentry Teams API
-      - Sentry Releases API
-      - Sentry Alerts API
-      - Sentry Crons API
-      - Sentry Dashboards API
-      - Sentry Discover API
-      - Sentry Environments API
-      - Sentry Explore API
-      - Sentry Integration Platform API
-      - Sentry Integrations API
-      - Sentry Mobile Builds API
-      - Sentry Monitors API
-      - Sentry Prevent API
-      - Sentry Replays API
-      - Sentry SCIM API
-      - Sentry Seer API
-      - Sentry Users API
-  - tier: professional
-    name: Professional Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 100000
-    timeFrame: month
-    applies:
-      - Sentry API
-      - Sentry Events and Issues API
-      - Sentry Organizations API
-      - Sentry Projects API
-      - Sentry Teams API
-      - Sentry Releases API
-      - Sentry Alerts API
-      - Sentry Crons API
-      - Sentry Dashboards API
-      - Sentry Discover API
-      - Sentry Environments API
-      - Sentry Explore API
-      - Sentry Integration Platform API
-      - Sentry Integrations API
-      - Sentry Mobile Builds API
-      - Sentry Monitors API
-      - Sentry Prevent API
-      - Sentry Replays API
-      - Sentry SCIM API
-      - Sentry Seer API
-      - Sentry Users API
-  - tier: enterprise
-    name: Enterprise Negotiated Limit
-    scope: contract
-    metric: requests_per_minute
-    limit: 1000
-    burst: 5000
-    timeFrame: minute
-    applies:
-      - Sentry API
-      - Sentry Events and Issues API
-      - Sentry Organizations API
-      - Sentry Projects API
-      - Sentry Teams API
-      - Sentry Releases API
-      - Sentry Alerts API
-      - Sentry Crons API
-      - Sentry Dashboards API
-      - Sentry Discover API
-      - Sentry Environments API
-      - Sentry Explore API
-      - Sentry Integration Platform API
-      - Sentry Integrations API
-      - Sentry Mobile Builds API
-      - Sentry Monitors API
-      - Sentry Prevent API
-      - Sentry Replays API
-      - Sentry SCIM API
-      - Sentry Seer API
-      - Sentry Users API
+  - name: Per-caller / per-endpoint rate
+    scope: caller/endpoint
+    metric: requests_per_window
+    limit: see X-Sentry-Rate-Limit-Limit
+    notes: Fixed-window count of requests by caller+endpoint. Reset epoch returned in X-Sentry-Rate-Limit-Reset.
+  - name: Per-caller / per-endpoint concurrency
+    scope: caller/endpoint
+    metric: concurrent_requests
+    limit: see X-Sentry-Rate-Limit-ConcurrentLimit
+    notes: Caps simultaneously open requests by caller+endpoint.
 policies:
-  - name: Backoff Strategy
-    description: Clients should implement exponential backoff with jitter, honoring the Retry-After header
-      when present.
-  - name: Burst Handling
-    description: Short bursts above the steady-state limit are tolerated up to the documented burst ceiling
-      before throttling engages.
-  - name: Quota Reset
-    description: Monthly quotas reset at the start of each calendar month in UTC. Per-minute and per-second
-      windows reset on a sliding-window basis.
-  - name: Fair Use
-    description: Even on uncapped enterprise tiers, sustained usage that materially impacts shared infrastructure
-      may be subject to fair-use throttling.
+  - name: Caller-scoped enforcement
+    description: Limits are bound to the unique caller identity, not the token. Generating multiple tokens
+      under the same identity does not raise the cap.
+  - name: Header-driven adaptation
+    description: Always read X-Sentry-Rate-Limit-Remaining and X-Sentry-Rate-Limit-Reset to pace traffic.
+      Concurrency caps require parallel-request governance.
+  - name: Prefer webhooks over polling
+    description: Sentry explicitly recommends consuming events via webhooks rather than polling endpoints,
+      to avoid hitting per-endpoint rate limits.
+  - name: Backoff
+    description: On 429, back off until the time indicated by X-Sentry-Rate-Limit-Reset (UTC epoch);
+      retries before that point will continue to be rejected.
 maintainers:
-  - name: Kin Lane
+  - FN: Kin Lane
     email: kin@apievangelist.com

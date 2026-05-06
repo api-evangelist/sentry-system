@@ -4,195 +4,275 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Sentry
 providerId: sentry-system
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: true
 tags:
-  - APM
-  - Application Monitoring
-  - Bug Tracking
-  - Developer Tools
   - Error Tracking
   - Observability
   - Performance Monitoring
-  - Real-Time Monitoring
-description: Machine-readable plans and pricing scaffold for this API provider. Conforms to the API Commons
-  Plans schema. Tier limits and prices are scaffold defaults; replace with provider-published values.
+  - APM
+  - Session Replay
+description: Sentry prices on tiered subscriptions with included event/session/log volumes plus per-unit
+  overage. Developer is free for 1 user; Team and Business unlock unlimited users at $26/mo and $80/mo
+  (annual billing) respectively. Both Team and Business publish per-unit overage rates for logs/metrics
+  ($0.50/GB), uptime alerts ($1.00 each), and cron monitors ($0.78 each). Enterprise is custom-priced.
+sources:
+  - https://sentry.io/pricing/
 plans:
-  - id: sentry-system-free
-    name: Free
+  - id: sentry-system-developer
+    name: Developer
     type: freemium
-    description: Free entry tier for the Sentry API surface. Intended for evaluation, prototyping, and
-      low-volume integrations. Real limits and pricing must be reconciled with the provider's published
-      plan documentation.
+    description: Free tier for a single user. Includes 5,000 errors, 5 GB logs, 5M spans, 50 session
+      replays, 1 uptime monitor, 1 cron monitor. Email alerts and 10 custom dashboards.
     entries:
-      - label: API Requests
-        description: Monthly API request quota across all included endpoints
-        name: api_requests
-        type: quota
-        metric: requests
-        limit: 1000
+      - label: Subscription
+        name: subscription
+        type: subscription
+        metric: month
+        limit: 1
         timeFrame: month
         geo: global
-        domains:
-          - https://sentry.io/api/0
         unit: 1
-        price: '0.00'
+        price: '$0'
         userMultiplied: false
-      - label: Rate Limit
-        description: Maximum requests per minute on the free tier
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 10
-        timeFrame: minute
+      - label: Users
+        name: users
+        type: quota
+        metric: seat
+        limit: 1
         geo: global
-        domains:
-          - https://sentry.io/api/0
         unit: 1
-        price: '0.00'
+        price: included
+        userMultiplied: false
+      - label: Errors
+        name: errors
+        type: quota
+        metric: errors
+        limit: 5000
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: included
+        userMultiplied: false
+      - label: Logs
+        name: logs
+        type: quota
+        metric: GB
+        limit: 5
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: included
+        userMultiplied: false
+      - label: Spans
+        name: spans
+        type: quota
+        metric: spans
+        limit: 5000000
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: included
+        userMultiplied: false
+      - label: Session Replays
+        name: replays
+        type: quota
+        metric: replays
+        limit: 50
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: included
+        userMultiplied: false
+      - label: Uptime Monitors
+        name: uptime_monitors
+        type: quota
+        metric: monitors
+        limit: 1
+        geo: global
+        unit: 1
+        price: included
+        userMultiplied: false
+      - label: Cron Monitors
+        name: cron_monitors
+        type: quota
+        metric: monitors
+        limit: 1
+        geo: global
+        unit: 1
+        price: included
         userMultiplied: false
     elements:
-      - name: Public Documentation
-      - name: Community Support
-      - name: Sandbox Access
-      - name: Sentry API
-      - name: Sentry Events and Issues API
-      - name: Sentry Organizations API
-      - name: Sentry Projects API
-      - name: Sentry Teams API
-      - name: Sentry Releases API
-      - name: Sentry Alerts API
-      - name: Sentry Crons API
-  - id: sentry-system-pro
-    name: Professional
-    type: paid
-    description: Production tier for Sentry. Provides higher quotas, priority support, and access to the
-      broader API portfolio. Pricing placeholder; align with the provider's pricing page.
+      - name: Error monitoring
+      - name: Tracing
+      - name: Email alerts
+      - name: 10 custom dashboards
+  - id: sentry-system-team
+    name: Team
+    type: subscription
+    description: Team plan at $26/month (annual billing) with unlimited users. Same baseline volumes
+      as Developer plus third-party integrations, 20 custom dashboards, and an opt-in AI debugging agent
+      (subscription required). Per-unit overage on logs, uptime alerts, and cron monitors.
     entries:
-      - label: API Requests
-        description: Monthly API request quota
-        name: api_requests
-        type: quota
-        metric: requests
-        limit: 100000
+      - label: Subscription
+        name: subscription
+        type: subscription
+        metric: month
+        limit: 1
         timeFrame: month
         geo: global
-        domains:
-          - https://sentry.io/api/0
         unit: 1
-        price: TBD
+        price: '$26/mo (annual billing)'
         userMultiplied: false
-      - label: Rate Limit
-        description: Maximum requests per minute on the professional tier
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 100
-        timeFrame: minute
+      - label: Users
+        name: users
+        type: quota
+        metric: seat
+        limit: -1
         geo: global
-        domains:
-          - https://sentry.io/api/0
         unit: 1
-        price: '0.00'
+        price: included
         userMultiplied: false
-      - label: Overage
-        description: Per-request price after monthly quota is exceeded
-        name: overage
+      - label: Errors
+        name: errors
+        type: quota
+        metric: errors
+        limit: 50000
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: included
+        userMultiplied: false
+      - label: Logs / Metrics overage
+        name: logs_metrics_overage
         type: metered
-        metric: requests
+        metric: GB
         limit: -1
         timeFrame: month
         geo: global
-        domains:
-          - https://sentry.io/api/0
-        unit: 1000
-        price: TBD
+        unit: 1
+        price: '$0.50/GB'
+        userMultiplied: false
+      - label: Uptime Alerts overage
+        name: uptime_alerts_overage
+        type: metered
+        metric: alert
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '$1.00 each'
+        userMultiplied: false
+      - label: Cron Monitors overage
+        name: cron_monitors_overage
+        type: metered
+        metric: monitor
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '$0.78 each'
         userMultiplied: false
     elements:
-      - name: All Production Endpoints
-      - name: Email Support
-      - name: SLA Targets
-      - name: Webhook Subscriptions
-      - name: Sentry API
-      - name: Sentry Events and Issues API
-      - name: Sentry Organizations API
-      - name: Sentry Projects API
-      - name: Sentry Teams API
-      - name: Sentry Releases API
-      - name: Sentry Alerts API
-      - name: Sentry Crons API
-      - name: Sentry Dashboards API
-      - name: Sentry Discover API
-      - name: Sentry Environments API
-      - name: Sentry Explore API
-      - name: Sentry Integration Platform API
-      - name: Sentry Integrations API
-      - name: Sentry Mobile Builds API
-      - name: Sentry Monitors API
-      - name: Sentry Prevent API
-      - name: Sentry Replays API
-      - name: Sentry SCIM API
-      - name: Sentry Seer API
-      - name: Sentry Users API
+      - name: All Developer features
+      - name: Unlimited users
+      - name: Third-party integrations
+      - name: 20 custom dashboards
+      - name: AI debugging agent (subscription required)
+  - id: sentry-system-business
+    name: Business
+    type: subscription
+    description: Business plan at $80/month (annual billing) with unlimited users. Same volume baseline
+      and overage rates as Team, plus 90-day insights lookback, unlimited custom dashboards, unlimited
+      metric alerts with anomaly detection, advanced quota management, and SAML + SCIM support.
+    entries:
+      - label: Subscription
+        name: subscription
+        type: subscription
+        metric: month
+        limit: 1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '$80/mo (annual billing)'
+        userMultiplied: false
+      - label: Users
+        name: users
+        type: quota
+        metric: seat
+        limit: -1
+        geo: global
+        unit: 1
+        price: included
+        userMultiplied: false
+      - label: Errors
+        name: errors
+        type: quota
+        metric: errors
+        limit: 50000
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: included
+        userMultiplied: false
+      - label: Logs / Metrics overage
+        name: logs_metrics_overage
+        type: metered
+        metric: GB
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '$0.50/GB'
+        userMultiplied: false
+      - label: Uptime Alerts overage
+        name: uptime_alerts_overage
+        type: metered
+        metric: alert
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '$1.00 each'
+        userMultiplied: false
+      - label: Cron Monitors overage
+        name: cron_monitors_overage
+        type: metered
+        metric: monitor
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '$0.78 each'
+        userMultiplied: false
+    elements:
+      - name: All Team features
+      - name: 90-day insights lookback
+      - name: Unlimited custom dashboards
+      - name: Unlimited metric alerts with anomaly detection
+      - name: Advanced quota management
+      - name: SAML + SCIM
   - id: sentry-system-enterprise
     name: Enterprise
     type: enterprise
-    description: Custom-negotiated tier for Sentry. Includes dedicated capacity, contractual SLAs, security
-      review, data residency options, and named technical account management.
+    description: Custom-priced plan with technical account manager, dedicated customer support, and customizable
+      limits across all services.
     entries:
-      - label: API Requests
-        description: Negotiated request volume; -1 indicates uncapped subject to fair use
-        name: api_requests
-        type: quota
-        metric: requests
-        limit: -1
+      - label: Subscription
+        name: subscription
+        type: subscription
+        metric: month
+        limit: 1
         timeFrame: month
-        geo: configurable
-        domains:
-          - https://sentry.io/api/0
-        unit: 1
-        price: custom
-        userMultiplied: false
-      - label: Rate Limit
-        description: Negotiated burst and steady-state rate
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 1000
-        timeFrame: minute
-        geo: configurable
-        domains:
-          - https://sentry.io/api/0
+        geo: global
         unit: 1
         price: custom
         userMultiplied: false
     elements:
-      - name: Unlimited / Negotiated Volume
-      - name: 24/7 Dedicated Support
-      - name: Contractual SLA
-      - name: Security & Compliance Review
-      - name: Dedicated Account Manager
-      - name: Custom Data Residency
-      - name: Sentry API
-      - name: Sentry Events and Issues API
-      - name: Sentry Organizations API
-      - name: Sentry Projects API
-      - name: Sentry Teams API
-      - name: Sentry Releases API
-      - name: Sentry Alerts API
-      - name: Sentry Crons API
-      - name: Sentry Dashboards API
-      - name: Sentry Discover API
-      - name: Sentry Environments API
-      - name: Sentry Explore API
-      - name: Sentry Integration Platform API
-      - name: Sentry Integrations API
-      - name: Sentry Mobile Builds API
-      - name: Sentry Monitors API
-      - name: Sentry Prevent API
-      - name: Sentry Replays API
-      - name: Sentry SCIM API
-      - name: Sentry Seer API
-      - name: Sentry Users API
+      - name: All Business features
+      - name: Customizable limits
+      - name: Technical Account Manager
+      - name: Dedicated support
 maintainers:
-  - name: Kin Lane
+  - FN: Kin Lane
     email: kin@apievangelist.com
