@@ -1,0 +1,127 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Sentry Organizations API — Repositories
+  description: 'Sentry Organizations API — Repositories. 2 operations. Lead operation: Sentry List organization repositories.
+    Self-contained Naftiko capability covering one Sentry System business surface.'
+  tags:
+  - Sentry System
+  - Repositories
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SENTRY_SYSTEM_API_KEY: SENTRY_SYSTEM_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: sentry-organizations-repositories
+    baseUri: https://sentry.io/api/0
+    description: Sentry Organizations API — Repositories business capability. Self-contained, no shared references.
+    resources:
+    - name: organizations-organization_id_or_slug-repos
+      path: /organizations/{organization_id_or_slug}/repos/
+      operations:
+      - name: listorganizationrepositories
+        method: GET
+        description: Sentry List organization repositories
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cursor
+          in: query
+          type: string
+          description: Pagination cursor.
+    - name: organizations-organization_id_or_slug-repos-repo_id-commits
+      path: /organizations/{organization_id_or_slug}/repos/{repo_id}/commits/
+      operations:
+      - name: listrepositorycommits
+        method: GET
+        description: Sentry List repository commits
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: repo_id
+          in: path
+          type: string
+          description: The ID of the repository.
+          required: true
+        - name: cursor
+          in: query
+          type: string
+          description: Pagination cursor.
+    authentication:
+      type: bearer
+      token: '{{env.SENTRY_SYSTEM_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: sentry-organizations-repositories-rest
+    port: 8080
+    description: REST adapter for Sentry Organizations API — Repositories. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/organizations/{organization-id-or-slug}/repos
+      name: organizations-organization-id-or-slug-repos
+      description: REST surface for organizations-organization_id_or_slug-repos.
+      operations:
+      - method: GET
+        name: listorganizationrepositories
+        description: Sentry List organization repositories
+        call: sentry-organizations-repositories.listorganizationrepositories
+        with:
+          cursor: rest.cursor
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organization-id-or-slug}/repos/{repo-id}/commits
+      name: organizations-organization-id-or-slug-repos-repo-id-commits
+      description: REST surface for organizations-organization_id_or_slug-repos-repo_id-commits.
+      operations:
+      - method: GET
+        name: listrepositorycommits
+        description: Sentry List repository commits
+        call: sentry-organizations-repositories.listrepositorycommits
+        with:
+          repo_id: rest.repo_id
+          cursor: rest.cursor
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: sentry-organizations-repositories-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Sentry Organizations API — Repositories. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: sentry-list-organization-repositories
+      description: Sentry List organization repositories
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sentry-organizations-repositories.listorganizationrepositories
+      with:
+        cursor: tools.cursor
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sentry-list-repository-commits
+      description: Sentry List repository commits
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sentry-organizations-repositories.listrepositorycommits
+      with:
+        repo_id: tools.repo_id
+        cursor: tools.cursor
+      outputParameters:
+      - type: object
+        mapping: $.

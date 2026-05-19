@@ -1,0 +1,275 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Sentry Monitors API — Alerts
+  description: 'Sentry Monitors API — Alerts. 7 operations. Lead operation: Sentry Fetch alerts. Self-contained Naftiko capability
+    covering one Sentry System business surface.'
+  tags:
+  - Sentry System
+  - Alerts
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SENTRY_SYSTEM_API_KEY: SENTRY_SYSTEM_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: sentry-monitors-alerts
+    baseUri: https://sentry.io/api/0
+    description: Sentry Monitors API — Alerts business capability. Self-contained, no shared references.
+    resources:
+    - name: organizations-organization_id_or_slug-alerts
+      path: /organizations/{organization_id_or_slug}/alerts/
+      operations:
+      - name: fetchalerts
+        method: GET
+        description: Sentry Fetch alerts
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cursor
+          in: query
+          type: string
+          description: Pagination cursor.
+      - name: createalert
+        method: POST
+        description: Sentry Create an alert for an organization
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: mutateorganizationalerts
+        method: PUT
+        description: Sentry Mutate an organization's alerts
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: bulkdeletealerts
+        method: DELETE
+        description: Sentry Bulk delete alerts
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: query
+          type: array
+          description: IDs of alerts to delete.
+    - name: organizations-organization_id_or_slug-alerts-alert_id
+      path: /organizations/{organization_id_or_slug}/alerts/{alert_id}/
+      operations:
+      - name: fetchalert
+        method: GET
+        description: Sentry Fetch an alert
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updatealert
+        method: PUT
+        description: Sentry Update an alert by ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deletealert
+        method: DELETE
+        description: Sentry Delete an alert
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.SENTRY_SYSTEM_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: sentry-monitors-alerts-rest
+    port: 8080
+    description: REST adapter for Sentry Monitors API — Alerts. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/organizations/{organization-id-or-slug}/alerts
+      name: organizations-organization-id-or-slug-alerts
+      description: REST surface for organizations-organization_id_or_slug-alerts.
+      operations:
+      - method: GET
+        name: fetchalerts
+        description: Sentry Fetch alerts
+        call: sentry-monitors-alerts.fetchalerts
+        with:
+          cursor: rest.cursor
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createalert
+        description: Sentry Create an alert for an organization
+        call: sentry-monitors-alerts.createalert
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: mutateorganizationalerts
+        description: Sentry Mutate an organization's alerts
+        call: sentry-monitors-alerts.mutateorganizationalerts
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: bulkdeletealerts
+        description: Sentry Bulk delete alerts
+        call: sentry-monitors-alerts.bulkdeletealerts
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organization-id-or-slug}/alerts/{alert-id}
+      name: organizations-organization-id-or-slug-alerts-alert-id
+      description: REST surface for organizations-organization_id_or_slug-alerts-alert_id.
+      operations:
+      - method: GET
+        name: fetchalert
+        description: Sentry Fetch an alert
+        call: sentry-monitors-alerts.fetchalert
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updatealert
+        description: Sentry Update an alert by ID
+        call: sentry-monitors-alerts.updatealert
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletealert
+        description: Sentry Delete an alert
+        call: sentry-monitors-alerts.deletealert
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: sentry-monitors-alerts-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Sentry Monitors API — Alerts. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: sentry-fetch-alerts
+      description: Sentry Fetch alerts
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sentry-monitors-alerts.fetchalerts
+      with:
+        cursor: tools.cursor
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sentry-create-alert-organization
+      description: Sentry Create an alert for an organization
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: sentry-monitors-alerts.createalert
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sentry-mutate-organization-s-alerts
+      description: Sentry Mutate an organization's alerts
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: sentry-monitors-alerts.mutateorganizationalerts
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sentry-bulk-delete-alerts
+      description: Sentry Bulk delete alerts
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: sentry-monitors-alerts.bulkdeletealerts
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sentry-fetch-alert
+      description: Sentry Fetch an alert
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sentry-monitors-alerts.fetchalert
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sentry-update-alert-id
+      description: Sentry Update an alert by ID
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: sentry-monitors-alerts.updatealert
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sentry-delete-alert
+      description: Sentry Delete an alert
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: sentry-monitors-alerts.deletealert
+      outputParameters:
+      - type: object
+        mapping: $.

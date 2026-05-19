@@ -1,0 +1,178 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Sentry Integration Platform API — External Issues
+  description: 'Sentry Integration Platform API — External Issues. 3 operations. Lead operation: Retrieve custom integration
+    issue links for a Sentry issue. Self-contained Naftiko capability covering one Sentry System business surface.'
+  tags:
+  - Sentry System
+  - External Issues
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SENTRY_SYSTEM_API_KEY: SENTRY_SYSTEM_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: sentry-integration-platform-external-issues
+    baseUri: https://sentry.io/api/0
+    description: Sentry Integration Platform API — External Issues business capability. Self-contained, no shared references.
+    resources:
+    - name: groups-issue_id-external-issues
+      path: /groups/{issue_id}/external-issues/
+      operations:
+      - name: listissueexternallinks
+        method: GET
+        description: Retrieve custom integration issue links for a Sentry issue
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: issue_id
+          in: path
+          type: string
+          description: The ID of the Sentry issue.
+          required: true
+    - name: sentry-app-installations-uuid-external-issues
+      path: /sentry-app-installations/{uuid}/external-issues/
+      operations:
+      - name: createexternalissue
+        method: POST
+        description: Sentry Create or update an external issue
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: uuid
+          in: path
+          type: string
+          description: The UUID of the installation.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: sentry-app-installations-uuid-external-issues-external_issue_id
+      path: /sentry-app-installations/{uuid}/external-issues/{external_issue_id}/
+      operations:
+      - name: deleteexternalissue
+        method: DELETE
+        description: Sentry Delete an external issue
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: uuid
+          in: path
+          type: string
+          description: The UUID of the installation.
+          required: true
+        - name: external_issue_id
+          in: path
+          type: string
+          description: The ID of the external issue link.
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.SENTRY_SYSTEM_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: sentry-integration-platform-external-issues-rest
+    port: 8080
+    description: REST adapter for Sentry Integration Platform API — External Issues. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/groups/{issue-id}/external-issues
+      name: groups-issue-id-external-issues
+      description: REST surface for groups-issue_id-external-issues.
+      operations:
+      - method: GET
+        name: listissueexternallinks
+        description: Retrieve custom integration issue links for a Sentry issue
+        call: sentry-integration-platform-external-issues.listissueexternallinks
+        with:
+          issue_id: rest.issue_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/sentry-app-installations/{uuid}/external-issues
+      name: sentry-app-installations-uuid-external-issues
+      description: REST surface for sentry-app-installations-uuid-external-issues.
+      operations:
+      - method: POST
+        name: createexternalissue
+        description: Sentry Create or update an external issue
+        call: sentry-integration-platform-external-issues.createexternalissue
+        with:
+          uuid: rest.uuid
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/sentry-app-installations/{uuid}/external-issues/{external-issue-id}
+      name: sentry-app-installations-uuid-external-issues-external-issue-id
+      description: REST surface for sentry-app-installations-uuid-external-issues-external_issue_id.
+      operations:
+      - method: DELETE
+        name: deleteexternalissue
+        description: Sentry Delete an external issue
+        call: sentry-integration-platform-external-issues.deleteexternalissue
+        with:
+          uuid: rest.uuid
+          external_issue_id: rest.external_issue_id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: sentry-integration-platform-external-issues-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Sentry Integration Platform API — External Issues. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: retrieve-custom-integration-issue-links
+      description: Retrieve custom integration issue links for a Sentry issue
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sentry-integration-platform-external-issues.listissueexternallinks
+      with:
+        issue_id: tools.issue_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sentry-create-update-external-issue
+      description: Sentry Create or update an external issue
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: sentry-integration-platform-external-issues.createexternalissue
+      with:
+        uuid: tools.uuid
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sentry-delete-external-issue
+      description: Sentry Delete an external issue
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: sentry-integration-platform-external-issues.deleteexternalissue
+      with:
+        uuid: tools.uuid
+        external_issue_id: tools.external_issue_id
+      outputParameters:
+      - type: object
+        mapping: $.

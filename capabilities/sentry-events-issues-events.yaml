@@ -1,0 +1,258 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Sentry Events and Issues API — Events
+  description: 'Sentry Events and Issues API — Events. 5 operations. Lead operation: Sentry List an issue''s events. Self-contained
+    Naftiko capability covering one Sentry System business surface.'
+  tags:
+  - Sentry System
+  - Events
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SENTRY_SYSTEM_API_KEY: SENTRY_SYSTEM_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: sentry-events-issues-events
+    baseUri: https://sentry.io/api/0
+    description: Sentry Events and Issues API — Events business capability. Self-contained, no shared references.
+    resources:
+    - name: issues-issue_id-events
+      path: /issues/{issue_id}/events/
+      operations:
+      - name: listissueevents
+        method: GET
+        description: Sentry List an issue's events
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cursor
+          in: query
+          type: string
+          description: Pagination cursor.
+        - name: full
+          in: query
+          type: boolean
+          description: If true, the event payload will include the full event body.
+    - name: issues-issue_id-events-event_id
+      path: /issues/{issue_id}/events/{event_id}/
+      operations:
+      - name: retrieveissueevent
+        method: GET
+        description: Sentry Retrieve an issue event
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: event_id
+          in: path
+          type: string
+          description: The ID of the event to retrieve.
+          required: true
+    - name: projects-organization_id_or_slug-project_id_or_slug-events
+      path: /projects/{organization_id_or_slug}/{project_id_or_slug}/events/
+      operations:
+      - name: listprojectevents
+        method: GET
+        description: Sentry List a project's error events
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cursor
+          in: query
+          type: string
+          description: Pagination cursor.
+        - name: full
+          in: query
+          type: boolean
+          description: If true, include full event body.
+    - name: projects-organization_id_or_slug-project_id_or_slug-events-event_id
+      path: /projects/{organization_id_or_slug}/{project_id_or_slug}/events/{event_id}/
+      operations:
+      - name: retrieveprojectevent
+        method: GET
+        description: Sentry Retrieve an event for a project
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: event_id
+          in: path
+          type: string
+          description: The ID of the event to retrieve.
+          required: true
+    - name: projects-organization_id_or_slug-project_id_or_slug-events-event_id-source-map-d
+      path: /projects/{organization_id_or_slug}/{project_id_or_slug}/events/{event_id}/source-map-debug/
+      operations:
+      - name: debugsourcemaps
+        method: GET
+        description: Sentry Debug issues related to source maps for a given event
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: event_id
+          in: path
+          type: string
+          description: The ID of the event to debug.
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.SENTRY_SYSTEM_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: sentry-events-issues-events-rest
+    port: 8080
+    description: REST adapter for Sentry Events and Issues API — Events. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/issues/{issue-id}/events
+      name: issues-issue-id-events
+      description: REST surface for issues-issue_id-events.
+      operations:
+      - method: GET
+        name: listissueevents
+        description: Sentry List an issue's events
+        call: sentry-events-issues-events.listissueevents
+        with:
+          cursor: rest.cursor
+          full: rest.full
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/issues/{issue-id}/events/{event-id}
+      name: issues-issue-id-events-event-id
+      description: REST surface for issues-issue_id-events-event_id.
+      operations:
+      - method: GET
+        name: retrieveissueevent
+        description: Sentry Retrieve an issue event
+        call: sentry-events-issues-events.retrieveissueevent
+        with:
+          event_id: rest.event_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/projects/{organization-id-or-slug}/{project-id-or-slug}/events
+      name: projects-organization-id-or-slug-project-id-or-slug-events
+      description: REST surface for projects-organization_id_or_slug-project_id_or_slug-events.
+      operations:
+      - method: GET
+        name: listprojectevents
+        description: Sentry List a project's error events
+        call: sentry-events-issues-events.listprojectevents
+        with:
+          cursor: rest.cursor
+          full: rest.full
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/projects/{organization-id-or-slug}/{project-id-or-slug}/events/{event-id}
+      name: projects-organization-id-or-slug-project-id-or-slug-events-event-id
+      description: REST surface for projects-organization_id_or_slug-project_id_or_slug-events-event_id.
+      operations:
+      - method: GET
+        name: retrieveprojectevent
+        description: Sentry Retrieve an event for a project
+        call: sentry-events-issues-events.retrieveprojectevent
+        with:
+          event_id: rest.event_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/projects/{organization-id-or-slug}/{project-id-or-slug}/events/{event-id}/source-map-debug
+      name: projects-organization-id-or-slug-project-id-or-slug-events-event-id-source-map-d
+      description: REST surface for projects-organization_id_or_slug-project_id_or_slug-events-event_id-source-map-d.
+      operations:
+      - method: GET
+        name: debugsourcemaps
+        description: Sentry Debug issues related to source maps for a given event
+        call: sentry-events-issues-events.debugsourcemaps
+        with:
+          event_id: rest.event_id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: sentry-events-issues-events-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Sentry Events and Issues API — Events. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: sentry-list-issue-s-events
+      description: Sentry List an issue's events
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sentry-events-issues-events.listissueevents
+      with:
+        cursor: tools.cursor
+        full: tools.full
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sentry-retrieve-issue-event
+      description: Sentry Retrieve an issue event
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sentry-events-issues-events.retrieveissueevent
+      with:
+        event_id: tools.event_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sentry-list-project-s-error-events
+      description: Sentry List a project's error events
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sentry-events-issues-events.listprojectevents
+      with:
+        cursor: tools.cursor
+        full: tools.full
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sentry-retrieve-event-project
+      description: Sentry Retrieve an event for a project
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sentry-events-issues-events.retrieveprojectevent
+      with:
+        event_id: tools.event_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sentry-debug-issues-related-source
+      description: Sentry Debug issues related to source maps for a given event
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sentry-events-issues-events.debugsourcemaps
+      with:
+        event_id: tools.event_id
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,173 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Sentry Prevent API — Test Results
+  description: 'Sentry Prevent API — Test Results. 3 operations. Lead operation: Sentry Retrieve paginated list of test results
+    for repository, owner, and organization. Self-contained Naftiko capability covering one Sentry System business surface.'
+  tags:
+  - Sentry System
+  - Test Results
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SENTRY_SYSTEM_API_KEY: SENTRY_SYSTEM_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: sentry-prevent-test-results
+    baseUri: https://sentry.io/api/0
+    description: Sentry Prevent API — Test Results business capability. Self-contained, no shared references.
+    resources:
+    - name: organizations-organization_id_or_slug-prevent-test-results
+      path: /organizations/{organization_id_or_slug}/prevent/test-results/
+      operations:
+      - name: listtestresults
+        method: GET
+        description: Sentry Retrieve paginated list of test results for repository, owner, and organization
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: repositoryId
+          in: query
+          type: string
+          description: Filter by repository ID.
+        - name: cursor
+          in: query
+          type: string
+          description: Pagination cursor.
+    - name: organizations-organization_id_or_slug-prevent-test-results-metrics
+      path: /organizations/{organization_id_or_slug}/prevent/test-results/metrics/
+      operations:
+      - name: retrievetestresultmetrics
+        method: GET
+        description: Sentry Retrieve aggregated test result metrics for repository, owner, and organization
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: repositoryId
+          in: query
+          type: string
+          description: Filter by repository ID.
+    - name: organizations-organization_id_or_slug-prevent-test-results-suites
+      path: /organizations/{organization_id_or_slug}/prevent/test-results/suites/
+      operations:
+      - name: listtestsuites
+        method: GET
+        description: Sentry Retrieve test suites belonging to a repository's test results
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: repositoryId
+          in: query
+          type: string
+          description: Filter by repository ID.
+        - name: cursor
+          in: query
+          type: string
+          description: Pagination cursor.
+    authentication:
+      type: bearer
+      token: '{{env.SENTRY_SYSTEM_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: sentry-prevent-test-results-rest
+    port: 8080
+    description: REST adapter for Sentry Prevent API — Test Results. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/organizations/{organization-id-or-slug}/prevent/test-results
+      name: organizations-organization-id-or-slug-prevent-test-results
+      description: REST surface for organizations-organization_id_or_slug-prevent-test-results.
+      operations:
+      - method: GET
+        name: listtestresults
+        description: Sentry Retrieve paginated list of test results for repository, owner, and organization
+        call: sentry-prevent-test-results.listtestresults
+        with:
+          repositoryId: rest.repositoryId
+          cursor: rest.cursor
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organization-id-or-slug}/prevent/test-results/metrics
+      name: organizations-organization-id-or-slug-prevent-test-results-metrics
+      description: REST surface for organizations-organization_id_or_slug-prevent-test-results-metrics.
+      operations:
+      - method: GET
+        name: retrievetestresultmetrics
+        description: Sentry Retrieve aggregated test result metrics for repository, owner, and organization
+        call: sentry-prevent-test-results.retrievetestresultmetrics
+        with:
+          repositoryId: rest.repositoryId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organization-id-or-slug}/prevent/test-results/suites
+      name: organizations-organization-id-or-slug-prevent-test-results-suites
+      description: REST surface for organizations-organization_id_or_slug-prevent-test-results-suites.
+      operations:
+      - method: GET
+        name: listtestsuites
+        description: Sentry Retrieve test suites belonging to a repository's test results
+        call: sentry-prevent-test-results.listtestsuites
+        with:
+          repositoryId: rest.repositoryId
+          cursor: rest.cursor
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: sentry-prevent-test-results-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Sentry Prevent API — Test Results. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: sentry-retrieve-paginated-list-test
+      description: Sentry Retrieve paginated list of test results for repository, owner, and organization
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sentry-prevent-test-results.listtestresults
+      with:
+        repositoryId: tools.repositoryId
+        cursor: tools.cursor
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sentry-retrieve-aggregated-test-result
+      description: Sentry Retrieve aggregated test result metrics for repository, owner, and organization
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sentry-prevent-test-results.retrievetestresultmetrics
+      with:
+        repositoryId: tools.repositoryId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sentry-retrieve-test-suites-belonging
+      description: Sentry Retrieve test suites belonging to a repository's test results
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sentry-prevent-test-results.listtestsuites
+      with:
+        repositoryId: tools.repositoryId
+        cursor: tools.cursor
+      outputParameters:
+      - type: object
+        mapping: $.

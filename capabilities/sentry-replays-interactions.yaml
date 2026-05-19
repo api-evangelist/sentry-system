@@ -1,0 +1,117 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Sentry Replays API — Interactions
+  description: 'Sentry Replays API — Interactions. 2 operations. Lead operation: Sentry List an organization''s selectors.
+    Self-contained Naftiko capability covering one Sentry System business surface.'
+  tags:
+  - Sentry System
+  - Interactions
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SENTRY_SYSTEM_API_KEY: SENTRY_SYSTEM_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: sentry-replays-interactions
+    baseUri: https://sentry.io/api/0
+    description: Sentry Replays API — Interactions business capability. Self-contained, no shared references.
+    resources:
+    - name: organizations-organization_id_or_slug-replays-selectors
+      path: /organizations/{organization_id_or_slug}/replays/selectors/
+      operations:
+      - name: listorganizationselectors
+        method: GET
+        description: Sentry List an organization's selectors
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: project
+          in: query
+          type: array
+          description: Project IDs to filter by.
+        - name: statsPeriod
+          in: query
+          type: string
+          description: Stats period.
+    - name: organizations-organization_id_or_slug-replays-replay_id-clicks
+      path: /organizations/{organization_id_or_slug}/replays/{replay_id}/clicks/
+      operations:
+      - name: listclickednodes
+        method: GET
+        description: Sentry List clicked nodes
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.SENTRY_SYSTEM_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: sentry-replays-interactions-rest
+    port: 8080
+    description: REST adapter for Sentry Replays API — Interactions. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/organizations/{organization-id-or-slug}/replays/selectors
+      name: organizations-organization-id-or-slug-replays-selectors
+      description: REST surface for organizations-organization_id_or_slug-replays-selectors.
+      operations:
+      - method: GET
+        name: listorganizationselectors
+        description: Sentry List an organization's selectors
+        call: sentry-replays-interactions.listorganizationselectors
+        with:
+          project: rest.project
+          statsPeriod: rest.statsPeriod
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organization-id-or-slug}/replays/{replay-id}/clicks
+      name: organizations-organization-id-or-slug-replays-replay-id-clicks
+      description: REST surface for organizations-organization_id_or_slug-replays-replay_id-clicks.
+      operations:
+      - method: GET
+        name: listclickednodes
+        description: Sentry List clicked nodes
+        call: sentry-replays-interactions.listclickednodes
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: sentry-replays-interactions-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Sentry Replays API — Interactions. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: sentry-list-organization-s-selectors
+      description: Sentry List an organization's selectors
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sentry-replays-interactions.listorganizationselectors
+      with:
+        project: tools.project
+        statsPeriod: tools.statsPeriod
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sentry-list-clicked-nodes
+      description: Sentry List clicked nodes
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sentry-replays-interactions.listclickednodes
+      outputParameters:
+      - type: object
+        mapping: $.

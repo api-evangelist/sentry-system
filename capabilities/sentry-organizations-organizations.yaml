@@ -1,0 +1,357 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Sentry Organizations API — Organizations
+  description: 'Sentry Organizations API — Organizations. 8 operations. Lead operation: Sentry Retrieve an organization. Self-contained
+    Naftiko capability covering one Sentry System business surface.'
+  tags:
+  - Sentry System
+  - Organizations
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SENTRY_SYSTEM_API_KEY: SENTRY_SYSTEM_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: sentry-organizations-organizations
+    baseUri: https://sentry.io/api/0
+    description: Sentry Organizations API — Organizations business capability. Self-contained, no shared references.
+    resources:
+    - name: organizations-organization_id_or_slug
+      path: /organizations/{organization_id_or_slug}/
+      operations:
+      - name: retrieveorganization
+        method: GET
+        description: Sentry Retrieve an organization
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateorganization
+        method: PUT
+        description: Sentry Update an organization
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: organizations-organization_id_or_slug-client-keys
+      path: /organizations/{organization_id_or_slug}/client-keys/
+      operations:
+      - name: listorganizationclientkeys
+        method: GET
+        description: Sentry List organization client keys
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cursor
+          in: query
+          type: string
+          description: Pagination cursor.
+    - name: organizations-organization_id_or_slug-eventids-event_id
+      path: /organizations/{organization_id_or_slug}/eventids/{event_id}/
+      operations:
+      - name: resolveeventid
+        method: GET
+        description: Sentry Resolve an event ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: event_id
+          in: path
+          type: string
+          description: The event ID to resolve.
+          required: true
+    - name: organizations-organization_id_or_slug-projects
+      path: /organizations/{organization_id_or_slug}/projects/
+      operations:
+      - name: listorganizationprojects
+        method: GET
+        description: Sentry List organization projects
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cursor
+          in: query
+          type: string
+          description: Pagination cursor.
+    - name: organizations-organization_id_or_slug-relay_usage
+      path: /organizations/{organization_id_or_slug}/relay_usage/
+      operations:
+      - name: listorganizationtrustedrelays
+        method: GET
+        description: Sentry List organization trusted relays
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: organizations-organization_id_or_slug-shortids-short_id
+      path: /organizations/{organization_id_or_slug}/shortids/{short_id}/
+      operations:
+      - name: resolveshortid
+        method: GET
+        description: Sentry Resolve a short ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: short_id
+          in: path
+          type: string
+          description: The short ID to resolve (e.g., PROJECT-123).
+          required: true
+    - name: organizations-organization_id_or_slug-stats_v2
+      path: /organizations/{organization_id_or_slug}/stats_v2/
+      operations:
+      - name: retrieveeventcounts
+        method: GET
+        description: Sentry Retrieve event counts (v2)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: field
+          in: query
+          type: string
+          description: The field to query (e.g., sum(quantity), sum(times_seen)).
+          required: true
+        - name: statsPeriod
+          in: query
+          type: string
+          description: Stats period (e.g., 24h, 14d).
+        - name: groupBy
+          in: query
+          type: string
+          description: Group results by category, outcome, or project.
+    authentication:
+      type: bearer
+      token: '{{env.SENTRY_SYSTEM_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: sentry-organizations-organizations-rest
+    port: 8080
+    description: REST adapter for Sentry Organizations API — Organizations. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/organizations/{organization-id-or-slug}
+      name: organizations-organization-id-or-slug
+      description: REST surface for organizations-organization_id_or_slug.
+      operations:
+      - method: GET
+        name: retrieveorganization
+        description: Sentry Retrieve an organization
+        call: sentry-organizations-organizations.retrieveorganization
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updateorganization
+        description: Sentry Update an organization
+        call: sentry-organizations-organizations.updateorganization
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organization-id-or-slug}/client-keys
+      name: organizations-organization-id-or-slug-client-keys
+      description: REST surface for organizations-organization_id_or_slug-client-keys.
+      operations:
+      - method: GET
+        name: listorganizationclientkeys
+        description: Sentry List organization client keys
+        call: sentry-organizations-organizations.listorganizationclientkeys
+        with:
+          cursor: rest.cursor
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organization-id-or-slug}/eventids/{event-id}
+      name: organizations-organization-id-or-slug-eventids-event-id
+      description: REST surface for organizations-organization_id_or_slug-eventids-event_id.
+      operations:
+      - method: GET
+        name: resolveeventid
+        description: Sentry Resolve an event ID
+        call: sentry-organizations-organizations.resolveeventid
+        with:
+          event_id: rest.event_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organization-id-or-slug}/projects
+      name: organizations-organization-id-or-slug-projects
+      description: REST surface for organizations-organization_id_or_slug-projects.
+      operations:
+      - method: GET
+        name: listorganizationprojects
+        description: Sentry List organization projects
+        call: sentry-organizations-organizations.listorganizationprojects
+        with:
+          cursor: rest.cursor
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organization-id-or-slug}/relay-usage
+      name: organizations-organization-id-or-slug-relay-usage
+      description: REST surface for organizations-organization_id_or_slug-relay_usage.
+      operations:
+      - method: GET
+        name: listorganizationtrustedrelays
+        description: Sentry List organization trusted relays
+        call: sentry-organizations-organizations.listorganizationtrustedrelays
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organization-id-or-slug}/shortids/{short-id}
+      name: organizations-organization-id-or-slug-shortids-short-id
+      description: REST surface for organizations-organization_id_or_slug-shortids-short_id.
+      operations:
+      - method: GET
+        name: resolveshortid
+        description: Sentry Resolve a short ID
+        call: sentry-organizations-organizations.resolveshortid
+        with:
+          short_id: rest.short_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organization-id-or-slug}/stats-v2
+      name: organizations-organization-id-or-slug-stats-v2
+      description: REST surface for organizations-organization_id_or_slug-stats_v2.
+      operations:
+      - method: GET
+        name: retrieveeventcounts
+        description: Sentry Retrieve event counts (v2)
+        call: sentry-organizations-organizations.retrieveeventcounts
+        with:
+          field: rest.field
+          statsPeriod: rest.statsPeriod
+          groupBy: rest.groupBy
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: sentry-organizations-organizations-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Sentry Organizations API — Organizations. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: sentry-retrieve-organization
+      description: Sentry Retrieve an organization
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sentry-organizations-organizations.retrieveorganization
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sentry-update-organization
+      description: Sentry Update an organization
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: sentry-organizations-organizations.updateorganization
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sentry-list-organization-client-keys
+      description: Sentry List organization client keys
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sentry-organizations-organizations.listorganizationclientkeys
+      with:
+        cursor: tools.cursor
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sentry-resolve-event-id
+      description: Sentry Resolve an event ID
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sentry-organizations-organizations.resolveeventid
+      with:
+        event_id: tools.event_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sentry-list-organization-projects
+      description: Sentry List organization projects
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sentry-organizations-organizations.listorganizationprojects
+      with:
+        cursor: tools.cursor
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sentry-list-organization-trusted-relays
+      description: Sentry List organization trusted relays
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sentry-organizations-organizations.listorganizationtrustedrelays
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sentry-resolve-short-id
+      description: Sentry Resolve a short ID
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sentry-organizations-organizations.resolveshortid
+      with:
+        short_id: tools.short_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sentry-retrieve-event-counts-v2
+      description: Sentry Retrieve event counts (v2)
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sentry-organizations-organizations.retrieveeventcounts
+      with:
+        field: tools.field
+        statsPeriod: tools.statsPeriod
+        groupBy: tools.groupBy
+      outputParameters:
+      - type: object
+        mapping: $.

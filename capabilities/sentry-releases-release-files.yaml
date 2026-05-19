@@ -1,0 +1,206 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Sentry Releases API — Release Files
+  description: 'Sentry Releases API — Release Files. 5 operations. Lead operation: Sentry List an organization''s release
+    files. Self-contained Naftiko capability covering one Sentry System business surface.'
+  tags:
+  - Sentry System
+  - Release Files
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SENTRY_SYSTEM_API_KEY: SENTRY_SYSTEM_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: sentry-releases-release-files
+    baseUri: https://sentry.io/api/0
+    description: Sentry Releases API — Release Files business capability. Self-contained, no shared references.
+    resources:
+    - name: organizations-organization_id_or_slug-releases-version-files
+      path: /organizations/{organization_id_or_slug}/releases/{version}/files/
+      operations:
+      - name: listorganizationreleasefiles
+        method: GET
+        description: Sentry List an organization's release files
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cursor
+          in: query
+          type: string
+          description: Pagination cursor.
+      - name: uploadorganizationreleasefile
+        method: POST
+        description: Sentry Upload a new organization release file
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: organizations-organization_id_or_slug-releases-version-files-file_id
+      path: /organizations/{organization_id_or_slug}/releases/{version}/files/{file_id}/
+      operations:
+      - name: retrieveorganizationreleasefile
+        method: GET
+        description: Sentry Retrieve an organization release's file
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateorganizationreleasefile
+        method: PUT
+        description: Sentry Update an organization release file
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteorganizationreleasefile
+        method: DELETE
+        description: Sentry Delete an organization release's file
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.SENTRY_SYSTEM_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: sentry-releases-release-files-rest
+    port: 8080
+    description: REST adapter for Sentry Releases API — Release Files. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/organizations/{organization-id-or-slug}/releases/{version}/files
+      name: organizations-organization-id-or-slug-releases-version-files
+      description: REST surface for organizations-organization_id_or_slug-releases-version-files.
+      operations:
+      - method: GET
+        name: listorganizationreleasefiles
+        description: Sentry List an organization's release files
+        call: sentry-releases-release-files.listorganizationreleasefiles
+        with:
+          cursor: rest.cursor
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: uploadorganizationreleasefile
+        description: Sentry Upload a new organization release file
+        call: sentry-releases-release-files.uploadorganizationreleasefile
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organization-id-or-slug}/releases/{version}/files/{file-id}
+      name: organizations-organization-id-or-slug-releases-version-files-file-id
+      description: REST surface for organizations-organization_id_or_slug-releases-version-files-file_id.
+      operations:
+      - method: GET
+        name: retrieveorganizationreleasefile
+        description: Sentry Retrieve an organization release's file
+        call: sentry-releases-release-files.retrieveorganizationreleasefile
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updateorganizationreleasefile
+        description: Sentry Update an organization release file
+        call: sentry-releases-release-files.updateorganizationreleasefile
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteorganizationreleasefile
+        description: Sentry Delete an organization release's file
+        call: sentry-releases-release-files.deleteorganizationreleasefile
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: sentry-releases-release-files-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Sentry Releases API — Release Files. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: sentry-list-organization-s-release-files
+      description: Sentry List an organization's release files
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sentry-releases-release-files.listorganizationreleasefiles
+      with:
+        cursor: tools.cursor
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sentry-upload-new-organization-release
+      description: Sentry Upload a new organization release file
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: sentry-releases-release-files.uploadorganizationreleasefile
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sentry-retrieve-organization-release-s-file
+      description: Sentry Retrieve an organization release's file
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sentry-releases-release-files.retrieveorganizationreleasefile
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sentry-update-organization-release-file
+      description: Sentry Update an organization release file
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: sentry-releases-release-files.updateorganizationreleasefile
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sentry-delete-organization-release-s-file
+      description: Sentry Delete an organization release's file
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: sentry-releases-release-files.deleteorganizationreleasefile
+      outputParameters:
+      - type: object
+        mapping: $.

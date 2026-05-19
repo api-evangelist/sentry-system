@@ -1,0 +1,282 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Sentry Monitors API — Monitors
+  description: 'Sentry Monitors API — Monitors. 7 operations. Lead operation: Sentry Fetch an organization''s monitors. Self-contained
+    Naftiko capability covering one Sentry System business surface.'
+  tags:
+  - Sentry System
+  - Monitors
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SENTRY_SYSTEM_API_KEY: SENTRY_SYSTEM_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: sentry-monitors-monitors
+    baseUri: https://sentry.io/api/0
+    description: Sentry Monitors API — Monitors business capability. Self-contained, no shared references.
+    resources:
+    - name: organizations-organization_id_or_slug-monitors
+      path: /organizations/{organization_id_or_slug}/monitors/
+      operations:
+      - name: listorganizationmonitors
+        method: GET
+        description: Sentry Fetch an organization's monitors
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cursor
+          in: query
+          type: string
+          description: Pagination cursor.
+      - name: mutateorganizationmonitors
+        method: PUT
+        description: Sentry Mutate an organization's monitors
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: bulkdeletemonitors
+        method: DELETE
+        description: Sentry Bulk delete monitors
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: query
+          type: array
+          description: IDs of monitors to delete.
+    - name: organizations-organization_id_or_slug-uptime-monitors-monitor_id
+      path: /organizations/{organization_id_or_slug}/uptime-monitors/{monitor_id}/
+      operations:
+      - name: fetchmonitor
+        method: GET
+        description: Sentry Fetch a monitor
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updatemonitor
+        method: PUT
+        description: Sentry Update a monitor by ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deletemonitor
+        method: DELETE
+        description: Sentry Delete a monitor
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: projects-organization_id_or_slug-project_id_or_slug-uptime-monitors
+      path: /projects/{organization_id_or_slug}/{project_id_or_slug}/uptime-monitors/
+      operations:
+      - name: createprojectmonitor
+        method: POST
+        description: Sentry Create a monitor for a project
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.SENTRY_SYSTEM_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: sentry-monitors-monitors-rest
+    port: 8080
+    description: REST adapter for Sentry Monitors API — Monitors. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/organizations/{organization-id-or-slug}/monitors
+      name: organizations-organization-id-or-slug-monitors
+      description: REST surface for organizations-organization_id_or_slug-monitors.
+      operations:
+      - method: GET
+        name: listorganizationmonitors
+        description: Sentry Fetch an organization's monitors
+        call: sentry-monitors-monitors.listorganizationmonitors
+        with:
+          cursor: rest.cursor
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: mutateorganizationmonitors
+        description: Sentry Mutate an organization's monitors
+        call: sentry-monitors-monitors.mutateorganizationmonitors
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: bulkdeletemonitors
+        description: Sentry Bulk delete monitors
+        call: sentry-monitors-monitors.bulkdeletemonitors
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organization-id-or-slug}/uptime-monitors/{monitor-id}
+      name: organizations-organization-id-or-slug-uptime-monitors-monitor-id
+      description: REST surface for organizations-organization_id_or_slug-uptime-monitors-monitor_id.
+      operations:
+      - method: GET
+        name: fetchmonitor
+        description: Sentry Fetch a monitor
+        call: sentry-monitors-monitors.fetchmonitor
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updatemonitor
+        description: Sentry Update a monitor by ID
+        call: sentry-monitors-monitors.updatemonitor
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletemonitor
+        description: Sentry Delete a monitor
+        call: sentry-monitors-monitors.deletemonitor
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/projects/{organization-id-or-slug}/{project-id-or-slug}/uptime-monitors
+      name: projects-organization-id-or-slug-project-id-or-slug-uptime-monitors
+      description: REST surface for projects-organization_id_or_slug-project_id_or_slug-uptime-monitors.
+      operations:
+      - method: POST
+        name: createprojectmonitor
+        description: Sentry Create a monitor for a project
+        call: sentry-monitors-monitors.createprojectmonitor
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: sentry-monitors-monitors-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Sentry Monitors API — Monitors. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: sentry-fetch-organization-s-monitors
+      description: Sentry Fetch an organization's monitors
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sentry-monitors-monitors.listorganizationmonitors
+      with:
+        cursor: tools.cursor
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sentry-mutate-organization-s-monitors
+      description: Sentry Mutate an organization's monitors
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: sentry-monitors-monitors.mutateorganizationmonitors
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sentry-bulk-delete-monitors
+      description: Sentry Bulk delete monitors
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: sentry-monitors-monitors.bulkdeletemonitors
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sentry-fetch-monitor
+      description: Sentry Fetch a monitor
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sentry-monitors-monitors.fetchmonitor
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sentry-update-monitor-id
+      description: Sentry Update a monitor by ID
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: sentry-monitors-monitors.updatemonitor
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sentry-delete-monitor
+      description: Sentry Delete a monitor
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: sentry-monitors-monitors.deletemonitor
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sentry-create-monitor-project
+      description: Sentry Create a monitor for a project
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: sentry-monitors-monitors.createprojectmonitor
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

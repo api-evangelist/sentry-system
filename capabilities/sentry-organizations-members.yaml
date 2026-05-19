@@ -1,0 +1,206 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Sentry Organizations API — Members
+  description: 'Sentry Organizations API — Members. 5 operations. Lead operation: Sentry List organization members. Self-contained
+    Naftiko capability covering one Sentry System business surface.'
+  tags:
+  - Sentry System
+  - Members
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SENTRY_SYSTEM_API_KEY: SENTRY_SYSTEM_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: sentry-organizations-members
+    baseUri: https://sentry.io/api/0
+    description: Sentry Organizations API — Members business capability. Self-contained, no shared references.
+    resources:
+    - name: organizations-organization_id_or_slug-members
+      path: /organizations/{organization_id_or_slug}/members/
+      operations:
+      - name: listorganizationmembers
+        method: GET
+        description: Sentry List organization members
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cursor
+          in: query
+          type: string
+          description: Pagination cursor.
+      - name: addorganizationmember
+        method: POST
+        description: Sentry Add a member to an organization
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: organizations-organization_id_or_slug-members-member_id
+      path: /organizations/{organization_id_or_slug}/members/{member_id}/
+      operations:
+      - name: retrieveorganizationmember
+        method: GET
+        description: Sentry Retrieve an organization member
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateorganizationmemberroles
+        method: PUT
+        description: Sentry Update organization member roles
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteorganizationmember
+        method: DELETE
+        description: Sentry Delete an organization member
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.SENTRY_SYSTEM_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: sentry-organizations-members-rest
+    port: 8080
+    description: REST adapter for Sentry Organizations API — Members. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/organizations/{organization-id-or-slug}/members
+      name: organizations-organization-id-or-slug-members
+      description: REST surface for organizations-organization_id_or_slug-members.
+      operations:
+      - method: GET
+        name: listorganizationmembers
+        description: Sentry List organization members
+        call: sentry-organizations-members.listorganizationmembers
+        with:
+          cursor: rest.cursor
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: addorganizationmember
+        description: Sentry Add a member to an organization
+        call: sentry-organizations-members.addorganizationmember
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organization-id-or-slug}/members/{member-id}
+      name: organizations-organization-id-or-slug-members-member-id
+      description: REST surface for organizations-organization_id_or_slug-members-member_id.
+      operations:
+      - method: GET
+        name: retrieveorganizationmember
+        description: Sentry Retrieve an organization member
+        call: sentry-organizations-members.retrieveorganizationmember
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updateorganizationmemberroles
+        description: Sentry Update organization member roles
+        call: sentry-organizations-members.updateorganizationmemberroles
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteorganizationmember
+        description: Sentry Delete an organization member
+        call: sentry-organizations-members.deleteorganizationmember
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: sentry-organizations-members-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Sentry Organizations API — Members. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: sentry-list-organization-members
+      description: Sentry List organization members
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sentry-organizations-members.listorganizationmembers
+      with:
+        cursor: tools.cursor
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sentry-add-member-organization
+      description: Sentry Add a member to an organization
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: sentry-organizations-members.addorganizationmember
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sentry-retrieve-organization-member
+      description: Sentry Retrieve an organization member
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sentry-organizations-members.retrieveorganizationmember
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sentry-update-organization-member-roles
+      description: Sentry Update organization member roles
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: sentry-organizations-members.updateorganizationmemberroles
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sentry-delete-organization-member
+      description: Sentry Delete an organization member
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: sentry-organizations-members.deleteorganizationmember
+      outputParameters:
+      - type: object
+        mapping: $.

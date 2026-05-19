@@ -1,0 +1,251 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Sentry Replays API — Replays
+  description: 'Sentry Replays API — Replays. 5 operations. Lead operation: Sentry Retrieve a count of replays for a given
+    issue or transaction. Self-contained Naftiko capability covering one Sentry System business surface.'
+  tags:
+  - Sentry System
+  - Replays
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SENTRY_SYSTEM_API_KEY: SENTRY_SYSTEM_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: sentry-replays-replays
+    baseUri: https://sentry.io/api/0
+    description: Sentry Replays API — Replays business capability. Self-contained, no shared references.
+    resources:
+    - name: organizations-organization_id_or_slug-replay-count
+      path: /organizations/{organization_id_or_slug}/replay-count/
+      operations:
+      - name: getreplaycount
+        method: GET
+        description: Sentry Retrieve a count of replays for a given issue or transaction
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: query
+          in: query
+          type: string
+          description: The search query (e.g., issue.id or transaction).
+        - name: statsPeriod
+          in: query
+          type: string
+          description: Stats period.
+        - name: project
+          in: query
+          type: array
+          description: Project IDs.
+    - name: organizations-organization_id_or_slug-replays
+      path: /organizations/{organization_id_or_slug}/replays/
+      operations:
+      - name: listorganizationreplays
+        method: GET
+        description: Sentry List an organization's replays
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cursor
+          in: query
+          type: string
+          description: Pagination cursor.
+        - name: query
+          in: query
+          type: string
+          description: A search query to filter replays.
+        - name: statsPeriod
+          in: query
+          type: string
+          description: Stats period (e.g., 24h, 14d).
+        - name: project
+          in: query
+          type: array
+          description: Project IDs to filter by.
+        - name: environment
+          in: query
+          type: string
+          description: Environment to filter by.
+        - name: sort
+          in: query
+          type: string
+          description: Sort order for results.
+    - name: projects-organization_id_or_slug-project_id_or_slug-replays-replay_id
+      path: /projects/{organization_id_or_slug}/{project_id_or_slug}/replays/{replay_id}/
+      operations:
+      - name: retrievereplay
+        method: GET
+        description: Sentry Retrieve a replay instance
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: deletereplay
+        method: DELETE
+        description: Sentry Delete a replay instance
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: projects-organization_id_or_slug-project_id_or_slug-replays-replay_id-viewed-by
+      path: /projects/{organization_id_or_slug}/{project_id_or_slug}/replays/{replay_id}/viewed-by/
+      operations:
+      - name: listreplayviewers
+        method: GET
+        description: Sentry List users who have viewed a replay
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.SENTRY_SYSTEM_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: sentry-replays-replays-rest
+    port: 8080
+    description: REST adapter for Sentry Replays API — Replays. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/organizations/{organization-id-or-slug}/replay-count
+      name: organizations-organization-id-or-slug-replay-count
+      description: REST surface for organizations-organization_id_or_slug-replay-count.
+      operations:
+      - method: GET
+        name: getreplaycount
+        description: Sentry Retrieve a count of replays for a given issue or transaction
+        call: sentry-replays-replays.getreplaycount
+        with:
+          query: rest.query
+          statsPeriod: rest.statsPeriod
+          project: rest.project
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organization-id-or-slug}/replays
+      name: organizations-organization-id-or-slug-replays
+      description: REST surface for organizations-organization_id_or_slug-replays.
+      operations:
+      - method: GET
+        name: listorganizationreplays
+        description: Sentry List an organization's replays
+        call: sentry-replays-replays.listorganizationreplays
+        with:
+          cursor: rest.cursor
+          query: rest.query
+          statsPeriod: rest.statsPeriod
+          project: rest.project
+          environment: rest.environment
+          sort: rest.sort
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/projects/{organization-id-or-slug}/{project-id-or-slug}/replays/{replay-id}
+      name: projects-organization-id-or-slug-project-id-or-slug-replays-replay-id
+      description: REST surface for projects-organization_id_or_slug-project_id_or_slug-replays-replay_id.
+      operations:
+      - method: GET
+        name: retrievereplay
+        description: Sentry Retrieve a replay instance
+        call: sentry-replays-replays.retrievereplay
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletereplay
+        description: Sentry Delete a replay instance
+        call: sentry-replays-replays.deletereplay
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/projects/{organization-id-or-slug}/{project-id-or-slug}/replays/{replay-id}/viewed-by
+      name: projects-organization-id-or-slug-project-id-or-slug-replays-replay-id-viewed-by
+      description: REST surface for projects-organization_id_or_slug-project_id_or_slug-replays-replay_id-viewed-by.
+      operations:
+      - method: GET
+        name: listreplayviewers
+        description: Sentry List users who have viewed a replay
+        call: sentry-replays-replays.listreplayviewers
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: sentry-replays-replays-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Sentry Replays API — Replays. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: sentry-retrieve-count-replays-given
+      description: Sentry Retrieve a count of replays for a given issue or transaction
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sentry-replays-replays.getreplaycount
+      with:
+        query: tools.query
+        statsPeriod: tools.statsPeriod
+        project: tools.project
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sentry-list-organization-s-replays
+      description: Sentry List an organization's replays
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sentry-replays-replays.listorganizationreplays
+      with:
+        cursor: tools.cursor
+        query: tools.query
+        statsPeriod: tools.statsPeriod
+        project: tools.project
+        environment: tools.environment
+        sort: tools.sort
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sentry-retrieve-replay-instance
+      description: Sentry Retrieve a replay instance
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sentry-replays-replays.retrievereplay
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sentry-delete-replay-instance
+      description: Sentry Delete a replay instance
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: sentry-replays-replays.deletereplay
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sentry-list-users-who-have
+      description: Sentry List users who have viewed a replay
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sentry-replays-replays.listreplayviewers
+      outputParameters:
+      - type: object
+        mapping: $.

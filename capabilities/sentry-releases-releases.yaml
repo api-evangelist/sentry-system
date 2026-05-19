@@ -1,0 +1,244 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Sentry Releases API — Releases
+  description: 'Sentry Releases API — Releases. 6 operations. Lead operation: Sentry Retrieve statuses of release thresholds
+    (Alpha). Self-contained Naftiko capability covering one Sentry System business surface.'
+  tags:
+  - Sentry System
+  - Releases
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SENTRY_SYSTEM_API_KEY: SENTRY_SYSTEM_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: sentry-releases-releases
+    baseUri: https://sentry.io/api/0
+    description: Sentry Releases API — Releases business capability. Self-contained, no shared references.
+    resources:
+    - name: organizations-organization_id_or_slug-release-thresholds
+      path: /organizations/{organization_id_or_slug}/release-thresholds/
+      operations:
+      - name: listreleasethresholdstatuses
+        method: GET
+        description: Sentry Retrieve statuses of release thresholds (Alpha)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: organizations-organization_id_or_slug-releases
+      path: /organizations/{organization_id_or_slug}/releases/
+      operations:
+      - name: listorganizationreleases
+        method: GET
+        description: Sentry List an organization's releases
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: query
+          in: query
+          type: string
+          description: Filter releases by search query.
+        - name: cursor
+          in: query
+          type: string
+          description: Pagination cursor.
+      - name: createorganizationrelease
+        method: POST
+        description: Sentry Create a new release for an organization
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: organizations-organization_id_or_slug-releases-version
+      path: /organizations/{organization_id_or_slug}/releases/{version}/
+      operations:
+      - name: retrieveorganizationrelease
+        method: GET
+        description: Sentry Retrieve an organization's release
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateorganizationrelease
+        method: PUT
+        description: Sentry Update an organization's release
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteorganizationrelease
+        method: DELETE
+        description: Sentry Delete an organization's release
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.SENTRY_SYSTEM_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: sentry-releases-releases-rest
+    port: 8080
+    description: REST adapter for Sentry Releases API — Releases. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/organizations/{organization-id-or-slug}/release-thresholds
+      name: organizations-organization-id-or-slug-release-thresholds
+      description: REST surface for organizations-organization_id_or_slug-release-thresholds.
+      operations:
+      - method: GET
+        name: listreleasethresholdstatuses
+        description: Sentry Retrieve statuses of release thresholds (Alpha)
+        call: sentry-releases-releases.listreleasethresholdstatuses
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organization-id-or-slug}/releases
+      name: organizations-organization-id-or-slug-releases
+      description: REST surface for organizations-organization_id_or_slug-releases.
+      operations:
+      - method: GET
+        name: listorganizationreleases
+        description: Sentry List an organization's releases
+        call: sentry-releases-releases.listorganizationreleases
+        with:
+          query: rest.query
+          cursor: rest.cursor
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createorganizationrelease
+        description: Sentry Create a new release for an organization
+        call: sentry-releases-releases.createorganizationrelease
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organization-id-or-slug}/releases/{version}
+      name: organizations-organization-id-or-slug-releases-version
+      description: REST surface for organizations-organization_id_or_slug-releases-version.
+      operations:
+      - method: GET
+        name: retrieveorganizationrelease
+        description: Sentry Retrieve an organization's release
+        call: sentry-releases-releases.retrieveorganizationrelease
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updateorganizationrelease
+        description: Sentry Update an organization's release
+        call: sentry-releases-releases.updateorganizationrelease
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteorganizationrelease
+        description: Sentry Delete an organization's release
+        call: sentry-releases-releases.deleteorganizationrelease
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: sentry-releases-releases-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Sentry Releases API — Releases. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: sentry-retrieve-statuses-release-thresholds
+      description: Sentry Retrieve statuses of release thresholds (Alpha)
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sentry-releases-releases.listreleasethresholdstatuses
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sentry-list-organization-s-releases
+      description: Sentry List an organization's releases
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sentry-releases-releases.listorganizationreleases
+      with:
+        query: tools.query
+        cursor: tools.cursor
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sentry-create-new-release-organization
+      description: Sentry Create a new release for an organization
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: sentry-releases-releases.createorganizationrelease
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sentry-retrieve-organization-s-release
+      description: Sentry Retrieve an organization's release
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sentry-releases-releases.retrieveorganizationrelease
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sentry-update-organization-s-release
+      description: Sentry Update an organization's release
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: sentry-releases-releases.updateorganizationrelease
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sentry-delete-organization-s-release
+      description: Sentry Delete an organization's release
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: sentry-releases-releases.deleteorganizationrelease
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,164 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Sentry Integrations API — External Teams
+  description: 'Sentry Integrations API — External Teams. 3 operations. Lead operation: Sentry Create an external team. Self-contained
+    Naftiko capability covering one Sentry System business surface.'
+  tags:
+  - Sentry System
+  - External Teams
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SENTRY_SYSTEM_API_KEY: SENTRY_SYSTEM_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: sentry-integrations-external-teams
+    baseUri: https://sentry.io/api/0
+    description: Sentry Integrations API — External Teams business capability. Self-contained, no shared references.
+    resources:
+    - name: organizations-organization_id_or_slug-external-teams
+      path: /organizations/{organization_id_or_slug}/external-teams/
+      operations:
+      - name: createexternalteam
+        method: POST
+        description: Sentry Create an external team
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: organizations-organization_id_or_slug-external-teams-external_team_id
+      path: /organizations/{organization_id_or_slug}/external-teams/{external_team_id}/
+      operations:
+      - name: updateexternalteam
+        method: PUT
+        description: Sentry Update an external team
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: external_team_id
+          in: path
+          type: string
+          description: The ID of the external team.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteexternalteam
+        method: DELETE
+        description: Sentry Delete an external team
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: external_team_id
+          in: path
+          type: string
+          description: The ID of the external team.
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.SENTRY_SYSTEM_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: sentry-integrations-external-teams-rest
+    port: 8080
+    description: REST adapter for Sentry Integrations API — External Teams. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/organizations/{organization-id-or-slug}/external-teams
+      name: organizations-organization-id-or-slug-external-teams
+      description: REST surface for organizations-organization_id_or_slug-external-teams.
+      operations:
+      - method: POST
+        name: createexternalteam
+        description: Sentry Create an external team
+        call: sentry-integrations-external-teams.createexternalteam
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organization-id-or-slug}/external-teams/{external-team-id}
+      name: organizations-organization-id-or-slug-external-teams-external-team-id
+      description: REST surface for organizations-organization_id_or_slug-external-teams-external_team_id.
+      operations:
+      - method: PUT
+        name: updateexternalteam
+        description: Sentry Update an external team
+        call: sentry-integrations-external-teams.updateexternalteam
+        with:
+          external_team_id: rest.external_team_id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteexternalteam
+        description: Sentry Delete an external team
+        call: sentry-integrations-external-teams.deleteexternalteam
+        with:
+          external_team_id: rest.external_team_id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: sentry-integrations-external-teams-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Sentry Integrations API — External Teams. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: sentry-create-external-team
+      description: Sentry Create an external team
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: sentry-integrations-external-teams.createexternalteam
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sentry-update-external-team
+      description: Sentry Update an external team
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: sentry-integrations-external-teams.updateexternalteam
+      with:
+        external_team_id: tools.external_team_id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sentry-delete-external-team
+      description: Sentry Delete an external team
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: sentry-integrations-external-teams.deleteexternalteam
+      with:
+        external_team_id: tools.external_team_id
+      outputParameters:
+      - type: object
+        mapping: $.

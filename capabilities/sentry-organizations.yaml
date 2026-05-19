@@ -1,0 +1,146 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Sentry API — Organizations
+  description: 'Sentry API — Organizations. 3 operations. Lead operation: Sentry List organizations. Self-contained Naftiko
+    capability covering one Sentry System business surface.'
+  tags:
+  - Sentry System
+  - Organizations
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SENTRY_SYSTEM_API_KEY: SENTRY_SYSTEM_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: sentry-organizations
+    baseUri: https://sentry.io/api/0
+    description: Sentry API — Organizations business capability. Self-contained, no shared references.
+    resources:
+    - name: organizations
+      path: /organizations/
+      operations:
+      - name: listorganizations
+        method: GET
+        description: Sentry List organizations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cursor
+          in: query
+          type: string
+          description: A pointer to the last object fetched and its sort order for pagination.
+    - name: organizations-organization_id_or_slug
+      path: /organizations/{organization_id_or_slug}/
+      operations:
+      - name: retrieveorganization
+        method: GET
+        description: Sentry Retrieve an organization
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateorganization
+        method: PUT
+        description: Sentry Update an organization
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.SENTRY_SYSTEM_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: sentry-organizations-rest
+    port: 8080
+    description: REST adapter for Sentry API — Organizations. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/organizations
+      name: organizations
+      description: REST surface for organizations.
+      operations:
+      - method: GET
+        name: listorganizations
+        description: Sentry List organizations
+        call: sentry-organizations.listorganizations
+        with:
+          cursor: rest.cursor
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organization-id-or-slug}
+      name: organizations-organization-id-or-slug
+      description: REST surface for organizations-organization_id_or_slug.
+      operations:
+      - method: GET
+        name: retrieveorganization
+        description: Sentry Retrieve an organization
+        call: sentry-organizations.retrieveorganization
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updateorganization
+        description: Sentry Update an organization
+        call: sentry-organizations.updateorganization
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: sentry-organizations-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Sentry API — Organizations. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: sentry-list-organizations
+      description: Sentry List organizations
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sentry-organizations.listorganizations
+      with:
+        cursor: tools.cursor
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sentry-retrieve-organization
+      description: Sentry Retrieve an organization
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sentry-organizations.retrieveorganization
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sentry-update-organization
+      description: Sentry Update an organization
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: sentry-organizations.updateorganization
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

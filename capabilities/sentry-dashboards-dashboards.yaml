@@ -1,0 +1,206 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Sentry Dashboards API — Dashboards
+  description: 'Sentry Dashboards API — Dashboards. 5 operations. Lead operation: Sentry List an organization''s custom dashboards.
+    Self-contained Naftiko capability covering one Sentry System business surface.'
+  tags:
+  - Sentry System
+  - Dashboards
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SENTRY_SYSTEM_API_KEY: SENTRY_SYSTEM_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: sentry-dashboards-dashboards
+    baseUri: https://sentry.io/api/0
+    description: Sentry Dashboards API — Dashboards business capability. Self-contained, no shared references.
+    resources:
+    - name: organizations-organization_id_or_slug-dashboards
+      path: /organizations/{organization_id_or_slug}/dashboards/
+      operations:
+      - name: listorganizationdashboards
+        method: GET
+        description: Sentry List an organization's custom dashboards
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cursor
+          in: query
+          type: string
+          description: Pagination cursor.
+      - name: createorganizationdashboard
+        method: POST
+        description: Sentry Create a new dashboard for an organization
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: organizations-organization_id_or_slug-dashboards-dashboard_id
+      path: /organizations/{organization_id_or_slug}/dashboards/{dashboard_id}/
+      operations:
+      - name: retrieveorganizationdashboard
+        method: GET
+        description: Sentry Retrieve an organization's custom dashboard
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: editorganizationdashboard
+        method: PUT
+        description: Sentry Edit an organization's custom dashboard
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteorganizationdashboard
+        method: DELETE
+        description: Sentry Delete an organization's custom dashboard
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.SENTRY_SYSTEM_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: sentry-dashboards-dashboards-rest
+    port: 8080
+    description: REST adapter for Sentry Dashboards API — Dashboards. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/organizations/{organization-id-or-slug}/dashboards
+      name: organizations-organization-id-or-slug-dashboards
+      description: REST surface for organizations-organization_id_or_slug-dashboards.
+      operations:
+      - method: GET
+        name: listorganizationdashboards
+        description: Sentry List an organization's custom dashboards
+        call: sentry-dashboards-dashboards.listorganizationdashboards
+        with:
+          cursor: rest.cursor
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createorganizationdashboard
+        description: Sentry Create a new dashboard for an organization
+        call: sentry-dashboards-dashboards.createorganizationdashboard
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organization-id-or-slug}/dashboards/{dashboard-id}
+      name: organizations-organization-id-or-slug-dashboards-dashboard-id
+      description: REST surface for organizations-organization_id_or_slug-dashboards-dashboard_id.
+      operations:
+      - method: GET
+        name: retrieveorganizationdashboard
+        description: Sentry Retrieve an organization's custom dashboard
+        call: sentry-dashboards-dashboards.retrieveorganizationdashboard
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: editorganizationdashboard
+        description: Sentry Edit an organization's custom dashboard
+        call: sentry-dashboards-dashboards.editorganizationdashboard
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteorganizationdashboard
+        description: Sentry Delete an organization's custom dashboard
+        call: sentry-dashboards-dashboards.deleteorganizationdashboard
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: sentry-dashboards-dashboards-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Sentry Dashboards API — Dashboards. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: sentry-list-organization-s-custom-dashboards
+      description: Sentry List an organization's custom dashboards
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sentry-dashboards-dashboards.listorganizationdashboards
+      with:
+        cursor: tools.cursor
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sentry-create-new-dashboard-organization
+      description: Sentry Create a new dashboard for an organization
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: sentry-dashboards-dashboards.createorganizationdashboard
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sentry-retrieve-organization-s-custom-dashboard
+      description: Sentry Retrieve an organization's custom dashboard
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sentry-dashboards-dashboards.retrieveorganizationdashboard
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sentry-edit-organization-s-custom-dashboard
+      description: Sentry Edit an organization's custom dashboard
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: sentry-dashboards-dashboards.editorganizationdashboard
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sentry-delete-organization-s-custom-dashboard
+      description: Sentry Delete an organization's custom dashboard
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: sentry-dashboards-dashboards.deleteorganizationdashboard
+      outputParameters:
+      - type: object
+        mapping: $.

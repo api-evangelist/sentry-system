@@ -1,0 +1,105 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Sentry Projects API — User Feedback
+  description: 'Sentry Projects API — User Feedback. 2 operations. Lead operation: Sentry List a project''s user feedback.
+    Self-contained Naftiko capability covering one Sentry System business surface.'
+  tags:
+  - Sentry System
+  - User Feedback
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SENTRY_SYSTEM_API_KEY: SENTRY_SYSTEM_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: sentry-projects-user-feedback
+    baseUri: https://sentry.io/api/0
+    description: Sentry Projects API — User Feedback business capability. Self-contained, no shared references.
+    resources:
+    - name: projects-organization_id_or_slug-project_id_or_slug-user-feedback
+      path: /projects/{organization_id_or_slug}/{project_id_or_slug}/user-feedback/
+      operations:
+      - name: listprojectuserfeedback
+        method: GET
+        description: Sentry List a project's user feedback
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: submitprojectuserfeedback
+        method: POST
+        description: Sentry Submit user feedback
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.SENTRY_SYSTEM_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: sentry-projects-user-feedback-rest
+    port: 8080
+    description: REST adapter for Sentry Projects API — User Feedback. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/projects/{organization-id-or-slug}/{project-id-or-slug}/user-feedback
+      name: projects-organization-id-or-slug-project-id-or-slug-user-feedback
+      description: REST surface for projects-organization_id_or_slug-project_id_or_slug-user-feedback.
+      operations:
+      - method: GET
+        name: listprojectuserfeedback
+        description: Sentry List a project's user feedback
+        call: sentry-projects-user-feedback.listprojectuserfeedback
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: submitprojectuserfeedback
+        description: Sentry Submit user feedback
+        call: sentry-projects-user-feedback.submitprojectuserfeedback
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: sentry-projects-user-feedback-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Sentry Projects API — User Feedback. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: sentry-list-project-s-user-feedback
+      description: Sentry List a project's user feedback
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sentry-projects-user-feedback.listprojectuserfeedback
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sentry-submit-user-feedback
+      description: Sentry Submit user feedback
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: sentry-projects-user-feedback.submitprojectuserfeedback
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

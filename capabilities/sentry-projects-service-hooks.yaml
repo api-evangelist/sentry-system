@@ -1,0 +1,206 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Sentry Projects API — Service Hooks
+  description: 'Sentry Projects API — Service Hooks. 5 operations. Lead operation: Sentry List a project''s service hooks.
+    Self-contained Naftiko capability covering one Sentry System business surface.'
+  tags:
+  - Sentry System
+  - Service Hooks
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SENTRY_SYSTEM_API_KEY: SENTRY_SYSTEM_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: sentry-projects-service-hooks
+    baseUri: https://sentry.io/api/0
+    description: Sentry Projects API — Service Hooks business capability. Self-contained, no shared references.
+    resources:
+    - name: projects-organization_id_or_slug-project_id_or_slug-hooks
+      path: /projects/{organization_id_or_slug}/{project_id_or_slug}/hooks/
+      operations:
+      - name: listprojectservicehooks
+        method: GET
+        description: Sentry List a project's service hooks
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cursor
+          in: query
+          type: string
+          description: Pagination cursor.
+      - name: createprojectservicehook
+        method: POST
+        description: Sentry Register a new service hook
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: projects-organization_id_or_slug-project_id_or_slug-hooks-hook_id
+      path: /projects/{organization_id_or_slug}/{project_id_or_slug}/hooks/{hook_id}/
+      operations:
+      - name: retrieveprojectservicehook
+        method: GET
+        description: Sentry Retrieve a service hook
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateprojectservicehook
+        method: PUT
+        description: Sentry Update a service hook
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteprojectservicehook
+        method: DELETE
+        description: Sentry Remove a service hook
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.SENTRY_SYSTEM_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: sentry-projects-service-hooks-rest
+    port: 8080
+    description: REST adapter for Sentry Projects API — Service Hooks. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/projects/{organization-id-or-slug}/{project-id-or-slug}/hooks
+      name: projects-organization-id-or-slug-project-id-or-slug-hooks
+      description: REST surface for projects-organization_id_or_slug-project_id_or_slug-hooks.
+      operations:
+      - method: GET
+        name: listprojectservicehooks
+        description: Sentry List a project's service hooks
+        call: sentry-projects-service-hooks.listprojectservicehooks
+        with:
+          cursor: rest.cursor
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createprojectservicehook
+        description: Sentry Register a new service hook
+        call: sentry-projects-service-hooks.createprojectservicehook
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/projects/{organization-id-or-slug}/{project-id-or-slug}/hooks/{hook-id}
+      name: projects-organization-id-or-slug-project-id-or-slug-hooks-hook-id
+      description: REST surface for projects-organization_id_or_slug-project_id_or_slug-hooks-hook_id.
+      operations:
+      - method: GET
+        name: retrieveprojectservicehook
+        description: Sentry Retrieve a service hook
+        call: sentry-projects-service-hooks.retrieveprojectservicehook
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updateprojectservicehook
+        description: Sentry Update a service hook
+        call: sentry-projects-service-hooks.updateprojectservicehook
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteprojectservicehook
+        description: Sentry Remove a service hook
+        call: sentry-projects-service-hooks.deleteprojectservicehook
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: sentry-projects-service-hooks-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Sentry Projects API — Service Hooks. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: sentry-list-project-s-service-hooks
+      description: Sentry List a project's service hooks
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sentry-projects-service-hooks.listprojectservicehooks
+      with:
+        cursor: tools.cursor
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sentry-register-new-service-hook
+      description: Sentry Register a new service hook
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: sentry-projects-service-hooks.createprojectservicehook
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sentry-retrieve-service-hook
+      description: Sentry Retrieve a service hook
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sentry-projects-service-hooks.retrieveprojectservicehook
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sentry-update-service-hook
+      description: Sentry Update a service hook
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: sentry-projects-service-hooks.updateprojectservicehook
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sentry-remove-service-hook
+      description: Sentry Remove a service hook
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: sentry-projects-service-hooks.deleteprojectservicehook
+      outputParameters:
+      - type: object
+        mapping: $.

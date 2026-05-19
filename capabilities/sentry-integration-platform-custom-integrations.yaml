@@ -1,0 +1,162 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Sentry Integration Platform API — Custom Integrations
+  description: 'Sentry Integration Platform API — Custom Integrations. 4 operations. Lead operation: Sentry Retrieve the custom
+    integrations created by an organization. Self-contained Naftiko capability covering one Sentry System business surface.'
+  tags:
+  - Sentry System
+  - Custom Integrations
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SENTRY_SYSTEM_API_KEY: SENTRY_SYSTEM_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: sentry-integration-platform-custom-integrations
+    baseUri: https://sentry.io/api/0
+    description: Sentry Integration Platform API — Custom Integrations business capability. Self-contained, no shared references.
+    resources:
+    - name: organizations-organization_id_or_slug-sentry-apps
+      path: /organizations/{organization_id_or_slug}/sentry-apps/
+      operations:
+      - name: listorganizationcustomintegrations
+        method: GET
+        description: Sentry Retrieve the custom integrations created by an organization
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: sentry-apps-sentry_app_id_or_slug
+      path: /sentry-apps/{sentry_app_id_or_slug}/
+      operations:
+      - name: retrievecustomintegration
+        method: GET
+        description: Sentry Retrieve a custom integration by ID or slug
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updatecustomintegration
+        method: PUT
+        description: Sentry Update an existing custom integration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deletecustomintegration
+        method: DELETE
+        description: Sentry Delete a custom integration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.SENTRY_SYSTEM_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: sentry-integration-platform-custom-integrations-rest
+    port: 8080
+    description: REST adapter for Sentry Integration Platform API — Custom Integrations. One Spectral-compliant resource per
+      consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/organizations/{organization-id-or-slug}/sentry-apps
+      name: organizations-organization-id-or-slug-sentry-apps
+      description: REST surface for organizations-organization_id_or_slug-sentry-apps.
+      operations:
+      - method: GET
+        name: listorganizationcustomintegrations
+        description: Sentry Retrieve the custom integrations created by an organization
+        call: sentry-integration-platform-custom-integrations.listorganizationcustomintegrations
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/sentry-apps/{sentry-app-id-or-slug}
+      name: sentry-apps-sentry-app-id-or-slug
+      description: REST surface for sentry-apps-sentry_app_id_or_slug.
+      operations:
+      - method: GET
+        name: retrievecustomintegration
+        description: Sentry Retrieve a custom integration by ID or slug
+        call: sentry-integration-platform-custom-integrations.retrievecustomintegration
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updatecustomintegration
+        description: Sentry Update an existing custom integration
+        call: sentry-integration-platform-custom-integrations.updatecustomintegration
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletecustomintegration
+        description: Sentry Delete a custom integration
+        call: sentry-integration-platform-custom-integrations.deletecustomintegration
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: sentry-integration-platform-custom-integrations-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Sentry Integration Platform API — Custom Integrations. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: sentry-retrieve-custom-integrations-created
+      description: Sentry Retrieve the custom integrations created by an organization
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sentry-integration-platform-custom-integrations.listorganizationcustomintegrations
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sentry-retrieve-custom-integration-id
+      description: Sentry Retrieve a custom integration by ID or slug
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sentry-integration-platform-custom-integrations.retrievecustomintegration
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sentry-update-existing-custom-integration
+      description: Sentry Update an existing custom integration
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: sentry-integration-platform-custom-integrations.updatecustomintegration
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sentry-delete-custom-integration
+      description: Sentry Delete a custom integration
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: sentry-integration-platform-custom-integrations.deletecustomintegration
+      outputParameters:
+      - type: object
+        mapping: $.

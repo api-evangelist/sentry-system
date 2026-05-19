@@ -1,0 +1,98 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Sentry Releases API — Sessions
+  description: 'Sentry Releases API — Sessions. 1 operations. Lead operation: Sentry Retrieve release health session statistics.
+    Self-contained Naftiko capability covering one Sentry System business surface.'
+  tags:
+  - Sentry System
+  - Sessions
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SENTRY_SYSTEM_API_KEY: SENTRY_SYSTEM_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: sentry-releases-sessions
+    baseUri: https://sentry.io/api/0
+    description: Sentry Releases API — Sessions business capability. Self-contained, no shared references.
+    resources:
+    - name: organizations-organization_id_or_slug-sessions
+      path: /organizations/{organization_id_or_slug}/sessions/
+      operations:
+      - name: retrievereleasehealthsessions
+        method: GET
+        description: Sentry Retrieve release health session statistics
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: field
+          in: query
+          type: string
+          description: The session field to query (e.g., sum(session), count_unique(user)).
+          required: true
+        - name: statsPeriod
+          in: query
+          type: string
+          description: Stats period (e.g., 24h, 14d).
+        - name: project
+          in: query
+          type: array
+          description: Project IDs to filter by.
+        - name: environment
+          in: query
+          type: string
+          description: Environment name to filter by.
+    authentication:
+      type: bearer
+      token: '{{env.SENTRY_SYSTEM_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: sentry-releases-sessions-rest
+    port: 8080
+    description: REST adapter for Sentry Releases API — Sessions. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/organizations/{organization-id-or-slug}/sessions
+      name: organizations-organization-id-or-slug-sessions
+      description: REST surface for organizations-organization_id_or_slug-sessions.
+      operations:
+      - method: GET
+        name: retrievereleasehealthsessions
+        description: Sentry Retrieve release health session statistics
+        call: sentry-releases-sessions.retrievereleasehealthsessions
+        with:
+          field: rest.field
+          statsPeriod: rest.statsPeriod
+          project: rest.project
+          environment: rest.environment
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: sentry-releases-sessions-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Sentry Releases API — Sessions. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: sentry-retrieve-release-health-session
+      description: Sentry Retrieve release health session statistics
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sentry-releases-sessions.retrievereleasehealthsessions
+      with:
+        field: tools.field
+        statsPeriod: tools.statsPeriod
+        project: tools.project
+        environment: tools.environment
+      outputParameters:
+      - type: object
+        mapping: $.

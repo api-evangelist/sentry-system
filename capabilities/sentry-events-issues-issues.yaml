@@ -1,0 +1,517 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Sentry Events and Issues API — Issues
+  description: 'Sentry Events and Issues API — Issues. 12 operations. Lead operation: Sentry Retrieve an issue. Self-contained
+    Naftiko capability covering one Sentry System business surface.'
+  tags:
+  - Sentry System
+  - Issues
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SENTRY_SYSTEM_API_KEY: SENTRY_SYSTEM_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: sentry-events-issues-issues
+    baseUri: https://sentry.io/api/0
+    description: Sentry Events and Issues API — Issues business capability. Self-contained, no shared references.
+    resources:
+    - name: issues-issue_id
+      path: /issues/{issue_id}/
+      operations:
+      - name: retrieveissue
+        method: GET
+        description: Sentry Retrieve an issue
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateissue
+        method: PUT
+        description: Sentry Update an issue
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: removeissue
+        method: DELETE
+        description: Sentry Remove an issue
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: issues-issue_id-hashes
+      path: /issues/{issue_id}/hashes/
+      operations:
+      - name: listissuehashes
+        method: GET
+        description: Sentry List an issue's hashes
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cursor
+          in: query
+          type: string
+          description: Pagination cursor.
+    - name: issues-issue_id-tags-key
+      path: /issues/{issue_id}/tags/{key}/
+      operations:
+      - name: retrieveissuetagdetails
+        method: GET
+        description: Sentry Retrieve tag details for an issue
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: key
+          in: path
+          type: string
+          description: The tag key to look up.
+          required: true
+    - name: issues-issue_id-tags-key-values
+      path: /issues/{issue_id}/tags/{key}/values/
+      operations:
+      - name: listissuetagvalues
+        method: GET
+        description: Sentry List a tag's values for an issue
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: key
+          in: path
+          type: string
+          description: The tag key to look up.
+          required: true
+    - name: organizations-organization_id_or_slug-issues
+      path: /organizations/{organization_id_or_slug}/issues/
+      operations:
+      - name: listorganizationissues
+        method: GET
+        description: Sentry List an organization's issues
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: query
+          in: query
+          type: string
+          description: An optional Sentry structured search query.
+        - name: cursor
+          in: query
+          type: string
+          description: A pointer to the last object fetched and its sort order for pagination.
+        - name: statsPeriod
+          in: query
+          type: string
+          description: An optional stat period (can be one of 24h, 14d, or empty string).
+        - name: shortIdLookup
+          in: query
+          type: boolean
+          description: If this is set to true then short IDs are looked up by this criteria.
+      - name: bulkmutateorganizationissues
+        method: PUT
+        description: Sentry Bulk mutate an organization's issues
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: query
+          type: array
+          description: A list of IDs of the issues to be mutated.
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: bulkremoveorganizationissues
+        method: DELETE
+        description: Sentry Bulk remove an organization's issues
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: query
+          type: array
+          description: A list of IDs of the issues to be removed.
+    - name: projects-organization_id_or_slug-project_id_or_slug-issues
+      path: /projects/{organization_id_or_slug}/{project_id_or_slug}/issues/
+      operations:
+      - name: listprojectissues
+        method: GET
+        description: Sentry List a project's issues
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: query
+          in: query
+          type: string
+          description: An optional Sentry structured search query.
+        - name: cursor
+          in: query
+          type: string
+          description: Pagination cursor.
+        - name: statsPeriod
+          in: query
+          type: string
+          description: An optional stat period.
+      - name: bulkmutateprojectissues
+        method: PUT
+        description: Sentry Bulk mutate a list of issues
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: query
+          type: array
+          description: A list of IDs of the issues to be mutated.
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: bulkremoveprojectissues
+        method: DELETE
+        description: Sentry Bulk remove a list of issues
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: query
+          type: array
+          description: A list of IDs of the issues to be removed.
+    authentication:
+      type: bearer
+      token: '{{env.SENTRY_SYSTEM_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: sentry-events-issues-issues-rest
+    port: 8080
+    description: REST adapter for Sentry Events and Issues API — Issues. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/issues/{issue-id}
+      name: issues-issue-id
+      description: REST surface for issues-issue_id.
+      operations:
+      - method: GET
+        name: retrieveissue
+        description: Sentry Retrieve an issue
+        call: sentry-events-issues-issues.retrieveissue
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updateissue
+        description: Sentry Update an issue
+        call: sentry-events-issues-issues.updateissue
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: removeissue
+        description: Sentry Remove an issue
+        call: sentry-events-issues-issues.removeissue
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/issues/{issue-id}/hashes
+      name: issues-issue-id-hashes
+      description: REST surface for issues-issue_id-hashes.
+      operations:
+      - method: GET
+        name: listissuehashes
+        description: Sentry List an issue's hashes
+        call: sentry-events-issues-issues.listissuehashes
+        with:
+          cursor: rest.cursor
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/issues/{issue-id}/tags/{key}
+      name: issues-issue-id-tags-key
+      description: REST surface for issues-issue_id-tags-key.
+      operations:
+      - method: GET
+        name: retrieveissuetagdetails
+        description: Sentry Retrieve tag details for an issue
+        call: sentry-events-issues-issues.retrieveissuetagdetails
+        with:
+          key: rest.key
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/issues/{issue-id}/tags/{key}/values
+      name: issues-issue-id-tags-key-values
+      description: REST surface for issues-issue_id-tags-key-values.
+      operations:
+      - method: GET
+        name: listissuetagvalues
+        description: Sentry List a tag's values for an issue
+        call: sentry-events-issues-issues.listissuetagvalues
+        with:
+          key: rest.key
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organization-id-or-slug}/issues
+      name: organizations-organization-id-or-slug-issues
+      description: REST surface for organizations-organization_id_or_slug-issues.
+      operations:
+      - method: GET
+        name: listorganizationissues
+        description: Sentry List an organization's issues
+        call: sentry-events-issues-issues.listorganizationissues
+        with:
+          query: rest.query
+          cursor: rest.cursor
+          statsPeriod: rest.statsPeriod
+          shortIdLookup: rest.shortIdLookup
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: bulkmutateorganizationissues
+        description: Sentry Bulk mutate an organization's issues
+        call: sentry-events-issues-issues.bulkmutateorganizationissues
+        with:
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: bulkremoveorganizationissues
+        description: Sentry Bulk remove an organization's issues
+        call: sentry-events-issues-issues.bulkremoveorganizationissues
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/projects/{organization-id-or-slug}/{project-id-or-slug}/issues
+      name: projects-organization-id-or-slug-project-id-or-slug-issues
+      description: REST surface for projects-organization_id_or_slug-project_id_or_slug-issues.
+      operations:
+      - method: GET
+        name: listprojectissues
+        description: Sentry List a project's issues
+        call: sentry-events-issues-issues.listprojectissues
+        with:
+          query: rest.query
+          cursor: rest.cursor
+          statsPeriod: rest.statsPeriod
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: bulkmutateprojectissues
+        description: Sentry Bulk mutate a list of issues
+        call: sentry-events-issues-issues.bulkmutateprojectissues
+        with:
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: bulkremoveprojectissues
+        description: Sentry Bulk remove a list of issues
+        call: sentry-events-issues-issues.bulkremoveprojectissues
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: sentry-events-issues-issues-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Sentry Events and Issues API — Issues. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: sentry-retrieve-issue
+      description: Sentry Retrieve an issue
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sentry-events-issues-issues.retrieveissue
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sentry-update-issue
+      description: Sentry Update an issue
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: sentry-events-issues-issues.updateissue
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sentry-remove-issue
+      description: Sentry Remove an issue
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: sentry-events-issues-issues.removeissue
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sentry-list-issue-s-hashes
+      description: Sentry List an issue's hashes
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sentry-events-issues-issues.listissuehashes
+      with:
+        cursor: tools.cursor
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sentry-retrieve-tag-details-issue
+      description: Sentry Retrieve tag details for an issue
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sentry-events-issues-issues.retrieveissuetagdetails
+      with:
+        key: tools.key
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sentry-list-tag-s-values-issue
+      description: Sentry List a tag's values for an issue
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sentry-events-issues-issues.listissuetagvalues
+      with:
+        key: tools.key
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sentry-list-organization-s-issues
+      description: Sentry List an organization's issues
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sentry-events-issues-issues.listorganizationissues
+      with:
+        query: tools.query
+        cursor: tools.cursor
+        statsPeriod: tools.statsPeriod
+        shortIdLookup: tools.shortIdLookup
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sentry-bulk-mutate-organization-s-issues
+      description: Sentry Bulk mutate an organization's issues
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: sentry-events-issues-issues.bulkmutateorganizationissues
+      with:
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sentry-bulk-remove-organization-s-issues
+      description: Sentry Bulk remove an organization's issues
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: sentry-events-issues-issues.bulkremoveorganizationissues
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sentry-list-project-s-issues
+      description: Sentry List a project's issues
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sentry-events-issues-issues.listprojectissues
+      with:
+        query: tools.query
+        cursor: tools.cursor
+        statsPeriod: tools.statsPeriod
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sentry-bulk-mutate-list-issues
+      description: Sentry Bulk mutate a list of issues
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: sentry-events-issues-issues.bulkmutateprojectissues
+      with:
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sentry-bulk-remove-list-issues
+      description: Sentry Bulk remove a list of issues
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: sentry-events-issues-issues.bulkremoveprojectissues
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
