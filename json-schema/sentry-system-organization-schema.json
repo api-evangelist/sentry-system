@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Organization",
+  "title": "Organization",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique identifier of the organization."
+    },
+    "slug": {
+      "type": "string",
+      "description": "The URL-friendly slug of the organization."
+    },
+    "name": {
+      "type": "string",
+      "description": "The human-readable name of the organization."
+    },
+    "dateCreated": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the organization was created."
+    },
+    "status": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "isEarlyAdopter": {
+      "type": "boolean",
+      "description": "Whether the organization is an early adopter."
+    },
+    "avatar": {
+      "type": "object",
+      "properties": {
+        "avatarType": {
+          "type": "string"
+        },
+        "avatarUuid": {
+          "type": "string",
+          "nullable": true
+        }
+      }
+    }
+  },
+  "required": [
+    "id",
+    "slug",
+    "name"
+  ]
+}

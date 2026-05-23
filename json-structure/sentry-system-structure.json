@@ -1,0 +1,258 @@
+{
+  "provider": "Sentry",
+  "providerId": "sentry-system",
+  "kind": "json-structure",
+  "description": "Structural overview of the Sentry API surface; extracted from openapi/.",
+  "schemaCount": 5,
+  "operationCount": 22,
+  "schemas": [
+    {
+      "name": "ProjectDetail",
+      "type": "object",
+      "propertyCount": 14,
+      "required": [
+        "id",
+        "slug",
+        "name"
+      ]
+    },
+    {
+      "name": "ClientKey",
+      "type": "object",
+      "propertyCount": 9,
+      "required": [
+        "id",
+        "name",
+        "public"
+      ]
+    },
+    {
+      "name": "ServiceHook",
+      "type": "object",
+      "propertyCount": 6,
+      "required": [
+        "id",
+        "url",
+        "events"
+      ]
+    },
+    {
+      "name": "DebugFile",
+      "type": "object",
+      "propertyCount": 8,
+      "required": [
+        "id"
+      ]
+    },
+    {
+      "name": "UserFeedback",
+      "type": "object",
+      "propertyCount": 6,
+      "required": [
+        "id",
+        "eventID",
+        "comments"
+      ]
+    }
+  ],
+  "operations": [
+    {
+      "method": "POST",
+      "path": "/teams/{organization_id_or_slug}/{team_id_or_slug}/projects/",
+      "operationId": "createProject",
+      "summary": "Sentry Create a new project",
+      "tags": [
+        "Projects"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/projects/{organization_id_or_slug}/{project_id_or_slug}/",
+      "operationId": "retrieveProject",
+      "summary": "Sentry Retrieve a project",
+      "tags": [
+        "Projects"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/projects/{organization_id_or_slug}/{project_id_or_slug}/",
+      "operationId": "updateProject",
+      "summary": "Sentry Update a project",
+      "tags": [
+        "Projects"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/projects/{organization_id_or_slug}/{project_id_or_slug}/",
+      "operationId": "deleteProject",
+      "summary": "Sentry Delete a project",
+      "tags": [
+        "Projects"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/projects/{organization_id_or_slug}/{project_id_or_slug}/keys/",
+      "operationId": "listProjectClientKeys",
+      "summary": "Sentry List a project's client keys",
+      "tags": [
+        "Client Keys"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/projects/{organization_id_or_slug}/{project_id_or_slug}/keys/",
+      "operationId": "createProjectClientKey",
+      "summary": "Sentry Create a new client key",
+      "tags": [
+        "Client Keys"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/projects/{organization_id_or_slug}/{project_id_or_slug}/keys/{key_id}/",
+      "operationId": "retrieveProjectClientKey",
+      "summary": "Sentry Retrieve a client key",
+      "tags": [
+        "Client Keys"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/projects/{organization_id_or_slug}/{project_id_or_slug}/keys/{key_id}/",
+      "operationId": "updateProjectClientKey",
+      "summary": "Sentry Update a client key",
+      "tags": [
+        "Client Keys"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/projects/{organization_id_or_slug}/{project_id_or_slug}/keys/{key_id}/",
+      "operationId": "deleteProjectClientKey",
+      "summary": "Sentry Delete a client key",
+      "tags": [
+        "Client Keys"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/projects/{organization_id_or_slug}/{project_id_or_slug}/hooks/",
+      "operationId": "listProjectServiceHooks",
+      "summary": "Sentry List a project's service hooks",
+      "tags": [
+        "Service Hooks"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/projects/{organization_id_or_slug}/{project_id_or_slug}/hooks/",
+      "operationId": "createProjectServiceHook",
+      "summary": "Sentry Register a new service hook",
+      "tags": [
+        "Service Hooks"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/projects/{organization_id_or_slug}/{project_id_or_slug}/hooks/{hook_id}/",
+      "operationId": "retrieveProjectServiceHook",
+      "summary": "Sentry Retrieve a service hook",
+      "tags": [
+        "Service Hooks"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/projects/{organization_id_or_slug}/{project_id_or_slug}/hooks/{hook_id}/",
+      "operationId": "updateProjectServiceHook",
+      "summary": "Sentry Update a service hook",
+      "tags": [
+        "Service Hooks"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/projects/{organization_id_or_slug}/{project_id_or_slug}/hooks/{hook_id}/",
+      "operationId": "deleteProjectServiceHook",
+      "summary": "Sentry Remove a service hook",
+      "tags": [
+        "Service Hooks"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/projects/{organization_id_or_slug}/{project_id_or_slug}/files/dsyms/",
+      "operationId": "listProjectDebugFiles",
+      "summary": "Sentry List a project's debug information files",
+      "tags": [
+        "Debug Files"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/projects/{organization_id_or_slug}/{project_id_or_slug}/filters/",
+      "operationId": "listProjectFilters",
+      "summary": "Sentry List a project's data filters",
+      "tags": [
+        "Filters"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/projects/{organization_id_or_slug}/{project_id_or_slug}/filters/{filter_id}/",
+      "operationId": "updateProjectFilter",
+      "summary": "Sentry Update an inbound data filter",
+      "tags": [
+        "Filters"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/projects/{organization_id_or_slug}/{project_id_or_slug}/user-feedback/",
+      "operationId": "listProjectUserFeedback",
+      "summary": "Sentry List a project's user feedback",
+      "tags": [
+        "User Feedback"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/projects/{organization_id_or_slug}/{project_id_or_slug}/user-feedback/",
+      "operationId": "submitProjectUserFeedback",
+      "summary": "Sentry Submit user feedback",
+      "tags": [
+        "User Feedback"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/projects/{organization_id_or_slug}/{project_id_or_slug}/users/",
+      "operationId": "listProjectUsers",
+      "summary": "Sentry List a project's users",
+      "tags": [
+        "Projects"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/projects/{organization_id_or_slug}/{project_id_or_slug}/teams/{team_id_or_slug}/",
+      "operationId": "addTeamToProject",
+      "summary": "Sentry Add a team to a project",
+      "tags": [
+        "Projects"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/projects/{organization_id_or_slug}/{project_id_or_slug}/teams/{team_id_or_slug}/",
+      "operationId": "removeTeamFromProject",
+      "summary": "Sentry Delete a team from a project",
+      "tags": [
+        "Projects"
+      ]
+    }
+  ]
+}

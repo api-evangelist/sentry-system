@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CheckIn",
+  "title": "CheckIn",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "ok",
+        "error",
+        "in_progress",
+        "missed",
+        "timeout"
+      ]
+    },
+    "duration": {
+      "type": "integer",
+      "nullable": true,
+      "description": "Duration in milliseconds."
+    },
+    "dateCreated": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "environment": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "id",
+    "status",
+    "dateCreated"
+  ]
+}

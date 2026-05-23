@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Event",
+  "title": "Event",
+  "type": "object",
+  "properties": {
+    "eventID": {
+      "type": "string",
+      "description": "The unique identifier of the event."
+    },
+    "context": {
+      "type": "object",
+      "description": "Additional context data attached to the event."
+    },
+    "dateCreated": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "dateReceived": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "message": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "platform": {
+      "type": "string"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "type": {
+      "type": "string"
+    },
+    "groupID": {
+      "type": "string",
+      "description": "The issue ID this event belongs to."
+    }
+  },
+  "required": [
+    "eventID",
+    "dateCreated"
+  ]
+}

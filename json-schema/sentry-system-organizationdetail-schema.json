@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/OrganizationDetail",
+  "title": "OrganizationDetail",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "dateCreated": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "status": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "isEarlyAdopter": {
+      "type": "boolean"
+    },
+    "avatar": {
+      "type": "object",
+      "properties": {
+        "avatarType": {
+          "type": "string"
+        },
+        "avatarUuid": {
+          "type": "string",
+          "nullable": true
+        }
+      }
+    },
+    "features": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "quota": {
+      "type": "object",
+      "properties": {
+        "maxRate": {
+          "type": "integer",
+          "nullable": true
+        },
+        "maxRateInterval": {
+          "type": "integer"
+        },
+        "accountLimit": {
+          "type": "integer"
+        },
+        "projectLimit": {
+          "type": "integer"
+        }
+      }
+    }
+  },
+  "required": [
+    "id",
+    "slug",
+    "name"
+  ]
+}

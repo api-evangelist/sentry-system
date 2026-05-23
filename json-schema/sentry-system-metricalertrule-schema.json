@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/MetricAlertRule",
+  "title": "MetricAlertRule",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "aggregate": {
+      "type": "string"
+    },
+    "dataset": {
+      "type": "string"
+    },
+    "query": {
+      "type": "string"
+    },
+    "timeWindow": {
+      "type": "integer"
+    },
+    "environment": {
+      "type": "string",
+      "nullable": true
+    },
+    "projects": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "triggers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "alertThreshold": {
+            "type": "number"
+          },
+          "resolveThreshold": {
+            "type": "number",
+            "nullable": true
+          },
+          "thresholdType": {
+            "type": "integer"
+          },
+          "actions": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "owner": {
+      "type": "string",
+      "nullable": true
+    },
+    "dateCreated": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "dateModified": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "aggregate"
+  ]
+}

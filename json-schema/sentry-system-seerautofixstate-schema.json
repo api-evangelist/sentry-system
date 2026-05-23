@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/SeerAutofixState",
+  "title": "SeerAutofixState",
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "processing",
+        "completed",
+        "error"
+      ]
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "completedAt": {
+      "type": "string",
+      "format": "date-time",
+      "nullable": true
+    },
+    "steps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "completedMessage": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      }
+    },
+    "fix": {
+      "type": "object",
+      "nullable": true,
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "pr_url": {
+          "type": "string",
+          "format": "uri",
+          "nullable": true
+        }
+      }
+    }
+  },
+  "required": [
+    "status",
+    "createdAt"
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Issue",
+  "title": "Issue",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique identifier of the issue."
+    },
+    "shortId": {
+      "type": "string",
+      "description": "The short ID for the issue (e.g., PROJECT-123)."
+    },
+    "title": {
+      "type": "string",
+      "description": "The title of the issue."
+    },
+    "culprit": {
+      "type": "string",
+      "description": "The function or module where the issue originated."
+    },
+    "permalink": {
+      "type": "string",
+      "format": "uri"
+    },
+    "level": {
+      "type": "string",
+      "enum": [
+        "fatal",
+        "error",
+        "warning",
+        "info",
+        "debug"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "resolved",
+        "unresolved",
+        "ignored"
+      ]
+    },
+    "platform": {
+      "type": "string"
+    },
+    "firstSeen": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "lastSeen": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "count": {
+      "type": "string",
+      "description": "The total number of events for this issue."
+    },
+    "userCount": {
+      "type": "integer",
+      "description": "The number of unique users affected."
+    },
+    "project": {
+      "$ref": "#/components/schemas/Project"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "error",
+        "default"
+      ]
+    },
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "required": [
+    "id",
+    "title",
+    "status"
+  ]
+}

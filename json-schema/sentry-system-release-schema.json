@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Release",
+  "title": "Release",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "The internal unique identifier."
+    },
+    "version": {
+      "type": "string",
+      "description": "The version identifier of the release."
+    },
+    "shortVersion": {
+      "type": "string",
+      "description": "Shortened version for display."
+    },
+    "dateCreated": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "dateReleased": {
+      "type": "string",
+      "format": "date-time",
+      "nullable": true
+    },
+    "firstEvent": {
+      "type": "string",
+      "format": "date-time",
+      "nullable": true
+    },
+    "lastEvent": {
+      "type": "string",
+      "format": "date-time",
+      "nullable": true
+    },
+    "newGroups": {
+      "type": "integer"
+    },
+    "projects": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "slug": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "version",
+    "dateCreated"
+  ]
+}

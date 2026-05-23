@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/SentryApp",
+  "title": "SentryApp",
+  "type": "object",
+  "properties": {
+    "uuid": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "slug": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "scopes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "status": {
+      "type": "string"
+    },
+    "webhookUrl": {
+      "type": "string",
+      "format": "uri"
+    },
+    "redirectUrl": {
+      "type": "string",
+      "format": "uri",
+      "nullable": true
+    },
+    "overview": {
+      "type": "string",
+      "nullable": true
+    },
+    "schema": {
+      "type": "object"
+    },
+    "datePublished": {
+      "type": "string",
+      "format": "date-time",
+      "nullable": true
+    },
+    "owner": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "slug": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "required": [
+    "uuid",
+    "slug",
+    "name"
+  ]
+}

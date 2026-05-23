@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Team",
+  "title": "Team",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique identifier of the team."
+    },
+    "slug": {
+      "type": "string",
+      "description": "The URL-friendly slug of the team."
+    },
+    "name": {
+      "type": "string",
+      "description": "The human-readable name of the team."
+    },
+    "dateCreated": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "isMember": {
+      "type": "boolean"
+    },
+    "memberCount": {
+      "type": "integer"
+    },
+    "avatar": {
+      "type": "object",
+      "properties": {
+        "avatarType": {
+          "type": "string"
+        },
+        "avatarUuid": {
+          "type": "string",
+          "nullable": true
+        }
+      }
+    }
+  },
+  "required": [
+    "id",
+    "slug",
+    "name"
+  ]
+}

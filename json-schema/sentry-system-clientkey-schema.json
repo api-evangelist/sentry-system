@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ClientKey",
+  "title": "ClientKey",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "label": {
+      "type": "string"
+    },
+    "public": {
+      "type": "string",
+      "description": "The public key portion of the DSN."
+    },
+    "secret": {
+      "type": "string",
+      "description": "The secret key portion of the DSN."
+    },
+    "projectId": {
+      "type": "integer"
+    },
+    "isActive": {
+      "type": "boolean"
+    },
+    "dateCreated": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "dsn": {
+      "type": "object",
+      "properties": {
+        "secret": {
+          "type": "string"
+        },
+        "public": {
+          "type": "string"
+        },
+        "csp": {
+          "type": "string"
+        },
+        "security": {
+          "type": "string"
+        },
+        "minidump": {
+          "type": "string"
+        },
+        "unreal": {
+          "type": "string"
+        },
+        "cdn": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "public"
+  ]
+}
