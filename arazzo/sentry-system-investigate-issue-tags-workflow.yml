@@ -1,0 +1,123 @@
+arazzo: 1.0.1
+info:
+  title: Sentry Investigate an Issue's Tags
+  summary: Find an issue, inspect a tag's distribution and values, then bookmark and assign it for follow-up.
+  description: >-
+    A debugging flow that uses tag breakdowns to scope an error. The workflow
+    finds an unresolved issue in an organization, retrieves the details for a
+    chosen tag key (such as browser or release) to see its value distribution,
+    lists the unique values of that tag, and then bookmarks and assigns the
+    issue so the right owner can follow up. Every step spells out its request
+    inline so the flow can be read and executed without opening the underlying
+    OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: eventsIssuesApi
+  url: ../openapi/sentry-events-issues-openapi.yml
+  type: openapi
+workflows:
+- workflowId: investigate-issue-tags
+  summary: Inspect an issue's tag distribution, then bookmark and assign it.
+  description: >-
+    Locates an issue by search query, retrieves the distribution for a chosen
+    tag key, lists that tag's unique values, and finally bookmarks and assigns
+    the issue for follow-up.
+  inputs:
+    type: object
+    required:
+    - organizationIdOrSlug
+    - tagKey
+    properties:
+      organizationIdOrSlug:
+        type: string
+        description: The ID or slug of the organization that owns the issues.
+      query:
+        type: string
+        description: A Sentry structured search query used to find the issue.
+      tagKey:
+        type: string
+        description: The tag key to inspect (e.g. browser, release, environment).
+      assignedTo:
+        type: string
+        description: The username or team to assign the issue to for follow-up.
+  steps:
+  - stepId: findIssue
+    description: >-
+      List the organization's issues filtered by the supplied search query and
+      capture the first matching issue id.
+    operationId: listOrganizationIssues
+    parameters:
+    - name: organization_id_or_slug
+      in: path
+      value: $inputs.organizationIdOrSlug
+    - name: query
+      in: query
+      value: $inputs.query
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      issueId: $response.body#/0/id
+    onSuccess:
+    - name: issueFound
+      type: goto
+      stepId: getTagDetails
+      criteria:
+      - context: $response.body
+        condition: $.length > 0
+        type: jsonpath
+  - stepId: getTagDetails
+    description: >-
+      Retrieve the distribution details for the chosen tag key on the matched
+      issue, including its top values and total counts.
+    operationId: retrieveIssueTagDetails
+    parameters:
+    - name: issue_id
+      in: path
+      value: $steps.findIssue.outputs.issueId
+    - name: key
+      in: path
+      value: $inputs.tagKey
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      uniqueValues: $response.body#/uniqueValues
+      topValue: $response.body#/topValues/0/value
+  - stepId: listTagValues
+    description: >-
+      List the unique values of the chosen tag key on the issue to see the full
+      breakdown.
+    operationId: listIssueTagValues
+    parameters:
+    - name: issue_id
+      in: path
+      value: $steps.findIssue.outputs.issueId
+    - name: key
+      in: path
+      value: $inputs.tagKey
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      firstValue: $response.body#/0/value
+  - stepId: assignIssue
+    description: >-
+      Bookmark the issue and assign it to the supplied owner so the right person
+      follows up on the investigation.
+    operationId: updateIssue
+    parameters:
+    - name: issue_id
+      in: path
+      value: $steps.findIssue.outputs.issueId
+    requestBody:
+      contentType: application/json
+      payload:
+        isBookmarked: true
+        assignedTo: $inputs.assignedTo
+        hasSeen: true
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      assignedIssueId: $response.body#/id
+  outputs:
+    issueId: $steps.findIssue.outputs.issueId
+    uniqueValues: $steps.getTagDetails.outputs.uniqueValues
+    assignedIssueId: $steps.assignIssue.outputs.assignedIssueId

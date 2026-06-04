@@ -1,0 +1,118 @@
+arazzo: 1.0.1
+info:
+  title: Sentry Invite a Member and Onboard to a Team
+  summary: Invite a new member to an organization, confirm the invite, add them to a team, and verify the roster.
+  description: >-
+    The people-onboarding flow spanning organization membership and team
+    assignment. The workflow invites a member to the organization by email,
+    retrieves the created member to confirm the invite, adds that member to a
+    target team, and lists the team members to verify the onboarding. Every step
+    spells out its request inline so the flow can be read and executed without
+    opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: organizationsApi
+  url: ../openapi/sentry-organizations-openapi.yml
+  type: openapi
+- name: teamsApi
+  url: ../openapi/sentry-teams-openapi.yml
+  type: openapi
+workflows:
+- workflowId: invite-member-onboard-team
+  summary: Invite an organization member and add them to a team.
+  description: >-
+    Invites a member to the organization by email, confirms the new member,
+    adds them to the supplied team, and lists the team members to verify the
+    addition.
+  inputs:
+    type: object
+    required:
+    - organizationIdOrSlug
+    - email
+    - role
+    - teamIdOrSlug
+    properties:
+      organizationIdOrSlug:
+        type: string
+        description: The ID or slug of the organization.
+      email:
+        type: string
+        description: The email address of the person to invite.
+      role:
+        type: string
+        description: The organization role for the member (e.g. member, admin, manager).
+      teamIdOrSlug:
+        type: string
+        description: The ID or slug of the team to onboard the member onto.
+  steps:
+  - stepId: inviteMember
+    description: >-
+      Invite a member to the organization by email with the supplied role.
+    operationId: addOrganizationMember
+    parameters:
+    - name: organization_id_or_slug
+      in: path
+      value: $inputs.organizationIdOrSlug
+    requestBody:
+      contentType: application/json
+      payload:
+        email: $inputs.email
+        role: $inputs.role
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      memberId: $response.body#/id
+  - stepId: confirmMember
+    description: >-
+      Retrieve the newly invited member to confirm the invitation before
+      onboarding them onto a team.
+    operationId: retrieveOrganizationMember
+    parameters:
+    - name: organization_id_or_slug
+      in: path
+      value: $inputs.organizationIdOrSlug
+    - name: member_id
+      in: path
+      value: $steps.inviteMember.outputs.memberId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      memberId: $response.body#/id
+      memberEmail: $response.body#/email
+  - stepId: addToTeam
+    description: >-
+      Add the confirmed member to the target team.
+    operationId: addMemberToTeam
+    parameters:
+    - name: organization_id_or_slug
+      in: path
+      value: $inputs.organizationIdOrSlug
+    - name: member_id
+      in: path
+      value: $steps.confirmMember.outputs.memberId
+    - name: team_id_or_slug
+      in: path
+      value: $inputs.teamIdOrSlug
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      addStatus: $statusCode
+  - stepId: verifyRoster
+    description: >-
+      List the team's members to verify the newly onboarded member appears on
+      the roster.
+    operationId: listTeamMembers
+    parameters:
+    - name: organization_id_or_slug
+      in: path
+      value: $inputs.organizationIdOrSlug
+    - name: team_id_or_slug
+      in: path
+      value: $inputs.teamIdOrSlug
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      firstMemberId: $response.body#/0/id
+  outputs:
+    memberId: $steps.confirmMember.outputs.memberId
+    memberEmail: $steps.confirmMember.outputs.memberEmail

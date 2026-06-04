@@ -1,0 +1,124 @@
+arazzo: 1.0.1
+info:
+  title: Sentry Provision a Project and Client Key
+  summary: Create a new project under a team, confirm it, and mint a client key (DSN) for the SDK.
+  description: >-
+    The standard bootstrap flow for onboarding a new application into Sentry.
+    The workflow creates a project bound to a team, retrieves the project to
+    confirm its slug, mints a client key (DSN) that the application SDK will use
+    to send events, and lists the project's keys to verify the new key is
+    present. Every step spells out its request inline so the flow can be read
+    and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: projectsApi
+  url: ../openapi/sentry-projects-openapi.yml
+  type: openapi
+workflows:
+- workflowId: provision-project-key
+  summary: Create a project under a team and provision a client key for it.
+  description: >-
+    Creates a new project for a team, confirms it via retrieval, creates a named
+    client key (DSN), and lists the project keys to verify the key exists.
+  inputs:
+    type: object
+    required:
+    - organizationIdOrSlug
+    - teamIdOrSlug
+    - projectName
+    - keyName
+    properties:
+      organizationIdOrSlug:
+        type: string
+        description: The ID or slug of the organization.
+      teamIdOrSlug:
+        type: string
+        description: The ID or slug of the team the project will belong to.
+      projectName:
+        type: string
+        description: The human-readable name of the new project.
+      platform:
+        type: string
+        description: The platform identifier for the project (e.g. python, javascript).
+      keyName:
+        type: string
+        description: The name for the client key (DSN) to create.
+  steps:
+  - stepId: createProject
+    description: >-
+      Create a new project bound to the supplied team using the project name and
+      optional platform.
+    operationId: createProject
+    parameters:
+    - name: organization_id_or_slug
+      in: path
+      value: $inputs.organizationIdOrSlug
+    - name: team_id_or_slug
+      in: path
+      value: $inputs.teamIdOrSlug
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.projectName
+        platform: $inputs.platform
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      projectSlug: $response.body#/slug
+      projectId: $response.body#/id
+  - stepId: confirmProject
+    description: >-
+      Retrieve the newly created project to confirm it exists and capture its
+      canonical slug for subsequent calls.
+    operationId: retrieveProject
+    parameters:
+    - name: organization_id_or_slug
+      in: path
+      value: $inputs.organizationIdOrSlug
+    - name: project_id_or_slug
+      in: path
+      value: $steps.createProject.outputs.projectSlug
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      projectSlug: $response.body#/slug
+  - stepId: createKey
+    description: >-
+      Create a named client key (DSN) for the project that the application SDK
+      will use to send events to Sentry.
+    operationId: createProjectClientKey
+    parameters:
+    - name: organization_id_or_slug
+      in: path
+      value: $inputs.organizationIdOrSlug
+    - name: project_id_or_slug
+      in: path
+      value: $steps.confirmProject.outputs.projectSlug
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.keyName
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      keyId: $response.body#/id
+      dsnPublic: $response.body#/dsn/public
+  - stepId: listKeys
+    description: >-
+      List the project's client keys to verify the newly created key is present.
+    operationId: listProjectClientKeys
+    parameters:
+    - name: organization_id_or_slug
+      in: path
+      value: $inputs.organizationIdOrSlug
+    - name: project_id_or_slug
+      in: path
+      value: $steps.confirmProject.outputs.projectSlug
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      firstKeyId: $response.body#/0/id
+  outputs:
+    projectSlug: $steps.confirmProject.outputs.projectSlug
+    keyId: $steps.createKey.outputs.keyId
+    dsnPublic: $steps.createKey.outputs.dsnPublic

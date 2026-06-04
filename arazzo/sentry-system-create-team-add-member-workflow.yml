@@ -1,0 +1,108 @@
+arazzo: 1.0.1
+info:
+  title: Sentry Create a Team and Add a Member
+  summary: Create a team, confirm it, add an existing organization member, and verify the team roster.
+  description: >-
+    The team-formation flow for organizing access in Sentry. The workflow
+    creates a new team in an organization, retrieves the team to confirm its
+    slug, adds an existing organization member to the team, and lists the team
+    members to verify the roster. Every step spells out its request inline so
+    the flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: teamsApi
+  url: ../openapi/sentry-teams-openapi.yml
+  type: openapi
+workflows:
+- workflowId: create-team-add-member
+  summary: Create a team and add an existing member to it.
+  description: >-
+    Creates a new team, confirms it via retrieval, adds an existing
+    organization member to the team, and lists the team's members to verify the
+    addition.
+  inputs:
+    type: object
+    required:
+    - organizationIdOrSlug
+    - teamName
+    - memberId
+    properties:
+      organizationIdOrSlug:
+        type: string
+        description: The ID or slug of the organization.
+      teamName:
+        type: string
+        description: The human-readable name of the new team.
+      memberId:
+        type: string
+        description: The ID of the existing organization member to add to the team.
+  steps:
+  - stepId: createTeam
+    description: >-
+      Create a new team bound to the organization using the supplied team name.
+    operationId: createTeam
+    parameters:
+    - name: organization_id_or_slug
+      in: path
+      value: $inputs.organizationIdOrSlug
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.teamName
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      teamSlug: $response.body#/slug
+  - stepId: confirmTeam
+    description: >-
+      Retrieve the newly created team to confirm its slug before adding members.
+    operationId: retrieveTeam
+    parameters:
+    - name: organization_id_or_slug
+      in: path
+      value: $inputs.organizationIdOrSlug
+    - name: team_id_or_slug
+      in: path
+      value: $steps.createTeam.outputs.teamSlug
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      teamSlug: $response.body#/slug
+  - stepId: addMember
+    description: >-
+      Add the supplied existing organization member to the confirmed team.
+    operationId: addMemberToTeam
+    parameters:
+    - name: organization_id_or_slug
+      in: path
+      value: $inputs.organizationIdOrSlug
+    - name: member_id
+      in: path
+      value: $inputs.memberId
+    - name: team_id_or_slug
+      in: path
+      value: $steps.confirmTeam.outputs.teamSlug
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      addStatus: $statusCode
+  - stepId: listMembers
+    description: >-
+      List the team's members to verify the newly added member appears on the
+      roster.
+    operationId: listTeamMembers
+    parameters:
+    - name: organization_id_or_slug
+      in: path
+      value: $inputs.organizationIdOrSlug
+    - name: team_id_or_slug
+      in: path
+      value: $steps.confirmTeam.outputs.teamSlug
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      firstMemberId: $response.body#/0/id
+  outputs:
+    teamSlug: $steps.confirmTeam.outputs.teamSlug
+    firstMemberId: $steps.listMembers.outputs.firstMemberId

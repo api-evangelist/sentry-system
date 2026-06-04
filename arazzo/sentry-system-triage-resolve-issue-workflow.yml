@@ -1,0 +1,114 @@
+arazzo: 1.0.1
+info:
+  title: Sentry Triage and Resolve an Issue
+  summary: Find a high-priority unresolved issue in an organization, inspect it, then assign and resolve it.
+  description: >-
+    A core Sentry incident-response flow. The workflow lists an organization's
+    unresolved issues filtered by a search query, picks the first matching
+    issue, pulls its full detail and most recent events for context, and then
+    mutates the issue to assign an owner and mark it resolved. Every step spells
+    out its request inline so the flow can be read and executed without opening
+    the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: eventsIssuesApi
+  url: ../openapi/sentry-events-issues-openapi.yml
+  type: openapi
+workflows:
+- workflowId: triage-resolve-issue
+  summary: Locate, inspect, and resolve an organization issue in one pass.
+  description: >-
+    Searches an organization's issues for an unresolved match, retrieves the
+    issue detail and its recent events for triage context, and finally updates
+    the issue to assign it and set its status to resolved.
+  inputs:
+    type: object
+    required:
+    - organizationIdOrSlug
+    properties:
+      organizationIdOrSlug:
+        type: string
+        description: The ID or slug of the organization that owns the issues.
+      query:
+        type: string
+        description: A Sentry structured search query used to find the issue (e.g. "is:unresolved").
+      assignedTo:
+        type: string
+        description: The username or team the issue should be assigned to during resolution.
+  steps:
+  - stepId: findIssue
+    description: >-
+      List the organization's issues filtered by the supplied search query and
+      capture the first matching issue id.
+    operationId: listOrganizationIssues
+    parameters:
+    - name: organization_id_or_slug
+      in: path
+      value: $inputs.organizationIdOrSlug
+    - name: query
+      in: query
+      value: $inputs.query
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      issueId: $response.body#/0/id
+    onSuccess:
+    - name: issueFound
+      type: goto
+      stepId: getIssue
+      criteria:
+      - context: $response.body
+        condition: $.length > 0
+        type: jsonpath
+  - stepId: getIssue
+    description: >-
+      Retrieve the full detail of the matched issue, including its
+      representative event, to confirm it before mutating.
+    operationId: retrieveIssue
+    parameters:
+    - name: issue_id
+      in: path
+      value: $steps.findIssue.outputs.issueId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      issueId: $response.body#/id
+      title: $response.body#/title
+      status: $response.body#/status
+  - stepId: listEvents
+    description: >-
+      Pull the recent events bound to the issue to give the responder context
+      on how often and where the error is occurring.
+    operationId: listIssueEvents
+    parameters:
+    - name: issue_id
+      in: path
+      value: $steps.getIssue.outputs.issueId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      latestEventId: $response.body#/0/eventID
+  - stepId: resolveIssue
+    description: >-
+      Assign the issue to the supplied owner and mark it resolved. Only the
+      submitted attributes are modified on the issue.
+    operationId: updateIssue
+    parameters:
+    - name: issue_id
+      in: path
+      value: $steps.getIssue.outputs.issueId
+    requestBody:
+      contentType: application/json
+      payload:
+        status: resolved
+        assignedTo: $inputs.assignedTo
+        hasSeen: true
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      resolvedIssueId: $response.body#/id
+      finalStatus: $response.body#/status
+  outputs:
+    issueId: $steps.getIssue.outputs.issueId
+    latestEventId: $steps.listEvents.outputs.latestEventId
+    finalStatus: $steps.resolveIssue.outputs.finalStatus

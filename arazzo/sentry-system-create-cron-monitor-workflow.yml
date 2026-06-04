@@ -1,0 +1,107 @@
+arazzo: 1.0.1
+info:
+  title: Sentry Create a Cron Monitor and Verify Check-ins
+  summary: Create a cron-job monitor for an organization, confirm it, and list its check-ins.
+  description: >-
+    The setup flow for Sentry Crons monitoring of scheduled jobs. The workflow
+    creates a cron-job monitor with a crontab schedule, retrieves the monitor to
+    confirm its slug and configuration, and lists the monitor's check-ins so the
+    operator can verify whether the job has reported in. Every step spells out
+    its request inline so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: cronsApi
+  url: ../openapi/sentry-crons-openapi.yml
+  type: openapi
+workflows:
+- workflowId: create-cron-monitor
+  summary: Create a cron monitor and verify it by listing its check-ins.
+  description: >-
+    Creates a cron-job monitor bound to a project with a crontab schedule,
+    confirms the monitor via retrieval, and lists its check-ins to verify
+    reporting.
+  inputs:
+    type: object
+    required:
+    - organizationIdOrSlug
+    - monitorName
+    - schedule
+    - project
+    properties:
+      organizationIdOrSlug:
+        type: string
+        description: The ID or slug of the organization.
+      monitorName:
+        type: string
+        description: The human-readable name of the monitor.
+      schedule:
+        type: string
+        description: A crontab expression for the monitor schedule (e.g. "0 * * * *").
+      project:
+        type: string
+        description: The project slug the monitor belongs to.
+      timezone:
+        type: string
+        description: The timezone for the monitor schedule (e.g. "UTC").
+  steps:
+  - stepId: createMonitor
+    description: >-
+      Create a new cron-job monitor with a crontab schedule bound to the
+      supplied project.
+    operationId: createMonitor
+    parameters:
+    - name: organization_id_or_slug
+      in: path
+      value: $inputs.organizationIdOrSlug
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.monitorName
+        type: cron_job
+        project: $inputs.project
+        config:
+          schedule_type: crontab
+          schedule: $inputs.schedule
+          timezone: $inputs.timezone
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      monitorSlug: $response.body#/slug
+  - stepId: confirmMonitor
+    description: >-
+      Retrieve the newly created monitor to confirm its configuration before
+      checking for reported check-ins.
+    operationId: retrieveMonitor
+    parameters:
+    - name: organization_id_or_slug
+      in: path
+      value: $inputs.organizationIdOrSlug
+    - name: monitor_id_or_slug
+      in: path
+      value: $steps.createMonitor.outputs.monitorSlug
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      monitorSlug: $response.body#/slug
+      monitorStatus: $response.body#/status
+  - stepId: listCheckIns
+    description: >-
+      List the monitor's check-ins so the operator can verify whether the
+      scheduled job has reported in yet.
+    operationId: listMonitorCheckIns
+    parameters:
+    - name: organization_id_or_slug
+      in: path
+      value: $inputs.organizationIdOrSlug
+    - name: monitor_id_or_slug
+      in: path
+      value: $steps.confirmMonitor.outputs.monitorSlug
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      latestCheckInId: $response.body#/0/id
+  outputs:
+    monitorSlug: $steps.confirmMonitor.outputs.monitorSlug
+    monitorStatus: $steps.confirmMonitor.outputs.monitorStatus
+    latestCheckInId: $steps.listCheckIns.outputs.latestCheckInId

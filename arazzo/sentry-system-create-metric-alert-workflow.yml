@@ -1,0 +1,109 @@
+arazzo: 1.0.1
+info:
+  title: Sentry Create a Metric Alert Rule
+  summary: Create a metric alert rule for an organization, retrieve it, and confirm it appears in the rule list.
+  description: >-
+    The alerting-setup flow for Sentry metric alerts. The workflow creates a
+    metric alert rule with an aggregate, time window, and trigger threshold for
+    one or more projects, retrieves the rule to confirm its configuration, and
+    lists the organization's metric alert rules to verify the new rule is
+    present. Every step spells out its request inline so the flow can be read and
+    executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: alertsApi
+  url: ../openapi/sentry-alerts-openapi.yml
+  type: openapi
+workflows:
+- workflowId: create-metric-alert
+  summary: Create a metric alert rule and verify it via retrieval and listing.
+  description: >-
+    Creates a metric alert rule with a single warning trigger, retrieves the
+    created rule to confirm it, and lists the organization's metric alert rules
+    to verify the rule was registered.
+  inputs:
+    type: object
+    required:
+    - organizationIdOrSlug
+    - ruleName
+    - aggregate
+    - timeWindow
+    - alertThreshold
+    - projects
+    properties:
+      organizationIdOrSlug:
+        type: string
+        description: The ID or slug of the organization.
+      ruleName:
+        type: string
+        description: The name of the metric alert rule.
+      aggregate:
+        type: string
+        description: The aggregation function to evaluate (e.g. "count()").
+      timeWindow:
+        type: integer
+        description: The time window in minutes over which the alert is evaluated.
+      alertThreshold:
+        type: number
+        description: The threshold value that triggers the alert.
+      projects:
+        type: array
+        items:
+          type: string
+        description: The project slugs the alert rule applies to.
+  steps:
+  - stepId: createRule
+    description: >-
+      Create a metric alert rule with a single trigger that fires when the
+      aggregate crosses the supplied threshold.
+    operationId: createMetricAlertRule
+    parameters:
+    - name: organization_id_or_slug
+      in: path
+      value: $inputs.organizationIdOrSlug
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.ruleName
+        aggregate: $inputs.aggregate
+        timeWindow: $inputs.timeWindow
+        projects: $inputs.projects
+        triggers:
+        - label: critical
+          alertThreshold: $inputs.alertThreshold
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      ruleId: $response.body#/id
+  - stepId: confirmRule
+    description: >-
+      Retrieve the created metric alert rule to confirm its configuration.
+    operationId: retrieveMetricAlertRule
+    parameters:
+    - name: organization_id_or_slug
+      in: path
+      value: $inputs.organizationIdOrSlug
+    - name: alert_rule_id
+      in: path
+      value: $steps.createRule.outputs.ruleId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      ruleId: $response.body#/id
+      ruleName: $response.body#/name
+  - stepId: listRules
+    description: >-
+      List the organization's metric alert rules to verify the new rule is
+      present.
+    operationId: listMetricAlertRules
+    parameters:
+    - name: organization_id_or_slug
+      in: path
+      value: $inputs.organizationIdOrSlug
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      firstRuleId: $response.body#/0/id
+  outputs:
+    ruleId: $steps.confirmRule.outputs.ruleId
+    ruleName: $steps.confirmRule.outputs.ruleName

@@ -1,0 +1,102 @@
+arazzo: 1.0.1
+info:
+  title: Sentry Run a Seer AI Autofix on an Issue
+  summary: List available Seer models, start an AI autofix for an issue, then poll until the fix completes.
+  description: >-
+    Drives Sentry's Seer AI-assisted debugging end to end. The workflow first
+    lists the available Seer models for the organization, kicks off an
+    asynchronous autofix analysis against a specific issue, and then polls the
+    autofix state until it reaches a terminal status, branching on completion
+    versus error. Every step spells out its request inline so the flow can be
+    read and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: seerApi
+  url: ../openapi/sentry-seer-openapi.yml
+  type: openapi
+workflows:
+- workflowId: seer-autofix-issue
+  summary: Start a Seer autofix for an issue and poll it to completion.
+  description: >-
+    Confirms Seer models are available, starts an autofix analysis for the
+    target issue, and polls the fix state until it is completed or errored,
+    surfacing the suggested fix and any pull request URL.
+  inputs:
+    type: object
+    required:
+    - organizationIdOrSlug
+    - issueId
+    properties:
+      organizationIdOrSlug:
+        type: string
+        description: The ID or slug of the organization that owns the issue.
+      issueId:
+        type: string
+        description: The ID of the issue to run the Seer autofix against.
+      instruction:
+        type: string
+        description: Optional natural-language instruction to guide the AI fix.
+  steps:
+  - stepId: listModels
+    description: >-
+      List the Seer AI models available to the organization to confirm
+      AI-assisted analysis is enabled before starting a fix.
+    operationId: listSeerModels
+    parameters:
+    - name: organization_id_or_slug
+      in: path
+      value: $inputs.organizationIdOrSlug
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      firstModelId: $response.body#/0/id
+  - stepId: startFix
+    description: >-
+      Start the asynchronous Seer autofix analysis for the issue, optionally
+      passing an instruction to steer the AI.
+    operationId: startSeerIssueFix
+    parameters:
+    - name: issue_id
+      in: path
+      value: $inputs.issueId
+    requestBody:
+      contentType: application/json
+      payload:
+        instruction: $inputs.instruction
+    successCriteria:
+    - condition: $statusCode == 202
+    outputs:
+      startedStatus: $response.body#/autofix/status
+  - stepId: pollFixState
+    description: >-
+      Poll the current state of the Seer autofix. The step succeeds once the
+      analysis has reached a terminal status of completed or error.
+    operationId: retrieveSeerIssueFixState
+    parameters:
+    - name: issue_id
+      in: path
+      value: $inputs.issueId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/autofix/status
+      fixTitle: $response.body#/autofix/fix/title
+      prUrl: $response.body#/autofix/fix/pr_url
+    onSuccess:
+    - name: fixCompleted
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.autofix.status == "completed"
+        type: jsonpath
+    - name: keepPolling
+      type: goto
+      stepId: pollFixState
+      criteria:
+      - context: $response.body
+        condition: $.autofix.status == "pending" || $.autofix.status == "processing"
+        type: jsonpath
+  outputs:
+    status: $steps.pollFixState.outputs.status
+    fixTitle: $steps.pollFixState.outputs.fixTitle
+    prUrl: $steps.pollFixState.outputs.prUrl

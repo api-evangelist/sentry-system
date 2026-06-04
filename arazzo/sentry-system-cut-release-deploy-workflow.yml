@@ -1,0 +1,121 @@
+arazzo: 1.0.1
+info:
+  title: Sentry Cut a Release and Record a Deploy
+  summary: Create an organization release, confirm it, record a deploy to an environment, and list its deploys.
+  description: >-
+    The release-management flow that ties a code version to a deployment. The
+    workflow creates a new release for one or more projects, retrieves it to
+    confirm the version was registered, records a deploy of that release to a
+    target environment, and lists the release's deploys to verify the deploy was
+    captured. Every step spells out its request inline so the flow can be read
+    and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: releasesApi
+  url: ../openapi/sentry-releases-openapi.yml
+  type: openapi
+workflows:
+- workflowId: cut-release-deploy
+  summary: Create a release and record a deploy of it to an environment.
+  description: >-
+    Creates an organization release tied to the supplied projects, confirms the
+    release, creates a deploy of it to the target environment, and lists deploys
+    to verify the record.
+  inputs:
+    type: object
+    required:
+    - organizationIdOrSlug
+    - version
+    - projects
+    - environment
+    properties:
+      organizationIdOrSlug:
+        type: string
+        description: The ID or slug of the organization.
+      version:
+        type: string
+        description: A unique version identifier for the release.
+      projects:
+        type: array
+        items:
+          type: string
+        description: A list of project slugs this release applies to.
+      environment:
+        type: string
+        description: The environment the deploy targets (e.g. production, staging).
+      url:
+        type: string
+        description: An optional URL associated with the deploy.
+  steps:
+  - stepId: createRelease
+    description: >-
+      Create a new release for the organization tied to the supplied projects
+      and version identifier.
+    operationId: createOrganizationRelease
+    parameters:
+    - name: organization_id_or_slug
+      in: path
+      value: $inputs.organizationIdOrSlug
+    requestBody:
+      contentType: application/json
+      payload:
+        version: $inputs.version
+        projects: $inputs.projects
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      version: $response.body#/version
+  - stepId: confirmRelease
+    description: >-
+      Retrieve the newly created release to confirm the version was registered
+      before recording a deploy.
+    operationId: retrieveOrganizationRelease
+    parameters:
+    - name: organization_id_or_slug
+      in: path
+      value: $inputs.organizationIdOrSlug
+    - name: version
+      in: path
+      value: $steps.createRelease.outputs.version
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      version: $response.body#/version
+  - stepId: createDeploy
+    description: >-
+      Record a deploy of the confirmed release to the target environment.
+    operationId: createReleaseDeploy
+    parameters:
+    - name: organization_id_or_slug
+      in: path
+      value: $inputs.organizationIdOrSlug
+    - name: version
+      in: path
+      value: $steps.confirmRelease.outputs.version
+    requestBody:
+      contentType: application/json
+      payload:
+        environment: $inputs.environment
+        url: $inputs.url
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      deployId: $response.body#/id
+  - stepId: listDeploys
+    description: >-
+      List the release's deploys to verify the new deploy was captured.
+    operationId: listReleaseDeploys
+    parameters:
+    - name: organization_id_or_slug
+      in: path
+      value: $inputs.organizationIdOrSlug
+    - name: version
+      in: path
+      value: $steps.confirmRelease.outputs.version
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      firstDeployId: $response.body#/0/id
+  outputs:
+    version: $steps.confirmRelease.outputs.version
+    deployId: $steps.createDeploy.outputs.deployId

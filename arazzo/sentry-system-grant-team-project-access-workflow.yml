@@ -1,0 +1,92 @@
+arazzo: 1.0.1
+info:
+  title: Sentry Grant a Team Access to a Project
+  summary: Confirm a project, grant a team access to it, and verify the team appears on the project.
+  description: >-
+    The access-management flow that connects a team to an existing project. The
+    workflow retrieves the project to confirm it exists, grants the target team
+    access to the project, and lists the project's teams to verify the grant
+    took effect. Every step spells out its request inline so the flow can be
+    read and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: projectsApi
+  url: ../openapi/sentry-projects-openapi.yml
+  type: openapi
+- name: teamsApi
+  url: ../openapi/sentry-teams-openapi.yml
+  type: openapi
+workflows:
+- workflowId: grant-team-project-access
+  summary: Grant a team access to a project and verify the grant.
+  description: >-
+    Confirms a project via retrieval, grants the supplied team access to it, and
+    lists the project's teams to verify the team now has access.
+  inputs:
+    type: object
+    required:
+    - organizationIdOrSlug
+    - projectIdOrSlug
+    - teamIdOrSlug
+    properties:
+      organizationIdOrSlug:
+        type: string
+        description: The ID or slug of the organization.
+      projectIdOrSlug:
+        type: string
+        description: The ID or slug of the project to grant access to.
+      teamIdOrSlug:
+        type: string
+        description: The ID or slug of the team that should be granted access.
+  steps:
+  - stepId: confirmProject
+    description: >-
+      Retrieve the project to confirm it exists before granting team access.
+    operationId: retrieveProject
+    parameters:
+    - name: organization_id_or_slug
+      in: path
+      value: $inputs.organizationIdOrSlug
+    - name: project_id_or_slug
+      in: path
+      value: $inputs.projectIdOrSlug
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      projectSlug: $response.body#/slug
+  - stepId: addTeam
+    description: >-
+      Grant the supplied team access to the confirmed project.
+    operationId: addTeamToProject
+    parameters:
+    - name: organization_id_or_slug
+      in: path
+      value: $inputs.organizationIdOrSlug
+    - name: project_id_or_slug
+      in: path
+      value: $steps.confirmProject.outputs.projectSlug
+    - name: team_id_or_slug
+      in: path
+      value: $inputs.teamIdOrSlug
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      grantStatus: $statusCode
+  - stepId: verifyTeams
+    description: >-
+      List the project's teams to verify the granted team now has access.
+    operationId: listProjectTeams
+    parameters:
+    - name: organization_id_or_slug
+      in: path
+      value: $inputs.organizationIdOrSlug
+    - name: project_id_or_slug
+      in: path
+      value: $steps.confirmProject.outputs.projectSlug
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      firstTeamId: $response.body#/0/id
+  outputs:
+    projectSlug: $steps.confirmProject.outputs.projectSlug
+    firstTeamId: $steps.verifyTeams.outputs.firstTeamId

@@ -1,0 +1,112 @@
+arazzo: 1.0.1
+info:
+  title: Sentry Capture User Feedback for an Event
+  summary: Find a recent project event, attach user feedback to it, and confirm the feedback was recorded.
+  description: >-
+    The flow that ties a crash to a real user report. The workflow lists a
+    project's recent error events, picks the most recent one, submits user
+    feedback referencing that event id, and lists the project's user feedback to
+    confirm the submission was recorded. Every step spells out its request
+    inline so the flow can be read and executed without opening the underlying
+    OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: projectsApi
+  url: ../openapi/sentry-projects-openapi.yml
+  type: openapi
+workflows:
+- workflowId: capture-user-feedback
+  summary: Attach user feedback to a recent project event and verify it.
+  description: >-
+    Lists a project's recent events, submits user feedback against the most
+    recent event, and lists the project's user feedback to confirm the new entry.
+  inputs:
+    type: object
+    required:
+    - organizationIdOrSlug
+    - projectIdOrSlug
+    - name
+    - email
+    - comments
+    properties:
+      organizationIdOrSlug:
+        type: string
+        description: The ID or slug of the organization.
+      projectIdOrSlug:
+        type: string
+        description: The ID or slug of the project.
+      name:
+        type: string
+        description: The name of the user submitting feedback.
+      email:
+        type: string
+        description: The email address of the user submitting feedback.
+      comments:
+        type: string
+        description: The feedback comments from the user.
+  steps:
+  - stepId: listEvents
+    description: >-
+      List the project's recent error events and capture the id of the most
+      recent event to attach feedback to.
+    operationId: listProjectEvents
+    parameters:
+    - name: organization_id_or_slug
+      in: path
+      value: $inputs.organizationIdOrSlug
+    - name: project_id_or_slug
+      in: path
+      value: $inputs.projectIdOrSlug
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      eventId: $response.body#/0/eventID
+    onSuccess:
+    - name: eventFound
+      type: goto
+      stepId: submitFeedback
+      criteria:
+      - context: $response.body
+        condition: $.length > 0
+        type: jsonpath
+  - stepId: submitFeedback
+    description: >-
+      Submit user feedback for the project referencing the most recent event id.
+    operationId: submitProjectUserFeedback
+    parameters:
+    - name: organization_id_or_slug
+      in: path
+      value: $inputs.organizationIdOrSlug
+    - name: project_id_or_slug
+      in: path
+      value: $inputs.projectIdOrSlug
+    requestBody:
+      contentType: application/json
+      payload:
+        event_id: $steps.listEvents.outputs.eventId
+        name: $inputs.name
+        email: $inputs.email
+        comments: $inputs.comments
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      feedbackEventId: $response.body#/eventID
+  - stepId: listFeedback
+    description: >-
+      List the project's user feedback to confirm the new feedback entry was
+      recorded.
+    operationId: listProjectUserFeedback
+    parameters:
+    - name: organization_id_or_slug
+      in: path
+      value: $inputs.organizationIdOrSlug
+    - name: project_id_or_slug
+      in: path
+      value: $inputs.projectIdOrSlug
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      firstFeedbackEventId: $response.body#/0/eventID
+  outputs:
+    eventId: $steps.listEvents.outputs.eventId
+    feedbackEventId: $steps.submitFeedback.outputs.feedbackEventId
