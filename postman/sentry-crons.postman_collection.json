@@ -1,0 +1,2582 @@
+{
+  "info": {
+    "_postman_id": "9dab6e19-3dea-4538-90d7-23828cd8d034",
+    "name": "Sentry Crons API",
+    "description": "The Crons API provides endpoints for managing cron job monitors in Sentry, including creating, retrieving, updating, and deleting monitors, managing monitor environments, and retrieving check-in history for tracked scheduled tasks.\n\nContact Support:\n Name: Sentry Support\n Email: support@sentry.io",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:17:31.000Z",
+    "updatedAt": "2026-06-05T15:17:31.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-9dab6e19-3dea-4538-90d7-23828cd8d034"
+  },
+  "item": [
+    {
+      "name": "organizations",
+      "item": [
+        {
+          "name": "{organization_id_or_slug}",
+          "item": [
+            {
+              "name": "monitors",
+              "item": [
+                {
+                  "name": "{monitor_id_or_slug}",
+                  "item": [
+                    {
+                      "name": "checkins",
+                      "item": [
+                        {
+                          "name": "Sentry Retrieve check-ins for a monitor",
+                          "id": "11d4fe28-e0b8-482c-bb57-f1c6a01cfe06",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/monitors/:monitor_id_or_slug/checkins/?cursor=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "monitors",
+                                ":monitor_id_or_slug",
+                                "checkins",
+                                ""
+                              ],
+                              "query": [
+                                {
+                                  "description": "Pagination cursor.",
+                                  "key": "cursor",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "628d4305-1f2d-408c-8476-7c5310a750f7",
+                                  "key": "organization_id_or_slug",
+                                  "value": "<string>",
+                                  "description": "(Required) The ID or slug of the organization."
+                                },
+                                {
+                                  "id": "b2725f41-7744-4d89-b07e-3e791939a72a",
+                                  "key": "monitor_id_or_slug",
+                                  "value": "<string>",
+                                  "description": "(Required) The ID or slug of the monitor."
+                                }
+                              ]
+                            },
+                            "description": "Returns a list of check-ins for a specific monitor."
+                          },
+                          "response": [
+                            {
+                              "id": "4f1fdba4-839c-49d1-8ec3-1c5261231619",
+                              "name": "A list of check-ins.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/monitors/:monitor_id_or_slug/checkins/?cursor=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "organizations",
+                                    ":organization_id_or_slug",
+                                    "monitors",
+                                    ":monitor_id_or_slug",
+                                    "checkins",
+                                    ""
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Pagination cursor.",
+                                      "key": "cursor",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "organization_id_or_slug"
+                                    },
+                                    {
+                                      "key": "monitor_id_or_slug"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "[\n  {\n    \"id\": \"<string>\",\n    \"status\": \"error\",\n    \"dateCreated\": \"<dateTime>\",\n    \"duration\": \"<integer>\",\n    \"environment\": \"<string>\"\n  },\n  {\n    \"id\": \"<string>\",\n    \"status\": \"ok\",\n    \"dateCreated\": \"<dateTime>\",\n    \"duration\": \"<integer>\",\n    \"environment\": \"<string>\"\n  }\n]",
+                              "createdAt": "2026-06-05T15:17:31.000Z",
+                              "updatedAt": "2026-06-05T15:17:31.000Z",
+                              "uid": "35240-4f1fdba4-839c-49d1-8ec3-1c5261231619"
+                            },
+                            {
+                              "id": "6827673a-5d49-486e-a968-ea523518f6ca",
+                              "name": "Unauthorized.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/monitors/:monitor_id_or_slug/checkins/?cursor=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "organizations",
+                                    ":organization_id_or_slug",
+                                    "monitors",
+                                    ":monitor_id_or_slug",
+                                    "checkins",
+                                    ""
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Pagination cursor.",
+                                      "key": "cursor",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "organization_id_or_slug"
+                                    },
+                                    {
+                                      "key": "monitor_id_or_slug"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-06-05T15:17:31.000Z",
+                              "updatedAt": "2026-06-05T15:17:31.000Z",
+                              "uid": "35240-6827673a-5d49-486e-a968-ea523518f6ca"
+                            },
+                            {
+                              "id": "9c64b5b2-fa7f-4386-b80c-ba8264834af4",
+                              "name": "Monitor not found.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/monitors/:monitor_id_or_slug/checkins/?cursor=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "organizations",
+                                    ":organization_id_or_slug",
+                                    "monitors",
+                                    ":monitor_id_or_slug",
+                                    "checkins",
+                                    ""
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Pagination cursor.",
+                                      "key": "cursor",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "organization_id_or_slug"
+                                    },
+                                    {
+                                      "key": "monitor_id_or_slug"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-06-05T15:17:31.000Z",
+                              "updatedAt": "2026-06-05T15:17:31.000Z",
+                              "uid": "35240-9c64b5b2-fa7f-4386-b80c-ba8264834af4"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:17:31.000Z",
+                          "updatedAt": "2026-06-05T15:17:31.000Z",
+                          "uid": "35240-11d4fe28-e0b8-482c-bb57-f1c6a01cfe06"
+                        }
+                      ],
+                      "id": "93824b00-761e-491c-bf81-99648a65c750",
+                      "createdAt": "2026-06-05T15:17:31.000Z",
+                      "updatedAt": "2026-06-05T15:17:31.000Z",
+                      "uid": "35240-93824b00-761e-491c-bf81-99648a65c750"
+                    },
+                    {
+                      "name": "Sentry Retrieve a monitor",
+                      "id": "1c2f86cc-ae37-401a-bf66-e7e645d8a467",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/monitors/:monitor_id_or_slug/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "monitors",
+                            ":monitor_id_or_slug",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "id": "90e6841d-30d2-42dd-bbc4-3dcb95ec6628",
+                              "key": "organization_id_or_slug",
+                              "value": "<string>",
+                              "description": "(Required) The ID or slug of the organization."
+                            },
+                            {
+                              "id": "7e084b6b-9883-4c43-b17f-f0809f48515c",
+                              "key": "monitor_id_or_slug",
+                              "value": "<string>",
+                              "description": "(Required) The ID or slug of the monitor."
+                            }
+                          ]
+                        },
+                        "description": "Returns details for a specific monitor."
+                      },
+                      "response": [
+                        {
+                          "id": "538b7fd2-0568-4c3e-ae20-63a7d8b28375",
+                          "name": "Monitor details.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/monitors/:monitor_id_or_slug/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "monitors",
+                                ":monitor_id_or_slug",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                },
+                                {
+                                  "key": "monitor_id_or_slug"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"config\": {\n    \"schedule_type\": \"<string>\",\n    \"schedule\": \"<string>\",\n    \"checkin_margin\": \"<integer>\",\n    \"max_runtime\": \"<integer>\",\n    \"timezone\": \"<string>\"\n  },\n  \"slug\": \"<string>\",\n  \"status\": \"<string>\",\n  \"dateCreated\": \"<dateTime>\",\n  \"project\": {\n    \"id\": \"<string>\",\n    \"slug\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"environments\": [\n    {\n      \"name\": \"<string>\",\n      \"status\": \"<string>\",\n      \"lastCheckIn\": \"<dateTime>\",\n      \"nextCheckIn\": \"<dateTime>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"status\": \"<string>\",\n      \"lastCheckIn\": \"<dateTime>\",\n      \"nextCheckIn\": \"<dateTime>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-06-05T15:17:31.000Z",
+                          "updatedAt": "2026-06-05T15:17:31.000Z",
+                          "uid": "35240-538b7fd2-0568-4c3e-ae20-63a7d8b28375"
+                        },
+                        {
+                          "id": "b098bab2-dd9f-4ace-80b9-bce8c3ae83a0",
+                          "name": "Unauthorized.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/monitors/:monitor_id_or_slug/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "monitors",
+                                ":monitor_id_or_slug",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                },
+                                {
+                                  "key": "monitor_id_or_slug"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:17:31.000Z",
+                          "updatedAt": "2026-06-05T15:17:31.000Z",
+                          "uid": "35240-b098bab2-dd9f-4ace-80b9-bce8c3ae83a0"
+                        },
+                        {
+                          "id": "ec24f252-cfa0-4008-badd-4c6ea465d091",
+                          "name": "Monitor not found.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/monitors/:monitor_id_or_slug/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "monitors",
+                                ":monitor_id_or_slug",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                },
+                                {
+                                  "key": "monitor_id_or_slug"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:17:31.000Z",
+                          "updatedAt": "2026-06-05T15:17:31.000Z",
+                          "uid": "35240-ec24f252-cfa0-4008-badd-4c6ea465d091"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:17:31.000Z",
+                      "updatedAt": "2026-06-05T15:17:31.000Z",
+                      "uid": "35240-1c2f86cc-ae37-401a-bf66-e7e645d8a467"
+                    },
+                    {
+                      "name": "Sentry Update a monitor",
+                      "id": "101e391e-0334-4c68-8db9-94ded36d6ddd",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"slug\": \"<string>\",\n  \"config\": {\n    \"schedule_type\": \"<string>\",\n    \"schedule\": \"<string>\",\n    \"checkin_margin\": \"<integer>\",\n    \"max_runtime\": \"<integer>\",\n    \"timezone\": \"<string>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/monitors/:monitor_id_or_slug/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "monitors",
+                            ":monitor_id_or_slug",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "id": "da269f82-97c6-4071-95cd-2bea6c936e12",
+                              "key": "organization_id_or_slug",
+                              "value": "<string>",
+                              "description": "(Required) The ID or slug of the organization."
+                            },
+                            {
+                              "id": "548e2322-5d37-44a6-a8ac-559b5d9ee823",
+                              "key": "monitor_id_or_slug",
+                              "value": "<string>",
+                              "description": "(Required) The ID or slug of the monitor."
+                            }
+                          ]
+                        },
+                        "description": "Updates a monitor."
+                      },
+                      "response": [
+                        {
+                          "id": "688d41e3-9733-40a5-aea4-fad67e32698b",
+                          "name": "Monitor updated.",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"slug\": \"<string>\",\n  \"config\": {\n    \"schedule_type\": \"<string>\",\n    \"schedule\": \"<string>\",\n    \"checkin_margin\": \"<integer>\",\n    \"max_runtime\": \"<integer>\",\n    \"timezone\": \"<string>\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/monitors/:monitor_id_or_slug/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "monitors",
+                                ":monitor_id_or_slug",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                },
+                                {
+                                  "key": "monitor_id_or_slug"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"config\": {\n    \"schedule_type\": \"<string>\",\n    \"schedule\": \"<string>\",\n    \"checkin_margin\": \"<integer>\",\n    \"max_runtime\": \"<integer>\",\n    \"timezone\": \"<string>\"\n  },\n  \"slug\": \"<string>\",\n  \"status\": \"<string>\",\n  \"dateCreated\": \"<dateTime>\",\n  \"project\": {\n    \"id\": \"<string>\",\n    \"slug\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"environments\": [\n    {\n      \"name\": \"<string>\",\n      \"status\": \"<string>\",\n      \"lastCheckIn\": \"<dateTime>\",\n      \"nextCheckIn\": \"<dateTime>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"status\": \"<string>\",\n      \"lastCheckIn\": \"<dateTime>\",\n      \"nextCheckIn\": \"<dateTime>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-06-05T15:17:31.000Z",
+                          "updatedAt": "2026-06-05T15:17:31.000Z",
+                          "uid": "35240-688d41e3-9733-40a5-aea4-fad67e32698b"
+                        },
+                        {
+                          "id": "ab4adc7b-e75b-477e-bf78-9f5e308fc219",
+                          "name": "Bad request.",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"slug\": \"<string>\",\n  \"config\": {\n    \"schedule_type\": \"<string>\",\n    \"schedule\": \"<string>\",\n    \"checkin_margin\": \"<integer>\",\n    \"max_runtime\": \"<integer>\",\n    \"timezone\": \"<string>\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/monitors/:monitor_id_or_slug/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "monitors",
+                                ":monitor_id_or_slug",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                },
+                                {
+                                  "key": "monitor_id_or_slug"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:17:31.000Z",
+                          "updatedAt": "2026-06-05T15:17:31.000Z",
+                          "uid": "35240-ab4adc7b-e75b-477e-bf78-9f5e308fc219"
+                        },
+                        {
+                          "id": "9833f9de-8f76-442b-8178-522dd742032f",
+                          "name": "Unauthorized.",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"slug\": \"<string>\",\n  \"config\": {\n    \"schedule_type\": \"<string>\",\n    \"schedule\": \"<string>\",\n    \"checkin_margin\": \"<integer>\",\n    \"max_runtime\": \"<integer>\",\n    \"timezone\": \"<string>\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/monitors/:monitor_id_or_slug/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "monitors",
+                                ":monitor_id_or_slug",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                },
+                                {
+                                  "key": "monitor_id_or_slug"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:17:31.000Z",
+                          "updatedAt": "2026-06-05T15:17:31.000Z",
+                          "uid": "35240-9833f9de-8f76-442b-8178-522dd742032f"
+                        },
+                        {
+                          "id": "76a8c7a1-5fd4-4efe-926e-466c2ff70ca0",
+                          "name": "Monitor not found.",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"slug\": \"<string>\",\n  \"config\": {\n    \"schedule_type\": \"<string>\",\n    \"schedule\": \"<string>\",\n    \"checkin_margin\": \"<integer>\",\n    \"max_runtime\": \"<integer>\",\n    \"timezone\": \"<string>\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/monitors/:monitor_id_or_slug/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "monitors",
+                                ":monitor_id_or_slug",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                },
+                                {
+                                  "key": "monitor_id_or_slug"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:17:31.000Z",
+                          "updatedAt": "2026-06-05T15:17:31.000Z",
+                          "uid": "35240-76a8c7a1-5fd4-4efe-926e-466c2ff70ca0"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:17:31.000Z",
+                      "updatedAt": "2026-06-05T15:17:31.000Z",
+                      "uid": "35240-101e391e-0334-4c68-8db9-94ded36d6ddd"
+                    },
+                    {
+                      "name": "Sentry Delete a monitor or monitor environments",
+                      "id": "c8ff402a-3737-4dba-8d99-497af23a44b5",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/monitors/:monitor_id_or_slug/?environment=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "monitors",
+                            ":monitor_id_or_slug",
+                            ""
+                          ],
+                          "query": [
+                            {
+                              "description": "Specific environment to delete rather than the entire monitor.",
+                              "key": "environment",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "3b237855-e8ba-4692-bb6b-89422d44175d",
+                              "key": "organization_id_or_slug",
+                              "value": "<string>",
+                              "description": "(Required) The ID or slug of the organization."
+                            },
+                            {
+                              "id": "578d8c57-fb9b-464f-a1b8-f4b753332029",
+                              "key": "monitor_id_or_slug",
+                              "value": "<string>",
+                              "description": "(Required) The ID or slug of the monitor."
+                            }
+                          ]
+                        },
+                        "description": "Deletes a monitor or specific monitor environments. Use the environment query parameter to selectively delete environments."
+                      },
+                      "response": [
+                        {
+                          "id": "a52dedbb-8bff-40fd-a79a-1be1f1fe0c96",
+                          "name": "Monitor or environment scheduled for deletion.",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/monitors/:monitor_id_or_slug/?environment=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "monitors",
+                                ":monitor_id_or_slug",
+                                ""
+                              ],
+                              "query": [
+                                {
+                                  "description": "Specific environment to delete rather than the entire monitor.",
+                                  "key": "environment",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                },
+                                {
+                                  "key": "monitor_id_or_slug"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Accepted",
+                          "code": 202,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:17:31.000Z",
+                          "updatedAt": "2026-06-05T15:17:31.000Z",
+                          "uid": "35240-a52dedbb-8bff-40fd-a79a-1be1f1fe0c96"
+                        },
+                        {
+                          "id": "1391ae2a-4d4d-4773-a8e9-2a1aa35605da",
+                          "name": "Unauthorized.",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/monitors/:monitor_id_or_slug/?environment=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "monitors",
+                                ":monitor_id_or_slug",
+                                ""
+                              ],
+                              "query": [
+                                {
+                                  "description": "Specific environment to delete rather than the entire monitor.",
+                                  "key": "environment",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                },
+                                {
+                                  "key": "monitor_id_or_slug"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:17:31.000Z",
+                          "updatedAt": "2026-06-05T15:17:31.000Z",
+                          "uid": "35240-1391ae2a-4d4d-4773-a8e9-2a1aa35605da"
+                        },
+                        {
+                          "id": "558ee73c-d6ef-4ded-92df-faa93b8cf2c7",
+                          "name": "Monitor not found.",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/monitors/:monitor_id_or_slug/?environment=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "monitors",
+                                ":monitor_id_or_slug",
+                                ""
+                              ],
+                              "query": [
+                                {
+                                  "description": "Specific environment to delete rather than the entire monitor.",
+                                  "key": "environment",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                },
+                                {
+                                  "key": "monitor_id_or_slug"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:17:31.000Z",
+                          "updatedAt": "2026-06-05T15:17:31.000Z",
+                          "uid": "35240-558ee73c-d6ef-4ded-92df-faa93b8cf2c7"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:17:31.000Z",
+                      "updatedAt": "2026-06-05T15:17:31.000Z",
+                      "uid": "35240-c8ff402a-3737-4dba-8d99-497af23a44b5"
+                    }
+                  ],
+                  "id": "119f0867-b8a5-404a-b7b4-46b12bb7c9b7",
+                  "createdAt": "2026-06-05T15:17:31.000Z",
+                  "updatedAt": "2026-06-05T15:17:31.000Z",
+                  "uid": "35240-119f0867-b8a5-404a-b7b4-46b12bb7c9b7"
+                },
+                {
+                  "name": "Sentry Retrieve monitors for an organization",
+                  "id": "de2837a2-1f0b-48d2-97b6-971a2d8e8c8b",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/monitors/?cursor=<string>&environment=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "organizations",
+                        ":organization_id_or_slug",
+                        "monitors",
+                        ""
+                      ],
+                      "query": [
+                        {
+                          "description": "Pagination cursor.",
+                          "key": "cursor",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by environment name.",
+                          "key": "environment",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "be999488-1504-4a77-b205-33088e635e89",
+                          "key": "organization_id_or_slug",
+                          "value": "<string>",
+                          "description": "(Required) The ID or slug of the organization."
+                        }
+                      ]
+                    },
+                    "description": "Returns a list of monitors for the given organization."
+                  },
+                  "response": [
+                    {
+                      "id": "4017f8ca-92ce-4250-9e2a-c2d68f3496b9",
+                      "name": "A list of monitors.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/monitors/?cursor=<string>&environment=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "monitors",
+                            ""
+                          ],
+                          "query": [
+                            {
+                              "description": "Pagination cursor.",
+                              "key": "cursor",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filter by environment name.",
+                              "key": "environment",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "organization_id_or_slug"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "[\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"type\": \"<string>\",\n    \"config\": {\n      \"schedule_type\": \"<string>\",\n      \"schedule\": \"<string>\",\n      \"checkin_margin\": \"<integer>\",\n      \"max_runtime\": \"<integer>\",\n      \"timezone\": \"<string>\"\n    },\n    \"slug\": \"<string>\",\n    \"status\": \"<string>\",\n    \"dateCreated\": \"<dateTime>\",\n    \"project\": {\n      \"id\": \"<string>\",\n      \"slug\": \"<string>\",\n      \"name\": \"<string>\"\n    },\n    \"environments\": [\n      {\n        \"name\": \"<string>\",\n        \"status\": \"<string>\",\n        \"lastCheckIn\": \"<dateTime>\",\n        \"nextCheckIn\": \"<dateTime>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"status\": \"<string>\",\n        \"lastCheckIn\": \"<dateTime>\",\n        \"nextCheckIn\": \"<dateTime>\"\n      }\n    ]\n  },\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"type\": \"<string>\",\n    \"config\": {\n      \"schedule_type\": \"<string>\",\n      \"schedule\": \"<string>\",\n      \"checkin_margin\": \"<integer>\",\n      \"max_runtime\": \"<integer>\",\n      \"timezone\": \"<string>\"\n    },\n    \"slug\": \"<string>\",\n    \"status\": \"<string>\",\n    \"dateCreated\": \"<dateTime>\",\n    \"project\": {\n      \"id\": \"<string>\",\n      \"slug\": \"<string>\",\n      \"name\": \"<string>\"\n    },\n    \"environments\": [\n      {\n        \"name\": \"<string>\",\n        \"status\": \"<string>\",\n        \"lastCheckIn\": \"<dateTime>\",\n        \"nextCheckIn\": \"<dateTime>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"status\": \"<string>\",\n        \"lastCheckIn\": \"<dateTime>\",\n        \"nextCheckIn\": \"<dateTime>\"\n      }\n    ]\n  }\n]",
+                      "createdAt": "2026-06-05T15:17:31.000Z",
+                      "updatedAt": "2026-06-05T15:17:31.000Z",
+                      "uid": "35240-4017f8ca-92ce-4250-9e2a-c2d68f3496b9"
+                    },
+                    {
+                      "id": "6e6688e0-6096-48c5-87b7-86e409f15959",
+                      "name": "Unauthorized.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/monitors/?cursor=<string>&environment=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "monitors",
+                            ""
+                          ],
+                          "query": [
+                            {
+                              "description": "Pagination cursor.",
+                              "key": "cursor",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filter by environment name.",
+                              "key": "environment",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "organization_id_or_slug"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:17:31.000Z",
+                      "updatedAt": "2026-06-05T15:17:31.000Z",
+                      "uid": "35240-6e6688e0-6096-48c5-87b7-86e409f15959"
+                    },
+                    {
+                      "id": "7a4205e4-9435-43bb-a01d-79b217a487f1",
+                      "name": "Forbidden.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/monitors/?cursor=<string>&environment=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "monitors",
+                            ""
+                          ],
+                          "query": [
+                            {
+                              "description": "Pagination cursor.",
+                              "key": "cursor",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filter by environment name.",
+                              "key": "environment",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "organization_id_or_slug"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:17:31.000Z",
+                      "updatedAt": "2026-06-05T15:17:31.000Z",
+                      "uid": "35240-7a4205e4-9435-43bb-a01d-79b217a487f1"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:17:31.000Z",
+                  "updatedAt": "2026-06-05T15:17:31.000Z",
+                  "uid": "35240-de2837a2-1f0b-48d2-97b6-971a2d8e8c8b"
+                },
+                {
+                  "name": "Sentry Create a monitor",
+                  "id": "40396295-8e74-450f-82f5-33bef79c83a8",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"cron_job\",\n  \"config\": {\n    \"schedule_type\": \"crontab\",\n    \"schedule\": \"<string>\",\n    \"checkin_margin\": \"<integer>\",\n    \"max_runtime\": \"<integer>\",\n    \"timezone\": \"<string>\"\n  },\n  \"slug\": \"<string>\",\n  \"project\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/monitors/",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "organizations",
+                        ":organization_id_or_slug",
+                        "monitors",
+                        ""
+                      ],
+                      "variable": [
+                        {
+                          "id": "5dbbfbad-7e60-42e2-9e9c-b4e344585d99",
+                          "key": "organization_id_or_slug",
+                          "value": "<string>",
+                          "description": "(Required) The ID or slug of the organization."
+                        }
+                      ]
+                    },
+                    "description": "Creates a new monitor for the given organization."
+                  },
+                  "response": [
+                    {
+                      "id": "1317030e-0ce6-4bdf-a497-f69d7c177283",
+                      "name": "Monitor created.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"cron_job\",\n  \"config\": {\n    \"schedule_type\": \"crontab\",\n    \"schedule\": \"<string>\",\n    \"checkin_margin\": \"<integer>\",\n    \"max_runtime\": \"<integer>\",\n    \"timezone\": \"<string>\"\n  },\n  \"slug\": \"<string>\",\n  \"project\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/monitors/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "monitors",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "key": "organization_id_or_slug"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"config\": {\n    \"schedule_type\": \"<string>\",\n    \"schedule\": \"<string>\",\n    \"checkin_margin\": \"<integer>\",\n    \"max_runtime\": \"<integer>\",\n    \"timezone\": \"<string>\"\n  },\n  \"slug\": \"<string>\",\n  \"status\": \"<string>\",\n  \"dateCreated\": \"<dateTime>\",\n  \"project\": {\n    \"id\": \"<string>\",\n    \"slug\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"environments\": [\n    {\n      \"name\": \"<string>\",\n      \"status\": \"<string>\",\n      \"lastCheckIn\": \"<dateTime>\",\n      \"nextCheckIn\": \"<dateTime>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"status\": \"<string>\",\n      \"lastCheckIn\": \"<dateTime>\",\n      \"nextCheckIn\": \"<dateTime>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-06-05T15:17:31.000Z",
+                      "updatedAt": "2026-06-05T15:17:31.000Z",
+                      "uid": "35240-1317030e-0ce6-4bdf-a497-f69d7c177283"
+                    },
+                    {
+                      "id": "929ae8db-69dd-4a67-8fe9-d0a29b039d10",
+                      "name": "Bad request.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"cron_job\",\n  \"config\": {\n    \"schedule_type\": \"crontab\",\n    \"schedule\": \"<string>\",\n    \"checkin_margin\": \"<integer>\",\n    \"max_runtime\": \"<integer>\",\n    \"timezone\": \"<string>\"\n  },\n  \"slug\": \"<string>\",\n  \"project\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/monitors/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "monitors",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "key": "organization_id_or_slug"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:17:31.000Z",
+                      "updatedAt": "2026-06-05T15:17:31.000Z",
+                      "uid": "35240-929ae8db-69dd-4a67-8fe9-d0a29b039d10"
+                    },
+                    {
+                      "id": "65308bc5-993f-4194-912b-7117b868f8fc",
+                      "name": "Unauthorized.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"cron_job\",\n  \"config\": {\n    \"schedule_type\": \"crontab\",\n    \"schedule\": \"<string>\",\n    \"checkin_margin\": \"<integer>\",\n    \"max_runtime\": \"<integer>\",\n    \"timezone\": \"<string>\"\n  },\n  \"slug\": \"<string>\",\n  \"project\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/monitors/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "monitors",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "key": "organization_id_or_slug"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:17:31.000Z",
+                      "updatedAt": "2026-06-05T15:17:31.000Z",
+                      "uid": "35240-65308bc5-993f-4194-912b-7117b868f8fc"
+                    },
+                    {
+                      "id": "7f43fce0-ca25-4cbc-971c-3f4b3126b9f9",
+                      "name": "Forbidden.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"cron_job\",\n  \"config\": {\n    \"schedule_type\": \"crontab\",\n    \"schedule\": \"<string>\",\n    \"checkin_margin\": \"<integer>\",\n    \"max_runtime\": \"<integer>\",\n    \"timezone\": \"<string>\"\n  },\n  \"slug\": \"<string>\",\n  \"project\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/monitors/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "monitors",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "key": "organization_id_or_slug"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:17:31.000Z",
+                      "updatedAt": "2026-06-05T15:17:31.000Z",
+                      "uid": "35240-7f43fce0-ca25-4cbc-971c-3f4b3126b9f9"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:17:31.000Z",
+                  "updatedAt": "2026-06-05T15:17:31.000Z",
+                  "uid": "35240-40396295-8e74-450f-82f5-33bef79c83a8"
+                }
+              ],
+              "id": "04bd5af3-ebc7-4866-8baf-b49bdd174fe0",
+              "createdAt": "2026-06-05T15:17:31.000Z",
+              "updatedAt": "2026-06-05T15:17:31.000Z",
+              "uid": "35240-04bd5af3-ebc7-4866-8baf-b49bdd174fe0"
+            }
+          ],
+          "id": "a458cb92-6d6b-44a2-a23b-aded984633b3",
+          "createdAt": "2026-06-05T15:17:31.000Z",
+          "updatedAt": "2026-06-05T15:17:31.000Z",
+          "uid": "35240-a458cb92-6d6b-44a2-a23b-aded984633b3"
+        }
+      ],
+      "id": "47c842d2-4bfe-48eb-900c-00b53b76e1d7",
+      "createdAt": "2026-06-05T15:17:31.000Z",
+      "updatedAt": "2026-06-05T15:17:31.000Z",
+      "uid": "35240-47c842d2-4bfe-48eb-900c-00b53b76e1d7"
+    },
+    {
+      "name": "projects",
+      "item": [
+        {
+          "name": "{organization_id_or_slug}",
+          "item": [
+            {
+              "name": "{project_id_or_slug}",
+              "item": [
+                {
+                  "name": "monitors",
+                  "item": [
+                    {
+                      "name": "{monitor_id_or_slug}",
+                      "item": [
+                        {
+                          "name": "checkins",
+                          "item": [
+                            {
+                              "name": "Sentry Retrieve check-ins for a monitor by project",
+                              "id": "150c1112-eafb-4a1f-b699-ebe3d92c4957",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/monitors/:monitor_id_or_slug/checkins/?cursor=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":organization_id_or_slug",
+                                    ":project_id_or_slug",
+                                    "monitors",
+                                    ":monitor_id_or_slug",
+                                    "checkins",
+                                    ""
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Pagination cursor.",
+                                      "key": "cursor",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "6e5a1754-1970-4738-af94-8cf65c90cebd",
+                                      "key": "organization_id_or_slug",
+                                      "value": "<string>",
+                                      "description": "(Required) The ID or slug of the organization."
+                                    },
+                                    {
+                                      "id": "88a4b4f5-16ef-453c-a99d-f15ef1a614b2",
+                                      "key": "project_id_or_slug",
+                                      "value": "<string>",
+                                      "description": "(Required) The ID or slug of the project."
+                                    },
+                                    {
+                                      "id": "1a445b68-fd1e-4c91-a388-26fdc1840d49",
+                                      "key": "monitor_id_or_slug",
+                                      "value": "<string>",
+                                      "description": "(Required) The ID or slug of the monitor."
+                                    }
+                                  ]
+                                },
+                                "description": "Returns a list of check-ins for a monitor scoped to a project."
+                              },
+                              "response": [
+                                {
+                                  "id": "3d94a5be-b771-49ee-baa5-ee8094e65c92",
+                                  "name": "A list of check-ins.",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/monitors/:monitor_id_or_slug/checkins/?cursor=<string>",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "projects",
+                                        ":organization_id_or_slug",
+                                        ":project_id_or_slug",
+                                        "monitors",
+                                        ":monitor_id_or_slug",
+                                        "checkins",
+                                        ""
+                                      ],
+                                      "query": [
+                                        {
+                                          "description": "Pagination cursor.",
+                                          "key": "cursor",
+                                          "value": "<string>"
+                                        }
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "organization_id_or_slug"
+                                        },
+                                        {
+                                          "key": "project_id_or_slug"
+                                        },
+                                        {
+                                          "key": "monitor_id_or_slug"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "[\n  {\n    \"id\": \"<string>\",\n    \"status\": \"error\",\n    \"dateCreated\": \"<dateTime>\",\n    \"duration\": \"<integer>\",\n    \"environment\": \"<string>\"\n  },\n  {\n    \"id\": \"<string>\",\n    \"status\": \"ok\",\n    \"dateCreated\": \"<dateTime>\",\n    \"duration\": \"<integer>\",\n    \"environment\": \"<string>\"\n  }\n]",
+                                  "createdAt": "2026-06-05T15:17:31.000Z",
+                                  "updatedAt": "2026-06-05T15:17:31.000Z",
+                                  "uid": "35240-3d94a5be-b771-49ee-baa5-ee8094e65c92"
+                                },
+                                {
+                                  "id": "ddff4f9c-976f-4e87-93d8-765dc50d64c0",
+                                  "name": "Unauthorized.",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/monitors/:monitor_id_or_slug/checkins/?cursor=<string>",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "projects",
+                                        ":organization_id_or_slug",
+                                        ":project_id_or_slug",
+                                        "monitors",
+                                        ":monitor_id_or_slug",
+                                        "checkins",
+                                        ""
+                                      ],
+                                      "query": [
+                                        {
+                                          "description": "Pagination cursor.",
+                                          "key": "cursor",
+                                          "value": "<string>"
+                                        }
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "organization_id_or_slug"
+                                        },
+                                        {
+                                          "key": "project_id_or_slug"
+                                        },
+                                        {
+                                          "key": "monitor_id_or_slug"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-06-05T15:17:31.000Z",
+                                  "updatedAt": "2026-06-05T15:17:31.000Z",
+                                  "uid": "35240-ddff4f9c-976f-4e87-93d8-765dc50d64c0"
+                                },
+                                {
+                                  "id": "b0517166-5c0c-4614-943e-d26805df4e93",
+                                  "name": "Monitor not found.",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/monitors/:monitor_id_or_slug/checkins/?cursor=<string>",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "projects",
+                                        ":organization_id_or_slug",
+                                        ":project_id_or_slug",
+                                        "monitors",
+                                        ":monitor_id_or_slug",
+                                        "checkins",
+                                        ""
+                                      ],
+                                      "query": [
+                                        {
+                                          "description": "Pagination cursor.",
+                                          "key": "cursor",
+                                          "value": "<string>"
+                                        }
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "organization_id_or_slug"
+                                        },
+                                        {
+                                          "key": "project_id_or_slug"
+                                        },
+                                        {
+                                          "key": "monitor_id_or_slug"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Not Found",
+                                  "code": 404,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-06-05T15:17:31.000Z",
+                                  "updatedAt": "2026-06-05T15:17:31.000Z",
+                                  "uid": "35240-b0517166-5c0c-4614-943e-d26805df4e93"
+                                }
+                              ],
+                              "createdAt": "2026-06-05T15:17:31.000Z",
+                              "updatedAt": "2026-06-05T15:17:31.000Z",
+                              "uid": "35240-150c1112-eafb-4a1f-b699-ebe3d92c4957"
+                            }
+                          ],
+                          "id": "13270957-d94b-46f7-9130-bfbec93a3353",
+                          "createdAt": "2026-06-05T15:17:31.000Z",
+                          "updatedAt": "2026-06-05T15:17:31.000Z",
+                          "uid": "35240-13270957-d94b-46f7-9130-bfbec93a3353"
+                        },
+                        {
+                          "name": "Sentry Retrieve a monitor for a project",
+                          "id": "0a28e90f-d5e7-4c54-aab9-02d9390f598e",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/monitors/:monitor_id_or_slug/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "projects",
+                                ":organization_id_or_slug",
+                                ":project_id_or_slug",
+                                "monitors",
+                                ":monitor_id_or_slug",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "id": "b36ad9ef-b753-4445-9c08-432325a767ed",
+                                  "key": "organization_id_or_slug",
+                                  "value": "<string>",
+                                  "description": "(Required) The ID or slug of the organization."
+                                },
+                                {
+                                  "id": "860073ee-5897-49d4-9217-e4b911c91430",
+                                  "key": "project_id_or_slug",
+                                  "value": "<string>",
+                                  "description": "(Required) The ID or slug of the project."
+                                },
+                                {
+                                  "id": "46876854-076c-4923-b658-da26e2efdfe9",
+                                  "key": "monitor_id_or_slug",
+                                  "value": "<string>",
+                                  "description": "(Required) The ID or slug of the monitor."
+                                }
+                              ]
+                            },
+                            "description": "Returns a monitor scoped to a specific project."
+                          },
+                          "response": [
+                            {
+                              "id": "661c7398-6a2d-42c4-9668-8c9281277ba9",
+                              "name": "Monitor details.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/monitors/:monitor_id_or_slug/",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":organization_id_or_slug",
+                                    ":project_id_or_slug",
+                                    "monitors",
+                                    ":monitor_id_or_slug",
+                                    ""
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "organization_id_or_slug"
+                                    },
+                                    {
+                                      "key": "project_id_or_slug"
+                                    },
+                                    {
+                                      "key": "monitor_id_or_slug"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"config\": {\n    \"schedule_type\": \"<string>\",\n    \"schedule\": \"<string>\",\n    \"checkin_margin\": \"<integer>\",\n    \"max_runtime\": \"<integer>\",\n    \"timezone\": \"<string>\"\n  },\n  \"slug\": \"<string>\",\n  \"status\": \"<string>\",\n  \"dateCreated\": \"<dateTime>\",\n  \"project\": {\n    \"id\": \"<string>\",\n    \"slug\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"environments\": [\n    {\n      \"name\": \"<string>\",\n      \"status\": \"<string>\",\n      \"lastCheckIn\": \"<dateTime>\",\n      \"nextCheckIn\": \"<dateTime>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"status\": \"<string>\",\n      \"lastCheckIn\": \"<dateTime>\",\n      \"nextCheckIn\": \"<dateTime>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-06-05T15:17:31.000Z",
+                              "updatedAt": "2026-06-05T15:17:31.000Z",
+                              "uid": "35240-661c7398-6a2d-42c4-9668-8c9281277ba9"
+                            },
+                            {
+                              "id": "6560b538-f17e-423b-a0e9-dce97c520e3f",
+                              "name": "Unauthorized.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/monitors/:monitor_id_or_slug/",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":organization_id_or_slug",
+                                    ":project_id_or_slug",
+                                    "monitors",
+                                    ":monitor_id_or_slug",
+                                    ""
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "organization_id_or_slug"
+                                    },
+                                    {
+                                      "key": "project_id_or_slug"
+                                    },
+                                    {
+                                      "key": "monitor_id_or_slug"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-06-05T15:17:31.000Z",
+                              "updatedAt": "2026-06-05T15:17:31.000Z",
+                              "uid": "35240-6560b538-f17e-423b-a0e9-dce97c520e3f"
+                            },
+                            {
+                              "id": "3afa8e93-1519-4b6d-89ef-b60c95561999",
+                              "name": "Monitor not found.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/monitors/:monitor_id_or_slug/",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":organization_id_or_slug",
+                                    ":project_id_or_slug",
+                                    "monitors",
+                                    ":monitor_id_or_slug",
+                                    ""
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "organization_id_or_slug"
+                                    },
+                                    {
+                                      "key": "project_id_or_slug"
+                                    },
+                                    {
+                                      "key": "monitor_id_or_slug"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-06-05T15:17:31.000Z",
+                              "updatedAt": "2026-06-05T15:17:31.000Z",
+                              "uid": "35240-3afa8e93-1519-4b6d-89ef-b60c95561999"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:17:31.000Z",
+                          "updatedAt": "2026-06-05T15:17:31.000Z",
+                          "uid": "35240-0a28e90f-d5e7-4c54-aab9-02d9390f598e"
+                        },
+                        {
+                          "name": "Sentry Update a monitor for a project",
+                          "id": "bdbbb7a7-4ae2-4c26-98cd-35dd434e6236",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"config\": {}\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/monitors/:monitor_id_or_slug/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "projects",
+                                ":organization_id_or_slug",
+                                ":project_id_or_slug",
+                                "monitors",
+                                ":monitor_id_or_slug",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "id": "48ae1f5d-eab7-4827-a7be-fc8ce296ab83",
+                                  "key": "organization_id_or_slug",
+                                  "value": "<string>",
+                                  "description": "(Required) The ID or slug of the organization."
+                                },
+                                {
+                                  "id": "1f11748b-dc6a-4145-b109-380a6c5067a2",
+                                  "key": "project_id_or_slug",
+                                  "value": "<string>",
+                                  "description": "(Required) The ID or slug of the project."
+                                },
+                                {
+                                  "id": "10476a0f-2f7f-425a-8dcb-8c8431a92066",
+                                  "key": "monitor_id_or_slug",
+                                  "value": "<string>",
+                                  "description": "(Required) The ID or slug of the monitor."
+                                }
+                              ]
+                            },
+                            "description": "Updates a monitor scoped to a specific project."
+                          },
+                          "response": [
+                            {
+                              "id": "09c08cd2-70c7-4ffe-acd6-816b26cc2a5f",
+                              "name": "Monitor updated.",
+                              "originalRequest": {
+                                "method": "PUT",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"name\": \"<string>\",\n  \"config\": {}\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/monitors/:monitor_id_or_slug/",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":organization_id_or_slug",
+                                    ":project_id_or_slug",
+                                    "monitors",
+                                    ":monitor_id_or_slug",
+                                    ""
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "organization_id_or_slug"
+                                    },
+                                    {
+                                      "key": "project_id_or_slug"
+                                    },
+                                    {
+                                      "key": "monitor_id_or_slug"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"config\": {\n    \"schedule_type\": \"<string>\",\n    \"schedule\": \"<string>\",\n    \"checkin_margin\": \"<integer>\",\n    \"max_runtime\": \"<integer>\",\n    \"timezone\": \"<string>\"\n  },\n  \"slug\": \"<string>\",\n  \"status\": \"<string>\",\n  \"dateCreated\": \"<dateTime>\",\n  \"project\": {\n    \"id\": \"<string>\",\n    \"slug\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"environments\": [\n    {\n      \"name\": \"<string>\",\n      \"status\": \"<string>\",\n      \"lastCheckIn\": \"<dateTime>\",\n      \"nextCheckIn\": \"<dateTime>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"status\": \"<string>\",\n      \"lastCheckIn\": \"<dateTime>\",\n      \"nextCheckIn\": \"<dateTime>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-06-05T15:17:31.000Z",
+                              "updatedAt": "2026-06-05T15:17:31.000Z",
+                              "uid": "35240-09c08cd2-70c7-4ffe-acd6-816b26cc2a5f"
+                            },
+                            {
+                              "id": "6976b612-f369-4a49-94e4-b01e8e3317e5",
+                              "name": "Bad request.",
+                              "originalRequest": {
+                                "method": "PUT",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"name\": \"<string>\",\n  \"config\": {}\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/monitors/:monitor_id_or_slug/",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":organization_id_or_slug",
+                                    ":project_id_or_slug",
+                                    "monitors",
+                                    ":monitor_id_or_slug",
+                                    ""
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "organization_id_or_slug"
+                                    },
+                                    {
+                                      "key": "project_id_or_slug"
+                                    },
+                                    {
+                                      "key": "monitor_id_or_slug"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-06-05T15:17:31.000Z",
+                              "updatedAt": "2026-06-05T15:17:31.000Z",
+                              "uid": "35240-6976b612-f369-4a49-94e4-b01e8e3317e5"
+                            },
+                            {
+                              "id": "118d17cb-00df-4987-ad11-75f5f949c23d",
+                              "name": "Unauthorized.",
+                              "originalRequest": {
+                                "method": "PUT",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"name\": \"<string>\",\n  \"config\": {}\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/monitors/:monitor_id_or_slug/",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":organization_id_or_slug",
+                                    ":project_id_or_slug",
+                                    "monitors",
+                                    ":monitor_id_or_slug",
+                                    ""
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "organization_id_or_slug"
+                                    },
+                                    {
+                                      "key": "project_id_or_slug"
+                                    },
+                                    {
+                                      "key": "monitor_id_or_slug"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-06-05T15:17:31.000Z",
+                              "updatedAt": "2026-06-05T15:17:31.000Z",
+                              "uid": "35240-118d17cb-00df-4987-ad11-75f5f949c23d"
+                            },
+                            {
+                              "id": "17645a5f-716f-4a32-b3bf-2e1bdd7a4b0e",
+                              "name": "Monitor not found.",
+                              "originalRequest": {
+                                "method": "PUT",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"name\": \"<string>\",\n  \"config\": {}\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/monitors/:monitor_id_or_slug/",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":organization_id_or_slug",
+                                    ":project_id_or_slug",
+                                    "monitors",
+                                    ":monitor_id_or_slug",
+                                    ""
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "organization_id_or_slug"
+                                    },
+                                    {
+                                      "key": "project_id_or_slug"
+                                    },
+                                    {
+                                      "key": "monitor_id_or_slug"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-06-05T15:17:31.000Z",
+                              "updatedAt": "2026-06-05T15:17:31.000Z",
+                              "uid": "35240-17645a5f-716f-4a32-b3bf-2e1bdd7a4b0e"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:17:31.000Z",
+                          "updatedAt": "2026-06-05T15:17:31.000Z",
+                          "uid": "35240-bdbbb7a7-4ae2-4c26-98cd-35dd434e6236"
+                        },
+                        {
+                          "name": "Sentry Delete a monitor or monitor environments for a project",
+                          "id": "aeb6a14f-96bb-4f75-ae41-fc6d8ca09392",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "DELETE",
+                            "header": [],
+                            "url": {
+                              "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/monitors/:monitor_id_or_slug/?environment=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "projects",
+                                ":organization_id_or_slug",
+                                ":project_id_or_slug",
+                                "monitors",
+                                ":monitor_id_or_slug",
+                                ""
+                              ],
+                              "query": [
+                                {
+                                  "description": "Specific environment to delete.",
+                                  "key": "environment",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "daddc19d-4fc4-4d01-8d8f-dbfab5c883aa",
+                                  "key": "organization_id_or_slug",
+                                  "value": "<string>",
+                                  "description": "(Required) The ID or slug of the organization."
+                                },
+                                {
+                                  "id": "2090b86c-4b14-475a-ab81-b82fb8272b0e",
+                                  "key": "project_id_or_slug",
+                                  "value": "<string>",
+                                  "description": "(Required) The ID or slug of the project."
+                                },
+                                {
+                                  "id": "e60c1da3-748a-4f69-9220-577fb7404352",
+                                  "key": "monitor_id_or_slug",
+                                  "value": "<string>",
+                                  "description": "(Required) The ID or slug of the monitor."
+                                }
+                              ]
+                            },
+                            "description": "Deletes a monitor or its environments scoped to a project."
+                          },
+                          "response": [
+                            {
+                              "id": "79fa8f51-fd4c-4ac7-a032-034c880afdad",
+                              "name": "Monitor or environment scheduled for deletion.",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/monitors/:monitor_id_or_slug/?environment=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":organization_id_or_slug",
+                                    ":project_id_or_slug",
+                                    "monitors",
+                                    ":monitor_id_or_slug",
+                                    ""
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Specific environment to delete.",
+                                      "key": "environment",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "organization_id_or_slug"
+                                    },
+                                    {
+                                      "key": "project_id_or_slug"
+                                    },
+                                    {
+                                      "key": "monitor_id_or_slug"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Accepted",
+                              "code": 202,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-06-05T15:17:31.000Z",
+                              "updatedAt": "2026-06-05T15:17:31.000Z",
+                              "uid": "35240-79fa8f51-fd4c-4ac7-a032-034c880afdad"
+                            },
+                            {
+                              "id": "9a07c7aa-4d50-4f01-994b-b727b46fde0b",
+                              "name": "Unauthorized.",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/monitors/:monitor_id_or_slug/?environment=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":organization_id_or_slug",
+                                    ":project_id_or_slug",
+                                    "monitors",
+                                    ":monitor_id_or_slug",
+                                    ""
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Specific environment to delete.",
+                                      "key": "environment",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "organization_id_or_slug"
+                                    },
+                                    {
+                                      "key": "project_id_or_slug"
+                                    },
+                                    {
+                                      "key": "monitor_id_or_slug"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-06-05T15:17:31.000Z",
+                              "updatedAt": "2026-06-05T15:17:31.000Z",
+                              "uid": "35240-9a07c7aa-4d50-4f01-994b-b727b46fde0b"
+                            },
+                            {
+                              "id": "33ec9b20-9004-43fd-94ba-60b8fc94fb25",
+                              "name": "Monitor not found.",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/monitors/:monitor_id_or_slug/?environment=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":organization_id_or_slug",
+                                    ":project_id_or_slug",
+                                    "monitors",
+                                    ":monitor_id_or_slug",
+                                    ""
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Specific environment to delete.",
+                                      "key": "environment",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "organization_id_or_slug"
+                                    },
+                                    {
+                                      "key": "project_id_or_slug"
+                                    },
+                                    {
+                                      "key": "monitor_id_or_slug"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-06-05T15:17:31.000Z",
+                              "updatedAt": "2026-06-05T15:17:31.000Z",
+                              "uid": "35240-33ec9b20-9004-43fd-94ba-60b8fc94fb25"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:17:31.000Z",
+                          "updatedAt": "2026-06-05T15:17:31.000Z",
+                          "uid": "35240-aeb6a14f-96bb-4f75-ae41-fc6d8ca09392"
+                        }
+                      ],
+                      "id": "b1612deb-b04e-481b-8ad1-057ee9698369",
+                      "createdAt": "2026-06-05T15:17:31.000Z",
+                      "updatedAt": "2026-06-05T15:17:31.000Z",
+                      "uid": "35240-b1612deb-b04e-481b-8ad1-057ee9698369"
+                    }
+                  ],
+                  "id": "1ae005f9-395e-4e54-b38b-3bedcb83e711",
+                  "createdAt": "2026-06-05T15:17:31.000Z",
+                  "updatedAt": "2026-06-05T15:17:31.000Z",
+                  "uid": "35240-1ae005f9-395e-4e54-b38b-3bedcb83e711"
+                }
+              ],
+              "id": "3b7fd138-d5d1-4f63-adb4-281264346a4d",
+              "createdAt": "2026-06-05T15:17:31.000Z",
+              "updatedAt": "2026-06-05T15:17:31.000Z",
+              "uid": "35240-3b7fd138-d5d1-4f63-adb4-281264346a4d"
+            }
+          ],
+          "id": "18948971-6233-4a6d-a7ad-39e91cd0eaaf",
+          "createdAt": "2026-06-05T15:17:31.000Z",
+          "updatedAt": "2026-06-05T15:17:31.000Z",
+          "uid": "35240-18948971-6233-4a6d-a7ad-39e91cd0eaaf"
+        }
+      ],
+      "id": "075b425e-bcfd-4a89-b3c5-f14718fd29df",
+      "createdAt": "2026-06-05T15:17:31.000Z",
+      "updatedAt": "2026-06-05T15:17:31.000Z",
+      "uid": "35240-075b425e-bcfd-4a89-b3c5-f14718fd29df"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://sentry.io/api/0"
+    }
+  ]
+}

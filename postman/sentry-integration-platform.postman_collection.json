@@ -1,0 +1,1684 @@
+{
+  "info": {
+    "_postman_id": "ac3975e7-e2f7-4982-ac76-7ff7ed42970f",
+    "name": "Sentry Integration Platform API",
+    "description": "The Integration Platform API provides endpoints for managing custom integrations in Sentry, including creating and updating external issues, managing integration configurations, listing installations, and retrieving organization-level custom integration details.\n\nContact Support:\n Name: Sentry Support\n Email: support@sentry.io",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:17:36.000Z",
+    "updatedAt": "2026-06-05T15:17:36.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-ac3975e7-e2f7-4982-ac76-7ff7ed42970f"
+  },
+  "item": [
+    {
+      "name": "organizations",
+      "item": [
+        {
+          "name": "{organization_id_or_slug}",
+          "item": [
+            {
+              "name": "sentry-app-installations",
+              "item": [
+                {
+                  "name": "Sentry List an organization's Integration Platform installations",
+                  "id": "09df850c-8758-4696-b6d6-e198489ccf9e",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/sentry-app-installations/",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "organizations",
+                        ":organization_id_or_slug",
+                        "sentry-app-installations",
+                        ""
+                      ],
+                      "variable": [
+                        {
+                          "id": "ee105f62-0e05-47ae-976e-adf0c4a63c78",
+                          "key": "organization_id_or_slug",
+                          "value": "<string>",
+                          "description": "(Required) The ID or slug of the organization."
+                        }
+                      ]
+                    },
+                    "description": "Returns a list of Integration Platform installations for the organization."
+                  },
+                  "response": [
+                    {
+                      "id": "92393c07-03b9-422d-89bf-f942fbde391d",
+                      "name": "A list of installations.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/sentry-app-installations/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "sentry-app-installations",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "key": "organization_id_or_slug"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "[\n  {\n    \"uuid\": \"<uuid>\",\n    \"app\": {\n      \"uuid\": \"<uuid>\",\n      \"slug\": \"<string>\"\n    },\n    \"organization\": {\n      \"slug\": \"<string>\"\n    },\n    \"status\": \"<string>\",\n    \"dateCreated\": \"<dateTime>\"\n  },\n  {\n    \"uuid\": \"<uuid>\",\n    \"app\": {\n      \"uuid\": \"<uuid>\",\n      \"slug\": \"<string>\"\n    },\n    \"organization\": {\n      \"slug\": \"<string>\"\n    },\n    \"status\": \"<string>\",\n    \"dateCreated\": \"<dateTime>\"\n  }\n]",
+                      "createdAt": "2026-06-05T15:17:37.000Z",
+                      "updatedAt": "2026-06-05T15:17:37.000Z",
+                      "uid": "35240-92393c07-03b9-422d-89bf-f942fbde391d"
+                    },
+                    {
+                      "id": "fdbfdbfe-bc66-4c7f-bb90-4015e2de8c6f",
+                      "name": "Unauthorized.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/sentry-app-installations/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "sentry-app-installations",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "key": "organization_id_or_slug"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:17:37.000Z",
+                      "updatedAt": "2026-06-05T15:17:37.000Z",
+                      "uid": "35240-fdbfdbfe-bc66-4c7f-bb90-4015e2de8c6f"
+                    },
+                    {
+                      "id": "32dcbdb1-6fc5-4cae-9cc1-87694b5fd269",
+                      "name": "Forbidden.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/sentry-app-installations/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "sentry-app-installations",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "key": "organization_id_or_slug"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:17:37.000Z",
+                      "updatedAt": "2026-06-05T15:17:37.000Z",
+                      "uid": "35240-32dcbdb1-6fc5-4cae-9cc1-87694b5fd269"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:17:37.000Z",
+                  "updatedAt": "2026-06-05T15:17:37.000Z",
+                  "uid": "35240-09df850c-8758-4696-b6d6-e198489ccf9e"
+                }
+              ],
+              "id": "894b9c35-0fb1-43e8-a89b-a08b92f6ed4d",
+              "createdAt": "2026-06-05T15:17:37.000Z",
+              "updatedAt": "2026-06-05T15:17:37.000Z",
+              "uid": "35240-894b9c35-0fb1-43e8-a89b-a08b92f6ed4d"
+            },
+            {
+              "name": "sentry-apps",
+              "item": [
+                {
+                  "name": "Sentry Retrieve the custom integrations created by an organization",
+                  "id": "d0b7929b-6361-4f0e-83cf-0011840f04ba",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/sentry-apps/",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "organizations",
+                        ":organization_id_or_slug",
+                        "sentry-apps",
+                        ""
+                      ],
+                      "variable": [
+                        {
+                          "id": "b4284525-e681-401b-b143-6ffbf55d8680",
+                          "key": "organization_id_or_slug",
+                          "value": "<string>",
+                          "description": "(Required) The ID or slug of the organization."
+                        }
+                      ]
+                    },
+                    "description": "Returns a list of custom integrations built by the organization."
+                  },
+                  "response": [
+                    {
+                      "id": "22fd31b8-bb80-441b-8004-b3cf3e221263",
+                      "name": "A list of custom integrations.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/sentry-apps/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "sentry-apps",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "key": "organization_id_or_slug"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "[\n  {\n    \"uuid\": \"<uuid>\",\n    \"slug\": \"<string>\",\n    \"name\": \"<string>\",\n    \"scopes\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"status\": \"<string>\",\n    \"webhookUrl\": \"<uri>\",\n    \"redirectUrl\": \"<uri>\",\n    \"overview\": \"<string>\",\n    \"schema\": {},\n    \"datePublished\": \"<dateTime>\",\n    \"owner\": {\n      \"id\": \"<string>\",\n      \"slug\": \"<string>\"\n    }\n  },\n  {\n    \"uuid\": \"<uuid>\",\n    \"slug\": \"<string>\",\n    \"name\": \"<string>\",\n    \"scopes\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"status\": \"<string>\",\n    \"webhookUrl\": \"<uri>\",\n    \"redirectUrl\": \"<uri>\",\n    \"overview\": \"<string>\",\n    \"schema\": {},\n    \"datePublished\": \"<dateTime>\",\n    \"owner\": {\n      \"id\": \"<string>\",\n      \"slug\": \"<string>\"\n    }\n  }\n]",
+                      "createdAt": "2026-06-05T15:17:37.000Z",
+                      "updatedAt": "2026-06-05T15:17:37.000Z",
+                      "uid": "35240-22fd31b8-bb80-441b-8004-b3cf3e221263"
+                    },
+                    {
+                      "id": "cf69e674-56be-4710-a98f-8615969d640d",
+                      "name": "Unauthorized.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/sentry-apps/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "sentry-apps",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "key": "organization_id_or_slug"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:17:37.000Z",
+                      "updatedAt": "2026-06-05T15:17:37.000Z",
+                      "uid": "35240-cf69e674-56be-4710-a98f-8615969d640d"
+                    },
+                    {
+                      "id": "b0e6f2ae-3508-4060-9aec-1355714a2586",
+                      "name": "Forbidden.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/sentry-apps/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "sentry-apps",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "key": "organization_id_or_slug"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:17:37.000Z",
+                      "updatedAt": "2026-06-05T15:17:37.000Z",
+                      "uid": "35240-b0e6f2ae-3508-4060-9aec-1355714a2586"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:17:37.000Z",
+                  "updatedAt": "2026-06-05T15:17:37.000Z",
+                  "uid": "35240-d0b7929b-6361-4f0e-83cf-0011840f04ba"
+                }
+              ],
+              "id": "71e1f2df-b67a-4f32-8f78-409f272bd6c5",
+              "createdAt": "2026-06-05T15:17:37.000Z",
+              "updatedAt": "2026-06-05T15:17:37.000Z",
+              "uid": "35240-71e1f2df-b67a-4f32-8f78-409f272bd6c5"
+            }
+          ],
+          "id": "5641210c-7170-407f-a32c-fa8fb577fffc",
+          "createdAt": "2026-06-05T15:17:37.000Z",
+          "updatedAt": "2026-06-05T15:17:37.000Z",
+          "uid": "35240-5641210c-7170-407f-a32c-fa8fb577fffc"
+        }
+      ],
+      "id": "cd551cb4-c182-4ef0-b05d-483241d0820d",
+      "createdAt": "2026-06-05T15:17:37.000Z",
+      "updatedAt": "2026-06-05T15:17:37.000Z",
+      "uid": "35240-cd551cb4-c182-4ef0-b05d-483241d0820d"
+    },
+    {
+      "name": "sentry-apps",
+      "item": [
+        {
+          "name": "{sentry_app_id_or_slug}",
+          "item": [
+            {
+              "name": "Sentry Retrieve a custom integration by ID or slug",
+              "id": "32f96894-70df-414b-8f09-5a2f4b33b35f",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/sentry-apps/:sentry_app_id_or_slug/",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "sentry-apps",
+                    ":sentry_app_id_or_slug",
+                    ""
+                  ],
+                  "variable": [
+                    {
+                      "id": "0451c522-becd-4409-9832-9fa86f65a57e",
+                      "key": "sentry_app_id_or_slug",
+                      "value": "<string>",
+                      "description": "(Required) The ID or slug of the custom integration."
+                    }
+                  ]
+                },
+                "description": "Returns details for a specific custom integration (Sentry App)."
+              },
+              "response": [
+                {
+                  "id": "b1e74cb2-92b9-4f09-a929-3a06cd678f30",
+                  "name": "Custom integration details.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/sentry-apps/:sentry_app_id_or_slug/",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "sentry-apps",
+                        ":sentry_app_id_or_slug",
+                        ""
+                      ],
+                      "variable": [
+                        {
+                          "key": "sentry_app_id_or_slug"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"uuid\": \"<uuid>\",\n  \"slug\": \"<string>\",\n  \"name\": \"<string>\",\n  \"scopes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"status\": \"<string>\",\n  \"webhookUrl\": \"<uri>\",\n  \"redirectUrl\": \"<uri>\",\n  \"overview\": \"<string>\",\n  \"schema\": {},\n  \"datePublished\": \"<dateTime>\",\n  \"owner\": {\n    \"id\": \"<string>\",\n    \"slug\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-06-05T15:17:37.000Z",
+                  "updatedAt": "2026-06-05T15:17:37.000Z",
+                  "uid": "35240-b1e74cb2-92b9-4f09-a929-3a06cd678f30"
+                },
+                {
+                  "id": "2d95c595-659e-403e-970b-dcde0a50d7b5",
+                  "name": "Unauthorized.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/sentry-apps/:sentry_app_id_or_slug/",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "sentry-apps",
+                        ":sentry_app_id_or_slug",
+                        ""
+                      ],
+                      "variable": [
+                        {
+                          "key": "sentry_app_id_or_slug"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:17:37.000Z",
+                  "updatedAt": "2026-06-05T15:17:37.000Z",
+                  "uid": "35240-2d95c595-659e-403e-970b-dcde0a50d7b5"
+                },
+                {
+                  "id": "bae4d42c-65c7-42d7-92b4-04a4fe1d999f",
+                  "name": "Integration not found.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/sentry-apps/:sentry_app_id_or_slug/",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "sentry-apps",
+                        ":sentry_app_id_or_slug",
+                        ""
+                      ],
+                      "variable": [
+                        {
+                          "key": "sentry_app_id_or_slug"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:17:37.000Z",
+                  "updatedAt": "2026-06-05T15:17:37.000Z",
+                  "uid": "35240-bae4d42c-65c7-42d7-92b4-04a4fe1d999f"
+                }
+              ],
+              "createdAt": "2026-06-05T15:17:37.000Z",
+              "updatedAt": "2026-06-05T15:17:37.000Z",
+              "uid": "35240-32f96894-70df-414b-8f09-5a2f4b33b35f"
+            },
+            {
+              "name": "Sentry Update an existing custom integration",
+              "id": "3380fd88-2f77-4d07-baac-d77bb87bacf0",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"scopes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"webhookUrl\": \"<uri>\",\n  \"redirectUrl\": \"<uri>\",\n  \"overview\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/sentry-apps/:sentry_app_id_or_slug/",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "sentry-apps",
+                    ":sentry_app_id_or_slug",
+                    ""
+                  ],
+                  "variable": [
+                    {
+                      "id": "a6954bd5-2696-415b-8dc4-1658d273dcc1",
+                      "key": "sentry_app_id_or_slug",
+                      "value": "<string>",
+                      "description": "(Required) The ID or slug of the custom integration."
+                    }
+                  ]
+                },
+                "description": "Updates an existing custom integration."
+              },
+              "response": [
+                {
+                  "id": "31e19dc7-528c-4bba-90ce-87ca227e7a75",
+                  "name": "Integration updated.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"scopes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"webhookUrl\": \"<uri>\",\n  \"redirectUrl\": \"<uri>\",\n  \"overview\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/sentry-apps/:sentry_app_id_or_slug/",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "sentry-apps",
+                        ":sentry_app_id_or_slug",
+                        ""
+                      ],
+                      "variable": [
+                        {
+                          "key": "sentry_app_id_or_slug"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"uuid\": \"<uuid>\",\n  \"slug\": \"<string>\",\n  \"name\": \"<string>\",\n  \"scopes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"status\": \"<string>\",\n  \"webhookUrl\": \"<uri>\",\n  \"redirectUrl\": \"<uri>\",\n  \"overview\": \"<string>\",\n  \"schema\": {},\n  \"datePublished\": \"<dateTime>\",\n  \"owner\": {\n    \"id\": \"<string>\",\n    \"slug\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-06-05T15:17:37.000Z",
+                  "updatedAt": "2026-06-05T15:17:37.000Z",
+                  "uid": "35240-31e19dc7-528c-4bba-90ce-87ca227e7a75"
+                },
+                {
+                  "id": "e3c5c784-d92b-402c-b88b-c6e1911fec45",
+                  "name": "Bad request.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"scopes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"webhookUrl\": \"<uri>\",\n  \"redirectUrl\": \"<uri>\",\n  \"overview\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/sentry-apps/:sentry_app_id_or_slug/",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "sentry-apps",
+                        ":sentry_app_id_or_slug",
+                        ""
+                      ],
+                      "variable": [
+                        {
+                          "key": "sentry_app_id_or_slug"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:17:37.000Z",
+                  "updatedAt": "2026-06-05T15:17:37.000Z",
+                  "uid": "35240-e3c5c784-d92b-402c-b88b-c6e1911fec45"
+                },
+                {
+                  "id": "d07de08c-35b3-443e-a9cd-9ea1743ee774",
+                  "name": "Unauthorized.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"scopes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"webhookUrl\": \"<uri>\",\n  \"redirectUrl\": \"<uri>\",\n  \"overview\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/sentry-apps/:sentry_app_id_or_slug/",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "sentry-apps",
+                        ":sentry_app_id_or_slug",
+                        ""
+                      ],
+                      "variable": [
+                        {
+                          "key": "sentry_app_id_or_slug"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:17:37.000Z",
+                  "updatedAt": "2026-06-05T15:17:37.000Z",
+                  "uid": "35240-d07de08c-35b3-443e-a9cd-9ea1743ee774"
+                },
+                {
+                  "id": "f9c6848a-11df-4c1e-8c4c-20fb61146f97",
+                  "name": "Integration not found.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"scopes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"webhookUrl\": \"<uri>\",\n  \"redirectUrl\": \"<uri>\",\n  \"overview\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/sentry-apps/:sentry_app_id_or_slug/",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "sentry-apps",
+                        ":sentry_app_id_or_slug",
+                        ""
+                      ],
+                      "variable": [
+                        {
+                          "key": "sentry_app_id_or_slug"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:17:37.000Z",
+                  "updatedAt": "2026-06-05T15:17:37.000Z",
+                  "uid": "35240-f9c6848a-11df-4c1e-8c4c-20fb61146f97"
+                }
+              ],
+              "createdAt": "2026-06-05T15:17:37.000Z",
+              "updatedAt": "2026-06-05T15:17:37.000Z",
+              "uid": "35240-3380fd88-2f77-4d07-baac-d77bb87bacf0"
+            },
+            {
+              "name": "Sentry Delete a custom integration",
+              "id": "f0bedbeb-e14d-4cf4-87bb-2e2180773ae4",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/sentry-apps/:sentry_app_id_or_slug/",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "sentry-apps",
+                    ":sentry_app_id_or_slug",
+                    ""
+                  ],
+                  "variable": [
+                    {
+                      "id": "0b585595-c48b-48f0-be7e-f9b5ccb9ad48",
+                      "key": "sentry_app_id_or_slug",
+                      "value": "<string>",
+                      "description": "(Required) The ID or slug of the custom integration."
+                    }
+                  ]
+                },
+                "description": "Deletes a custom integration."
+              },
+              "response": [
+                {
+                  "id": "97f9adb0-d478-4aac-bc95-ac4a2eb87fc3",
+                  "name": "Integration deleted.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/sentry-apps/:sentry_app_id_or_slug/",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "sentry-apps",
+                        ":sentry_app_id_or_slug",
+                        ""
+                      ],
+                      "variable": [
+                        {
+                          "key": "sentry_app_id_or_slug"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:17:37.000Z",
+                  "updatedAt": "2026-06-05T15:17:37.000Z",
+                  "uid": "35240-97f9adb0-d478-4aac-bc95-ac4a2eb87fc3"
+                },
+                {
+                  "id": "e0bc9d79-a61a-40bf-8416-99cbfab5f92a",
+                  "name": "Unauthorized.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/sentry-apps/:sentry_app_id_or_slug/",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "sentry-apps",
+                        ":sentry_app_id_or_slug",
+                        ""
+                      ],
+                      "variable": [
+                        {
+                          "key": "sentry_app_id_or_slug"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:17:37.000Z",
+                  "updatedAt": "2026-06-05T15:17:37.000Z",
+                  "uid": "35240-e0bc9d79-a61a-40bf-8416-99cbfab5f92a"
+                },
+                {
+                  "id": "ed089924-77b5-4205-9a42-6a988bc09110",
+                  "name": "Integration not found.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/sentry-apps/:sentry_app_id_or_slug/",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "sentry-apps",
+                        ":sentry_app_id_or_slug",
+                        ""
+                      ],
+                      "variable": [
+                        {
+                          "key": "sentry_app_id_or_slug"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:17:37.000Z",
+                  "updatedAt": "2026-06-05T15:17:37.000Z",
+                  "uid": "35240-ed089924-77b5-4205-9a42-6a988bc09110"
+                }
+              ],
+              "createdAt": "2026-06-05T15:17:37.000Z",
+              "updatedAt": "2026-06-05T15:17:37.000Z",
+              "uid": "35240-f0bedbeb-e14d-4cf4-87bb-2e2180773ae4"
+            }
+          ],
+          "id": "1c682729-86c8-421a-ab2a-8b47276d418d",
+          "createdAt": "2026-06-05T15:17:37.000Z",
+          "updatedAt": "2026-06-05T15:17:37.000Z",
+          "uid": "35240-1c682729-86c8-421a-ab2a-8b47276d418d"
+        }
+      ],
+      "id": "739fd5d5-f953-4555-ad1c-bb0cb213eb3c",
+      "createdAt": "2026-06-05T15:17:37.000Z",
+      "updatedAt": "2026-06-05T15:17:37.000Z",
+      "uid": "35240-739fd5d5-f953-4555-ad1c-bb0cb213eb3c"
+    },
+    {
+      "name": "sentry-app-installations",
+      "item": [
+        {
+          "name": "{uuid}",
+          "item": [
+            {
+              "name": "external-issues",
+              "item": [
+                {
+                  "name": "{external_issue_id}",
+                  "item": [
+                    {
+                      "name": "Sentry Delete an external issue",
+                      "id": "71be5214-8e22-4709-aeba-8627e97db69f",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/sentry-app-installations/:uuid/external-issues/:external_issue_id/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "sentry-app-installations",
+                            ":uuid",
+                            "external-issues",
+                            ":external_issue_id",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "id": "e04c6641-0d0a-402b-9008-065012b6e1e4",
+                              "key": "uuid",
+                              "value": "<uuid>",
+                              "description": "(Required) The UUID of the installation."
+                            },
+                            {
+                              "id": "89644fcd-4f6b-4db0-9175-667cd73e9365",
+                              "key": "external_issue_id",
+                              "value": "<string>",
+                              "description": "(Required) The ID of the external issue link."
+                            }
+                          ]
+                        },
+                        "description": "Removes a link between a Sentry issue and an external issue."
+                      },
+                      "response": [
+                        {
+                          "id": "e41beaea-f7f2-4429-935b-ce3ca08b1b0b",
+                          "name": "External issue link deleted.",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/sentry-app-installations/:uuid/external-issues/:external_issue_id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "sentry-app-installations",
+                                ":uuid",
+                                "external-issues",
+                                ":external_issue_id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "uuid"
+                                },
+                                {
+                                  "key": "external_issue_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "No Content",
+                          "code": 204,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:17:37.000Z",
+                          "updatedAt": "2026-06-05T15:17:37.000Z",
+                          "uid": "35240-e41beaea-f7f2-4429-935b-ce3ca08b1b0b"
+                        },
+                        {
+                          "id": "7e6a7daf-f7eb-4047-9e55-baba86b5b5b9",
+                          "name": "Unauthorized.",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/sentry-app-installations/:uuid/external-issues/:external_issue_id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "sentry-app-installations",
+                                ":uuid",
+                                "external-issues",
+                                ":external_issue_id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "uuid"
+                                },
+                                {
+                                  "key": "external_issue_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:17:37.000Z",
+                          "updatedAt": "2026-06-05T15:17:37.000Z",
+                          "uid": "35240-7e6a7daf-f7eb-4047-9e55-baba86b5b5b9"
+                        },
+                        {
+                          "id": "6818b02d-fba7-41f0-b537-3ef632275908",
+                          "name": "Not found.",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/sentry-app-installations/:uuid/external-issues/:external_issue_id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "sentry-app-installations",
+                                ":uuid",
+                                "external-issues",
+                                ":external_issue_id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "uuid"
+                                },
+                                {
+                                  "key": "external_issue_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:17:37.000Z",
+                          "updatedAt": "2026-06-05T15:17:37.000Z",
+                          "uid": "35240-6818b02d-fba7-41f0-b537-3ef632275908"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:17:37.000Z",
+                      "updatedAt": "2026-06-05T15:17:37.000Z",
+                      "uid": "35240-71be5214-8e22-4709-aeba-8627e97db69f"
+                    }
+                  ],
+                  "id": "a4535cc4-667c-4063-976b-c7a2636294c5",
+                  "createdAt": "2026-06-05T15:17:37.000Z",
+                  "updatedAt": "2026-06-05T15:17:37.000Z",
+                  "uid": "35240-a4535cc4-667c-4063-976b-c7a2636294c5"
+                },
+                {
+                  "name": "Sentry Create or update an external issue",
+                  "id": "6d456685-55aa-4c20-8fc1-3040ac3b68f3",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"issueId\": \"<integer>\",\n  \"webUrl\": \"<uri>\",\n  \"project\": \"<string>\",\n  \"identifier\": \"<string>\",\n  \"label\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/sentry-app-installations/:uuid/external-issues/",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "sentry-app-installations",
+                        ":uuid",
+                        "external-issues",
+                        ""
+                      ],
+                      "variable": [
+                        {
+                          "id": "c39f67ef-eef5-4f49-b482-4035239c10e6",
+                          "key": "uuid",
+                          "value": "<uuid>",
+                          "description": "(Required) The UUID of the installation."
+                        }
+                      ]
+                    },
+                    "description": "Creates or updates a link between a Sentry issue and an external issue."
+                  },
+                  "response": [
+                    {
+                      "id": "5e406ea7-6647-4efa-bb8d-8466ac50fe37",
+                      "name": "External issue created or updated.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"issueId\": \"<integer>\",\n  \"webUrl\": \"<uri>\",\n  \"project\": \"<string>\",\n  \"identifier\": \"<string>\",\n  \"label\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/sentry-app-installations/:uuid/external-issues/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "sentry-app-installations",
+                            ":uuid",
+                            "external-issues",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "key": "uuid"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"issueId\": \"<integer>\",\n  \"webUrl\": \"<uri>\",\n  \"serviceType\": \"<string>\",\n  \"displayName\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:17:37.000Z",
+                      "updatedAt": "2026-06-05T15:17:37.000Z",
+                      "uid": "35240-5e406ea7-6647-4efa-bb8d-8466ac50fe37"
+                    },
+                    {
+                      "id": "e07466d9-b1a0-4515-a0db-9a9a3a338b5e",
+                      "name": "Bad request.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"issueId\": \"<integer>\",\n  \"webUrl\": \"<uri>\",\n  \"project\": \"<string>\",\n  \"identifier\": \"<string>\",\n  \"label\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/sentry-app-installations/:uuid/external-issues/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "sentry-app-installations",
+                            ":uuid",
+                            "external-issues",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "key": "uuid"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:17:37.000Z",
+                      "updatedAt": "2026-06-05T15:17:37.000Z",
+                      "uid": "35240-e07466d9-b1a0-4515-a0db-9a9a3a338b5e"
+                    },
+                    {
+                      "id": "b96c3597-c5a0-4310-80a6-51ad54c1925b",
+                      "name": "Unauthorized.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"issueId\": \"<integer>\",\n  \"webUrl\": \"<uri>\",\n  \"project\": \"<string>\",\n  \"identifier\": \"<string>\",\n  \"label\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/sentry-app-installations/:uuid/external-issues/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "sentry-app-installations",
+                            ":uuid",
+                            "external-issues",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "key": "uuid"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:17:37.000Z",
+                      "updatedAt": "2026-06-05T15:17:37.000Z",
+                      "uid": "35240-b96c3597-c5a0-4310-80a6-51ad54c1925b"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:17:37.000Z",
+                  "updatedAt": "2026-06-05T15:17:37.000Z",
+                  "uid": "35240-6d456685-55aa-4c20-8fc1-3040ac3b68f3"
+                }
+              ],
+              "id": "e8a3449b-fdab-4ccd-bf67-e2a9d300966c",
+              "createdAt": "2026-06-05T15:17:37.000Z",
+              "updatedAt": "2026-06-05T15:17:37.000Z",
+              "uid": "35240-e8a3449b-fdab-4ccd-bf67-e2a9d300966c"
+            }
+          ],
+          "id": "5e4cdd15-1abb-43ee-b75c-db848749c098",
+          "createdAt": "2026-06-05T15:17:37.000Z",
+          "updatedAt": "2026-06-05T15:17:37.000Z",
+          "uid": "35240-5e4cdd15-1abb-43ee-b75c-db848749c098"
+        }
+      ],
+      "id": "e0412091-e259-43d2-969a-bebd7f41ef3b",
+      "createdAt": "2026-06-05T15:17:37.000Z",
+      "updatedAt": "2026-06-05T15:17:37.000Z",
+      "uid": "35240-e0412091-e259-43d2-969a-bebd7f41ef3b"
+    },
+    {
+      "name": "groups",
+      "item": [
+        {
+          "name": "{issue_id}",
+          "item": [
+            {
+              "name": "external-issues",
+              "item": [
+                {
+                  "name": "Retrieve custom integration issue links for a Sentry issue",
+                  "id": "b2ce9956-70d5-40e6-b0e5-c6e568924204",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/groups/:issue_id/external-issues/",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "groups",
+                        ":issue_id",
+                        "external-issues",
+                        ""
+                      ],
+                      "variable": [
+                        {
+                          "id": "952291af-16f2-4e0a-be7f-52f13b279d72",
+                          "key": "issue_id",
+                          "value": "<string>",
+                          "description": "(Required) The ID of the Sentry issue."
+                        }
+                      ]
+                    },
+                    "description": "Returns a list of external issue links for a given Sentry issue."
+                  },
+                  "response": [
+                    {
+                      "id": "7b6f29e6-4349-4ddd-a6de-894190c81043",
+                      "name": "A list of external issue links.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/groups/:issue_id/external-issues/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "groups",
+                            ":issue_id",
+                            "external-issues",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "key": "issue_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "[\n  {\n    \"id\": \"<string>\",\n    \"issueId\": \"<integer>\",\n    \"webUrl\": \"<uri>\",\n    \"serviceType\": \"<string>\",\n    \"displayName\": \"<string>\"\n  },\n  {\n    \"id\": \"<string>\",\n    \"issueId\": \"<integer>\",\n    \"webUrl\": \"<uri>\",\n    \"serviceType\": \"<string>\",\n    \"displayName\": \"<string>\"\n  }\n]",
+                      "createdAt": "2026-06-05T15:17:37.000Z",
+                      "updatedAt": "2026-06-05T15:17:37.000Z",
+                      "uid": "35240-7b6f29e6-4349-4ddd-a6de-894190c81043"
+                    },
+                    {
+                      "id": "9a0e6e72-42c1-4284-820a-5039d8d99fbb",
+                      "name": "Unauthorized.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/groups/:issue_id/external-issues/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "groups",
+                            ":issue_id",
+                            "external-issues",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "key": "issue_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:17:37.000Z",
+                      "updatedAt": "2026-06-05T15:17:37.000Z",
+                      "uid": "35240-9a0e6e72-42c1-4284-820a-5039d8d99fbb"
+                    },
+                    {
+                      "id": "fc64f03c-b752-486c-aa3b-802088de77c6",
+                      "name": "Issue not found.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/groups/:issue_id/external-issues/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "groups",
+                            ":issue_id",
+                            "external-issues",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "key": "issue_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:17:37.000Z",
+                      "updatedAt": "2026-06-05T15:17:37.000Z",
+                      "uid": "35240-fc64f03c-b752-486c-aa3b-802088de77c6"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:17:37.000Z",
+                  "updatedAt": "2026-06-05T15:17:37.000Z",
+                  "uid": "35240-b2ce9956-70d5-40e6-b0e5-c6e568924204"
+                }
+              ],
+              "id": "a51d2a15-c5cc-4b87-b73e-9cd0b52cc3d4",
+              "createdAt": "2026-06-05T15:17:37.000Z",
+              "updatedAt": "2026-06-05T15:17:37.000Z",
+              "uid": "35240-a51d2a15-c5cc-4b87-b73e-9cd0b52cc3d4"
+            }
+          ],
+          "id": "8737ee4a-5f99-470e-8de4-5d4f104982c3",
+          "createdAt": "2026-06-05T15:17:37.000Z",
+          "updatedAt": "2026-06-05T15:17:37.000Z",
+          "uid": "35240-8737ee4a-5f99-470e-8de4-5d4f104982c3"
+        }
+      ],
+      "id": "dd45cdf3-86e9-4866-89dd-b458e6dbab24",
+      "createdAt": "2026-06-05T15:17:37.000Z",
+      "updatedAt": "2026-06-05T15:17:37.000Z",
+      "uid": "35240-dd45cdf3-86e9-4866-89dd-b458e6dbab24"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://sentry.io/api/0"
+    }
+  ]
+}

@@ -1,0 +1,2023 @@
+{
+  "info": {
+    "_postman_id": "ee279811-9b77-4a02-b330-829b5ff32598",
+    "name": "Sentry Prevent API",
+    "description": "The Prevent API provides endpoints for managing repository integrations and test results in Sentry, including syncing repositories, managing branches, generating upload tokens, and retrieving test result metrics and test suites.\n\nContact Support:\n Name: Sentry Support\n Email: support@sentry.io",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:17:41.000Z",
+    "updatedAt": "2026-06-05T15:17:41.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-ee279811-9b77-4a02-b330-829b5ff32598"
+  },
+  "item": [
+    {
+      "name": "organizations",
+      "item": [
+        {
+          "name": "{organization_id_or_slug}",
+          "item": [
+            {
+              "name": "prevent",
+              "item": [
+                {
+                  "name": "repositories",
+                  "item": [
+                    {
+                      "name": "{repo_id}",
+                      "item": [
+                        {
+                          "name": "branches",
+                          "item": [
+                            {
+                              "name": "Sentry Retrieve list of branches for a given owner and repository",
+                              "id": "f3549907-c009-4f08-b4f8-c48b57e7da77",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/prevent/repositories/:repo_id/branches/?cursor=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "organizations",
+                                    ":organization_id_or_slug",
+                                    "prevent",
+                                    "repositories",
+                                    ":repo_id",
+                                    "branches",
+                                    ""
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Pagination cursor.",
+                                      "key": "cursor",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "c1f01de2-08e5-4971-b63a-dd04b25ea11e",
+                                      "key": "organization_id_or_slug",
+                                      "value": "<string>",
+                                      "description": "(Required) The ID or slug of the organization."
+                                    },
+                                    {
+                                      "id": "711dd846-88ed-42e7-9d76-8b4c764646c0",
+                                      "key": "repo_id",
+                                      "value": "<string>",
+                                      "description": "(Required) The ID of the repository."
+                                    }
+                                  ]
+                                },
+                                "description": "Returns a list of branches for a specific repository."
+                              },
+                              "response": [
+                                {
+                                  "id": "444740c5-8427-48f3-b9fa-2891cb16b376",
+                                  "name": "A list of branches.",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/prevent/repositories/:repo_id/branches/?cursor=<string>",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "organizations",
+                                        ":organization_id_or_slug",
+                                        "prevent",
+                                        "repositories",
+                                        ":repo_id",
+                                        "branches",
+                                        ""
+                                      ],
+                                      "query": [
+                                        {
+                                          "description": "Pagination cursor.",
+                                          "key": "cursor",
+                                          "value": "<string>"
+                                        }
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "organization_id_or_slug"
+                                        },
+                                        {
+                                          "key": "repo_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "[\n  {\n    \"name\": \"<string>\",\n    \"sha\": \"<string>\"\n  },\n  {\n    \"name\": \"<string>\",\n    \"sha\": \"<string>\"\n  }\n]",
+                                  "createdAt": "2026-06-05T15:17:41.000Z",
+                                  "updatedAt": "2026-06-05T15:17:41.000Z",
+                                  "uid": "35240-444740c5-8427-48f3-b9fa-2891cb16b376"
+                                },
+                                {
+                                  "id": "25c791b1-5731-4d1d-81b7-4fc4fe724c87",
+                                  "name": "Unauthorized.",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/prevent/repositories/:repo_id/branches/?cursor=<string>",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "organizations",
+                                        ":organization_id_or_slug",
+                                        "prevent",
+                                        "repositories",
+                                        ":repo_id",
+                                        "branches",
+                                        ""
+                                      ],
+                                      "query": [
+                                        {
+                                          "description": "Pagination cursor.",
+                                          "key": "cursor",
+                                          "value": "<string>"
+                                        }
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "organization_id_or_slug"
+                                        },
+                                        {
+                                          "key": "repo_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-06-05T15:17:41.000Z",
+                                  "updatedAt": "2026-06-05T15:17:41.000Z",
+                                  "uid": "35240-25c791b1-5731-4d1d-81b7-4fc4fe724c87"
+                                },
+                                {
+                                  "id": "76a82157-c724-4ae7-947e-b5172b144146",
+                                  "name": "Repository not found.",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/prevent/repositories/:repo_id/branches/?cursor=<string>",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "organizations",
+                                        ":organization_id_or_slug",
+                                        "prevent",
+                                        "repositories",
+                                        ":repo_id",
+                                        "branches",
+                                        ""
+                                      ],
+                                      "query": [
+                                        {
+                                          "description": "Pagination cursor.",
+                                          "key": "cursor",
+                                          "value": "<string>"
+                                        }
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "organization_id_or_slug"
+                                        },
+                                        {
+                                          "key": "repo_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Not Found",
+                                  "code": 404,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-06-05T15:17:41.000Z",
+                                  "updatedAt": "2026-06-05T15:17:41.000Z",
+                                  "uid": "35240-76a82157-c724-4ae7-947e-b5172b144146"
+                                }
+                              ],
+                              "createdAt": "2026-06-05T15:17:41.000Z",
+                              "updatedAt": "2026-06-05T15:17:41.000Z",
+                              "uid": "35240-f3549907-c009-4f08-b4f8-c48b57e7da77"
+                            }
+                          ],
+                          "id": "1020832b-851c-4a37-bca4-4b602de9b282",
+                          "createdAt": "2026-06-05T15:17:41.000Z",
+                          "updatedAt": "2026-06-05T15:17:41.000Z",
+                          "uid": "35240-1020832b-851c-4a37-bca4-4b602de9b282"
+                        },
+                        {
+                          "name": "Sentry Retrieve a single repository for a given owner",
+                          "id": "3ed3b8d1-a03b-4aec-b836-627c2e55db90",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/prevent/repositories/:repo_id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "prevent",
+                                "repositories",
+                                ":repo_id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "id": "6e8e5185-0c50-47e6-a00f-21ad3a4db865",
+                                  "key": "organization_id_or_slug",
+                                  "value": "<string>",
+                                  "description": "(Required) The ID or slug of the organization."
+                                },
+                                {
+                                  "id": "098360f1-8a96-4662-9521-b3e2debb6739",
+                                  "key": "repo_id",
+                                  "value": "<string>",
+                                  "description": "(Required) The ID of the repository."
+                                }
+                              ]
+                            },
+                            "description": "Returns details for a specific repository."
+                          },
+                          "response": [
+                            {
+                              "id": "8e4b85a4-f95f-4f30-8589-9da63af8ed21",
+                              "name": "Repository details.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/prevent/repositories/:repo_id/",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "organizations",
+                                    ":organization_id_or_slug",
+                                    "prevent",
+                                    "repositories",
+                                    ":repo_id",
+                                    ""
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "organization_id_or_slug"
+                                    },
+                                    {
+                                      "key": "repo_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"provider\": \"<string>\",\n  \"url\": \"<string>\",\n  \"dateCreated\": \"<dateTime>\"\n}",
+                              "createdAt": "2026-06-05T15:17:41.000Z",
+                              "updatedAt": "2026-06-05T15:17:41.000Z",
+                              "uid": "35240-8e4b85a4-f95f-4f30-8589-9da63af8ed21"
+                            },
+                            {
+                              "id": "d2d1cd26-ab77-45e9-b755-e0c19829d4ed",
+                              "name": "Unauthorized.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/prevent/repositories/:repo_id/",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "organizations",
+                                    ":organization_id_or_slug",
+                                    "prevent",
+                                    "repositories",
+                                    ":repo_id",
+                                    ""
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "organization_id_or_slug"
+                                    },
+                                    {
+                                      "key": "repo_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-06-05T15:17:41.000Z",
+                              "updatedAt": "2026-06-05T15:17:41.000Z",
+                              "uid": "35240-d2d1cd26-ab77-45e9-b755-e0c19829d4ed"
+                            },
+                            {
+                              "id": "7ca4eeca-29f8-4fe7-b82e-2c7ee8e06731",
+                              "name": "Repository not found.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/prevent/repositories/:repo_id/",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "organizations",
+                                    ":organization_id_or_slug",
+                                    "prevent",
+                                    "repositories",
+                                    ":repo_id",
+                                    ""
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "organization_id_or_slug"
+                                    },
+                                    {
+                                      "key": "repo_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-06-05T15:17:41.000Z",
+                              "updatedAt": "2026-06-05T15:17:41.000Z",
+                              "uid": "35240-7ca4eeca-29f8-4fe7-b82e-2c7ee8e06731"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:17:41.000Z",
+                          "updatedAt": "2026-06-05T15:17:41.000Z",
+                          "uid": "35240-3ed3b8d1-a03b-4aec-b836-627c2e55db90"
+                        }
+                      ],
+                      "id": "b2308a68-4790-47d7-9035-108fa2b0e1ff",
+                      "createdAt": "2026-06-05T15:17:41.000Z",
+                      "updatedAt": "2026-06-05T15:17:41.000Z",
+                      "uid": "35240-b2308a68-4790-47d7-9035-108fa2b0e1ff"
+                    },
+                    {
+                      "name": "Sentry Retrieve list of repositories for a given owner",
+                      "id": "b9e6f1d6-230f-45e0-a1f4-3c4a9c12a84a",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/prevent/repositories/?cursor=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "prevent",
+                            "repositories",
+                            ""
+                          ],
+                          "query": [
+                            {
+                              "description": "Pagination cursor.",
+                              "key": "cursor",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "6d3a773c-a3a9-4f2e-b089-12fa54dd62f8",
+                              "key": "organization_id_or_slug",
+                              "value": "<string>",
+                              "description": "(Required) The ID or slug of the organization."
+                            }
+                          ]
+                        },
+                        "description": "Returns a list of repositories for the organization."
+                      },
+                      "response": [
+                        {
+                          "id": "0787b3c0-1c1d-4324-adaa-c0ff973a3421",
+                          "name": "A list of repositories.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/prevent/repositories/?cursor=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "prevent",
+                                "repositories",
+                                ""
+                              ],
+                              "query": [
+                                {
+                                  "description": "Pagination cursor.",
+                                  "key": "cursor",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "[\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"provider\": \"<string>\",\n    \"url\": \"<string>\",\n    \"dateCreated\": \"<dateTime>\"\n  },\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"provider\": \"<string>\",\n    \"url\": \"<string>\",\n    \"dateCreated\": \"<dateTime>\"\n  }\n]",
+                          "createdAt": "2026-06-05T15:17:41.000Z",
+                          "updatedAt": "2026-06-05T15:17:41.000Z",
+                          "uid": "35240-0787b3c0-1c1d-4324-adaa-c0ff973a3421"
+                        },
+                        {
+                          "id": "ddbe4a86-51a2-46f4-82f2-b10228f963e0",
+                          "name": "Unauthorized.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/prevent/repositories/?cursor=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "prevent",
+                                "repositories",
+                                ""
+                              ],
+                              "query": [
+                                {
+                                  "description": "Pagination cursor.",
+                                  "key": "cursor",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:17:41.000Z",
+                          "updatedAt": "2026-06-05T15:17:41.000Z",
+                          "uid": "35240-ddbe4a86-51a2-46f4-82f2-b10228f963e0"
+                        },
+                        {
+                          "id": "7cb000c2-1c4c-4d0a-ab35-68b078e914c1",
+                          "name": "Forbidden.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/prevent/repositories/?cursor=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "prevent",
+                                "repositories",
+                                ""
+                              ],
+                              "query": [
+                                {
+                                  "description": "Pagination cursor.",
+                                  "key": "cursor",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:17:41.000Z",
+                          "updatedAt": "2026-06-05T15:17:41.000Z",
+                          "uid": "35240-7cb000c2-1c4c-4d0a-ab35-68b078e914c1"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:17:41.000Z",
+                      "updatedAt": "2026-06-05T15:17:41.000Z",
+                      "uid": "35240-b9e6f1d6-230f-45e0-a1f4-3c4a9c12a84a"
+                    }
+                  ],
+                  "id": "fa2b8c1e-7354-44ed-89e0-46c52f63b854",
+                  "createdAt": "2026-06-05T15:17:41.000Z",
+                  "updatedAt": "2026-06-05T15:17:41.000Z",
+                  "uid": "35240-fa2b8c1e-7354-44ed-89e0-46c52f63b854"
+                },
+                {
+                  "name": "sync",
+                  "item": [
+                    {
+                      "name": "Sentry Sync repositories from an integrated org with GitHub",
+                      "id": "464613d9-cae6-476f-9818-c5d3e8efdca8",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/prevent/sync/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "prevent",
+                            "sync",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "id": "fc74eb02-5247-48f6-93f8-a220dfc6f082",
+                              "key": "organization_id_or_slug",
+                              "value": "<string>",
+                              "description": "(Required) The ID or slug of the organization."
+                            }
+                          ]
+                        },
+                        "description": "Triggers a sync of repositories from the integrated organization's GitHub."
+                      },
+                      "response": [
+                        {
+                          "id": "2f1b949a-0363-4569-93d8-92521ef024cb",
+                          "name": "Sync initiated.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/prevent/sync/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "prevent",
+                                "sync",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Accepted",
+                          "code": 202,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:17:41.000Z",
+                          "updatedAt": "2026-06-05T15:17:41.000Z",
+                          "uid": "35240-2f1b949a-0363-4569-93d8-92521ef024cb"
+                        },
+                        {
+                          "id": "f900bebc-694f-4941-968d-6b3e85bc7b85",
+                          "name": "Unauthorized.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/prevent/sync/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "prevent",
+                                "sync",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:17:41.000Z",
+                          "updatedAt": "2026-06-05T15:17:41.000Z",
+                          "uid": "35240-f900bebc-694f-4941-968d-6b3e85bc7b85"
+                        },
+                        {
+                          "id": "bc8ddaf4-1774-4350-9c69-290a58aa2777",
+                          "name": "Forbidden.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/prevent/sync/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "prevent",
+                                "sync",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:17:41.000Z",
+                          "updatedAt": "2026-06-05T15:17:41.000Z",
+                          "uid": "35240-bc8ddaf4-1774-4350-9c69-290a58aa2777"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:17:41.000Z",
+                      "updatedAt": "2026-06-05T15:17:41.000Z",
+                      "uid": "35240-464613d9-cae6-476f-9818-c5d3e8efdca8"
+                    }
+                  ],
+                  "id": "213dfdc5-2243-4dc9-be29-27881d435a3b",
+                  "createdAt": "2026-06-05T15:17:41.000Z",
+                  "updatedAt": "2026-06-05T15:17:41.000Z",
+                  "uid": "35240-213dfdc5-2243-4dc9-be29-27881d435a3b"
+                },
+                {
+                  "name": "sync-status",
+                  "item": [
+                    {
+                      "name": "Sentry Get syncing status for repositories for an integrated org",
+                      "id": "cf1b7c72-fcba-4b84-9f37-793ac13f288b",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/prevent/sync-status/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "prevent",
+                            "sync-status",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "id": "e35ea104-40ea-4850-8f45-21d4cf31ef61",
+                              "key": "organization_id_or_slug",
+                              "value": "<string>",
+                              "description": "(Required) The ID or slug of the organization."
+                            }
+                          ]
+                        },
+                        "description": "Returns the current sync status for repositories."
+                      },
+                      "response": [
+                        {
+                          "id": "60fb9fe5-989a-49f4-b59d-40d7c80fe27c",
+                          "name": "Sync status.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/prevent/sync-status/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "prevent",
+                                "sync-status",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"status\": \"<string>\",\n  \"lastSync\": \"<dateTime>\"\n}",
+                          "createdAt": "2026-06-05T15:17:41.000Z",
+                          "updatedAt": "2026-06-05T15:17:41.000Z",
+                          "uid": "35240-60fb9fe5-989a-49f4-b59d-40d7c80fe27c"
+                        },
+                        {
+                          "id": "84eec427-2bd7-4462-8d12-d7239a9c8b0d",
+                          "name": "Unauthorized.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/prevent/sync-status/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "prevent",
+                                "sync-status",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:17:41.000Z",
+                          "updatedAt": "2026-06-05T15:17:41.000Z",
+                          "uid": "35240-84eec427-2bd7-4462-8d12-d7239a9c8b0d"
+                        },
+                        {
+                          "id": "f347c88f-7453-46ab-a23e-ba38e1c7fc3e",
+                          "name": "Forbidden.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/prevent/sync-status/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "prevent",
+                                "sync-status",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:17:41.000Z",
+                          "updatedAt": "2026-06-05T15:17:41.000Z",
+                          "uid": "35240-f347c88f-7453-46ab-a23e-ba38e1c7fc3e"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:17:41.000Z",
+                      "updatedAt": "2026-06-05T15:17:41.000Z",
+                      "uid": "35240-cf1b7c72-fcba-4b84-9f37-793ac13f288b"
+                    }
+                  ],
+                  "id": "15f57807-e08f-4c7f-9dac-15b10086dd8d",
+                  "createdAt": "2026-06-05T15:17:41.000Z",
+                  "updatedAt": "2026-06-05T15:17:41.000Z",
+                  "uid": "35240-15f57807-e08f-4c7f-9dac-15b10086dd8d"
+                },
+                {
+                  "name": "tokens",
+                  "item": [
+                    {
+                      "name": "regenerate",
+                      "item": [
+                        {
+                          "name": "Sentry Regenerate a repository upload token and return the new token",
+                          "id": "f426f602-832f-4d64-ad26-561f9adb4be5",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"repositoryId\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/prevent/tokens/regenerate/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "prevent",
+                                "tokens",
+                                "regenerate",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "id": "59f092f9-eedc-43d4-b085-2b42fd73d363",
+                                  "key": "organization_id_or_slug",
+                                  "value": "<string>",
+                                  "description": "(Required) The ID or slug of the organization."
+                                }
+                              ]
+                            },
+                            "description": "Regenerates a repository upload token."
+                          },
+                          "response": [
+                            {
+                              "id": "108b2306-fa93-4463-8efc-c655ab40b579",
+                              "name": "New token generated.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"repositoryId\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/prevent/tokens/regenerate/",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "organizations",
+                                    ":organization_id_or_slug",
+                                    "prevent",
+                                    "tokens",
+                                    "regenerate",
+                                    ""
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "organization_id_or_slug"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"token\": \"<string>\"\n}",
+                              "createdAt": "2026-06-05T15:17:41.000Z",
+                              "updatedAt": "2026-06-05T15:17:41.000Z",
+                              "uid": "35240-108b2306-fa93-4463-8efc-c655ab40b579"
+                            },
+                            {
+                              "id": "f63acf43-2c69-4948-873c-12a861eb3ec3",
+                              "name": "Unauthorized.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"repositoryId\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/prevent/tokens/regenerate/",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "organizations",
+                                    ":organization_id_or_slug",
+                                    "prevent",
+                                    "tokens",
+                                    "regenerate",
+                                    ""
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "organization_id_or_slug"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-06-05T15:17:41.000Z",
+                              "updatedAt": "2026-06-05T15:17:41.000Z",
+                              "uid": "35240-f63acf43-2c69-4948-873c-12a861eb3ec3"
+                            },
+                            {
+                              "id": "a535a279-898e-416a-8dc8-741311773d95",
+                              "name": "Repository not found.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"repositoryId\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/prevent/tokens/regenerate/",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "organizations",
+                                    ":organization_id_or_slug",
+                                    "prevent",
+                                    "tokens",
+                                    "regenerate",
+                                    ""
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "organization_id_or_slug"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-06-05T15:17:41.000Z",
+                              "updatedAt": "2026-06-05T15:17:41.000Z",
+                              "uid": "35240-a535a279-898e-416a-8dc8-741311773d95"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:17:41.000Z",
+                          "updatedAt": "2026-06-05T15:17:41.000Z",
+                          "uid": "35240-f426f602-832f-4d64-ad26-561f9adb4be5"
+                        }
+                      ],
+                      "id": "e918db3b-869f-4abc-8db6-4196c33ab598",
+                      "createdAt": "2026-06-05T15:17:41.000Z",
+                      "updatedAt": "2026-06-05T15:17:41.000Z",
+                      "uid": "35240-e918db3b-869f-4abc-8db6-4196c33ab598"
+                    },
+                    {
+                      "name": "Sentry Retrieve a paginated list of repository tokens for a given owner",
+                      "id": "635d5939-fe37-4903-8319-53abc12b3eba",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/prevent/tokens/?cursor=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "prevent",
+                            "tokens",
+                            ""
+                          ],
+                          "query": [
+                            {
+                              "description": "Pagination cursor.",
+                              "key": "cursor",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "9a46402d-ca22-490b-9808-115023dd0755",
+                              "key": "organization_id_or_slug",
+                              "value": "<string>",
+                              "description": "(Required) The ID or slug of the organization."
+                            }
+                          ]
+                        },
+                        "description": "Returns repository upload tokens."
+                      },
+                      "response": [
+                        {
+                          "id": "72bc6951-b75b-4687-8792-d3aab067fb54",
+                          "name": "A list of tokens.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/prevent/tokens/?cursor=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "prevent",
+                                "tokens",
+                                ""
+                              ],
+                              "query": [
+                                {
+                                  "description": "Pagination cursor.",
+                                  "key": "cursor",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "[\n  {\n    \"id\": \"<string>\",\n    \"token\": \"<string>\",\n    \"repositoryId\": \"<string>\",\n    \"dateCreated\": \"<dateTime>\"\n  },\n  {\n    \"id\": \"<string>\",\n    \"token\": \"<string>\",\n    \"repositoryId\": \"<string>\",\n    \"dateCreated\": \"<dateTime>\"\n  }\n]",
+                          "createdAt": "2026-06-05T15:17:41.000Z",
+                          "updatedAt": "2026-06-05T15:17:41.000Z",
+                          "uid": "35240-72bc6951-b75b-4687-8792-d3aab067fb54"
+                        },
+                        {
+                          "id": "3f5796fa-cda3-44ca-989c-9d6429c057e8",
+                          "name": "Unauthorized.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/prevent/tokens/?cursor=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "prevent",
+                                "tokens",
+                                ""
+                              ],
+                              "query": [
+                                {
+                                  "description": "Pagination cursor.",
+                                  "key": "cursor",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:17:41.000Z",
+                          "updatedAt": "2026-06-05T15:17:41.000Z",
+                          "uid": "35240-3f5796fa-cda3-44ca-989c-9d6429c057e8"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:17:41.000Z",
+                      "updatedAt": "2026-06-05T15:17:41.000Z",
+                      "uid": "35240-635d5939-fe37-4903-8319-53abc12b3eba"
+                    }
+                  ],
+                  "id": "fe1c4469-7a7b-403e-9829-6a9dd001a7f3",
+                  "createdAt": "2026-06-05T15:17:41.000Z",
+                  "updatedAt": "2026-06-05T15:17:41.000Z",
+                  "uid": "35240-fe1c4469-7a7b-403e-9829-6a9dd001a7f3"
+                },
+                {
+                  "name": "test-results",
+                  "item": [
+                    {
+                      "name": "metrics",
+                      "item": [
+                        {
+                          "name": "Sentry Retrieve aggregated test result metrics for repository, owner, and organization",
+                          "id": "241ca504-4ecf-4252-ae20-48b3e72dd48f",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/prevent/test-results/metrics/?repositoryId=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "prevent",
+                                "test-results",
+                                "metrics",
+                                ""
+                              ],
+                              "query": [
+                                {
+                                  "description": "Filter by repository ID.",
+                                  "key": "repositoryId",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "12b7f3fa-f575-4d2e-ac9a-f226dc5948a9",
+                                  "key": "organization_id_or_slug",
+                                  "value": "<string>",
+                                  "description": "(Required) The ID or slug of the organization."
+                                }
+                              ]
+                            },
+                            "description": "Returns aggregated test result metrics."
+                          },
+                          "response": [
+                            {
+                              "id": "a4ffc7ba-34c9-49e8-9d89-1f74ff847bf2",
+                              "name": "Aggregated test result metrics.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/prevent/test-results/metrics/?repositoryId=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "organizations",
+                                    ":organization_id_or_slug",
+                                    "prevent",
+                                    "test-results",
+                                    "metrics",
+                                    ""
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Filter by repository ID.",
+                                      "key": "repositoryId",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "organization_id_or_slug"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"totalTests\": \"<integer>\",\n  \"passedTests\": \"<integer>\",\n  \"failedTests\": \"<integer>\",\n  \"skippedTests\": \"<integer>\",\n  \"avgDuration\": \"<number>\",\n  \"passRate\": \"<number>\"\n}",
+                              "createdAt": "2026-06-05T15:17:41.000Z",
+                              "updatedAt": "2026-06-05T15:17:41.000Z",
+                              "uid": "35240-a4ffc7ba-34c9-49e8-9d89-1f74ff847bf2"
+                            },
+                            {
+                              "id": "946ffde4-9853-4588-80e3-69644ea1db37",
+                              "name": "Unauthorized.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/prevent/test-results/metrics/?repositoryId=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "organizations",
+                                    ":organization_id_or_slug",
+                                    "prevent",
+                                    "test-results",
+                                    "metrics",
+                                    ""
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Filter by repository ID.",
+                                      "key": "repositoryId",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "organization_id_or_slug"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-06-05T15:17:41.000Z",
+                              "updatedAt": "2026-06-05T15:17:41.000Z",
+                              "uid": "35240-946ffde4-9853-4588-80e3-69644ea1db37"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:17:41.000Z",
+                          "updatedAt": "2026-06-05T15:17:41.000Z",
+                          "uid": "35240-241ca504-4ecf-4252-ae20-48b3e72dd48f"
+                        }
+                      ],
+                      "id": "d17007fd-65ca-415c-a43b-153086fcb091",
+                      "createdAt": "2026-06-05T15:17:41.000Z",
+                      "updatedAt": "2026-06-05T15:17:41.000Z",
+                      "uid": "35240-d17007fd-65ca-415c-a43b-153086fcb091"
+                    },
+                    {
+                      "name": "suites",
+                      "item": [
+                        {
+                          "name": "Sentry Retrieve test suites belonging to a repository's test results",
+                          "id": "2e409469-acee-4343-a058-53692e5c4f87",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/prevent/test-results/suites/?repositoryId=<string>&cursor=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "prevent",
+                                "test-results",
+                                "suites",
+                                ""
+                              ],
+                              "query": [
+                                {
+                                  "description": "Filter by repository ID.",
+                                  "key": "repositoryId",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Pagination cursor.",
+                                  "key": "cursor",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "1fe85612-4f0c-45a2-9294-3c664e7be3c8",
+                                  "key": "organization_id_or_slug",
+                                  "value": "<string>",
+                                  "description": "(Required) The ID or slug of the organization."
+                                }
+                              ]
+                            },
+                            "description": "Returns test suites for a repository's test results."
+                          },
+                          "response": [
+                            {
+                              "id": "808c1b90-e289-47c5-abe0-95c67897dfe4",
+                              "name": "A list of test suites.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/prevent/test-results/suites/?repositoryId=<string>&cursor=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "organizations",
+                                    ":organization_id_or_slug",
+                                    "prevent",
+                                    "test-results",
+                                    "suites",
+                                    ""
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Filter by repository ID.",
+                                      "key": "repositoryId",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "description": "Pagination cursor.",
+                                      "key": "cursor",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "organization_id_or_slug"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "[\n  {\n    \"name\": \"<string>\",\n    \"totalTests\": \"<integer>\",\n    \"passedTests\": \"<integer>\",\n    \"failedTests\": \"<integer>\",\n    \"duration\": \"<number>\"\n  },\n  {\n    \"name\": \"<string>\",\n    \"totalTests\": \"<integer>\",\n    \"passedTests\": \"<integer>\",\n    \"failedTests\": \"<integer>\",\n    \"duration\": \"<number>\"\n  }\n]",
+                              "createdAt": "2026-06-05T15:17:41.000Z",
+                              "updatedAt": "2026-06-05T15:17:41.000Z",
+                              "uid": "35240-808c1b90-e289-47c5-abe0-95c67897dfe4"
+                            },
+                            {
+                              "id": "e64d632b-e4c5-447e-9591-258d8aa158ee",
+                              "name": "Unauthorized.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/prevent/test-results/suites/?repositoryId=<string>&cursor=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "organizations",
+                                    ":organization_id_or_slug",
+                                    "prevent",
+                                    "test-results",
+                                    "suites",
+                                    ""
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Filter by repository ID.",
+                                      "key": "repositoryId",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "description": "Pagination cursor.",
+                                      "key": "cursor",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "organization_id_or_slug"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-06-05T15:17:41.000Z",
+                              "updatedAt": "2026-06-05T15:17:41.000Z",
+                              "uid": "35240-e64d632b-e4c5-447e-9591-258d8aa158ee"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:17:41.000Z",
+                          "updatedAt": "2026-06-05T15:17:41.000Z",
+                          "uid": "35240-2e409469-acee-4343-a058-53692e5c4f87"
+                        }
+                      ],
+                      "id": "a07f1bb8-8708-4d2a-a89d-f75092a3b083",
+                      "createdAt": "2026-06-05T15:17:41.000Z",
+                      "updatedAt": "2026-06-05T15:17:41.000Z",
+                      "uid": "35240-a07f1bb8-8708-4d2a-a89d-f75092a3b083"
+                    },
+                    {
+                      "name": "Sentry Retrieve paginated list of test results for repository, owner, and organization",
+                      "id": "8d99d545-a612-48e8-a6d2-a52adbc0987a",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/prevent/test-results/?repositoryId=<string>&cursor=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "prevent",
+                            "test-results",
+                            ""
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter by repository ID.",
+                              "key": "repositoryId",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Pagination cursor.",
+                              "key": "cursor",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "42135ec4-6d26-43fa-8de0-7b1768e8a983",
+                              "key": "organization_id_or_slug",
+                              "value": "<string>",
+                              "description": "(Required) The ID or slug of the organization."
+                            }
+                          ]
+                        },
+                        "description": "Returns paginated test results for the organization."
+                      },
+                      "response": [
+                        {
+                          "id": "40ad725b-d81d-49bb-95d8-e207081e9693",
+                          "name": "A list of test results.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/prevent/test-results/?repositoryId=<string>&cursor=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "prevent",
+                                "test-results",
+                                ""
+                              ],
+                              "query": [
+                                {
+                                  "description": "Filter by repository ID.",
+                                  "key": "repositoryId",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Pagination cursor.",
+                                  "key": "cursor",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "[\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"status\": \"skipped\",\n    \"duration\": \"<number>\",\n    \"suite\": \"<string>\",\n    \"dateCreated\": \"<dateTime>\"\n  },\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"status\": \"skipped\",\n    \"duration\": \"<number>\",\n    \"suite\": \"<string>\",\n    \"dateCreated\": \"<dateTime>\"\n  }\n]",
+                          "createdAt": "2026-06-05T15:17:41.000Z",
+                          "updatedAt": "2026-06-05T15:17:41.000Z",
+                          "uid": "35240-40ad725b-d81d-49bb-95d8-e207081e9693"
+                        },
+                        {
+                          "id": "a1727751-9501-4283-9109-ee35bf22bacc",
+                          "name": "Unauthorized.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/prevent/test-results/?repositoryId=<string>&cursor=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "prevent",
+                                "test-results",
+                                ""
+                              ],
+                              "query": [
+                                {
+                                  "description": "Filter by repository ID.",
+                                  "key": "repositoryId",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Pagination cursor.",
+                                  "key": "cursor",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:17:41.000Z",
+                          "updatedAt": "2026-06-05T15:17:41.000Z",
+                          "uid": "35240-a1727751-9501-4283-9109-ee35bf22bacc"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:17:41.000Z",
+                      "updatedAt": "2026-06-05T15:17:41.000Z",
+                      "uid": "35240-8d99d545-a612-48e8-a6d2-a52adbc0987a"
+                    }
+                  ],
+                  "id": "be4fcda2-8559-4b80-8b45-de3b809627bf",
+                  "createdAt": "2026-06-05T15:17:41.000Z",
+                  "updatedAt": "2026-06-05T15:17:41.000Z",
+                  "uid": "35240-be4fcda2-8559-4b80-8b45-de3b809627bf"
+                }
+              ],
+              "id": "b55de36d-3f89-40c2-afc1-069d049c25b8",
+              "createdAt": "2026-06-05T15:17:41.000Z",
+              "updatedAt": "2026-06-05T15:17:41.000Z",
+              "uid": "35240-b55de36d-3f89-40c2-afc1-069d049c25b8"
+            }
+          ],
+          "id": "19127c45-9d28-4887-8e0d-1b5aac8127fb",
+          "createdAt": "2026-06-05T15:17:41.000Z",
+          "updatedAt": "2026-06-05T15:17:41.000Z",
+          "uid": "35240-19127c45-9d28-4887-8e0d-1b5aac8127fb"
+        }
+      ],
+      "id": "e61b96e8-0e74-471b-84bc-e5ec6863e186",
+      "createdAt": "2026-06-05T15:17:41.000Z",
+      "updatedAt": "2026-06-05T15:17:41.000Z",
+      "uid": "35240-e61b96e8-0e74-471b-84bc-e5ec6863e186"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://sentry.io/api/0"
+    }
+  ]
+}

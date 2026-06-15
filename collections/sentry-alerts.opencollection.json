@@ -1,0 +1,360 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sentry Alerts API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Metric Alerts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Sentry List an organization's metric alert rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/alert-rules/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Pagination cursor."
+              }
+            ]
+          },
+          "docs": "Returns a list of metric alert rules for an organization."
+        },
+        {
+          "info": {
+            "name": "Sentry Create a metric alert rule for an organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/alert-rules/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new metric alert rule for the given organization."
+        },
+        {
+          "info": {
+            "name": "Sentry Retrieve a metric alert rule for an organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/alert-rules/:alert_rule_id/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "alert_rule_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the metric alert rule."
+              }
+            ]
+          },
+          "docs": "Returns a specific metric alert rule."
+        },
+        {
+          "info": {
+            "name": "Sentry Update a metric alert rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/alert-rules/:alert_rule_id/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "alert_rule_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the metric alert rule."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a metric alert rule."
+        },
+        {
+          "info": {
+            "name": "Sentry Delete a metric alert rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/alert-rules/:alert_rule_id/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "alert_rule_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the metric alert rule."
+              }
+            ]
+          },
+          "docs": "Deletes a metric alert rule."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Issue Alerts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Sentry List a project's issue alert rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/projects/:organization_id_or_slug/:project_id_or_slug/rules/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "project_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the project."
+              }
+            ]
+          },
+          "docs": "Returns a list of issue alert rules for a project."
+        },
+        {
+          "info": {
+            "name": "Sentry Create an issue alert rule for a project",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sentry.io/api/0/projects/:organization_id_or_slug/:project_id_or_slug/rules/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "project_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the project."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new issue alert rule for the given project."
+        },
+        {
+          "info": {
+            "name": "Sentry Retrieve an issue alert rule for a project",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/projects/:organization_id_or_slug/:project_id_or_slug/rules/:rule_id/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "project_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the project."
+              },
+              {
+                "name": "rule_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the issue alert rule."
+              }
+            ]
+          },
+          "docs": "Returns a specific issue alert rule."
+        },
+        {
+          "info": {
+            "name": "Sentry Update an issue alert rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://sentry.io/api/0/projects/:organization_id_or_slug/:project_id_or_slug/rules/:rule_id/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "project_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the project."
+              },
+              {
+                "name": "rule_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the issue alert rule."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an issue alert rule."
+        },
+        {
+          "info": {
+            "name": "Sentry Delete an issue alert rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://sentry.io/api/0/projects/:organization_id_or_slug/:project_id_or_slug/rules/:rule_id/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "project_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the project."
+              },
+              {
+                "name": "rule_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the issue alert rule."
+              }
+            ]
+          },
+          "docs": "Deletes an issue alert rule."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Spike Protection",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Sentry List spike protection notifications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/spike-protections/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              }
+            ]
+          },
+          "docs": "Returns a list of spike protection notification actions."
+        },
+        {
+          "info": {
+            "name": "Sentry Create a spike protection notification action",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/spike-protections/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new spike protection notification action."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

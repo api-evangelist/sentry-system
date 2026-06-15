@@ -1,0 +1,151 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sentry Dashboards API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Dashboards",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Sentry List an organization's custom dashboards",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/dashboards/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Pagination cursor."
+              }
+            ]
+          },
+          "docs": "Returns a list of custom dashboards for the given organization."
+        },
+        {
+          "info": {
+            "name": "Sentry Create a new dashboard for an organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/dashboards/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new custom dashboard for the given organization."
+        },
+        {
+          "info": {
+            "name": "Sentry Retrieve an organization's custom dashboard",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/dashboards/:dashboard_id/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "dashboard_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the dashboard."
+              }
+            ]
+          },
+          "docs": "Returns a custom dashboard with its widgets."
+        },
+        {
+          "info": {
+            "name": "Sentry Edit an organization's custom dashboard",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/dashboards/:dashboard_id/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "dashboard_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the dashboard."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a custom dashboard."
+        },
+        {
+          "info": {
+            "name": "Sentry Delete an organization's custom dashboard",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/dashboards/:dashboard_id/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "dashboard_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the dashboard."
+              }
+            ]
+          },
+          "docs": "Deletes a custom dashboard."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

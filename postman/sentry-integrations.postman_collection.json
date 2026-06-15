@@ -1,0 +1,2986 @@
+{
+  "info": {
+    "_postman_id": "87de7447-28d5-42d3-a662-35f4ed2e65fe",
+    "name": "Sentry Integrations API",
+    "description": "The Integrations API provides endpoints for managing third-party integrations within Sentry organizations, including creating and managing data forwarders, handling external user and team records, and controlling integration configurations.\n\nContact Support:\n Name: Sentry Support\n Email: support@sentry.io",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:17:37.000Z",
+    "updatedAt": "2026-06-05T15:17:38.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-87de7447-28d5-42d3-a662-35f4ed2e65fe"
+  },
+  "item": [
+    {
+      "name": "organizations",
+      "item": [
+        {
+          "name": "{organization_id_or_slug}",
+          "item": [
+            {
+              "name": "integrations",
+              "item": [
+                {
+                  "name": "{integration_id}",
+                  "item": [
+                    {
+                      "name": "Sentry Retrieve an integration for an organization",
+                      "id": "d7c3190a-8ead-4ebc-abf2-2f775adc51bd",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/integrations/:integration_id/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "integrations",
+                            ":integration_id",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "id": "14624d7e-4935-43b3-81e8-e0744a3e91a3",
+                              "key": "organization_id_or_slug",
+                              "value": "<string>",
+                              "description": "(Required) The ID or slug of the organization."
+                            },
+                            {
+                              "id": "2527de27-01b9-4cfa-8cb1-f0f5601cf6fa",
+                              "key": "integration_id",
+                              "value": "<string>",
+                              "description": "(Required) The ID of the integration."
+                            }
+                          ]
+                        },
+                        "description": "Returns details for a specific integration."
+                      },
+                      "response": [
+                        {
+                          "id": "000022d4-ad09-4aaa-b50d-49bb1439a750",
+                          "name": "Integration details.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/integrations/:integration_id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "integrations",
+                                ":integration_id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                },
+                                {
+                                  "key": "integration_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"provider\": {\n    \"key\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"icon\": \"<string>\",\n  \"domainName\": \"<string>\",\n  \"status\": \"<string>\",\n  \"configData\": {},\n  \"dateCreated\": \"<dateTime>\"\n}",
+                          "createdAt": "2026-06-05T15:17:38.000Z",
+                          "updatedAt": "2026-06-05T15:17:38.000Z",
+                          "uid": "35240-000022d4-ad09-4aaa-b50d-49bb1439a750"
+                        },
+                        {
+                          "id": "7dca8eff-090f-4520-9837-58ed38b0219a",
+                          "name": "Unauthorized.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/integrations/:integration_id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "integrations",
+                                ":integration_id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                },
+                                {
+                                  "key": "integration_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:17:38.000Z",
+                          "updatedAt": "2026-06-05T15:17:38.000Z",
+                          "uid": "35240-7dca8eff-090f-4520-9837-58ed38b0219a"
+                        },
+                        {
+                          "id": "a2cbf600-9b47-499c-bad2-013e2ea2a892",
+                          "name": "Integration not found.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/integrations/:integration_id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "integrations",
+                                ":integration_id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                },
+                                {
+                                  "key": "integration_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:17:38.000Z",
+                          "updatedAt": "2026-06-05T15:17:38.000Z",
+                          "uid": "35240-a2cbf600-9b47-499c-bad2-013e2ea2a892"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:17:38.000Z",
+                      "updatedAt": "2026-06-05T15:17:38.000Z",
+                      "uid": "35240-d7c3190a-8ead-4ebc-abf2-2f775adc51bd"
+                    },
+                    {
+                      "name": "Sentry Delete an integration for an organization",
+                      "id": "52462218-fcfe-4ade-b4a1-8774304e3315",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/integrations/:integration_id/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "integrations",
+                            ":integration_id",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "id": "dddfa8fd-5606-4cca-8418-8325a1f9c31f",
+                              "key": "organization_id_or_slug",
+                              "value": "<string>",
+                              "description": "(Required) The ID or slug of the organization."
+                            },
+                            {
+                              "id": "5a0649ce-748a-4cf2-824b-f4c58a64b268",
+                              "key": "integration_id",
+                              "value": "<string>",
+                              "description": "(Required) The ID of the integration."
+                            }
+                          ]
+                        },
+                        "description": "Removes an integration from the organization."
+                      },
+                      "response": [
+                        {
+                          "id": "2480b424-9daa-46f0-bb4f-b5de6825df87",
+                          "name": "Integration deleted.",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/integrations/:integration_id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "integrations",
+                                ":integration_id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                },
+                                {
+                                  "key": "integration_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "No Content",
+                          "code": 204,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:17:38.000Z",
+                          "updatedAt": "2026-06-05T15:17:38.000Z",
+                          "uid": "35240-2480b424-9daa-46f0-bb4f-b5de6825df87"
+                        },
+                        {
+                          "id": "7c8fecf1-ceea-4e2d-be53-753050c18eaa",
+                          "name": "Unauthorized.",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/integrations/:integration_id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "integrations",
+                                ":integration_id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                },
+                                {
+                                  "key": "integration_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:17:38.000Z",
+                          "updatedAt": "2026-06-05T15:17:38.000Z",
+                          "uid": "35240-7c8fecf1-ceea-4e2d-be53-753050c18eaa"
+                        },
+                        {
+                          "id": "0e81c6bd-7653-4f23-a122-dc2953f1af7c",
+                          "name": "Integration not found.",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/integrations/:integration_id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "integrations",
+                                ":integration_id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                },
+                                {
+                                  "key": "integration_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:17:38.000Z",
+                          "updatedAt": "2026-06-05T15:17:38.000Z",
+                          "uid": "35240-0e81c6bd-7653-4f23-a122-dc2953f1af7c"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:17:38.000Z",
+                      "updatedAt": "2026-06-05T15:17:38.000Z",
+                      "uid": "35240-52462218-fcfe-4ade-b4a1-8774304e3315"
+                    }
+                  ],
+                  "id": "09e51ece-1ad8-4724-b642-d33d81c55141",
+                  "createdAt": "2026-06-05T15:17:38.000Z",
+                  "updatedAt": "2026-06-05T15:17:38.000Z",
+                  "uid": "35240-09e51ece-1ad8-4724-b642-d33d81c55141"
+                },
+                {
+                  "name": "Sentry List an organization's available integrations",
+                  "id": "a61c38a9-390c-457b-87b1-9ba50dcd5787",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/integrations/?providerKey=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "organizations",
+                        ":organization_id_or_slug",
+                        "integrations",
+                        ""
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter by integration provider key.",
+                          "key": "providerKey",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "0a61d6ed-548c-44b9-af05-81e1d042645a",
+                          "key": "organization_id_or_slug",
+                          "value": "<string>",
+                          "description": "(Required) The ID or slug of the organization."
+                        }
+                      ]
+                    },
+                    "description": "Returns a list of integrations configured for an organization."
+                  },
+                  "response": [
+                    {
+                      "id": "b72c141c-3789-4ba4-9349-9d77256de08a",
+                      "name": "A list of integrations.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/integrations/?providerKey=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "integrations",
+                            ""
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter by integration provider key.",
+                              "key": "providerKey",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "organization_id_or_slug"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "[\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"provider\": {\n      \"key\": \"<string>\",\n      \"name\": \"<string>\"\n    },\n    \"icon\": \"<string>\",\n    \"domainName\": \"<string>\",\n    \"status\": \"<string>\",\n    \"configData\": {},\n    \"dateCreated\": \"<dateTime>\"\n  },\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"provider\": {\n      \"key\": \"<string>\",\n      \"name\": \"<string>\"\n    },\n    \"icon\": \"<string>\",\n    \"domainName\": \"<string>\",\n    \"status\": \"<string>\",\n    \"configData\": {},\n    \"dateCreated\": \"<dateTime>\"\n  }\n]",
+                      "createdAt": "2026-06-05T15:17:38.000Z",
+                      "updatedAt": "2026-06-05T15:17:38.000Z",
+                      "uid": "35240-b72c141c-3789-4ba4-9349-9d77256de08a"
+                    },
+                    {
+                      "id": "e65251dd-e1c6-42c1-bb05-32d38459e63d",
+                      "name": "Unauthorized.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/integrations/?providerKey=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "integrations",
+                            ""
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter by integration provider key.",
+                              "key": "providerKey",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "organization_id_or_slug"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:17:38.000Z",
+                      "updatedAt": "2026-06-05T15:17:38.000Z",
+                      "uid": "35240-e65251dd-e1c6-42c1-bb05-32d38459e63d"
+                    },
+                    {
+                      "id": "42e55a9d-4544-4039-9fac-677b5a8869bf",
+                      "name": "Forbidden.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/integrations/?providerKey=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "integrations",
+                            ""
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter by integration provider key.",
+                              "key": "providerKey",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "organization_id_or_slug"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:17:38.000Z",
+                      "updatedAt": "2026-06-05T15:17:38.000Z",
+                      "uid": "35240-42e55a9d-4544-4039-9fac-677b5a8869bf"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:17:38.000Z",
+                  "updatedAt": "2026-06-05T15:17:38.000Z",
+                  "uid": "35240-a61c38a9-390c-457b-87b1-9ba50dcd5787"
+                }
+              ],
+              "id": "8b88181c-7e5f-4f6c-9edd-de8d88534e66",
+              "createdAt": "2026-06-05T15:17:38.000Z",
+              "updatedAt": "2026-06-05T15:17:38.000Z",
+              "uid": "35240-8b88181c-7e5f-4f6c-9edd-de8d88534e66"
+            },
+            {
+              "name": "config",
+              "item": [
+                {
+                  "name": "integrations",
+                  "item": [
+                    {
+                      "name": "Sentry Get integration provider information",
+                      "id": "2d718402-fb7a-4a80-a62a-0c4eb8a9d815",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/config/integrations/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "config",
+                            "integrations",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "id": "b9a1d23b-5ceb-414d-ad57-a26e50f12cce",
+                              "key": "organization_id_or_slug",
+                              "value": "<string>",
+                              "description": "(Required) The ID or slug of the organization."
+                            }
+                          ]
+                        },
+                        "description": "Returns available integration providers and their configurations."
+                      },
+                      "response": [
+                        {
+                          "id": "e008b9d3-eca2-4ac4-ad66-033252bf0719",
+                          "name": "Integration provider information.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/config/integrations/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "config",
+                                "integrations",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"providers\": [\n    {\n      \"key\": \"<string>\",\n      \"name\": \"<string>\",\n      \"canAdd\": \"<boolean>\",\n      \"features\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"key\": \"<string>\",\n      \"name\": \"<string>\",\n      \"canAdd\": \"<boolean>\",\n      \"features\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ]\n}",
+                          "createdAt": "2026-06-05T15:17:38.000Z",
+                          "updatedAt": "2026-06-05T15:17:38.000Z",
+                          "uid": "35240-e008b9d3-eca2-4ac4-ad66-033252bf0719"
+                        },
+                        {
+                          "id": "4d8d4b4b-ec36-4a99-94e4-b220e168851b",
+                          "name": "Unauthorized.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/config/integrations/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "config",
+                                "integrations",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:17:38.000Z",
+                          "updatedAt": "2026-06-05T15:17:38.000Z",
+                          "uid": "35240-4d8d4b4b-ec36-4a99-94e4-b220e168851b"
+                        },
+                        {
+                          "id": "707bee6c-81f5-4df6-a4a5-80406d6fe274",
+                          "name": "Forbidden.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/config/integrations/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "config",
+                                "integrations",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:17:38.000Z",
+                          "updatedAt": "2026-06-05T15:17:38.000Z",
+                          "uid": "35240-707bee6c-81f5-4df6-a4a5-80406d6fe274"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:17:38.000Z",
+                      "updatedAt": "2026-06-05T15:17:38.000Z",
+                      "uid": "35240-2d718402-fb7a-4a80-a62a-0c4eb8a9d815"
+                    }
+                  ],
+                  "id": "bc75c865-49f3-4430-ad1a-8a1b968442fb",
+                  "createdAt": "2026-06-05T15:17:38.000Z",
+                  "updatedAt": "2026-06-05T15:17:38.000Z",
+                  "uid": "35240-bc75c865-49f3-4430-ad1a-8a1b968442fb"
+                }
+              ],
+              "id": "d9843518-94a1-4255-b5cf-a38593fc0876",
+              "createdAt": "2026-06-05T15:17:38.000Z",
+              "updatedAt": "2026-06-05T15:17:38.000Z",
+              "uid": "35240-d9843518-94a1-4255-b5cf-a38593fc0876"
+            },
+            {
+              "name": "data-forwarders",
+              "item": [
+                {
+                  "name": "{forwarder_id}",
+                  "item": [
+                    {
+                      "name": "Sentry Update a data forwarder for an organization",
+                      "id": "b404e936-e899-457d-864d-9775c5c05a47",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/data-forwarders/:forwarder_id/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "data-forwarders",
+                            ":forwarder_id",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "id": "f2b7271d-2f55-4671-8aa6-f81f80b0c54e",
+                              "key": "organization_id_or_slug",
+                              "value": "<string>",
+                              "description": "(Required) The ID or slug of the organization."
+                            },
+                            {
+                              "id": "a802ae12-7188-4150-b86e-5e94f44bb483",
+                              "key": "forwarder_id",
+                              "value": "<string>",
+                              "description": "(Required) The ID of the data forwarder."
+                            }
+                          ]
+                        },
+                        "description": "Updates an existing data forwarder."
+                      },
+                      "response": [
+                        {
+                          "id": "6470f2b3-98da-4e99-a336-92151dbddf0e",
+                          "name": "Data forwarder updated.",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/data-forwarders/:forwarder_id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "data-forwarders",
+                                ":forwarder_id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                },
+                                {
+                                  "key": "forwarder_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"dateCreated\": \"<dateTime>\"\n}",
+                          "createdAt": "2026-06-05T15:17:38.000Z",
+                          "updatedAt": "2026-06-05T15:17:38.000Z",
+                          "uid": "35240-6470f2b3-98da-4e99-a336-92151dbddf0e"
+                        },
+                        {
+                          "id": "d81d80da-a691-42c4-bc00-44dbf7d83f44",
+                          "name": "Unauthorized.",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/data-forwarders/:forwarder_id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "data-forwarders",
+                                ":forwarder_id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                },
+                                {
+                                  "key": "forwarder_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:17:38.000Z",
+                          "updatedAt": "2026-06-05T15:17:38.000Z",
+                          "uid": "35240-d81d80da-a691-42c4-bc00-44dbf7d83f44"
+                        },
+                        {
+                          "id": "0a5f0511-56e2-4cf3-b48a-fae582058e20",
+                          "name": "Not found.",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/data-forwarders/:forwarder_id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "data-forwarders",
+                                ":forwarder_id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                },
+                                {
+                                  "key": "forwarder_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:17:38.000Z",
+                          "updatedAt": "2026-06-05T15:17:38.000Z",
+                          "uid": "35240-0a5f0511-56e2-4cf3-b48a-fae582058e20"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:17:38.000Z",
+                      "updatedAt": "2026-06-05T15:17:38.000Z",
+                      "uid": "35240-b404e936-e899-457d-864d-9775c5c05a47"
+                    },
+                    {
+                      "name": "Sentry Delete a data forwarder for an organization",
+                      "id": "b562e270-9caf-44b7-bcc1-431da7b526d1",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/data-forwarders/:forwarder_id/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "data-forwarders",
+                            ":forwarder_id",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "id": "b858ea57-b4e8-4158-aa69-96226b91d850",
+                              "key": "organization_id_or_slug",
+                              "value": "<string>",
+                              "description": "(Required) The ID or slug of the organization."
+                            },
+                            {
+                              "id": "9c772e19-e0c1-427f-a2d8-3e13d518b7f0",
+                              "key": "forwarder_id",
+                              "value": "<string>",
+                              "description": "(Required) The ID of the data forwarder."
+                            }
+                          ]
+                        },
+                        "description": "Deletes a data forwarder."
+                      },
+                      "response": [
+                        {
+                          "id": "9ae9551a-de91-4361-a20c-f3b1095d6783",
+                          "name": "Data forwarder deleted.",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/data-forwarders/:forwarder_id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "data-forwarders",
+                                ":forwarder_id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                },
+                                {
+                                  "key": "forwarder_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "No Content",
+                          "code": 204,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:17:38.000Z",
+                          "updatedAt": "2026-06-05T15:17:38.000Z",
+                          "uid": "35240-9ae9551a-de91-4361-a20c-f3b1095d6783"
+                        },
+                        {
+                          "id": "f381ba0a-9a58-4d47-8013-92ba151bce93",
+                          "name": "Unauthorized.",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/data-forwarders/:forwarder_id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "data-forwarders",
+                                ":forwarder_id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                },
+                                {
+                                  "key": "forwarder_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:17:38.000Z",
+                          "updatedAt": "2026-06-05T15:17:38.000Z",
+                          "uid": "35240-f381ba0a-9a58-4d47-8013-92ba151bce93"
+                        },
+                        {
+                          "id": "824a98ce-704f-443e-a7f3-23a523444cc0",
+                          "name": "Not found.",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/data-forwarders/:forwarder_id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "data-forwarders",
+                                ":forwarder_id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                },
+                                {
+                                  "key": "forwarder_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:17:38.000Z",
+                          "updatedAt": "2026-06-05T15:17:38.000Z",
+                          "uid": "35240-824a98ce-704f-443e-a7f3-23a523444cc0"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:17:38.000Z",
+                      "updatedAt": "2026-06-05T15:17:38.000Z",
+                      "uid": "35240-b562e270-9caf-44b7-bcc1-431da7b526d1"
+                    }
+                  ],
+                  "id": "a2ffddc3-de05-4bf6-8cfe-9577af1766a4",
+                  "createdAt": "2026-06-05T15:17:38.000Z",
+                  "updatedAt": "2026-06-05T15:17:38.000Z",
+                  "uid": "35240-a2ffddc3-de05-4bf6-8cfe-9577af1766a4"
+                },
+                {
+                  "name": "Sentry Retrieve data forwarders for an organization",
+                  "id": "a38add56-3ca1-49b4-ba65-d90cb9d116f7",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/data-forwarders/",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "organizations",
+                        ":organization_id_or_slug",
+                        "data-forwarders",
+                        ""
+                      ],
+                      "variable": [
+                        {
+                          "id": "cb7d5c41-a604-487d-a4d4-a6d59e159a38",
+                          "key": "organization_id_or_slug",
+                          "value": "<string>",
+                          "description": "(Required) The ID or slug of the organization."
+                        }
+                      ]
+                    },
+                    "description": "Returns a list of data forwarders configured for the organization."
+                  },
+                  "response": [
+                    {
+                      "id": "cee1cfc1-d5fc-4ef7-953c-f4836bbfe0d2",
+                      "name": "A list of data forwarders.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/data-forwarders/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "data-forwarders",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "key": "organization_id_or_slug"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "[\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"dateCreated\": \"<dateTime>\"\n  },\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"dateCreated\": \"<dateTime>\"\n  }\n]",
+                      "createdAt": "2026-06-05T15:17:38.000Z",
+                      "updatedAt": "2026-06-05T15:17:38.000Z",
+                      "uid": "35240-cee1cfc1-d5fc-4ef7-953c-f4836bbfe0d2"
+                    },
+                    {
+                      "id": "f9b5b591-51fb-48ce-bc23-891fd17767e1",
+                      "name": "Unauthorized.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/data-forwarders/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "data-forwarders",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "key": "organization_id_or_slug"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:17:38.000Z",
+                      "updatedAt": "2026-06-05T15:17:38.000Z",
+                      "uid": "35240-f9b5b591-51fb-48ce-bc23-891fd17767e1"
+                    },
+                    {
+                      "id": "9a547d61-2300-4276-824b-f83c4c76bce4",
+                      "name": "Forbidden.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/data-forwarders/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "data-forwarders",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "key": "organization_id_or_slug"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:17:38.000Z",
+                      "updatedAt": "2026-06-05T15:17:38.000Z",
+                      "uid": "35240-9a547d61-2300-4276-824b-f83c4c76bce4"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:17:38.000Z",
+                  "updatedAt": "2026-06-05T15:17:38.000Z",
+                  "uid": "35240-a38add56-3ca1-49b4-ba65-d90cb9d116f7"
+                },
+                {
+                  "name": "Sentry Create a data forwarder for an organization",
+                  "id": "54a933d5-60ac-45dc-813a-96b5e40de0d7",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/data-forwarders/",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "organizations",
+                        ":organization_id_or_slug",
+                        "data-forwarders",
+                        ""
+                      ],
+                      "variable": [
+                        {
+                          "id": "5cf7fc03-6210-4f66-8d7f-7318952f1ce7",
+                          "key": "organization_id_or_slug",
+                          "value": "<string>",
+                          "description": "(Required) The ID or slug of the organization."
+                        }
+                      ]
+                    },
+                    "description": "Creates a new data forwarder for the organization."
+                  },
+                  "response": [
+                    {
+                      "id": "36a1a6a5-b9ad-4c40-8a37-9e17e74ce702",
+                      "name": "Data forwarder created.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/data-forwarders/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "data-forwarders",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "key": "organization_id_or_slug"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"dateCreated\": \"<dateTime>\"\n}",
+                      "createdAt": "2026-06-05T15:17:38.000Z",
+                      "updatedAt": "2026-06-05T15:17:38.000Z",
+                      "uid": "35240-36a1a6a5-b9ad-4c40-8a37-9e17e74ce702"
+                    },
+                    {
+                      "id": "2b8c4a97-46b4-4c11-a29e-b9504fbfb179",
+                      "name": "Bad request.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/data-forwarders/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "data-forwarders",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "key": "organization_id_or_slug"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:17:38.000Z",
+                      "updatedAt": "2026-06-05T15:17:38.000Z",
+                      "uid": "35240-2b8c4a97-46b4-4c11-a29e-b9504fbfb179"
+                    },
+                    {
+                      "id": "4e83d2af-737d-44a5-80fc-daed055364b3",
+                      "name": "Unauthorized.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/data-forwarders/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "data-forwarders",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "key": "organization_id_or_slug"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:17:38.000Z",
+                      "updatedAt": "2026-06-05T15:17:38.000Z",
+                      "uid": "35240-4e83d2af-737d-44a5-80fc-daed055364b3"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:17:38.000Z",
+                  "updatedAt": "2026-06-05T15:17:38.000Z",
+                  "uid": "35240-54a933d5-60ac-45dc-813a-96b5e40de0d7"
+                }
+              ],
+              "id": "afd6f3c8-1381-4fc4-938f-d7b9ed139cba",
+              "createdAt": "2026-06-05T15:17:38.000Z",
+              "updatedAt": "2026-06-05T15:17:38.000Z",
+              "uid": "35240-afd6f3c8-1381-4fc4-938f-d7b9ed139cba"
+            },
+            {
+              "name": "external-users",
+              "item": [
+                {
+                  "name": "{external_user_id}",
+                  "item": [
+                    {
+                      "name": "Sentry Update an external user",
+                      "id": "273d6610-850f-42b7-81fc-7b5630cb6167",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"externalName\": \"<string>\",\n  \"provider\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/external-users/:external_user_id/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "external-users",
+                            ":external_user_id",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "id": "14e5835a-385f-4f3b-a01f-b1bed713f1c4",
+                              "key": "organization_id_or_slug",
+                              "value": "<string>",
+                              "description": "(Required) The ID or slug of the organization."
+                            },
+                            {
+                              "id": "4c8f17ee-fd5d-4ac3-a652-9894f9b287a1",
+                              "key": "external_user_id",
+                              "value": "<string>",
+                              "description": "(Required) The ID of the external user."
+                            }
+                          ]
+                        },
+                        "description": "Updates an external user mapping."
+                      },
+                      "response": [
+                        {
+                          "id": "a07184df-085f-45f9-8822-c7eb414a5914",
+                          "name": "External user updated.",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"externalName\": \"<string>\",\n  \"provider\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/external-users/:external_user_id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "external-users",
+                                ":external_user_id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                },
+                                {
+                                  "key": "external_user_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:17:38.000Z",
+                          "updatedAt": "2026-06-05T15:17:38.000Z",
+                          "uid": "35240-a07184df-085f-45f9-8822-c7eb414a5914"
+                        },
+                        {
+                          "id": "420e6d87-b8d8-43ae-a38f-7eebb4e48e26",
+                          "name": "Unauthorized.",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"externalName\": \"<string>\",\n  \"provider\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/external-users/:external_user_id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "external-users",
+                                ":external_user_id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                },
+                                {
+                                  "key": "external_user_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:17:38.000Z",
+                          "updatedAt": "2026-06-05T15:17:38.000Z",
+                          "uid": "35240-420e6d87-b8d8-43ae-a38f-7eebb4e48e26"
+                        },
+                        {
+                          "id": "9dc75b69-4d62-4f11-9d46-ecb53084a488",
+                          "name": "Not found.",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"externalName\": \"<string>\",\n  \"provider\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/external-users/:external_user_id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "external-users",
+                                ":external_user_id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                },
+                                {
+                                  "key": "external_user_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:17:38.000Z",
+                          "updatedAt": "2026-06-05T15:17:38.000Z",
+                          "uid": "35240-9dc75b69-4d62-4f11-9d46-ecb53084a488"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:17:38.000Z",
+                      "updatedAt": "2026-06-05T15:17:38.000Z",
+                      "uid": "35240-273d6610-850f-42b7-81fc-7b5630cb6167"
+                    },
+                    {
+                      "name": "Sentry Delete an external user",
+                      "id": "e511ef3c-a284-471b-8997-2ce5649e8120",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/external-users/:external_user_id/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "external-users",
+                            ":external_user_id",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "id": "bbd2138c-9201-42eb-8278-df01cb000274",
+                              "key": "organization_id_or_slug",
+                              "value": "<string>",
+                              "description": "(Required) The ID or slug of the organization."
+                            },
+                            {
+                              "id": "8c6ddb4f-e514-4053-9a5a-42e6a269fb87",
+                              "key": "external_user_id",
+                              "value": "<string>",
+                              "description": "(Required) The ID of the external user."
+                            }
+                          ]
+                        },
+                        "description": "Deletes an external user mapping."
+                      },
+                      "response": [
+                        {
+                          "id": "0fb3d029-6148-4ea1-9fa3-715d184de477",
+                          "name": "External user deleted.",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/external-users/:external_user_id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "external-users",
+                                ":external_user_id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                },
+                                {
+                                  "key": "external_user_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "No Content",
+                          "code": 204,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:17:38.000Z",
+                          "updatedAt": "2026-06-05T15:17:38.000Z",
+                          "uid": "35240-0fb3d029-6148-4ea1-9fa3-715d184de477"
+                        },
+                        {
+                          "id": "60f94339-1164-49b4-8ddf-39f5ad6ec94b",
+                          "name": "Unauthorized.",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/external-users/:external_user_id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "external-users",
+                                ":external_user_id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                },
+                                {
+                                  "key": "external_user_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:17:38.000Z",
+                          "updatedAt": "2026-06-05T15:17:38.000Z",
+                          "uid": "35240-60f94339-1164-49b4-8ddf-39f5ad6ec94b"
+                        },
+                        {
+                          "id": "259579c6-a5fb-41cd-9b90-14127b420ad2",
+                          "name": "Not found.",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/external-users/:external_user_id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "external-users",
+                                ":external_user_id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                },
+                                {
+                                  "key": "external_user_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:17:38.000Z",
+                          "updatedAt": "2026-06-05T15:17:38.000Z",
+                          "uid": "35240-259579c6-a5fb-41cd-9b90-14127b420ad2"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:17:38.000Z",
+                      "updatedAt": "2026-06-05T15:17:38.000Z",
+                      "uid": "35240-e511ef3c-a284-471b-8997-2ce5649e8120"
+                    }
+                  ],
+                  "id": "c74efe28-82a1-49c1-a1ee-a32dab0ff0e7",
+                  "createdAt": "2026-06-05T15:17:38.000Z",
+                  "updatedAt": "2026-06-05T15:17:38.000Z",
+                  "uid": "35240-c74efe28-82a1-49c1-a1ee-a32dab0ff0e7"
+                },
+                {
+                  "name": "Sentry Create an external user",
+                  "id": "2dd0038f-5933-41f8-9f29-79ff2ad0bbb1",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"externalName\": \"<string>\",\n  \"provider\": \"<string>\",\n  \"memberId\": \"<integer>\",\n  \"integrationId\": \"<integer>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/external-users/",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "organizations",
+                        ":organization_id_or_slug",
+                        "external-users",
+                        ""
+                      ],
+                      "variable": [
+                        {
+                          "id": "567f135d-d612-45c3-becd-c39dc1da789c",
+                          "key": "organization_id_or_slug",
+                          "value": "<string>",
+                          "description": "(Required) The ID or slug of the organization."
+                        }
+                      ]
+                    },
+                    "description": "Creates a mapping between a Sentry user and an external service user."
+                  },
+                  "response": [
+                    {
+                      "id": "cc30f8ad-f256-480f-adc1-eead0f98fa1f",
+                      "name": "External user created.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"externalName\": \"<string>\",\n  \"provider\": \"<string>\",\n  \"memberId\": \"<integer>\",\n  \"integrationId\": \"<integer>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/external-users/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "external-users",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "key": "organization_id_or_slug"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:17:38.000Z",
+                      "updatedAt": "2026-06-05T15:17:38.000Z",
+                      "uid": "35240-cc30f8ad-f256-480f-adc1-eead0f98fa1f"
+                    },
+                    {
+                      "id": "7f7b7d4b-26d3-4a8b-b3e4-6bbe98747a48",
+                      "name": "Bad request.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"externalName\": \"<string>\",\n  \"provider\": \"<string>\",\n  \"memberId\": \"<integer>\",\n  \"integrationId\": \"<integer>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/external-users/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "external-users",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "key": "organization_id_or_slug"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:17:38.000Z",
+                      "updatedAt": "2026-06-05T15:17:38.000Z",
+                      "uid": "35240-7f7b7d4b-26d3-4a8b-b3e4-6bbe98747a48"
+                    },
+                    {
+                      "id": "23c5dae9-a3dd-4b66-a4c9-17e0a63779d8",
+                      "name": "Unauthorized.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"externalName\": \"<string>\",\n  \"provider\": \"<string>\",\n  \"memberId\": \"<integer>\",\n  \"integrationId\": \"<integer>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/external-users/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "external-users",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "key": "organization_id_or_slug"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:17:38.000Z",
+                      "updatedAt": "2026-06-05T15:17:38.000Z",
+                      "uid": "35240-23c5dae9-a3dd-4b66-a4c9-17e0a63779d8"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:17:38.000Z",
+                  "updatedAt": "2026-06-05T15:17:38.000Z",
+                  "uid": "35240-2dd0038f-5933-41f8-9f29-79ff2ad0bbb1"
+                }
+              ],
+              "id": "7cce867e-cae4-41a0-9e7e-ca4c104f1ee1",
+              "createdAt": "2026-06-05T15:17:38.000Z",
+              "updatedAt": "2026-06-05T15:17:38.000Z",
+              "uid": "35240-7cce867e-cae4-41a0-9e7e-ca4c104f1ee1"
+            },
+            {
+              "name": "external-teams",
+              "item": [
+                {
+                  "name": "{external_team_id}",
+                  "item": [
+                    {
+                      "name": "Sentry Update an external team",
+                      "id": "caf5a38d-4c99-42af-91fe-a4a11bd9f4e6",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"externalName\": \"<string>\",\n  \"provider\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/external-teams/:external_team_id/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "external-teams",
+                            ":external_team_id",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "id": "54035971-6719-4519-b3ec-a20475775afc",
+                              "key": "organization_id_or_slug",
+                              "value": "<string>",
+                              "description": "(Required) The ID or slug of the organization."
+                            },
+                            {
+                              "id": "47aa1ceb-7b8a-463f-81bb-7ab6e86930df",
+                              "key": "external_team_id",
+                              "value": "<string>",
+                              "description": "(Required) The ID of the external team."
+                            }
+                          ]
+                        },
+                        "description": "Updates an external team mapping."
+                      },
+                      "response": [
+                        {
+                          "id": "c7f86c9e-36b3-44e7-9759-4f6df7e21e6d",
+                          "name": "External team updated.",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"externalName\": \"<string>\",\n  \"provider\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/external-teams/:external_team_id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "external-teams",
+                                ":external_team_id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                },
+                                {
+                                  "key": "external_team_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:17:38.000Z",
+                          "updatedAt": "2026-06-05T15:17:38.000Z",
+                          "uid": "35240-c7f86c9e-36b3-44e7-9759-4f6df7e21e6d"
+                        },
+                        {
+                          "id": "d7787e9e-6671-4e63-b49c-655ab2733e0f",
+                          "name": "Unauthorized.",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"externalName\": \"<string>\",\n  \"provider\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/external-teams/:external_team_id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "external-teams",
+                                ":external_team_id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                },
+                                {
+                                  "key": "external_team_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:17:38.000Z",
+                          "updatedAt": "2026-06-05T15:17:38.000Z",
+                          "uid": "35240-d7787e9e-6671-4e63-b49c-655ab2733e0f"
+                        },
+                        {
+                          "id": "657a16f9-b535-4e49-b7b8-15d5f9f63649",
+                          "name": "Not found.",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"externalName\": \"<string>\",\n  \"provider\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/external-teams/:external_team_id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "external-teams",
+                                ":external_team_id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                },
+                                {
+                                  "key": "external_team_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:17:38.000Z",
+                          "updatedAt": "2026-06-05T15:17:38.000Z",
+                          "uid": "35240-657a16f9-b535-4e49-b7b8-15d5f9f63649"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:17:38.000Z",
+                      "updatedAt": "2026-06-05T15:17:38.000Z",
+                      "uid": "35240-caf5a38d-4c99-42af-91fe-a4a11bd9f4e6"
+                    },
+                    {
+                      "name": "Sentry Delete an external team",
+                      "id": "f0282bda-0d2f-4d28-a182-8fbc7136a546",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/external-teams/:external_team_id/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "external-teams",
+                            ":external_team_id",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "id": "cd3a5647-3e0e-4c8d-a8b9-bada37f92c19",
+                              "key": "organization_id_or_slug",
+                              "value": "<string>",
+                              "description": "(Required) The ID or slug of the organization."
+                            },
+                            {
+                              "id": "8d5e86f1-1e8b-4706-96e5-beb626ecf02d",
+                              "key": "external_team_id",
+                              "value": "<string>",
+                              "description": "(Required) The ID of the external team."
+                            }
+                          ]
+                        },
+                        "description": "Deletes an external team mapping."
+                      },
+                      "response": [
+                        {
+                          "id": "3a7798ee-328e-457e-8683-c2f6338586c0",
+                          "name": "External team deleted.",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/external-teams/:external_team_id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "external-teams",
+                                ":external_team_id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                },
+                                {
+                                  "key": "external_team_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "No Content",
+                          "code": 204,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:17:38.000Z",
+                          "updatedAt": "2026-06-05T15:17:38.000Z",
+                          "uid": "35240-3a7798ee-328e-457e-8683-c2f6338586c0"
+                        },
+                        {
+                          "id": "8440e966-7f08-4a89-af06-265f0ac7158c",
+                          "name": "Unauthorized.",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/external-teams/:external_team_id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "external-teams",
+                                ":external_team_id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                },
+                                {
+                                  "key": "external_team_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:17:38.000Z",
+                          "updatedAt": "2026-06-05T15:17:38.000Z",
+                          "uid": "35240-8440e966-7f08-4a89-af06-265f0ac7158c"
+                        },
+                        {
+                          "id": "74c67728-2026-4019-ac46-2944bd6cdc39",
+                          "name": "Not found.",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/external-teams/:external_team_id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "external-teams",
+                                ":external_team_id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                },
+                                {
+                                  "key": "external_team_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:17:38.000Z",
+                          "updatedAt": "2026-06-05T15:17:38.000Z",
+                          "uid": "35240-74c67728-2026-4019-ac46-2944bd6cdc39"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:17:38.000Z",
+                      "updatedAt": "2026-06-05T15:17:38.000Z",
+                      "uid": "35240-f0282bda-0d2f-4d28-a182-8fbc7136a546"
+                    }
+                  ],
+                  "id": "1192ecb1-13cf-452c-9858-936fab3f9b59",
+                  "createdAt": "2026-06-05T15:17:38.000Z",
+                  "updatedAt": "2026-06-05T15:17:38.000Z",
+                  "uid": "35240-1192ecb1-13cf-452c-9858-936fab3f9b59"
+                },
+                {
+                  "name": "Sentry Create an external team",
+                  "id": "4fa8288d-085e-4502-9e84-022e622171a7",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"externalName\": \"<string>\",\n  \"provider\": \"<string>\",\n  \"teamId\": \"<integer>\",\n  \"integrationId\": \"<integer>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/external-teams/",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "organizations",
+                        ":organization_id_or_slug",
+                        "external-teams",
+                        ""
+                      ],
+                      "variable": [
+                        {
+                          "id": "957c6f9c-7804-476c-85cc-4081e4fe7fbe",
+                          "key": "organization_id_or_slug",
+                          "value": "<string>",
+                          "description": "(Required) The ID or slug of the organization."
+                        }
+                      ]
+                    },
+                    "description": "Creates a mapping between a Sentry team and an external service team."
+                  },
+                  "response": [
+                    {
+                      "id": "a3f7b548-b77e-45e4-8c5d-01038d3fbf60",
+                      "name": "External team created.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"externalName\": \"<string>\",\n  \"provider\": \"<string>\",\n  \"teamId\": \"<integer>\",\n  \"integrationId\": \"<integer>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/external-teams/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "external-teams",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "key": "organization_id_or_slug"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:17:38.000Z",
+                      "updatedAt": "2026-06-05T15:17:38.000Z",
+                      "uid": "35240-a3f7b548-b77e-45e4-8c5d-01038d3fbf60"
+                    },
+                    {
+                      "id": "7dec6f74-e34c-47b6-bba0-bc7e722ae3f3",
+                      "name": "Bad request.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"externalName\": \"<string>\",\n  \"provider\": \"<string>\",\n  \"teamId\": \"<integer>\",\n  \"integrationId\": \"<integer>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/external-teams/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "external-teams",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "key": "organization_id_or_slug"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:17:38.000Z",
+                      "updatedAt": "2026-06-05T15:17:38.000Z",
+                      "uid": "35240-7dec6f74-e34c-47b6-bba0-bc7e722ae3f3"
+                    },
+                    {
+                      "id": "5a10cb29-6de6-4dfb-9550-e6210f4346cd",
+                      "name": "Unauthorized.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"externalName\": \"<string>\",\n  \"provider\": \"<string>\",\n  \"teamId\": \"<integer>\",\n  \"integrationId\": \"<integer>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/external-teams/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "external-teams",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "key": "organization_id_or_slug"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:17:38.000Z",
+                      "updatedAt": "2026-06-05T15:17:38.000Z",
+                      "uid": "35240-5a10cb29-6de6-4dfb-9550-e6210f4346cd"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:17:38.000Z",
+                  "updatedAt": "2026-06-05T15:17:38.000Z",
+                  "uid": "35240-4fa8288d-085e-4502-9e84-022e622171a7"
+                }
+              ],
+              "id": "7e2ef74a-60c0-4718-951b-f8b638673607",
+              "createdAt": "2026-06-05T15:17:38.000Z",
+              "updatedAt": "2026-06-05T15:17:38.000Z",
+              "uid": "35240-7e2ef74a-60c0-4718-951b-f8b638673607"
+            }
+          ],
+          "id": "7b5645e7-6126-4941-9106-6c5c7882803d",
+          "createdAt": "2026-06-05T15:17:38.000Z",
+          "updatedAt": "2026-06-05T15:17:38.000Z",
+          "uid": "35240-7b5645e7-6126-4941-9106-6c5c7882803d"
+        }
+      ],
+      "id": "c8b363a0-c0fd-44f5-90d8-c49699543c15",
+      "createdAt": "2026-06-05T15:17:38.000Z",
+      "updatedAt": "2026-06-05T15:17:38.000Z",
+      "uid": "35240-c8b363a0-c0fd-44f5-90d8-c49699543c15"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://sentry.io/api/0"
+    }
+  ]
+}

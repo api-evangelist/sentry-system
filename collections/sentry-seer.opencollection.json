@@ -1,0 +1,85 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sentry Seer API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Seer",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Sentry List Seer AI models",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/seer/models/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              }
+            ]
+          },
+          "docs": "Returns a list of available AI models for Seer issue analysis."
+        },
+        {
+          "info": {
+            "name": "Sentry Retrieve Seer issue fix state",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/issues/:issue_id/seer/autofix/",
+            "params": [
+              {
+                "name": "issue_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the issue."
+              }
+            ]
+          },
+          "docs": "Returns the current state of a Seer issue fix analysis."
+        },
+        {
+          "info": {
+            "name": "Sentry Start Seer issue fix",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sentry.io/api/0/issues/:issue_id/seer/autofix/",
+            "params": [
+              {
+                "name": "issue_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the issue."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Initiates an AI-powered issue fix analysis using Seer. The fix runs asynchronously and its state can be polled."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

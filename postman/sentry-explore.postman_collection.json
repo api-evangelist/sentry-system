@@ -1,0 +1,986 @@
+{
+  "info": {
+    "_postman_id": "ae3f64d2-9721-4953-bdaf-447bd6a9083f",
+    "name": "Sentry Explore API",
+    "description": "The Explore API provides endpoints for querying and analyzing event data in Sentry, allowing you to slice and dice events in both table and timeseries formats for flexible data analysis and visualization.\n\nContact Support:\n Name: Sentry Support\n Email: support@sentry.io",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:17:35.000Z",
+    "updatedAt": "2026-06-05T15:17:35.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-ae3f64d2-9721-4953-bdaf-447bd6a9083f"
+  },
+  "item": [
+    {
+      "name": "organizations",
+      "item": [
+        {
+          "name": "{organization_id_or_slug}",
+          "item": [
+            {
+              "name": "events",
+              "item": [
+                {
+                  "name": "Sentry Query Explore events in table format",
+                  "id": "ec64b964-d71a-4383-b559-cf9c33c408cf",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/events/?field=<string>&field=<string>&query=<string>&statsPeriod=<string>&start=<dateTime>&end=<dateTime>&sort=<string>&project=<integer>&project=<integer>&environment=<string>&per_page=<integer>&cursor=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "organizations",
+                        ":organization_id_or_slug",
+                        "events",
+                        ""
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) The fields to select (may be specified multiple times).",
+                          "key": "field",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) The fields to select (may be specified multiple times).",
+                          "key": "field",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "An optional Sentry search query to filter events.",
+                          "key": "query",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Stats period (e.g., 24h, 14d).",
+                          "key": "statsPeriod",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Start date for the query range.",
+                          "key": "start",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "End date for the query range.",
+                          "key": "end",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Field to sort by (prefix with - for descending).",
+                          "key": "sort",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Project IDs to filter by.",
+                          "key": "project",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Project IDs to filter by.",
+                          "key": "project",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Environment name to filter by.",
+                          "key": "environment",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Number of results per page.",
+                          "key": "per_page",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Pagination cursor.",
+                          "key": "cursor",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "1895b557-8504-41a8-8535-bf8eb63c5e68",
+                          "key": "organization_id_or_slug",
+                          "value": "<string>",
+                          "description": "(Required) The ID or slug of the organization."
+                        }
+                      ]
+                    },
+                    "description": "Returns event data in table format, allowing you to slice and dice your events using various fields and aggregations."
+                  },
+                  "response": [
+                    {
+                      "id": "e4913aaf-6c6d-4c2c-99fb-da82754d9321",
+                      "name": "Event data in table format.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/events/?field=<string>&query=<string>&statsPeriod=<string>&start=<dateTime>&end=<dateTime>&sort=<string>&project=<integer>&environment=<string>&per_page=<integer>&cursor=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "events",
+                            ""
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) The fields to select (may be specified multiple times).",
+                              "key": "field",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "An optional Sentry search query to filter events.",
+                              "key": "query",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Stats period (e.g., 24h, 14d).",
+                              "key": "statsPeriod",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Start date for the query range.",
+                              "key": "start",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "End date for the query range.",
+                              "key": "end",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "Field to sort by (prefix with - for descending).",
+                              "key": "sort",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Project IDs to filter by.",
+                              "key": "project",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Environment name to filter by.",
+                              "key": "environment",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Number of results per page.",
+                              "key": "per_page",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Pagination cursor.",
+                              "key": "cursor",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "organization_id_or_slug"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"meta\": {\n    \"fields\": {}\n  }\n}",
+                      "createdAt": "2026-06-05T15:17:36.000Z",
+                      "updatedAt": "2026-06-05T15:17:36.000Z",
+                      "uid": "35240-e4913aaf-6c6d-4c2c-99fb-da82754d9321"
+                    },
+                    {
+                      "id": "306c587e-7b64-439a-a2d5-943161247cb6",
+                      "name": "Bad request or invalid query.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/events/?field=<string>&query=<string>&statsPeriod=<string>&start=<dateTime>&end=<dateTime>&sort=<string>&project=<integer>&environment=<string>&per_page=<integer>&cursor=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "events",
+                            ""
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) The fields to select (may be specified multiple times).",
+                              "key": "field",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "An optional Sentry search query to filter events.",
+                              "key": "query",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Stats period (e.g., 24h, 14d).",
+                              "key": "statsPeriod",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Start date for the query range.",
+                              "key": "start",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "End date for the query range.",
+                              "key": "end",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "Field to sort by (prefix with - for descending).",
+                              "key": "sort",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Project IDs to filter by.",
+                              "key": "project",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Environment name to filter by.",
+                              "key": "environment",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Number of results per page.",
+                              "key": "per_page",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Pagination cursor.",
+                              "key": "cursor",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "organization_id_or_slug"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:17:36.000Z",
+                      "updatedAt": "2026-06-05T15:17:36.000Z",
+                      "uid": "35240-306c587e-7b64-439a-a2d5-943161247cb6"
+                    },
+                    {
+                      "id": "d054aa2f-5dc7-4482-ba4d-9fa2de52c0cc",
+                      "name": "Unauthorized.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/events/?field=<string>&query=<string>&statsPeriod=<string>&start=<dateTime>&end=<dateTime>&sort=<string>&project=<integer>&environment=<string>&per_page=<integer>&cursor=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "events",
+                            ""
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) The fields to select (may be specified multiple times).",
+                              "key": "field",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "An optional Sentry search query to filter events.",
+                              "key": "query",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Stats period (e.g., 24h, 14d).",
+                              "key": "statsPeriod",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Start date for the query range.",
+                              "key": "start",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "End date for the query range.",
+                              "key": "end",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "Field to sort by (prefix with - for descending).",
+                              "key": "sort",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Project IDs to filter by.",
+                              "key": "project",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Environment name to filter by.",
+                              "key": "environment",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Number of results per page.",
+                              "key": "per_page",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Pagination cursor.",
+                              "key": "cursor",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "organization_id_or_slug"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:17:36.000Z",
+                      "updatedAt": "2026-06-05T15:17:36.000Z",
+                      "uid": "35240-d054aa2f-5dc7-4482-ba4d-9fa2de52c0cc"
+                    },
+                    {
+                      "id": "346695cd-c92b-4c80-b207-f2f39169d753",
+                      "name": "Forbidden.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/events/?field=<string>&query=<string>&statsPeriod=<string>&start=<dateTime>&end=<dateTime>&sort=<string>&project=<integer>&environment=<string>&per_page=<integer>&cursor=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "events",
+                            ""
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) The fields to select (may be specified multiple times).",
+                              "key": "field",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "An optional Sentry search query to filter events.",
+                              "key": "query",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Stats period (e.g., 24h, 14d).",
+                              "key": "statsPeriod",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Start date for the query range.",
+                              "key": "start",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "End date for the query range.",
+                              "key": "end",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "Field to sort by (prefix with - for descending).",
+                              "key": "sort",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Project IDs to filter by.",
+                              "key": "project",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Environment name to filter by.",
+                              "key": "environment",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Number of results per page.",
+                              "key": "per_page",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Pagination cursor.",
+                              "key": "cursor",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "organization_id_or_slug"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:17:36.000Z",
+                      "updatedAt": "2026-06-05T15:17:36.000Z",
+                      "uid": "35240-346695cd-c92b-4c80-b207-f2f39169d753"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:17:36.000Z",
+                  "updatedAt": "2026-06-05T15:17:36.000Z",
+                  "uid": "35240-ec64b964-d71a-4383-b559-cf9c33c408cf"
+                }
+              ],
+              "id": "fba7c9bf-3f8b-4a01-89c3-e0f58a74d4b7",
+              "createdAt": "2026-06-05T15:17:36.000Z",
+              "updatedAt": "2026-06-05T15:17:36.000Z",
+              "uid": "35240-fba7c9bf-3f8b-4a01-89c3-e0f58a74d4b7"
+            },
+            {
+              "name": "events-stats",
+              "item": [
+                {
+                  "name": "Sentry Query Explore events in timeseries format",
+                  "id": "3cb27d66-2f0e-4110-9310-3aa7949981c0",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/events-stats/?yAxis=<string>&yAxis=<string>&query=<string>&statsPeriod=<string>&start=<dateTime>&end=<dateTime>&interval=<string>&project=<integer>&project=<integer>&environment=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "organizations",
+                        ":organization_id_or_slug",
+                        "events-stats",
+                        ""
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) The aggregate field to chart (e.g., count(), p50(transaction.duration)).",
+                          "key": "yAxis",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) The aggregate field to chart (e.g., count(), p50(transaction.duration)).",
+                          "key": "yAxis",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "An optional search query to filter events.",
+                          "key": "query",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Stats period (e.g., 24h, 14d).",
+                          "key": "statsPeriod",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Start date for the query range.",
+                          "key": "start",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "End date for the query range.",
+                          "key": "end",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Resolution interval (e.g., 1h, 1d).",
+                          "key": "interval",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Project IDs to filter by.",
+                          "key": "project",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Project IDs to filter by.",
+                          "key": "project",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Environment name to filter by.",
+                          "key": "environment",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "219d7578-d830-4fc5-be4b-2fd19f2dbe62",
+                          "key": "organization_id_or_slug",
+                          "value": "<string>",
+                          "description": "(Required) The ID or slug of the organization."
+                        }
+                      ]
+                    },
+                    "description": "Returns event data in timeseries format, suitable for charting and visualization over time."
+                  },
+                  "response": [
+                    {
+                      "id": "368f8a3e-6cde-414a-8cfb-8c7ec4196a09",
+                      "name": "Event data in timeseries format.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/events-stats/?yAxis=<string>&query=<string>&statsPeriod=<string>&start=<dateTime>&end=<dateTime>&interval=<string>&project=<integer>&environment=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "events-stats",
+                            ""
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) The aggregate field to chart (e.g., count(), p50(transaction.duration)).",
+                              "key": "yAxis",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "An optional search query to filter events.",
+                              "key": "query",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Stats period (e.g., 24h, 14d).",
+                              "key": "statsPeriod",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Start date for the query range.",
+                              "key": "start",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "End date for the query range.",
+                              "key": "end",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "Resolution interval (e.g., 1h, 1d).",
+                              "key": "interval",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Project IDs to filter by.",
+                              "key": "project",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Environment name to filter by.",
+                              "key": "environment",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "organization_id_or_slug"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": [\n    [],\n    []\n  ],\n  \"meta\": {},\n  \"start\": \"<dateTime>\",\n  \"end\": \"<dateTime>\",\n  \"intervals\": [\n    \"<dateTime>\",\n    \"<dateTime>\"\n  ]\n}",
+                      "createdAt": "2026-06-05T15:17:36.000Z",
+                      "updatedAt": "2026-06-05T15:17:36.000Z",
+                      "uid": "35240-368f8a3e-6cde-414a-8cfb-8c7ec4196a09"
+                    },
+                    {
+                      "id": "4f57c8d9-fd87-40d4-8056-05cbb9b09c51",
+                      "name": "Bad request or invalid query.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/events-stats/?yAxis=<string>&query=<string>&statsPeriod=<string>&start=<dateTime>&end=<dateTime>&interval=<string>&project=<integer>&environment=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "events-stats",
+                            ""
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) The aggregate field to chart (e.g., count(), p50(transaction.duration)).",
+                              "key": "yAxis",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "An optional search query to filter events.",
+                              "key": "query",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Stats period (e.g., 24h, 14d).",
+                              "key": "statsPeriod",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Start date for the query range.",
+                              "key": "start",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "End date for the query range.",
+                              "key": "end",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "Resolution interval (e.g., 1h, 1d).",
+                              "key": "interval",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Project IDs to filter by.",
+                              "key": "project",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Environment name to filter by.",
+                              "key": "environment",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "organization_id_or_slug"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:17:36.000Z",
+                      "updatedAt": "2026-06-05T15:17:36.000Z",
+                      "uid": "35240-4f57c8d9-fd87-40d4-8056-05cbb9b09c51"
+                    },
+                    {
+                      "id": "9a56d6ea-0034-40e1-bfe5-aea6372c98d1",
+                      "name": "Unauthorized.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/events-stats/?yAxis=<string>&query=<string>&statsPeriod=<string>&start=<dateTime>&end=<dateTime>&interval=<string>&project=<integer>&environment=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "events-stats",
+                            ""
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) The aggregate field to chart (e.g., count(), p50(transaction.duration)).",
+                              "key": "yAxis",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "An optional search query to filter events.",
+                              "key": "query",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Stats period (e.g., 24h, 14d).",
+                              "key": "statsPeriod",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Start date for the query range.",
+                              "key": "start",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "End date for the query range.",
+                              "key": "end",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "Resolution interval (e.g., 1h, 1d).",
+                              "key": "interval",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Project IDs to filter by.",
+                              "key": "project",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Environment name to filter by.",
+                              "key": "environment",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "organization_id_or_slug"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:17:36.000Z",
+                      "updatedAt": "2026-06-05T15:17:36.000Z",
+                      "uid": "35240-9a56d6ea-0034-40e1-bfe5-aea6372c98d1"
+                    },
+                    {
+                      "id": "7191d4be-08a4-4af4-80fa-914d917a52a1",
+                      "name": "Forbidden.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/events-stats/?yAxis=<string>&query=<string>&statsPeriod=<string>&start=<dateTime>&end=<dateTime>&interval=<string>&project=<integer>&environment=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "events-stats",
+                            ""
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) The aggregate field to chart (e.g., count(), p50(transaction.duration)).",
+                              "key": "yAxis",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "An optional search query to filter events.",
+                              "key": "query",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Stats period (e.g., 24h, 14d).",
+                              "key": "statsPeriod",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Start date for the query range.",
+                              "key": "start",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "End date for the query range.",
+                              "key": "end",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "Resolution interval (e.g., 1h, 1d).",
+                              "key": "interval",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Project IDs to filter by.",
+                              "key": "project",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Environment name to filter by.",
+                              "key": "environment",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "organization_id_or_slug"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:17:36.000Z",
+                      "updatedAt": "2026-06-05T15:17:36.000Z",
+                      "uid": "35240-7191d4be-08a4-4af4-80fa-914d917a52a1"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:17:36.000Z",
+                  "updatedAt": "2026-06-05T15:17:36.000Z",
+                  "uid": "35240-3cb27d66-2f0e-4110-9310-3aa7949981c0"
+                }
+              ],
+              "id": "d5f89e87-9fa2-439a-a417-3a3522e9b4b0",
+              "createdAt": "2026-06-05T15:17:36.000Z",
+              "updatedAt": "2026-06-05T15:17:36.000Z",
+              "uid": "35240-d5f89e87-9fa2-439a-a417-3a3522e9b4b0"
+            }
+          ],
+          "id": "8d04b617-2d85-4568-a05b-59bf7ecbd375",
+          "createdAt": "2026-06-05T15:17:36.000Z",
+          "updatedAt": "2026-06-05T15:17:36.000Z",
+          "uid": "35240-8d04b617-2d85-4568-a05b-59bf7ecbd375"
+        }
+      ],
+      "id": "8347fd22-d4f8-459a-bfad-a7bce1b520f1",
+      "createdAt": "2026-06-05T15:17:36.000Z",
+      "updatedAt": "2026-06-05T15:17:36.000Z",
+      "uid": "35240-8347fd22-d4f8-459a-bfad-a7bce1b520f1"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://sentry.io/api/0"
+    }
+  ]
+}

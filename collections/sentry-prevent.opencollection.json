@@ -1,0 +1,294 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sentry Prevent API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Repositories",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Sentry Retrieve list of repositories for a given owner",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/prevent/repositories/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Pagination cursor."
+              }
+            ]
+          },
+          "docs": "Returns a list of repositories for the organization."
+        },
+        {
+          "info": {
+            "name": "Sentry Retrieve a single repository for a given owner",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/prevent/repositories/:repo_id/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "repo_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the repository."
+              }
+            ]
+          },
+          "docs": "Returns details for a specific repository."
+        },
+        {
+          "info": {
+            "name": "Sentry Retrieve list of branches for a given owner and repository",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/prevent/repositories/:repo_id/branches/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "repo_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the repository."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Pagination cursor."
+              }
+            ]
+          },
+          "docs": "Returns a list of branches for a specific repository."
+        },
+        {
+          "info": {
+            "name": "Sentry Sync repositories from an integrated org with GitHub",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/prevent/sync/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              }
+            ]
+          },
+          "docs": "Triggers a sync of repositories from the integrated organization's GitHub."
+        },
+        {
+          "info": {
+            "name": "Sentry Get syncing status for repositories for an integrated org",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/prevent/sync-status/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              }
+            ]
+          },
+          "docs": "Returns the current sync status for repositories."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Tokens",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Sentry Retrieve a paginated list of repository tokens for a given owner",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/prevent/tokens/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Pagination cursor."
+              }
+            ]
+          },
+          "docs": "Returns repository upload tokens."
+        },
+        {
+          "info": {
+            "name": "Sentry Regenerate a repository upload token and return the new token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/prevent/tokens/regenerate/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Regenerates a repository upload token."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Test Results",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Sentry Retrieve paginated list of test results for repository, owner, and organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/prevent/test-results/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "repositoryId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by repository ID."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Pagination cursor."
+              }
+            ]
+          },
+          "docs": "Returns paginated test results for the organization."
+        },
+        {
+          "info": {
+            "name": "Sentry Retrieve aggregated test result metrics for repository, owner, and organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/prevent/test-results/metrics/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "repositoryId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by repository ID."
+              }
+            ]
+          },
+          "docs": "Returns aggregated test result metrics."
+        },
+        {
+          "info": {
+            "name": "Sentry Retrieve test suites belonging to a repository's test results",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/prevent/test-results/suites/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "repositoryId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by repository ID."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Pagination cursor."
+              }
+            ]
+          },
+          "docs": "Returns test suites for a repository's test results."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

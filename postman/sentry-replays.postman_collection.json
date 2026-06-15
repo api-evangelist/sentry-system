@@ -1,0 +1,2140 @@
+{
+  "info": {
+    "_postman_id": "f1b586ba-d266-44d9-9501-b94414ad3afd",
+    "name": "Sentry Replays API",
+    "description": "The Replays API provides endpoints for managing session replays in Sentry, including listing, retrieving, and deleting replay instances, accessing recording segments, listing clicked nodes and selectors, and retrieving replay counts for issues or transactions.\n\nContact Support:\n Name: Sentry Support\n Email: support@sentry.io",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:17:42.000Z",
+    "updatedAt": "2026-06-05T15:17:42.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-f1b586ba-d266-44d9-9501-b94414ad3afd"
+  },
+  "item": [
+    {
+      "name": "organizations",
+      "item": [
+        {
+          "name": "{organization_id_or_slug}",
+          "item": [
+            {
+              "name": "replays",
+              "item": [
+                {
+                  "name": "selectors",
+                  "item": [
+                    {
+                      "name": "Sentry List an organization's selectors",
+                      "id": "c0ea6d5b-eb4f-4b93-acb9-379a6ecb9486",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/replays/selectors/?project=<integer>&project=<integer>&statsPeriod=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "replays",
+                            "selectors",
+                            ""
+                          ],
+                          "query": [
+                            {
+                              "description": "Project IDs to filter by.",
+                              "key": "project",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Project IDs to filter by.",
+                              "key": "project",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Stats period.",
+                              "key": "statsPeriod",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "c3b37e23-ddb7-499b-a3a0-965bf5969226",
+                              "key": "organization_id_or_slug",
+                              "value": "<string>",
+                              "description": "(Required) The ID or slug of the organization."
+                            }
+                          ]
+                        },
+                        "description": "Returns a list of DOM selectors tracked across organization replays."
+                      },
+                      "response": [
+                        {
+                          "id": "fbb65ac0-1c5b-40e8-9d46-a09953f8ef9f",
+                          "name": "A list of selectors.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/replays/selectors/?project=<integer>&statsPeriod=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "replays",
+                                "selectors",
+                                ""
+                              ],
+                              "query": [
+                                {
+                                  "description": "Project IDs to filter by.",
+                                  "key": "project",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "Stats period.",
+                                  "key": "statsPeriod",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": [\n    {\n      \"dom_element\": \"<string>\",\n      \"count\": \"<integer>\",\n      \"dead_click_count\": \"<integer>\",\n      \"rage_click_count\": \"<integer>\"\n    },\n    {\n      \"dom_element\": \"<string>\",\n      \"count\": \"<integer>\",\n      \"dead_click_count\": \"<integer>\",\n      \"rage_click_count\": \"<integer>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-06-05T15:17:43.000Z",
+                          "updatedAt": "2026-06-05T15:17:43.000Z",
+                          "uid": "35240-fbb65ac0-1c5b-40e8-9d46-a09953f8ef9f"
+                        },
+                        {
+                          "id": "3f68424e-a6fd-4463-9d59-6f15e72011e5",
+                          "name": "Unauthorized.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/replays/selectors/?project=<integer>&statsPeriod=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "replays",
+                                "selectors",
+                                ""
+                              ],
+                              "query": [
+                                {
+                                  "description": "Project IDs to filter by.",
+                                  "key": "project",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "Stats period.",
+                                  "key": "statsPeriod",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:17:43.000Z",
+                          "updatedAt": "2026-06-05T15:17:43.000Z",
+                          "uid": "35240-3f68424e-a6fd-4463-9d59-6f15e72011e5"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:17:42.000Z",
+                      "updatedAt": "2026-06-05T15:17:42.000Z",
+                      "uid": "35240-c0ea6d5b-eb4f-4b93-acb9-379a6ecb9486"
+                    }
+                  ],
+                  "id": "0d3bffd7-0e80-4991-9304-52af7fa3c2a1",
+                  "createdAt": "2026-06-05T15:17:42.000Z",
+                  "updatedAt": "2026-06-05T15:17:42.000Z",
+                  "uid": "35240-0d3bffd7-0e80-4991-9304-52af7fa3c2a1"
+                },
+                {
+                  "name": "{replay_id}",
+                  "item": [
+                    {
+                      "name": "clicks",
+                      "item": [
+                        {
+                          "name": "Sentry List clicked nodes",
+                          "id": "8d24d57d-91ef-4c86-b19a-793aa30db4bf",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/replays/:replay_id/clicks/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "replays",
+                                ":replay_id",
+                                "clicks",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "id": "251045f8-0d05-414e-9568-e2b0ba000274",
+                                  "key": "organization_id_or_slug",
+                                  "value": "<string>",
+                                  "description": "(Required) The ID or slug of the organization."
+                                },
+                                {
+                                  "id": "bd40e99d-3976-46e5-ba2d-0f2ad4157b41",
+                                  "key": "replay_id",
+                                  "value": "<uuid>",
+                                  "description": "(Required) The ID of the replay."
+                                }
+                              ]
+                            },
+                            "description": "Returns a list of clicked DOM nodes within a replay."
+                          },
+                          "response": [
+                            {
+                              "id": "75793286-d903-4611-b2a9-6e6600c86a38",
+                              "name": "A list of clicked nodes.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/replays/:replay_id/clicks/",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "organizations",
+                                    ":organization_id_or_slug",
+                                    "replays",
+                                    ":replay_id",
+                                    "clicks",
+                                    ""
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "organization_id_or_slug"
+                                    },
+                                    {
+                                      "key": "replay_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"data\": [\n    {\n      \"node_id\": \"<integer>\",\n      \"timestamp\": \"<dateTime>\",\n      \"element\": {\n        \"tag\": \"<string>\",\n        \"id\": \"<string>\",\n        \"class\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"text\": \"<string>\"\n      }\n    },\n    {\n      \"node_id\": \"<integer>\",\n      \"timestamp\": \"<dateTime>\",\n      \"element\": {\n        \"tag\": \"<string>\",\n        \"id\": \"<string>\",\n        \"class\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"text\": \"<string>\"\n      }\n    }\n  ]\n}",
+                              "createdAt": "2026-06-05T15:17:43.000Z",
+                              "updatedAt": "2026-06-05T15:17:43.000Z",
+                              "uid": "35240-75793286-d903-4611-b2a9-6e6600c86a38"
+                            },
+                            {
+                              "id": "583473a5-5fb0-4528-ba39-bb6bd713cee3",
+                              "name": "Unauthorized.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/replays/:replay_id/clicks/",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "organizations",
+                                    ":organization_id_or_slug",
+                                    "replays",
+                                    ":replay_id",
+                                    "clicks",
+                                    ""
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "organization_id_or_slug"
+                                    },
+                                    {
+                                      "key": "replay_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-06-05T15:17:43.000Z",
+                              "updatedAt": "2026-06-05T15:17:43.000Z",
+                              "uid": "35240-583473a5-5fb0-4528-ba39-bb6bd713cee3"
+                            },
+                            {
+                              "id": "ba9194be-ebdf-4fa0-87ec-4689c0c11a20",
+                              "name": "Replay not found.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/replays/:replay_id/clicks/",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "organizations",
+                                    ":organization_id_or_slug",
+                                    "replays",
+                                    ":replay_id",
+                                    "clicks",
+                                    ""
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "organization_id_or_slug"
+                                    },
+                                    {
+                                      "key": "replay_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-06-05T15:17:43.000Z",
+                              "updatedAt": "2026-06-05T15:17:43.000Z",
+                              "uid": "35240-ba9194be-ebdf-4fa0-87ec-4689c0c11a20"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:17:42.000Z",
+                          "updatedAt": "2026-06-05T15:17:42.000Z",
+                          "uid": "35240-8d24d57d-91ef-4c86-b19a-793aa30db4bf"
+                        }
+                      ],
+                      "id": "744db014-fbd8-4ca8-bcdb-7378a2d1e654",
+                      "createdAt": "2026-06-05T15:17:42.000Z",
+                      "updatedAt": "2026-06-05T15:17:42.000Z",
+                      "uid": "35240-744db014-fbd8-4ca8-bcdb-7378a2d1e654"
+                    }
+                  ],
+                  "id": "0b6f0cab-b07a-496e-ba1a-dc5c28f125d7",
+                  "createdAt": "2026-06-05T15:17:42.000Z",
+                  "updatedAt": "2026-06-05T15:17:42.000Z",
+                  "uid": "35240-0b6f0cab-b07a-496e-ba1a-dc5c28f125d7"
+                },
+                {
+                  "name": "Sentry List an organization's replays",
+                  "id": "1842f74c-70a8-419f-ba36-ab0a1f8076b4",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/replays/?cursor=<string>&query=<string>&statsPeriod=<string>&project=<integer>&project=<integer>&environment=<string>&sort=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "organizations",
+                        ":organization_id_or_slug",
+                        "replays",
+                        ""
+                      ],
+                      "query": [
+                        {
+                          "description": "Pagination cursor.",
+                          "key": "cursor",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "A search query to filter replays.",
+                          "key": "query",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Stats period (e.g., 24h, 14d).",
+                          "key": "statsPeriod",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Project IDs to filter by.",
+                          "key": "project",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Project IDs to filter by.",
+                          "key": "project",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Environment to filter by.",
+                          "key": "environment",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Sort order for results.",
+                          "key": "sort",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "34af373f-161b-409a-86e8-11005b121f27",
+                          "key": "organization_id_or_slug",
+                          "value": "<string>",
+                          "description": "(Required) The ID or slug of the organization."
+                        }
+                      ]
+                    },
+                    "description": "Returns a list of replays for the given organization."
+                  },
+                  "response": [
+                    {
+                      "id": "c4a147cd-1b28-492c-aa6b-0d553aee046a",
+                      "name": "A list of replays.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/replays/?cursor=<string>&query=<string>&statsPeriod=<string>&project=<integer>&environment=<string>&sort=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "replays",
+                            ""
+                          ],
+                          "query": [
+                            {
+                              "description": "Pagination cursor.",
+                              "key": "cursor",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "A search query to filter replays.",
+                              "key": "query",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Stats period (e.g., 24h, 14d).",
+                              "key": "statsPeriod",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Project IDs to filter by.",
+                              "key": "project",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Environment to filter by.",
+                              "key": "environment",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Sort order for results.",
+                              "key": "sort",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "organization_id_or_slug"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": [\n    {\n      \"id\": \"<uuid>\",\n      \"startedAt\": \"<dateTime>\",\n      \"finishedAt\": \"<dateTime>\",\n      \"title\": \"<string>\",\n      \"projectId\": \"<string>\",\n      \"duration\": \"<integer>\",\n      \"countErrors\": \"<integer>\",\n      \"countSegments\": \"<integer>\",\n      \"countUrls\": \"<integer>\",\n      \"platform\": \"<string>\",\n      \"environment\": \"<string>\",\n      \"urls\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"user\": {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\",\n        \"email\": \"<string>\",\n        \"ip_address\": \"<string>\"\n      },\n      \"browser\": {\n        \"name\": \"<string>\",\n        \"version\": \"<string>\"\n      },\n      \"os\": {\n        \"name\": \"<string>\",\n        \"version\": \"<string>\"\n      },\n      \"device\": {\n        \"name\": \"<string>\",\n        \"brand\": \"<string>\",\n        \"model\": \"<string>\",\n        \"family\": \"<string>\"\n      },\n      \"tags\": {\n        \"ullamco_b3c\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"startedAt\": \"<dateTime>\",\n      \"finishedAt\": \"<dateTime>\",\n      \"title\": \"<string>\",\n      \"projectId\": \"<string>\",\n      \"duration\": \"<integer>\",\n      \"countErrors\": \"<integer>\",\n      \"countSegments\": \"<integer>\",\n      \"countUrls\": \"<integer>\",\n      \"platform\": \"<string>\",\n      \"environment\": \"<string>\",\n      \"urls\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"user\": {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\",\n        \"email\": \"<string>\",\n        \"ip_address\": \"<string>\"\n      },\n      \"browser\": {\n        \"name\": \"<string>\",\n        \"version\": \"<string>\"\n      },\n      \"os\": {\n        \"name\": \"<string>\",\n        \"version\": \"<string>\"\n      },\n      \"device\": {\n        \"name\": \"<string>\",\n        \"brand\": \"<string>\",\n        \"model\": \"<string>\",\n        \"family\": \"<string>\"\n      },\n      \"tags\": {\n        \"eiusmod_2\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"officiadb\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"pariatur27\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"eu_6\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    }\n  ]\n}",
+                      "createdAt": "2026-06-05T15:17:43.000Z",
+                      "updatedAt": "2026-06-05T15:17:43.000Z",
+                      "uid": "35240-c4a147cd-1b28-492c-aa6b-0d553aee046a"
+                    },
+                    {
+                      "id": "39cc38fd-4615-4dda-9c87-adb3bd901b29",
+                      "name": "Unauthorized.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/replays/?cursor=<string>&query=<string>&statsPeriod=<string>&project=<integer>&environment=<string>&sort=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "replays",
+                            ""
+                          ],
+                          "query": [
+                            {
+                              "description": "Pagination cursor.",
+                              "key": "cursor",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "A search query to filter replays.",
+                              "key": "query",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Stats period (e.g., 24h, 14d).",
+                              "key": "statsPeriod",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Project IDs to filter by.",
+                              "key": "project",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Environment to filter by.",
+                              "key": "environment",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Sort order for results.",
+                              "key": "sort",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "organization_id_or_slug"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:17:43.000Z",
+                      "updatedAt": "2026-06-05T15:17:43.000Z",
+                      "uid": "35240-39cc38fd-4615-4dda-9c87-adb3bd901b29"
+                    },
+                    {
+                      "id": "4861edc2-4563-4967-ae0f-b648e0f89f83",
+                      "name": "Forbidden.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/replays/?cursor=<string>&query=<string>&statsPeriod=<string>&project=<integer>&environment=<string>&sort=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "replays",
+                            ""
+                          ],
+                          "query": [
+                            {
+                              "description": "Pagination cursor.",
+                              "key": "cursor",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "A search query to filter replays.",
+                              "key": "query",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Stats period (e.g., 24h, 14d).",
+                              "key": "statsPeriod",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Project IDs to filter by.",
+                              "key": "project",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Environment to filter by.",
+                              "key": "environment",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Sort order for results.",
+                              "key": "sort",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "organization_id_or_slug"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:17:43.000Z",
+                      "updatedAt": "2026-06-05T15:17:43.000Z",
+                      "uid": "35240-4861edc2-4563-4967-ae0f-b648e0f89f83"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:17:42.000Z",
+                  "updatedAt": "2026-06-05T15:17:42.000Z",
+                  "uid": "35240-1842f74c-70a8-419f-ba36-ab0a1f8076b4"
+                }
+              ],
+              "id": "fade928e-9a90-43be-ab39-81cba6279155",
+              "createdAt": "2026-06-05T15:17:42.000Z",
+              "updatedAt": "2026-06-05T15:17:42.000Z",
+              "uid": "35240-fade928e-9a90-43be-ab39-81cba6279155"
+            },
+            {
+              "name": "replay-count",
+              "item": [
+                {
+                  "name": "Sentry Retrieve a count of replays for a given issue or transaction",
+                  "id": "95b0bbf3-3e84-4229-9f1b-30c47c6f19e8",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/replay-count/?query=<string>&statsPeriod=<string>&project=<integer>&project=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "organizations",
+                        ":organization_id_or_slug",
+                        "replay-count",
+                        ""
+                      ],
+                      "query": [
+                        {
+                          "description": "The search query (e.g., issue.id or transaction).",
+                          "key": "query",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Stats period.",
+                          "key": "statsPeriod",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Project IDs.",
+                          "key": "project",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Project IDs.",
+                          "key": "project",
+                          "value": "<integer>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "aba201e2-8e3b-4300-91bb-c058cab083ff",
+                          "key": "organization_id_or_slug",
+                          "value": "<string>",
+                          "description": "(Required) The ID or slug of the organization."
+                        }
+                      ]
+                    },
+                    "description": "Returns the count of replays associated with specified issues or transactions."
+                  },
+                  "response": [
+                    {
+                      "id": "3833ffb1-6623-430c-8e22-f36d1844ee27",
+                      "name": "Replay counts.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/replay-count/?query=<string>&statsPeriod=<string>&project=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "replay-count",
+                            ""
+                          ],
+                          "query": [
+                            {
+                              "description": "The search query (e.g., issue.id or transaction).",
+                              "key": "query",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Stats period.",
+                              "key": "statsPeriod",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Project IDs.",
+                              "key": "project",
+                              "value": "<integer>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "organization_id_or_slug"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"eu2af\": \"<integer>\",\n  \"aliqua_df3\": \"<integer>\"\n}",
+                      "createdAt": "2026-06-05T15:17:43.000Z",
+                      "updatedAt": "2026-06-05T15:17:43.000Z",
+                      "uid": "35240-3833ffb1-6623-430c-8e22-f36d1844ee27"
+                    },
+                    {
+                      "id": "d634a96c-bfe3-422a-b006-3864d5d6da06",
+                      "name": "Unauthorized.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/replay-count/?query=<string>&statsPeriod=<string>&project=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "replay-count",
+                            ""
+                          ],
+                          "query": [
+                            {
+                              "description": "The search query (e.g., issue.id or transaction).",
+                              "key": "query",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Stats period.",
+                              "key": "statsPeriod",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Project IDs.",
+                              "key": "project",
+                              "value": "<integer>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "organization_id_or_slug"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:17:43.000Z",
+                      "updatedAt": "2026-06-05T15:17:43.000Z",
+                      "uid": "35240-d634a96c-bfe3-422a-b006-3864d5d6da06"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:17:42.000Z",
+                  "updatedAt": "2026-06-05T15:17:42.000Z",
+                  "uid": "35240-95b0bbf3-3e84-4229-9f1b-30c47c6f19e8"
+                }
+              ],
+              "id": "b56d7940-69d7-49dc-824d-2ad7907cee73",
+              "createdAt": "2026-06-05T15:17:42.000Z",
+              "updatedAt": "2026-06-05T15:17:42.000Z",
+              "uid": "35240-b56d7940-69d7-49dc-824d-2ad7907cee73"
+            }
+          ],
+          "id": "e9d90bb6-9120-41da-8a28-3bb4415cbfa2",
+          "createdAt": "2026-06-05T15:17:42.000Z",
+          "updatedAt": "2026-06-05T15:17:42.000Z",
+          "uid": "35240-e9d90bb6-9120-41da-8a28-3bb4415cbfa2"
+        }
+      ],
+      "id": "84a04dfb-01ef-4f85-93cb-925a331e212f",
+      "createdAt": "2026-06-05T15:17:42.000Z",
+      "updatedAt": "2026-06-05T15:17:42.000Z",
+      "uid": "35240-84a04dfb-01ef-4f85-93cb-925a331e212f"
+    },
+    {
+      "name": "projects",
+      "item": [
+        {
+          "name": "{organization_id_or_slug}",
+          "item": [
+            {
+              "name": "{project_id_or_slug}",
+              "item": [
+                {
+                  "name": "replays",
+                  "item": [
+                    {
+                      "name": "{replay_id}",
+                      "item": [
+                        {
+                          "name": "recording-segments",
+                          "item": [
+                            {
+                              "name": "{segment_id}",
+                              "item": [
+                                {
+                                  "name": "Sentry Retrieve a recording segment",
+                                  "id": "b91f704b-7084-4c5d-93c2-3db492bd7595",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/replays/:replay_id/recording-segments/:segment_id/",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "projects",
+                                        ":organization_id_or_slug",
+                                        ":project_id_or_slug",
+                                        "replays",
+                                        ":replay_id",
+                                        "recording-segments",
+                                        ":segment_id",
+                                        ""
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "8456c4b6-315a-43e0-b433-2c0e3fbced54",
+                                          "key": "organization_id_or_slug",
+                                          "value": "<string>",
+                                          "description": "(Required) The ID or slug of the organization."
+                                        },
+                                        {
+                                          "id": "74b4ad0c-134d-4739-a53e-90d7f5148df9",
+                                          "key": "project_id_or_slug",
+                                          "value": "<string>",
+                                          "description": "(Required) The ID or slug of the project."
+                                        },
+                                        {
+                                          "id": "a2a0e6f6-e4bf-4748-9796-acdab9a6524d",
+                                          "key": "replay_id",
+                                          "value": "<uuid>",
+                                          "description": "(Required) The ID of the replay."
+                                        },
+                                        {
+                                          "id": "f451f781-81bc-4bfd-98fe-159175d7cae5",
+                                          "key": "segment_id",
+                                          "value": "<integer>",
+                                          "description": "(Required) The ID of the recording segment."
+                                        }
+                                      ]
+                                    },
+                                    "description": "Returns a specific recording segment."
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "69ecba68-349a-43be-9a18-6b67a56b85a2",
+                                      "name": "Recording segment data.",
+                                      "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/replays/:replay_id/recording-segments/:segment_id/",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "projects",
+                                            ":organization_id_or_slug",
+                                            ":project_id_or_slug",
+                                            "replays",
+                                            ":replay_id",
+                                            "recording-segments",
+                                            ":segment_id",
+                                            ""
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "organization_id_or_slug"
+                                            },
+                                            {
+                                              "key": "project_id_or_slug"
+                                            },
+                                            {
+                                              "key": "replay_id"
+                                            },
+                                            {
+                                              "key": "segment_id"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"id\": \"<integer>\",\n  \"segmentId\": \"<integer>\",\n  \"replayId\": \"<uuid>\",\n  \"dateAdded\": \"<dateTime>\"\n}",
+                                      "createdAt": "2026-06-05T15:17:43.000Z",
+                                      "updatedAt": "2026-06-05T15:17:43.000Z",
+                                      "uid": "35240-69ecba68-349a-43be-9a18-6b67a56b85a2"
+                                    },
+                                    {
+                                      "id": "7b4d28a9-edec-4b67-9cbe-e8ddf33ba22d",
+                                      "name": "Unauthorized.",
+                                      "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/replays/:replay_id/recording-segments/:segment_id/",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "projects",
+                                            ":organization_id_or_slug",
+                                            ":project_id_or_slug",
+                                            "replays",
+                                            ":replay_id",
+                                            "recording-segments",
+                                            ":segment_id",
+                                            ""
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "organization_id_or_slug"
+                                            },
+                                            {
+                                              "key": "project_id_or_slug"
+                                            },
+                                            {
+                                              "key": "replay_id"
+                                            },
+                                            {
+                                              "key": "segment_id"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Unauthorized",
+                                      "code": 401,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": null,
+                                      "createdAt": "2026-06-05T15:17:43.000Z",
+                                      "updatedAt": "2026-06-05T15:17:43.000Z",
+                                      "uid": "35240-7b4d28a9-edec-4b67-9cbe-e8ddf33ba22d"
+                                    },
+                                    {
+                                      "id": "63aec223-20e8-480e-8acf-fa1996a34ed9",
+                                      "name": "Segment not found.",
+                                      "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/replays/:replay_id/recording-segments/:segment_id/",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "projects",
+                                            ":organization_id_or_slug",
+                                            ":project_id_or_slug",
+                                            "replays",
+                                            ":replay_id",
+                                            "recording-segments",
+                                            ":segment_id",
+                                            ""
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "organization_id_or_slug"
+                                            },
+                                            {
+                                              "key": "project_id_or_slug"
+                                            },
+                                            {
+                                              "key": "replay_id"
+                                            },
+                                            {
+                                              "key": "segment_id"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Not Found",
+                                      "code": 404,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": null,
+                                      "createdAt": "2026-06-05T15:17:43.000Z",
+                                      "updatedAt": "2026-06-05T15:17:43.000Z",
+                                      "uid": "35240-63aec223-20e8-480e-8acf-fa1996a34ed9"
+                                    }
+                                  ],
+                                  "createdAt": "2026-06-05T15:17:42.000Z",
+                                  "updatedAt": "2026-06-05T15:17:42.000Z",
+                                  "uid": "35240-b91f704b-7084-4c5d-93c2-3db492bd7595"
+                                }
+                              ],
+                              "id": "898604ef-6079-4c1d-8f84-833c406b154d",
+                              "createdAt": "2026-06-05T15:17:42.000Z",
+                              "updatedAt": "2026-06-05T15:17:42.000Z",
+                              "uid": "35240-898604ef-6079-4c1d-8f84-833c406b154d"
+                            },
+                            {
+                              "name": "Sentry List recording segments",
+                              "id": "416d536f-5efb-47fe-b382-562fe7e3cf38",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/replays/:replay_id/recording-segments/?cursor=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":organization_id_or_slug",
+                                    ":project_id_or_slug",
+                                    "replays",
+                                    ":replay_id",
+                                    "recording-segments",
+                                    ""
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Pagination cursor.",
+                                      "key": "cursor",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "6356aadc-208c-4823-90a0-cb90e6bef159",
+                                      "key": "organization_id_or_slug",
+                                      "value": "<string>",
+                                      "description": "(Required) The ID or slug of the organization."
+                                    },
+                                    {
+                                      "id": "14d625bb-5424-42f6-8fbc-036d20ad5f84",
+                                      "key": "project_id_or_slug",
+                                      "value": "<string>",
+                                      "description": "(Required) The ID or slug of the project."
+                                    },
+                                    {
+                                      "id": "9d7e3af6-6b73-4726-a3a5-9b575b6397ea",
+                                      "key": "replay_id",
+                                      "value": "<uuid>",
+                                      "description": "(Required) The ID of the replay."
+                                    }
+                                  ]
+                                },
+                                "description": "Returns a list of recording segments for a given replay."
+                              },
+                              "response": [
+                                {
+                                  "id": "a1352e15-f151-4d0d-a63f-4056f576eb94",
+                                  "name": "A list of recording segments.",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/replays/:replay_id/recording-segments/?cursor=<string>",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "projects",
+                                        ":organization_id_or_slug",
+                                        ":project_id_or_slug",
+                                        "replays",
+                                        ":replay_id",
+                                        "recording-segments",
+                                        ""
+                                      ],
+                                      "query": [
+                                        {
+                                          "description": "Pagination cursor.",
+                                          "key": "cursor",
+                                          "value": "<string>"
+                                        }
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "organization_id_or_slug"
+                                        },
+                                        {
+                                          "key": "project_id_or_slug"
+                                        },
+                                        {
+                                          "key": "replay_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "[\n  {\n    \"id\": \"<integer>\",\n    \"segmentId\": \"<integer>\",\n    \"replayId\": \"<uuid>\",\n    \"dateAdded\": \"<dateTime>\"\n  },\n  {\n    \"id\": \"<integer>\",\n    \"segmentId\": \"<integer>\",\n    \"replayId\": \"<uuid>\",\n    \"dateAdded\": \"<dateTime>\"\n  }\n]",
+                                  "createdAt": "2026-06-05T15:17:43.000Z",
+                                  "updatedAt": "2026-06-05T15:17:43.000Z",
+                                  "uid": "35240-a1352e15-f151-4d0d-a63f-4056f576eb94"
+                                },
+                                {
+                                  "id": "d9108c6c-96e8-483c-ac30-39570f0d5eb1",
+                                  "name": "Unauthorized.",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/replays/:replay_id/recording-segments/?cursor=<string>",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "projects",
+                                        ":organization_id_or_slug",
+                                        ":project_id_or_slug",
+                                        "replays",
+                                        ":replay_id",
+                                        "recording-segments",
+                                        ""
+                                      ],
+                                      "query": [
+                                        {
+                                          "description": "Pagination cursor.",
+                                          "key": "cursor",
+                                          "value": "<string>"
+                                        }
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "organization_id_or_slug"
+                                        },
+                                        {
+                                          "key": "project_id_or_slug"
+                                        },
+                                        {
+                                          "key": "replay_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-06-05T15:17:43.000Z",
+                                  "updatedAt": "2026-06-05T15:17:43.000Z",
+                                  "uid": "35240-d9108c6c-96e8-483c-ac30-39570f0d5eb1"
+                                },
+                                {
+                                  "id": "8f229dfc-28bb-4fc7-8602-bd5f0ec59342",
+                                  "name": "Replay not found.",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/replays/:replay_id/recording-segments/?cursor=<string>",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "projects",
+                                        ":organization_id_or_slug",
+                                        ":project_id_or_slug",
+                                        "replays",
+                                        ":replay_id",
+                                        "recording-segments",
+                                        ""
+                                      ],
+                                      "query": [
+                                        {
+                                          "description": "Pagination cursor.",
+                                          "key": "cursor",
+                                          "value": "<string>"
+                                        }
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "organization_id_or_slug"
+                                        },
+                                        {
+                                          "key": "project_id_or_slug"
+                                        },
+                                        {
+                                          "key": "replay_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Not Found",
+                                  "code": 404,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-06-05T15:17:43.000Z",
+                                  "updatedAt": "2026-06-05T15:17:43.000Z",
+                                  "uid": "35240-8f229dfc-28bb-4fc7-8602-bd5f0ec59342"
+                                }
+                              ],
+                              "createdAt": "2026-06-05T15:17:42.000Z",
+                              "updatedAt": "2026-06-05T15:17:42.000Z",
+                              "uid": "35240-416d536f-5efb-47fe-b382-562fe7e3cf38"
+                            }
+                          ],
+                          "id": "bfebe18f-4a3a-4d99-8f3e-bd261acce763",
+                          "createdAt": "2026-06-05T15:17:42.000Z",
+                          "updatedAt": "2026-06-05T15:17:42.000Z",
+                          "uid": "35240-bfebe18f-4a3a-4d99-8f3e-bd261acce763"
+                        },
+                        {
+                          "name": "viewed-by",
+                          "item": [
+                            {
+                              "name": "Sentry List users who have viewed a replay",
+                              "id": "ad52a38a-5a55-44b3-9191-7629b4481233",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/replays/:replay_id/viewed-by/",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":organization_id_or_slug",
+                                    ":project_id_or_slug",
+                                    "replays",
+                                    ":replay_id",
+                                    "viewed-by",
+                                    ""
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "af43f58a-e60f-4a8a-a878-5bfc41c9b949",
+                                      "key": "organization_id_or_slug",
+                                      "value": "<string>",
+                                      "description": "(Required) The ID or slug of the organization."
+                                    },
+                                    {
+                                      "id": "3ddd89c6-e85b-4e53-805a-ad652f60fafd",
+                                      "key": "project_id_or_slug",
+                                      "value": "<string>",
+                                      "description": "(Required) The ID or slug of the project."
+                                    },
+                                    {
+                                      "id": "f3b7ebd4-d78e-440f-83c1-aaca62446283",
+                                      "key": "replay_id",
+                                      "value": "<uuid>",
+                                      "description": "(Required) The ID of the replay."
+                                    }
+                                  ]
+                                },
+                                "description": "Returns a list of users who have viewed a specific replay."
+                              },
+                              "response": [
+                                {
+                                  "id": "5a897196-bae8-4643-8ada-41aeee915903",
+                                  "name": "A list of users who have viewed the replay.",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/replays/:replay_id/viewed-by/",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "projects",
+                                        ":organization_id_or_slug",
+                                        ":project_id_or_slug",
+                                        "replays",
+                                        ":replay_id",
+                                        "viewed-by",
+                                        ""
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "organization_id_or_slug"
+                                        },
+                                        {
+                                          "key": "project_id_or_slug"
+                                        },
+                                        {
+                                          "key": "replay_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"email\": \"<string>\",\n      \"dateViewed\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"email\": \"<string>\",\n      \"dateViewed\": \"<dateTime>\"\n    }\n  ]\n}",
+                                  "createdAt": "2026-06-05T15:17:43.000Z",
+                                  "updatedAt": "2026-06-05T15:17:43.000Z",
+                                  "uid": "35240-5a897196-bae8-4643-8ada-41aeee915903"
+                                },
+                                {
+                                  "id": "98c1dacf-e859-4047-967c-57cdaa363fc3",
+                                  "name": "Unauthorized.",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/replays/:replay_id/viewed-by/",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "projects",
+                                        ":organization_id_or_slug",
+                                        ":project_id_or_slug",
+                                        "replays",
+                                        ":replay_id",
+                                        "viewed-by",
+                                        ""
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "organization_id_or_slug"
+                                        },
+                                        {
+                                          "key": "project_id_or_slug"
+                                        },
+                                        {
+                                          "key": "replay_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-06-05T15:17:43.000Z",
+                                  "updatedAt": "2026-06-05T15:17:43.000Z",
+                                  "uid": "35240-98c1dacf-e859-4047-967c-57cdaa363fc3"
+                                },
+                                {
+                                  "id": "1c1673f5-dec4-47a3-9cf9-497d82fa8d48",
+                                  "name": "Replay not found.",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/replays/:replay_id/viewed-by/",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "projects",
+                                        ":organization_id_or_slug",
+                                        ":project_id_or_slug",
+                                        "replays",
+                                        ":replay_id",
+                                        "viewed-by",
+                                        ""
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "organization_id_or_slug"
+                                        },
+                                        {
+                                          "key": "project_id_or_slug"
+                                        },
+                                        {
+                                          "key": "replay_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Not Found",
+                                  "code": 404,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-06-05T15:17:43.000Z",
+                                  "updatedAt": "2026-06-05T15:17:43.000Z",
+                                  "uid": "35240-1c1673f5-dec4-47a3-9cf9-497d82fa8d48"
+                                }
+                              ],
+                              "createdAt": "2026-06-05T15:17:42.000Z",
+                              "updatedAt": "2026-06-05T15:17:42.000Z",
+                              "uid": "35240-ad52a38a-5a55-44b3-9191-7629b4481233"
+                            }
+                          ],
+                          "id": "e4abe15d-3034-4eac-8ec8-c234b10dee03",
+                          "createdAt": "2026-06-05T15:17:42.000Z",
+                          "updatedAt": "2026-06-05T15:17:42.000Z",
+                          "uid": "35240-e4abe15d-3034-4eac-8ec8-c234b10dee03"
+                        },
+                        {
+                          "name": "Sentry Retrieve a replay instance",
+                          "id": "f78f6945-7c17-49c0-9e0d-effe21dfc4a4",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/replays/:replay_id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "projects",
+                                ":organization_id_or_slug",
+                                ":project_id_or_slug",
+                                "replays",
+                                ":replay_id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "id": "c77fb8a8-fdf2-44f8-980c-8d850d05db67",
+                                  "key": "organization_id_or_slug",
+                                  "value": "<string>",
+                                  "description": "(Required) The ID or slug of the organization."
+                                },
+                                {
+                                  "id": "07cd3ffe-ca9b-4039-bf03-d36c38ce1d58",
+                                  "key": "project_id_or_slug",
+                                  "value": "<string>",
+                                  "description": "(Required) The ID or slug of the project."
+                                },
+                                {
+                                  "id": "3c68de9f-74e5-465b-ad1d-08e1f99df21d",
+                                  "key": "replay_id",
+                                  "value": "<uuid>",
+                                  "description": "(Required) The ID of the replay."
+                                }
+                              ]
+                            },
+                            "description": "Returns details for a specific session replay."
+                          },
+                          "response": [
+                            {
+                              "id": "bd0e74f4-44bf-451c-8e3c-f731f42c596e",
+                              "name": "Replay details.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/replays/:replay_id/",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":organization_id_or_slug",
+                                    ":project_id_or_slug",
+                                    "replays",
+                                    ":replay_id",
+                                    ""
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "organization_id_or_slug"
+                                    },
+                                    {
+                                      "key": "project_id_or_slug"
+                                    },
+                                    {
+                                      "key": "replay_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"data\": {\n    \"id\": \"<uuid>\",\n    \"startedAt\": \"<dateTime>\",\n    \"finishedAt\": \"<dateTime>\",\n    \"title\": \"<string>\",\n    \"projectId\": \"<string>\",\n    \"duration\": \"<integer>\",\n    \"countErrors\": \"<integer>\",\n    \"countSegments\": \"<integer>\",\n    \"countUrls\": \"<integer>\",\n    \"platform\": \"<string>\",\n    \"environment\": \"<string>\",\n    \"urls\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"user\": {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"email\": \"<string>\",\n      \"ip_address\": \"<string>\"\n    },\n    \"browser\": {\n      \"name\": \"<string>\",\n      \"version\": \"<string>\"\n    },\n    \"os\": {\n      \"name\": \"<string>\",\n      \"version\": \"<string>\"\n    },\n    \"device\": {\n      \"name\": \"<string>\",\n      \"brand\": \"<string>\",\n      \"model\": \"<string>\",\n      \"family\": \"<string>\"\n    },\n    \"tags\": {\n      \"Duis_0\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  }\n}",
+                              "createdAt": "2026-06-05T15:17:43.000Z",
+                              "updatedAt": "2026-06-05T15:17:43.000Z",
+                              "uid": "35240-bd0e74f4-44bf-451c-8e3c-f731f42c596e"
+                            },
+                            {
+                              "id": "652b5dfc-a811-4f89-9ca3-ad13cbdf08cc",
+                              "name": "Unauthorized.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/replays/:replay_id/",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":organization_id_or_slug",
+                                    ":project_id_or_slug",
+                                    "replays",
+                                    ":replay_id",
+                                    ""
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "organization_id_or_slug"
+                                    },
+                                    {
+                                      "key": "project_id_or_slug"
+                                    },
+                                    {
+                                      "key": "replay_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-06-05T15:17:43.000Z",
+                              "updatedAt": "2026-06-05T15:17:43.000Z",
+                              "uid": "35240-652b5dfc-a811-4f89-9ca3-ad13cbdf08cc"
+                            },
+                            {
+                              "id": "3dd5c850-3ef4-4c23-98e3-d452ea58a4c3",
+                              "name": "Replay not found.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/replays/:replay_id/",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":organization_id_or_slug",
+                                    ":project_id_or_slug",
+                                    "replays",
+                                    ":replay_id",
+                                    ""
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "organization_id_or_slug"
+                                    },
+                                    {
+                                      "key": "project_id_or_slug"
+                                    },
+                                    {
+                                      "key": "replay_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-06-05T15:17:43.000Z",
+                              "updatedAt": "2026-06-05T15:17:43.000Z",
+                              "uid": "35240-3dd5c850-3ef4-4c23-98e3-d452ea58a4c3"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:17:42.000Z",
+                          "updatedAt": "2026-06-05T15:17:42.000Z",
+                          "uid": "35240-f78f6945-7c17-49c0-9e0d-effe21dfc4a4"
+                        },
+                        {
+                          "name": "Sentry Delete a replay instance",
+                          "id": "b1dc4831-51ed-485e-97b7-ea72f3f6650a",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "DELETE",
+                            "header": [],
+                            "url": {
+                              "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/replays/:replay_id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "projects",
+                                ":organization_id_or_slug",
+                                ":project_id_or_slug",
+                                "replays",
+                                ":replay_id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "id": "27932c70-47d3-4aed-abc1-89ed1da4b122",
+                                  "key": "organization_id_or_slug",
+                                  "value": "<string>",
+                                  "description": "(Required) The ID or slug of the organization."
+                                },
+                                {
+                                  "id": "d4d74484-293d-4175-a3fa-541d59d8641d",
+                                  "key": "project_id_or_slug",
+                                  "value": "<string>",
+                                  "description": "(Required) The ID or slug of the project."
+                                },
+                                {
+                                  "id": "f6bd1865-6512-4f60-8c6b-99a0f7356c91",
+                                  "key": "replay_id",
+                                  "value": "<uuid>",
+                                  "description": "(Required) The ID of the replay."
+                                }
+                              ]
+                            },
+                            "description": "Deletes a session replay."
+                          },
+                          "response": [
+                            {
+                              "id": "7daefdbd-5e2e-4d35-9a74-6dc13a3efbd6",
+                              "name": "Replay deleted.",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/replays/:replay_id/",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":organization_id_or_slug",
+                                    ":project_id_or_slug",
+                                    "replays",
+                                    ":replay_id",
+                                    ""
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "organization_id_or_slug"
+                                    },
+                                    {
+                                      "key": "project_id_or_slug"
+                                    },
+                                    {
+                                      "key": "replay_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "No Content",
+                              "code": 204,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-06-05T15:17:43.000Z",
+                              "updatedAt": "2026-06-05T15:17:43.000Z",
+                              "uid": "35240-7daefdbd-5e2e-4d35-9a74-6dc13a3efbd6"
+                            },
+                            {
+                              "id": "62fd850a-3912-4b78-99de-96d022c10e24",
+                              "name": "Unauthorized.",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/replays/:replay_id/",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":organization_id_or_slug",
+                                    ":project_id_or_slug",
+                                    "replays",
+                                    ":replay_id",
+                                    ""
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "organization_id_or_slug"
+                                    },
+                                    {
+                                      "key": "project_id_or_slug"
+                                    },
+                                    {
+                                      "key": "replay_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-06-05T15:17:43.000Z",
+                              "updatedAt": "2026-06-05T15:17:43.000Z",
+                              "uid": "35240-62fd850a-3912-4b78-99de-96d022c10e24"
+                            },
+                            {
+                              "id": "08941c96-9002-4d1a-99af-ed1ffd49c8b1",
+                              "name": "Replay not found.",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/replays/:replay_id/",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":organization_id_or_slug",
+                                    ":project_id_or_slug",
+                                    "replays",
+                                    ":replay_id",
+                                    ""
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "organization_id_or_slug"
+                                    },
+                                    {
+                                      "key": "project_id_or_slug"
+                                    },
+                                    {
+                                      "key": "replay_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-06-05T15:17:43.000Z",
+                              "updatedAt": "2026-06-05T15:17:43.000Z",
+                              "uid": "35240-08941c96-9002-4d1a-99af-ed1ffd49c8b1"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:17:42.000Z",
+                          "updatedAt": "2026-06-05T15:17:42.000Z",
+                          "uid": "35240-b1dc4831-51ed-485e-97b7-ea72f3f6650a"
+                        }
+                      ],
+                      "id": "94bdb21b-5aea-4bc4-8119-daa6b858ad7d",
+                      "createdAt": "2026-06-05T15:17:42.000Z",
+                      "updatedAt": "2026-06-05T15:17:42.000Z",
+                      "uid": "35240-94bdb21b-5aea-4bc4-8119-daa6b858ad7d"
+                    }
+                  ],
+                  "id": "25e828d3-d256-424b-bc7e-d0ed7da06fb8",
+                  "createdAt": "2026-06-05T15:17:42.000Z",
+                  "updatedAt": "2026-06-05T15:17:42.000Z",
+                  "uid": "35240-25e828d3-d256-424b-bc7e-d0ed7da06fb8"
+                }
+              ],
+              "id": "24ebecf2-c153-45c5-949e-d415b946789b",
+              "createdAt": "2026-06-05T15:17:42.000Z",
+              "updatedAt": "2026-06-05T15:17:42.000Z",
+              "uid": "35240-24ebecf2-c153-45c5-949e-d415b946789b"
+            }
+          ],
+          "id": "d079c3fa-507e-4d46-bde0-2ff1ba90c77a",
+          "createdAt": "2026-06-05T15:17:42.000Z",
+          "updatedAt": "2026-06-05T15:17:42.000Z",
+          "uid": "35240-d079c3fa-507e-4d46-bde0-2ff1ba90c77a"
+        }
+      ],
+      "id": "b4852046-d4de-49ce-aac6-7c83bc737d72",
+      "createdAt": "2026-06-05T15:17:42.000Z",
+      "updatedAt": "2026-06-05T15:17:42.000Z",
+      "uid": "35240-b4852046-d4de-49ce-aac6-7c83bc737d72"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://sentry.io/api/0"
+    }
+  ]
+}

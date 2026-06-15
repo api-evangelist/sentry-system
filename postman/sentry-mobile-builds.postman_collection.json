@@ -1,0 +1,525 @@
+{
+  "info": {
+    "_postman_id": "5989749b-5472-427e-ab55-cf435f0b0015",
+    "name": "Sentry Mobile Builds API",
+    "description": "The Mobile Builds API provides endpoints for analyzing mobile application artifacts in Sentry, including retrieving install information and size analysis results for mobile build artifacts.\n\nContact Support:\n Name: Sentry Support\n Email: support@sentry.io",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:17:38.000Z",
+    "updatedAt": "2026-06-05T15:17:39.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-5989749b-5472-427e-ab55-cf435f0b0015"
+  },
+  "item": [
+    {
+      "name": "projects",
+      "item": [
+        {
+          "name": "{organization_id_or_slug}",
+          "item": [
+            {
+              "name": "{project_id_or_slug}",
+              "item": [
+                {
+                  "name": "artifact-bundles",
+                  "item": [
+                    {
+                      "name": "{bundle_id}",
+                      "item": [
+                        {
+                          "name": "install-info",
+                          "item": [
+                            {
+                              "name": "Sentry Retrieve install info for a given artifact",
+                              "id": "134e6eac-8e8b-4d83-a3a2-124d9f4c2d92",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/artifact-bundles/:bundle_id/install-info/",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":organization_id_or_slug",
+                                    ":project_id_or_slug",
+                                    "artifact-bundles",
+                                    ":bundle_id",
+                                    "install-info",
+                                    ""
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "57dc79ea-dfff-442c-a84f-7d0a538bc0e4",
+                                      "key": "organization_id_or_slug",
+                                      "value": "<string>",
+                                      "description": "(Required) The ID or slug of the organization."
+                                    },
+                                    {
+                                      "id": "a5364620-88b0-4784-9455-8b0f0db4b7b1",
+                                      "key": "project_id_or_slug",
+                                      "value": "<string>",
+                                      "description": "(Required) The ID or slug of the project."
+                                    },
+                                    {
+                                      "id": "bea2cc3a-49f8-4811-8e89-a4975c6dca8d",
+                                      "key": "bundle_id",
+                                      "value": "<string>",
+                                      "description": "(Required) The ID of the artifact bundle."
+                                    }
+                                  ]
+                                },
+                                "description": "Returns installation information for a specific mobile build artifact, including installation URLs and QR code data."
+                              },
+                              "response": [
+                                {
+                                  "id": "e2dd8493-1617-41ff-9ebb-17b7fdab611d",
+                                  "name": "Artifact install information.",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/artifact-bundles/:bundle_id/install-info/",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "projects",
+                                        ":organization_id_or_slug",
+                                        ":project_id_or_slug",
+                                        "artifact-bundles",
+                                        ":bundle_id",
+                                        "install-info",
+                                        ""
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "organization_id_or_slug"
+                                        },
+                                        {
+                                          "key": "project_id_or_slug"
+                                        },
+                                        {
+                                          "key": "bundle_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"url\": \"<uri>\",\n  \"bundleId\": \"<string>\",\n  \"version\": \"<string>\",\n  \"buildNumber\": \"<string>\"\n}",
+                                  "createdAt": "2026-06-05T15:17:39.000Z",
+                                  "updatedAt": "2026-06-05T15:17:39.000Z",
+                                  "uid": "35240-e2dd8493-1617-41ff-9ebb-17b7fdab611d"
+                                },
+                                {
+                                  "id": "fe2916f2-9cee-416b-a305-638ab52159cd",
+                                  "name": "Unauthorized.",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/artifact-bundles/:bundle_id/install-info/",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "projects",
+                                        ":organization_id_or_slug",
+                                        ":project_id_or_slug",
+                                        "artifact-bundles",
+                                        ":bundle_id",
+                                        "install-info",
+                                        ""
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "organization_id_or_slug"
+                                        },
+                                        {
+                                          "key": "project_id_or_slug"
+                                        },
+                                        {
+                                          "key": "bundle_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-06-05T15:17:39.000Z",
+                                  "updatedAt": "2026-06-05T15:17:39.000Z",
+                                  "uid": "35240-fe2916f2-9cee-416b-a305-638ab52159cd"
+                                },
+                                {
+                                  "id": "15c34b9c-27f3-4c3f-b8ea-8e52846ad7b0",
+                                  "name": "Artifact not found.",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/artifact-bundles/:bundle_id/install-info/",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "projects",
+                                        ":organization_id_or_slug",
+                                        ":project_id_or_slug",
+                                        "artifact-bundles",
+                                        ":bundle_id",
+                                        "install-info",
+                                        ""
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "organization_id_or_slug"
+                                        },
+                                        {
+                                          "key": "project_id_or_slug"
+                                        },
+                                        {
+                                          "key": "bundle_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Not Found",
+                                  "code": 404,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-06-05T15:17:39.000Z",
+                                  "updatedAt": "2026-06-05T15:17:39.000Z",
+                                  "uid": "35240-15c34b9c-27f3-4c3f-b8ea-8e52846ad7b0"
+                                }
+                              ],
+                              "createdAt": "2026-06-05T15:17:39.000Z",
+                              "updatedAt": "2026-06-05T15:17:39.000Z",
+                              "uid": "35240-134e6eac-8e8b-4d83-a3a2-124d9f4c2d92"
+                            }
+                          ],
+                          "id": "1c2e1a6d-59f8-4b67-97fd-368fbd518169",
+                          "createdAt": "2026-06-05T15:17:39.000Z",
+                          "updatedAt": "2026-06-05T15:17:39.000Z",
+                          "uid": "35240-1c2e1a6d-59f8-4b67-97fd-368fbd518169"
+                        },
+                        {
+                          "name": "size-analysis",
+                          "item": [
+                            {
+                              "name": "Sentry Retrieve size analysis results for a given artifact",
+                              "id": "281b85b9-33c5-4157-bd2f-f14e19fcee0f",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/artifact-bundles/:bundle_id/size-analysis/",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":organization_id_or_slug",
+                                    ":project_id_or_slug",
+                                    "artifact-bundles",
+                                    ":bundle_id",
+                                    "size-analysis",
+                                    ""
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "2decb40c-4925-4de4-aab1-e1f888b5952e",
+                                      "key": "organization_id_or_slug",
+                                      "value": "<string>",
+                                      "description": "(Required) The ID or slug of the organization."
+                                    },
+                                    {
+                                      "id": "9bd40342-8ab3-4fff-8928-2f9ee6be6615",
+                                      "key": "project_id_or_slug",
+                                      "value": "<string>",
+                                      "description": "(Required) The ID or slug of the project."
+                                    },
+                                    {
+                                      "id": "2c7c3f92-004e-44f0-903f-2eaadab5bd01",
+                                      "key": "bundle_id",
+                                      "value": "<string>",
+                                      "description": "(Required) The ID of the artifact bundle."
+                                    }
+                                  ]
+                                },
+                                "description": "Returns size analysis data for a specific mobile build artifact, including breakdown by component and asset type."
+                              },
+                              "response": [
+                                {
+                                  "id": "6ab19242-8281-4c8a-8c35-4d490fc4af28",
+                                  "name": "Size analysis results.",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/artifact-bundles/:bundle_id/size-analysis/",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "projects",
+                                        ":organization_id_or_slug",
+                                        ":project_id_or_slug",
+                                        "artifact-bundles",
+                                        ":bundle_id",
+                                        "size-analysis",
+                                        ""
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "organization_id_or_slug"
+                                        },
+                                        {
+                                          "key": "project_id_or_slug"
+                                        },
+                                        {
+                                          "key": "bundle_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"totalSize\": \"<integer>\",\n  \"downloadSize\": \"<integer>\",\n  \"components\": [\n    {\n      \"name\": \"<string>\",\n      \"size\": \"<integer>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"size\": \"<integer>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+                                  "createdAt": "2026-06-05T15:17:39.000Z",
+                                  "updatedAt": "2026-06-05T15:17:39.000Z",
+                                  "uid": "35240-6ab19242-8281-4c8a-8c35-4d490fc4af28"
+                                },
+                                {
+                                  "id": "d98a0b7e-b25e-4f83-942f-f14b0c9e0a42",
+                                  "name": "Unauthorized.",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/artifact-bundles/:bundle_id/size-analysis/",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "projects",
+                                        ":organization_id_or_slug",
+                                        ":project_id_or_slug",
+                                        "artifact-bundles",
+                                        ":bundle_id",
+                                        "size-analysis",
+                                        ""
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "organization_id_or_slug"
+                                        },
+                                        {
+                                          "key": "project_id_or_slug"
+                                        },
+                                        {
+                                          "key": "bundle_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-06-05T15:17:39.000Z",
+                                  "updatedAt": "2026-06-05T15:17:39.000Z",
+                                  "uid": "35240-d98a0b7e-b25e-4f83-942f-f14b0c9e0a42"
+                                },
+                                {
+                                  "id": "207081cd-5c25-4668-91c6-bb6e3db2aaab",
+                                  "name": "Artifact not found.",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/artifact-bundles/:bundle_id/size-analysis/",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "projects",
+                                        ":organization_id_or_slug",
+                                        ":project_id_or_slug",
+                                        "artifact-bundles",
+                                        ":bundle_id",
+                                        "size-analysis",
+                                        ""
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "organization_id_or_slug"
+                                        },
+                                        {
+                                          "key": "project_id_or_slug"
+                                        },
+                                        {
+                                          "key": "bundle_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Not Found",
+                                  "code": 404,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-06-05T15:17:39.000Z",
+                                  "updatedAt": "2026-06-05T15:17:39.000Z",
+                                  "uid": "35240-207081cd-5c25-4668-91c6-bb6e3db2aaab"
+                                }
+                              ],
+                              "createdAt": "2026-06-05T15:17:39.000Z",
+                              "updatedAt": "2026-06-05T15:17:39.000Z",
+                              "uid": "35240-281b85b9-33c5-4157-bd2f-f14e19fcee0f"
+                            }
+                          ],
+                          "id": "47d70bf6-0654-4d36-b001-effd1d7c865e",
+                          "createdAt": "2026-06-05T15:17:39.000Z",
+                          "updatedAt": "2026-06-05T15:17:39.000Z",
+                          "uid": "35240-47d70bf6-0654-4d36-b001-effd1d7c865e"
+                        }
+                      ],
+                      "id": "2e92f65b-5b7f-408e-9be2-063db06a5c34",
+                      "createdAt": "2026-06-05T15:17:39.000Z",
+                      "updatedAt": "2026-06-05T15:17:39.000Z",
+                      "uid": "35240-2e92f65b-5b7f-408e-9be2-063db06a5c34"
+                    }
+                  ],
+                  "id": "3eaf26dc-913c-4e19-91c0-4c2d08e5fb52",
+                  "createdAt": "2026-06-05T15:17:39.000Z",
+                  "updatedAt": "2026-06-05T15:17:39.000Z",
+                  "uid": "35240-3eaf26dc-913c-4e19-91c0-4c2d08e5fb52"
+                }
+              ],
+              "id": "094a833b-ac52-45ba-910e-ada5ffda3d62",
+              "createdAt": "2026-06-05T15:17:39.000Z",
+              "updatedAt": "2026-06-05T15:17:39.000Z",
+              "uid": "35240-094a833b-ac52-45ba-910e-ada5ffda3d62"
+            }
+          ],
+          "id": "f46cf583-44bf-4ea1-af37-b0edf5105634",
+          "createdAt": "2026-06-05T15:17:39.000Z",
+          "updatedAt": "2026-06-05T15:17:39.000Z",
+          "uid": "35240-f46cf583-44bf-4ea1-af37-b0edf5105634"
+        }
+      ],
+      "id": "75ff2686-1424-4866-b814-4f771bd57a26",
+      "createdAt": "2026-06-05T15:17:39.000Z",
+      "updatedAt": "2026-06-05T15:17:39.000Z",
+      "uid": "35240-75ff2686-1424-4866-b814-4f771bd57a26"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://sentry.io/api/0"
+    }
+  ]
+}

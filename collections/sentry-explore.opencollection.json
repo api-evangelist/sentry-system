@@ -1,0 +1,170 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sentry Explore API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Explore",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Sentry Query Explore events in table format",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/events/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "field",
+                "value": "",
+                "type": "query",
+                "description": "The fields to select (may be specified multiple times)."
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "An optional Sentry search query to filter events."
+              },
+              {
+                "name": "statsPeriod",
+                "value": "",
+                "type": "query",
+                "description": "Stats period (e.g., 24h, 14d)."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "Start date for the query range."
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "End date for the query range."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Field to sort by (prefix with - for descending)."
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "query",
+                "description": "Project IDs to filter by."
+              },
+              {
+                "name": "environment",
+                "value": "",
+                "type": "query",
+                "description": "Environment name to filter by."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Pagination cursor."
+              }
+            ]
+          },
+          "docs": "Returns event data in table format, allowing you to slice and dice your events using various fields and aggregations."
+        },
+        {
+          "info": {
+            "name": "Sentry Query Explore events in timeseries format",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/events-stats/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "yAxis",
+                "value": "",
+                "type": "query",
+                "description": "The aggregate field to chart (e.g., count(), p50(transaction.duration))."
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "An optional search query to filter events."
+              },
+              {
+                "name": "statsPeriod",
+                "value": "",
+                "type": "query",
+                "description": "Stats period (e.g., 24h, 14d)."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "Start date for the query range."
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "End date for the query range."
+              },
+              {
+                "name": "interval",
+                "value": "",
+                "type": "query",
+                "description": "Resolution interval (e.g., 1h, 1d)."
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "query",
+                "description": "Project IDs to filter by."
+              },
+              {
+                "name": "environment",
+                "value": "",
+                "type": "query",
+                "description": "Environment name to filter by."
+              }
+            ]
+          },
+          "docs": "Returns event data in timeseries format, suitable for charting and visualization over time."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

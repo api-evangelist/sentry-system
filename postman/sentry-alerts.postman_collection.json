@@ -1,0 +1,2933 @@
+{
+  "info": {
+    "_postman_id": "d4adf19b-75c5-4969-95bf-69c84a252987",
+    "name": "Sentry Alerts API",
+    "description": "The Alerts API provides endpoints for managing alert rules in Sentry, including creating, retrieving, updating, and deleting metric alert rules and issue alert rules, as well as managing spike protection notification actions.\n\nContact Support:\n Name: Sentry Support\n Email: support@sentry.io",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:17:30.000Z",
+    "updatedAt": "2026-06-05T15:17:30.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-d4adf19b-75c5-4969-95bf-69c84a252987"
+  },
+  "item": [
+    {
+      "name": "organizations",
+      "item": [
+        {
+          "name": "{organization_id_or_slug}",
+          "item": [
+            {
+              "name": "alert-rules",
+              "item": [
+                {
+                  "name": "{alert_rule_id}",
+                  "item": [
+                    {
+                      "name": "Sentry Retrieve a metric alert rule for an organization",
+                      "id": "21efe94a-07d1-487c-82b5-bd18bd6a8499",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/alert-rules/:alert_rule_id/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "alert-rules",
+                            ":alert_rule_id",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "id": "9e2bef8a-e169-4e27-80f3-af14bbf6f5a8",
+                              "key": "organization_id_or_slug",
+                              "value": "<string>",
+                              "description": "(Required) The ID or slug of the organization."
+                            },
+                            {
+                              "id": "063927df-ed94-43a6-9448-c716a0480387",
+                              "key": "alert_rule_id",
+                              "value": "<integer>",
+                              "description": "(Required) The ID of the metric alert rule."
+                            }
+                          ]
+                        },
+                        "description": "Returns a specific metric alert rule."
+                      },
+                      "response": [
+                        {
+                          "id": "42c1531c-c961-4af2-bebe-b95b21dcc29e",
+                          "name": "Metric alert rule details.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/alert-rules/:alert_rule_id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "alert-rules",
+                                ":alert_rule_id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                },
+                                {
+                                  "key": "alert_rule_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"aggregate\": \"<string>\",\n  \"dataset\": \"<string>\",\n  \"query\": \"<string>\",\n  \"timeWindow\": \"<integer>\",\n  \"environment\": \"<string>\",\n  \"projects\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"triggers\": [\n    {\n      \"id\": \"<string>\",\n      \"label\": \"<string>\",\n      \"alertThreshold\": \"<number>\",\n      \"resolveThreshold\": \"<number>\",\n      \"thresholdType\": \"<integer>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"label\": \"<string>\",\n      \"alertThreshold\": \"<number>\",\n      \"resolveThreshold\": \"<number>\",\n      \"thresholdType\": \"<integer>\"\n    }\n  ],\n  \"owner\": \"<string>\",\n  \"dateCreated\": \"<dateTime>\",\n  \"dateModified\": \"<dateTime>\"\n}",
+                          "createdAt": "2026-06-05T15:17:30.000Z",
+                          "updatedAt": "2026-06-05T15:17:30.000Z",
+                          "uid": "35240-42c1531c-c961-4af2-bebe-b95b21dcc29e"
+                        },
+                        {
+                          "id": "905097cf-3523-40d5-a7cb-b5650e5ca3a6",
+                          "name": "Unauthorized.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/alert-rules/:alert_rule_id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "alert-rules",
+                                ":alert_rule_id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                },
+                                {
+                                  "key": "alert_rule_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:17:30.000Z",
+                          "updatedAt": "2026-06-05T15:17:30.000Z",
+                          "uid": "35240-905097cf-3523-40d5-a7cb-b5650e5ca3a6"
+                        },
+                        {
+                          "id": "60a8afb8-42a3-4f91-a8f6-153e59f0fdec",
+                          "name": "Alert rule not found.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/alert-rules/:alert_rule_id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "alert-rules",
+                                ":alert_rule_id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                },
+                                {
+                                  "key": "alert_rule_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:17:30.000Z",
+                          "updatedAt": "2026-06-05T15:17:30.000Z",
+                          "uid": "35240-60a8afb8-42a3-4f91-a8f6-153e59f0fdec"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:17:30.000Z",
+                      "updatedAt": "2026-06-05T15:17:30.000Z",
+                      "uid": "35240-21efe94a-07d1-487c-82b5-bd18bd6a8499"
+                    },
+                    {
+                      "name": "Sentry Update a metric alert rule",
+                      "id": "debf5888-4143-460a-8511-91af69adf27a",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"aggregate\": \"<string>\",\n  \"query\": \"<string>\",\n  \"timeWindow\": \"<integer>\",\n  \"owner\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/alert-rules/:alert_rule_id/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "alert-rules",
+                            ":alert_rule_id",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "id": "4085eead-300a-46cf-9adb-bc8614caf35d",
+                              "key": "organization_id_or_slug",
+                              "value": "<string>",
+                              "description": "(Required) The ID or slug of the organization."
+                            },
+                            {
+                              "id": "6d78204f-49b4-4071-821b-5ff4c8278b09",
+                              "key": "alert_rule_id",
+                              "value": "<integer>",
+                              "description": "(Required) The ID of the metric alert rule."
+                            }
+                          ]
+                        },
+                        "description": "Updates a metric alert rule."
+                      },
+                      "response": [
+                        {
+                          "id": "49a7ec34-555c-4e6a-9953-c109f9caefad",
+                          "name": "Metric alert rule updated.",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"aggregate\": \"<string>\",\n  \"query\": \"<string>\",\n  \"timeWindow\": \"<integer>\",\n  \"owner\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/alert-rules/:alert_rule_id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "alert-rules",
+                                ":alert_rule_id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                },
+                                {
+                                  "key": "alert_rule_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"aggregate\": \"<string>\",\n  \"dataset\": \"<string>\",\n  \"query\": \"<string>\",\n  \"timeWindow\": \"<integer>\",\n  \"environment\": \"<string>\",\n  \"projects\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"triggers\": [\n    {\n      \"id\": \"<string>\",\n      \"label\": \"<string>\",\n      \"alertThreshold\": \"<number>\",\n      \"resolveThreshold\": \"<number>\",\n      \"thresholdType\": \"<integer>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"label\": \"<string>\",\n      \"alertThreshold\": \"<number>\",\n      \"resolveThreshold\": \"<number>\",\n      \"thresholdType\": \"<integer>\"\n    }\n  ],\n  \"owner\": \"<string>\",\n  \"dateCreated\": \"<dateTime>\",\n  \"dateModified\": \"<dateTime>\"\n}",
+                          "createdAt": "2026-06-05T15:17:30.000Z",
+                          "updatedAt": "2026-06-05T15:17:30.000Z",
+                          "uid": "35240-49a7ec34-555c-4e6a-9953-c109f9caefad"
+                        },
+                        {
+                          "id": "01f7b99b-6fc9-4278-8e10-b63f8662c38e",
+                          "name": "Bad request.",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"aggregate\": \"<string>\",\n  \"query\": \"<string>\",\n  \"timeWindow\": \"<integer>\",\n  \"owner\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/alert-rules/:alert_rule_id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "alert-rules",
+                                ":alert_rule_id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                },
+                                {
+                                  "key": "alert_rule_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:17:30.000Z",
+                          "updatedAt": "2026-06-05T15:17:30.000Z",
+                          "uid": "35240-01f7b99b-6fc9-4278-8e10-b63f8662c38e"
+                        },
+                        {
+                          "id": "9182fe61-8d4c-427f-8b04-a43882e2a93f",
+                          "name": "Unauthorized.",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"aggregate\": \"<string>\",\n  \"query\": \"<string>\",\n  \"timeWindow\": \"<integer>\",\n  \"owner\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/alert-rules/:alert_rule_id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "alert-rules",
+                                ":alert_rule_id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                },
+                                {
+                                  "key": "alert_rule_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:17:30.000Z",
+                          "updatedAt": "2026-06-05T15:17:30.000Z",
+                          "uid": "35240-9182fe61-8d4c-427f-8b04-a43882e2a93f"
+                        },
+                        {
+                          "id": "ad22825a-231a-4bed-a6f5-289039ab8d6a",
+                          "name": "Alert rule not found.",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"aggregate\": \"<string>\",\n  \"query\": \"<string>\",\n  \"timeWindow\": \"<integer>\",\n  \"owner\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/alert-rules/:alert_rule_id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "alert-rules",
+                                ":alert_rule_id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                },
+                                {
+                                  "key": "alert_rule_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:17:30.000Z",
+                          "updatedAt": "2026-06-05T15:17:30.000Z",
+                          "uid": "35240-ad22825a-231a-4bed-a6f5-289039ab8d6a"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:17:30.000Z",
+                      "updatedAt": "2026-06-05T15:17:30.000Z",
+                      "uid": "35240-debf5888-4143-460a-8511-91af69adf27a"
+                    },
+                    {
+                      "name": "Sentry Delete a metric alert rule",
+                      "id": "3a3f9587-04e3-4c57-b902-36a7f117c3a0",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/alert-rules/:alert_rule_id/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "alert-rules",
+                            ":alert_rule_id",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "id": "15a74633-f7ed-4937-a08a-61179473ef08",
+                              "key": "organization_id_or_slug",
+                              "value": "<string>",
+                              "description": "(Required) The ID or slug of the organization."
+                            },
+                            {
+                              "id": "d789c902-0a7f-4de6-b69d-d7bf64142a12",
+                              "key": "alert_rule_id",
+                              "value": "<integer>",
+                              "description": "(Required) The ID of the metric alert rule."
+                            }
+                          ]
+                        },
+                        "description": "Deletes a metric alert rule."
+                      },
+                      "response": [
+                        {
+                          "id": "927d1ca8-4072-4ff1-9606-d7037e302af9",
+                          "name": "Alert rule deleted.",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/alert-rules/:alert_rule_id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "alert-rules",
+                                ":alert_rule_id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                },
+                                {
+                                  "key": "alert_rule_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "No Content",
+                          "code": 204,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:17:30.000Z",
+                          "updatedAt": "2026-06-05T15:17:30.000Z",
+                          "uid": "35240-927d1ca8-4072-4ff1-9606-d7037e302af9"
+                        },
+                        {
+                          "id": "8f32b7a0-966f-4994-a1e0-cfabb973694c",
+                          "name": "Unauthorized.",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/alert-rules/:alert_rule_id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "alert-rules",
+                                ":alert_rule_id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                },
+                                {
+                                  "key": "alert_rule_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:17:30.000Z",
+                          "updatedAt": "2026-06-05T15:17:30.000Z",
+                          "uid": "35240-8f32b7a0-966f-4994-a1e0-cfabb973694c"
+                        },
+                        {
+                          "id": "812b87ea-4b05-4b51-adc4-7d56942ddaa4",
+                          "name": "Alert rule not found.",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/alert-rules/:alert_rule_id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "alert-rules",
+                                ":alert_rule_id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                },
+                                {
+                                  "key": "alert_rule_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:17:30.000Z",
+                          "updatedAt": "2026-06-05T15:17:30.000Z",
+                          "uid": "35240-812b87ea-4b05-4b51-adc4-7d56942ddaa4"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:17:30.000Z",
+                      "updatedAt": "2026-06-05T15:17:30.000Z",
+                      "uid": "35240-3a3f9587-04e3-4c57-b902-36a7f117c3a0"
+                    }
+                  ],
+                  "id": "af99da40-bbe1-4015-b431-f397545c910b",
+                  "createdAt": "2026-06-05T15:17:30.000Z",
+                  "updatedAt": "2026-06-05T15:17:30.000Z",
+                  "uid": "35240-af99da40-bbe1-4015-b431-f397545c910b"
+                },
+                {
+                  "name": "Sentry List an organization's metric alert rules",
+                  "id": "1307d9c1-2088-4f4f-a983-4559aa2e4eca",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/alert-rules/?cursor=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "organizations",
+                        ":organization_id_or_slug",
+                        "alert-rules",
+                        ""
+                      ],
+                      "query": [
+                        {
+                          "description": "Pagination cursor.",
+                          "key": "cursor",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "eebf54ae-2664-4f15-8b53-4f4dfbe8c793",
+                          "key": "organization_id_or_slug",
+                          "value": "<string>",
+                          "description": "(Required) The ID or slug of the organization."
+                        }
+                      ]
+                    },
+                    "description": "Returns a list of metric alert rules for an organization."
+                  },
+                  "response": [
+                    {
+                      "id": "bc440154-e8df-4f96-9d62-eceae5f25e66",
+                      "name": "A list of metric alert rules.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/alert-rules/?cursor=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "alert-rules",
+                            ""
+                          ],
+                          "query": [
+                            {
+                              "description": "Pagination cursor.",
+                              "key": "cursor",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "organization_id_or_slug"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "[\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"aggregate\": \"<string>\",\n    \"dataset\": \"<string>\",\n    \"query\": \"<string>\",\n    \"timeWindow\": \"<integer>\",\n    \"environment\": \"<string>\",\n    \"projects\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"triggers\": [\n      {\n        \"id\": \"<string>\",\n        \"label\": \"<string>\",\n        \"alertThreshold\": \"<number>\",\n        \"resolveThreshold\": \"<number>\",\n        \"thresholdType\": \"<integer>\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"label\": \"<string>\",\n        \"alertThreshold\": \"<number>\",\n        \"resolveThreshold\": \"<number>\",\n        \"thresholdType\": \"<integer>\"\n      }\n    ],\n    \"owner\": \"<string>\",\n    \"dateCreated\": \"<dateTime>\",\n    \"dateModified\": \"<dateTime>\"\n  },\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"aggregate\": \"<string>\",\n    \"dataset\": \"<string>\",\n    \"query\": \"<string>\",\n    \"timeWindow\": \"<integer>\",\n    \"environment\": \"<string>\",\n    \"projects\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"triggers\": [\n      {\n        \"id\": \"<string>\",\n        \"label\": \"<string>\",\n        \"alertThreshold\": \"<number>\",\n        \"resolveThreshold\": \"<number>\",\n        \"thresholdType\": \"<integer>\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"label\": \"<string>\",\n        \"alertThreshold\": \"<number>\",\n        \"resolveThreshold\": \"<number>\",\n        \"thresholdType\": \"<integer>\"\n      }\n    ],\n    \"owner\": \"<string>\",\n    \"dateCreated\": \"<dateTime>\",\n    \"dateModified\": \"<dateTime>\"\n  }\n]",
+                      "createdAt": "2026-06-05T15:17:30.000Z",
+                      "updatedAt": "2026-06-05T15:17:30.000Z",
+                      "uid": "35240-bc440154-e8df-4f96-9d62-eceae5f25e66"
+                    },
+                    {
+                      "id": "c3e9e01a-41c0-4c8b-a0c8-a0a5a9791e23",
+                      "name": "Unauthorized.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/alert-rules/?cursor=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "alert-rules",
+                            ""
+                          ],
+                          "query": [
+                            {
+                              "description": "Pagination cursor.",
+                              "key": "cursor",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "organization_id_or_slug"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:17:30.000Z",
+                      "updatedAt": "2026-06-05T15:17:30.000Z",
+                      "uid": "35240-c3e9e01a-41c0-4c8b-a0c8-a0a5a9791e23"
+                    },
+                    {
+                      "id": "47b7624f-9c71-4ccd-978e-7ff682b5768b",
+                      "name": "Forbidden.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/alert-rules/?cursor=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "alert-rules",
+                            ""
+                          ],
+                          "query": [
+                            {
+                              "description": "Pagination cursor.",
+                              "key": "cursor",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "organization_id_or_slug"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:17:30.000Z",
+                      "updatedAt": "2026-06-05T15:17:30.000Z",
+                      "uid": "35240-47b7624f-9c71-4ccd-978e-7ff682b5768b"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:17:30.000Z",
+                  "updatedAt": "2026-06-05T15:17:30.000Z",
+                  "uid": "35240-1307d9c1-2088-4f4f-a983-4559aa2e4eca"
+                },
+                {
+                  "name": "Sentry Create a metric alert rule for an organization",
+                  "id": "a34ccee9-d974-44ba-8b37-c2d521a272c4",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"aggregate\": \"<string>\",\n  \"timeWindow\": \"<integer>\",\n  \"triggers\": [\n    {\n      \"label\": \"<string>\",\n      \"alertThreshold\": \"<number>\"\n    },\n    {\n      \"label\": \"<string>\",\n      \"alertThreshold\": \"<number>\"\n    }\n  ],\n  \"dataset\": \"<string>\",\n  \"query\": \"<string>\",\n  \"environment\": \"<string>\",\n  \"projects\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"owner\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/alert-rules/",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "organizations",
+                        ":organization_id_or_slug",
+                        "alert-rules",
+                        ""
+                      ],
+                      "variable": [
+                        {
+                          "id": "931c53d7-7c43-49c2-b3dd-b6d7332b6e1b",
+                          "key": "organization_id_or_slug",
+                          "value": "<string>",
+                          "description": "(Required) The ID or slug of the organization."
+                        }
+                      ]
+                    },
+                    "description": "Creates a new metric alert rule for the given organization."
+                  },
+                  "response": [
+                    {
+                      "id": "411b3fca-59ce-4f3f-be8b-3d1f71a79c73",
+                      "name": "Metric alert rule created.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"aggregate\": \"<string>\",\n  \"timeWindow\": \"<integer>\",\n  \"triggers\": [\n    {\n      \"label\": \"<string>\",\n      \"alertThreshold\": \"<number>\"\n    },\n    {\n      \"label\": \"<string>\",\n      \"alertThreshold\": \"<number>\"\n    }\n  ],\n  \"dataset\": \"<string>\",\n  \"query\": \"<string>\",\n  \"environment\": \"<string>\",\n  \"projects\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"owner\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/alert-rules/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "alert-rules",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "key": "organization_id_or_slug"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"aggregate\": \"<string>\",\n  \"dataset\": \"<string>\",\n  \"query\": \"<string>\",\n  \"timeWindow\": \"<integer>\",\n  \"environment\": \"<string>\",\n  \"projects\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"triggers\": [\n    {\n      \"id\": \"<string>\",\n      \"label\": \"<string>\",\n      \"alertThreshold\": \"<number>\",\n      \"resolveThreshold\": \"<number>\",\n      \"thresholdType\": \"<integer>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"label\": \"<string>\",\n      \"alertThreshold\": \"<number>\",\n      \"resolveThreshold\": \"<number>\",\n      \"thresholdType\": \"<integer>\"\n    }\n  ],\n  \"owner\": \"<string>\",\n  \"dateCreated\": \"<dateTime>\",\n  \"dateModified\": \"<dateTime>\"\n}",
+                      "createdAt": "2026-06-05T15:17:30.000Z",
+                      "updatedAt": "2026-06-05T15:17:30.000Z",
+                      "uid": "35240-411b3fca-59ce-4f3f-be8b-3d1f71a79c73"
+                    },
+                    {
+                      "id": "3d8fd06b-140f-4ecf-af62-301a001804fa",
+                      "name": "Bad request.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"aggregate\": \"<string>\",\n  \"timeWindow\": \"<integer>\",\n  \"triggers\": [\n    {\n      \"label\": \"<string>\",\n      \"alertThreshold\": \"<number>\"\n    },\n    {\n      \"label\": \"<string>\",\n      \"alertThreshold\": \"<number>\"\n    }\n  ],\n  \"dataset\": \"<string>\",\n  \"query\": \"<string>\",\n  \"environment\": \"<string>\",\n  \"projects\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"owner\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/alert-rules/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "alert-rules",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "key": "organization_id_or_slug"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:17:30.000Z",
+                      "updatedAt": "2026-06-05T15:17:30.000Z",
+                      "uid": "35240-3d8fd06b-140f-4ecf-af62-301a001804fa"
+                    },
+                    {
+                      "id": "4c511f3c-8d6a-47e3-8920-9834d331dc39",
+                      "name": "Unauthorized.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"aggregate\": \"<string>\",\n  \"timeWindow\": \"<integer>\",\n  \"triggers\": [\n    {\n      \"label\": \"<string>\",\n      \"alertThreshold\": \"<number>\"\n    },\n    {\n      \"label\": \"<string>\",\n      \"alertThreshold\": \"<number>\"\n    }\n  ],\n  \"dataset\": \"<string>\",\n  \"query\": \"<string>\",\n  \"environment\": \"<string>\",\n  \"projects\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"owner\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/alert-rules/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "alert-rules",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "key": "organization_id_or_slug"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:17:30.000Z",
+                      "updatedAt": "2026-06-05T15:17:30.000Z",
+                      "uid": "35240-4c511f3c-8d6a-47e3-8920-9834d331dc39"
+                    },
+                    {
+                      "id": "b7122c08-5518-4bb9-9ec3-778493fb878a",
+                      "name": "Forbidden.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"aggregate\": \"<string>\",\n  \"timeWindow\": \"<integer>\",\n  \"triggers\": [\n    {\n      \"label\": \"<string>\",\n      \"alertThreshold\": \"<number>\"\n    },\n    {\n      \"label\": \"<string>\",\n      \"alertThreshold\": \"<number>\"\n    }\n  ],\n  \"dataset\": \"<string>\",\n  \"query\": \"<string>\",\n  \"environment\": \"<string>\",\n  \"projects\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"owner\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/alert-rules/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "alert-rules",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "key": "organization_id_or_slug"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:17:30.000Z",
+                      "updatedAt": "2026-06-05T15:17:30.000Z",
+                      "uid": "35240-b7122c08-5518-4bb9-9ec3-778493fb878a"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:17:30.000Z",
+                  "updatedAt": "2026-06-05T15:17:30.000Z",
+                  "uid": "35240-a34ccee9-d974-44ba-8b37-c2d521a272c4"
+                }
+              ],
+              "id": "cb23050d-5c9d-44c8-b412-9a074b64696b",
+              "createdAt": "2026-06-05T15:17:30.000Z",
+              "updatedAt": "2026-06-05T15:17:30.000Z",
+              "uid": "35240-cb23050d-5c9d-44c8-b412-9a074b64696b"
+            },
+            {
+              "name": "spike-protections",
+              "item": [
+                {
+                  "name": "Sentry List spike protection notifications",
+                  "id": "34699677-893b-4591-9907-341c43a6330c",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/spike-protections/",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "organizations",
+                        ":organization_id_or_slug",
+                        "spike-protections",
+                        ""
+                      ],
+                      "variable": [
+                        {
+                          "id": "f5bf67c8-1091-4d91-bf92-40df242b722c",
+                          "key": "organization_id_or_slug",
+                          "value": "<string>",
+                          "description": "(Required) The ID or slug of the organization."
+                        }
+                      ]
+                    },
+                    "description": "Returns a list of spike protection notification actions."
+                  },
+                  "response": [
+                    {
+                      "id": "fc3e90fb-7220-4473-9f77-5778caa9a012",
+                      "name": "A list of spike protection notification actions.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/spike-protections/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "spike-protections",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "key": "organization_id_or_slug"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "[\n  {\n    \"id\": \"<string>\",\n    \"projects\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"dateCreated\": \"<dateTime>\"\n  },\n  {\n    \"id\": \"<string>\",\n    \"projects\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"dateCreated\": \"<dateTime>\"\n  }\n]",
+                      "createdAt": "2026-06-05T15:17:30.000Z",
+                      "updatedAt": "2026-06-05T15:17:30.000Z",
+                      "uid": "35240-fc3e90fb-7220-4473-9f77-5778caa9a012"
+                    },
+                    {
+                      "id": "0dd5a5c3-5e96-4236-9ce2-eb6bc5fd006f",
+                      "name": "Unauthorized.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/spike-protections/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "spike-protections",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "key": "organization_id_or_slug"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:17:30.000Z",
+                      "updatedAt": "2026-06-05T15:17:30.000Z",
+                      "uid": "35240-0dd5a5c3-5e96-4236-9ce2-eb6bc5fd006f"
+                    },
+                    {
+                      "id": "cfdceb60-00be-4277-ab2a-939bc1c32b55",
+                      "name": "Forbidden.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/spike-protections/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "spike-protections",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "key": "organization_id_or_slug"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:17:30.000Z",
+                      "updatedAt": "2026-06-05T15:17:30.000Z",
+                      "uid": "35240-cfdceb60-00be-4277-ab2a-939bc1c32b55"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:17:30.000Z",
+                  "updatedAt": "2026-06-05T15:17:30.000Z",
+                  "uid": "35240-34699677-893b-4591-9907-341c43a6330c"
+                },
+                {
+                  "name": "Sentry Create a spike protection notification action",
+                  "id": "b83f0dd0-02ce-4747-96a2-f01db14c6195",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"projects\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/spike-protections/",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "organizations",
+                        ":organization_id_or_slug",
+                        "spike-protections",
+                        ""
+                      ],
+                      "variable": [
+                        {
+                          "id": "e28a7411-4e23-4c91-8a6a-7daa5a860d5a",
+                          "key": "organization_id_or_slug",
+                          "value": "<string>",
+                          "description": "(Required) The ID or slug of the organization."
+                        }
+                      ]
+                    },
+                    "description": "Creates a new spike protection notification action."
+                  },
+                  "response": [
+                    {
+                      "id": "703b38db-3b74-4028-9396-cbb2a133bb81",
+                      "name": "Spike protection notification created.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"projects\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/spike-protections/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "spike-protections",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "key": "organization_id_or_slug"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"projects\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"dateCreated\": \"<dateTime>\"\n}",
+                      "createdAt": "2026-06-05T15:17:30.000Z",
+                      "updatedAt": "2026-06-05T15:17:30.000Z",
+                      "uid": "35240-703b38db-3b74-4028-9396-cbb2a133bb81"
+                    },
+                    {
+                      "id": "6bc186b2-32e5-4e14-986d-943ccd8c56ee",
+                      "name": "Bad request.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"projects\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/spike-protections/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "spike-protections",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "key": "organization_id_or_slug"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:17:30.000Z",
+                      "updatedAt": "2026-06-05T15:17:30.000Z",
+                      "uid": "35240-6bc186b2-32e5-4e14-986d-943ccd8c56ee"
+                    },
+                    {
+                      "id": "9bf3a62d-8aa7-475e-8e03-cbb01d9cdc8b",
+                      "name": "Unauthorized.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"projects\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/spike-protections/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "spike-protections",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "key": "organization_id_or_slug"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:17:30.000Z",
+                      "updatedAt": "2026-06-05T15:17:30.000Z",
+                      "uid": "35240-9bf3a62d-8aa7-475e-8e03-cbb01d9cdc8b"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:17:30.000Z",
+                  "updatedAt": "2026-06-05T15:17:30.000Z",
+                  "uid": "35240-b83f0dd0-02ce-4747-96a2-f01db14c6195"
+                }
+              ],
+              "id": "303d24f6-49b6-4c4e-9af3-7d549942345a",
+              "createdAt": "2026-06-05T15:17:30.000Z",
+              "updatedAt": "2026-06-05T15:17:30.000Z",
+              "uid": "35240-303d24f6-49b6-4c4e-9af3-7d549942345a"
+            }
+          ],
+          "id": "185ec003-ffdb-468c-a571-c042cfb99945",
+          "createdAt": "2026-06-05T15:17:30.000Z",
+          "updatedAt": "2026-06-05T15:17:30.000Z",
+          "uid": "35240-185ec003-ffdb-468c-a571-c042cfb99945"
+        }
+      ],
+      "id": "61a6870c-f7f8-48c7-8a9a-36b4d64c4a90",
+      "createdAt": "2026-06-05T15:17:30.000Z",
+      "updatedAt": "2026-06-05T15:17:30.000Z",
+      "uid": "35240-61a6870c-f7f8-48c7-8a9a-36b4d64c4a90"
+    },
+    {
+      "name": "projects",
+      "item": [
+        {
+          "name": "{organization_id_or_slug}",
+          "item": [
+            {
+              "name": "{project_id_or_slug}",
+              "item": [
+                {
+                  "name": "rules",
+                  "item": [
+                    {
+                      "name": "{rule_id}",
+                      "item": [
+                        {
+                          "name": "Sentry Retrieve an issue alert rule for a project",
+                          "id": "899e7d53-f2f4-4a89-8ff3-243cd7fb5930",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/rules/:rule_id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "projects",
+                                ":organization_id_or_slug",
+                                ":project_id_or_slug",
+                                "rules",
+                                ":rule_id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "id": "e85ef34b-2c77-42f3-ad25-f82a828c1f48",
+                                  "key": "organization_id_or_slug",
+                                  "value": "<string>",
+                                  "description": "(Required) The ID or slug of the organization."
+                                },
+                                {
+                                  "id": "db0a112c-ca4e-4224-ad28-96add1f3cd76",
+                                  "key": "project_id_or_slug",
+                                  "value": "<string>",
+                                  "description": "(Required) The ID or slug of the project."
+                                },
+                                {
+                                  "id": "66212b68-a77b-42f4-87a6-98f861946ff5",
+                                  "key": "rule_id",
+                                  "value": "<integer>",
+                                  "description": "(Required) The ID of the issue alert rule."
+                                }
+                              ]
+                            },
+                            "description": "Returns a specific issue alert rule."
+                          },
+                          "response": [
+                            {
+                              "id": "c93c0ca1-30ec-4db9-8648-5a6f5e53ddf1",
+                              "name": "Issue alert rule details.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/rules/:rule_id/",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":organization_id_or_slug",
+                                    ":project_id_or_slug",
+                                    "rules",
+                                    ":rule_id",
+                                    ""
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "organization_id_or_slug"
+                                    },
+                                    {
+                                      "key": "project_id_or_slug"
+                                    },
+                                    {
+                                      "key": "rule_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"actionMatch\": \"<string>\",\n  \"filterMatch\": \"<string>\",\n  \"frequency\": \"<integer>\",\n  \"environment\": \"<string>\",\n  \"owner\": \"<string>\",\n  \"dateCreated\": \"<dateTime>\"\n}",
+                              "createdAt": "2026-06-05T15:17:30.000Z",
+                              "updatedAt": "2026-06-05T15:17:30.000Z",
+                              "uid": "35240-c93c0ca1-30ec-4db9-8648-5a6f5e53ddf1"
+                            },
+                            {
+                              "id": "fea48747-c046-463a-ae77-301e1d09aa90",
+                              "name": "Unauthorized.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/rules/:rule_id/",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":organization_id_or_slug",
+                                    ":project_id_or_slug",
+                                    "rules",
+                                    ":rule_id",
+                                    ""
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "organization_id_or_slug"
+                                    },
+                                    {
+                                      "key": "project_id_or_slug"
+                                    },
+                                    {
+                                      "key": "rule_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-06-05T15:17:30.000Z",
+                              "updatedAt": "2026-06-05T15:17:30.000Z",
+                              "uid": "35240-fea48747-c046-463a-ae77-301e1d09aa90"
+                            },
+                            {
+                              "id": "3fd2098f-f0a2-4cb2-9ad1-6c54bbaa509f",
+                              "name": "Alert rule not found.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/rules/:rule_id/",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":organization_id_or_slug",
+                                    ":project_id_or_slug",
+                                    "rules",
+                                    ":rule_id",
+                                    ""
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "organization_id_or_slug"
+                                    },
+                                    {
+                                      "key": "project_id_or_slug"
+                                    },
+                                    {
+                                      "key": "rule_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-06-05T15:17:30.000Z",
+                              "updatedAt": "2026-06-05T15:17:30.000Z",
+                              "uid": "35240-3fd2098f-f0a2-4cb2-9ad1-6c54bbaa509f"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:17:30.000Z",
+                          "updatedAt": "2026-06-05T15:17:30.000Z",
+                          "uid": "35240-899e7d53-f2f4-4a89-8ff3-243cd7fb5930"
+                        },
+                        {
+                          "name": "Sentry Update an issue alert rule",
+                          "id": "e91af4e9-90dc-4153-b0bc-04cdc25b8c4a",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"actionMatch\": \"<string>\",\n  \"frequency\": \"<integer>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/rules/:rule_id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "projects",
+                                ":organization_id_or_slug",
+                                ":project_id_or_slug",
+                                "rules",
+                                ":rule_id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "id": "24a851b2-6e61-435b-beeb-927f04b56fef",
+                                  "key": "organization_id_or_slug",
+                                  "value": "<string>",
+                                  "description": "(Required) The ID or slug of the organization."
+                                },
+                                {
+                                  "id": "b46cde12-e592-4bf1-97ea-b6919f9cc9b0",
+                                  "key": "project_id_or_slug",
+                                  "value": "<string>",
+                                  "description": "(Required) The ID or slug of the project."
+                                },
+                                {
+                                  "id": "faa07737-918e-4e90-9b48-00e8e26c506c",
+                                  "key": "rule_id",
+                                  "value": "<integer>",
+                                  "description": "(Required) The ID of the issue alert rule."
+                                }
+                              ]
+                            },
+                            "description": "Updates an issue alert rule."
+                          },
+                          "response": [
+                            {
+                              "id": "9a94a7ba-2f2c-4f1d-9fde-c8b8faa8b4f7",
+                              "name": "Issue alert rule updated.",
+                              "originalRequest": {
+                                "method": "PUT",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"name\": \"<string>\",\n  \"actionMatch\": \"<string>\",\n  \"frequency\": \"<integer>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/rules/:rule_id/",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":organization_id_or_slug",
+                                    ":project_id_or_slug",
+                                    "rules",
+                                    ":rule_id",
+                                    ""
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "organization_id_or_slug"
+                                    },
+                                    {
+                                      "key": "project_id_or_slug"
+                                    },
+                                    {
+                                      "key": "rule_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"actionMatch\": \"<string>\",\n  \"filterMatch\": \"<string>\",\n  \"frequency\": \"<integer>\",\n  \"environment\": \"<string>\",\n  \"owner\": \"<string>\",\n  \"dateCreated\": \"<dateTime>\"\n}",
+                              "createdAt": "2026-06-05T15:17:30.000Z",
+                              "updatedAt": "2026-06-05T15:17:30.000Z",
+                              "uid": "35240-9a94a7ba-2f2c-4f1d-9fde-c8b8faa8b4f7"
+                            },
+                            {
+                              "id": "7930b5fc-4928-4a4b-a33b-e86bb8e30db5",
+                              "name": "Bad request.",
+                              "originalRequest": {
+                                "method": "PUT",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"name\": \"<string>\",\n  \"actionMatch\": \"<string>\",\n  \"frequency\": \"<integer>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/rules/:rule_id/",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":organization_id_or_slug",
+                                    ":project_id_or_slug",
+                                    "rules",
+                                    ":rule_id",
+                                    ""
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "organization_id_or_slug"
+                                    },
+                                    {
+                                      "key": "project_id_or_slug"
+                                    },
+                                    {
+                                      "key": "rule_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-06-05T15:17:30.000Z",
+                              "updatedAt": "2026-06-05T15:17:30.000Z",
+                              "uid": "35240-7930b5fc-4928-4a4b-a33b-e86bb8e30db5"
+                            },
+                            {
+                              "id": "2446dd0f-cd60-4588-a9a2-5f6c5a1113ce",
+                              "name": "Unauthorized.",
+                              "originalRequest": {
+                                "method": "PUT",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"name\": \"<string>\",\n  \"actionMatch\": \"<string>\",\n  \"frequency\": \"<integer>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/rules/:rule_id/",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":organization_id_or_slug",
+                                    ":project_id_or_slug",
+                                    "rules",
+                                    ":rule_id",
+                                    ""
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "organization_id_or_slug"
+                                    },
+                                    {
+                                      "key": "project_id_or_slug"
+                                    },
+                                    {
+                                      "key": "rule_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-06-05T15:17:30.000Z",
+                              "updatedAt": "2026-06-05T15:17:30.000Z",
+                              "uid": "35240-2446dd0f-cd60-4588-a9a2-5f6c5a1113ce"
+                            },
+                            {
+                              "id": "4621ac7d-2961-4295-8e10-f5cb4284a1c2",
+                              "name": "Alert rule not found.",
+                              "originalRequest": {
+                                "method": "PUT",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"name\": \"<string>\",\n  \"actionMatch\": \"<string>\",\n  \"frequency\": \"<integer>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/rules/:rule_id/",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":organization_id_or_slug",
+                                    ":project_id_or_slug",
+                                    "rules",
+                                    ":rule_id",
+                                    ""
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "organization_id_or_slug"
+                                    },
+                                    {
+                                      "key": "project_id_or_slug"
+                                    },
+                                    {
+                                      "key": "rule_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-06-05T15:17:30.000Z",
+                              "updatedAt": "2026-06-05T15:17:30.000Z",
+                              "uid": "35240-4621ac7d-2961-4295-8e10-f5cb4284a1c2"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:17:30.000Z",
+                          "updatedAt": "2026-06-05T15:17:30.000Z",
+                          "uid": "35240-e91af4e9-90dc-4153-b0bc-04cdc25b8c4a"
+                        },
+                        {
+                          "name": "Sentry Delete an issue alert rule",
+                          "id": "35a86e88-7a24-4fe3-8452-325e37a44c47",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "DELETE",
+                            "header": [],
+                            "url": {
+                              "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/rules/:rule_id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "projects",
+                                ":organization_id_or_slug",
+                                ":project_id_or_slug",
+                                "rules",
+                                ":rule_id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "id": "ac56e2ea-9b45-4725-8884-94deb221b615",
+                                  "key": "organization_id_or_slug",
+                                  "value": "<string>",
+                                  "description": "(Required) The ID or slug of the organization."
+                                },
+                                {
+                                  "id": "3eefd069-967d-4f5f-af41-f43aeada6034",
+                                  "key": "project_id_or_slug",
+                                  "value": "<string>",
+                                  "description": "(Required) The ID or slug of the project."
+                                },
+                                {
+                                  "id": "f519bcf5-68a4-4245-80d3-4742c8aa11bf",
+                                  "key": "rule_id",
+                                  "value": "<integer>",
+                                  "description": "(Required) The ID of the issue alert rule."
+                                }
+                              ]
+                            },
+                            "description": "Deletes an issue alert rule."
+                          },
+                          "response": [
+                            {
+                              "id": "d49f19f8-79f7-46a2-9426-e98ca96dfdd4",
+                              "name": "Alert rule deleted.",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/rules/:rule_id/",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":organization_id_or_slug",
+                                    ":project_id_or_slug",
+                                    "rules",
+                                    ":rule_id",
+                                    ""
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "organization_id_or_slug"
+                                    },
+                                    {
+                                      "key": "project_id_or_slug"
+                                    },
+                                    {
+                                      "key": "rule_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "No Content",
+                              "code": 204,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-06-05T15:17:30.000Z",
+                              "updatedAt": "2026-06-05T15:17:30.000Z",
+                              "uid": "35240-d49f19f8-79f7-46a2-9426-e98ca96dfdd4"
+                            },
+                            {
+                              "id": "e560b85e-e3d1-4369-92cb-49f6f736617c",
+                              "name": "Unauthorized.",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/rules/:rule_id/",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":organization_id_or_slug",
+                                    ":project_id_or_slug",
+                                    "rules",
+                                    ":rule_id",
+                                    ""
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "organization_id_or_slug"
+                                    },
+                                    {
+                                      "key": "project_id_or_slug"
+                                    },
+                                    {
+                                      "key": "rule_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-06-05T15:17:30.000Z",
+                              "updatedAt": "2026-06-05T15:17:30.000Z",
+                              "uid": "35240-e560b85e-e3d1-4369-92cb-49f6f736617c"
+                            },
+                            {
+                              "id": "bbd78a63-c745-4152-a9c3-6db24f0a838f",
+                              "name": "Alert rule not found.",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/rules/:rule_id/",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":organization_id_or_slug",
+                                    ":project_id_or_slug",
+                                    "rules",
+                                    ":rule_id",
+                                    ""
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "organization_id_or_slug"
+                                    },
+                                    {
+                                      "key": "project_id_or_slug"
+                                    },
+                                    {
+                                      "key": "rule_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-06-05T15:17:30.000Z",
+                              "updatedAt": "2026-06-05T15:17:30.000Z",
+                              "uid": "35240-bbd78a63-c745-4152-a9c3-6db24f0a838f"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:17:30.000Z",
+                          "updatedAt": "2026-06-05T15:17:30.000Z",
+                          "uid": "35240-35a86e88-7a24-4fe3-8452-325e37a44c47"
+                        }
+                      ],
+                      "id": "1e0cb29d-a788-4e35-ac2f-93930d3a3203",
+                      "createdAt": "2026-06-05T15:17:30.000Z",
+                      "updatedAt": "2026-06-05T15:17:30.000Z",
+                      "uid": "35240-1e0cb29d-a788-4e35-ac2f-93930d3a3203"
+                    },
+                    {
+                      "name": "Sentry List a project's issue alert rules",
+                      "id": "d133e56a-8f4d-4be3-a71a-82df27dd7d6a",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/rules/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "projects",
+                            ":organization_id_or_slug",
+                            ":project_id_or_slug",
+                            "rules",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "id": "06a2180b-8646-4a2d-9ad6-80ba3bab164e",
+                              "key": "organization_id_or_slug",
+                              "value": "<string>",
+                              "description": "(Required) The ID or slug of the organization."
+                            },
+                            {
+                              "id": "01ea47f0-7448-4b95-9c6d-739210676824",
+                              "key": "project_id_or_slug",
+                              "value": "<string>",
+                              "description": "(Required) The ID or slug of the project."
+                            }
+                          ]
+                        },
+                        "description": "Returns a list of issue alert rules for a project."
+                      },
+                      "response": [
+                        {
+                          "id": "f15145d2-40cb-473b-a798-c9042e89a6ed",
+                          "name": "A list of issue alert rules.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/rules/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "projects",
+                                ":organization_id_or_slug",
+                                ":project_id_or_slug",
+                                "rules",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                },
+                                {
+                                  "key": "project_id_or_slug"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "[\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"actionMatch\": \"<string>\",\n    \"filterMatch\": \"<string>\",\n    \"frequency\": \"<integer>\",\n    \"environment\": \"<string>\",\n    \"owner\": \"<string>\",\n    \"dateCreated\": \"<dateTime>\"\n  },\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"actionMatch\": \"<string>\",\n    \"filterMatch\": \"<string>\",\n    \"frequency\": \"<integer>\",\n    \"environment\": \"<string>\",\n    \"owner\": \"<string>\",\n    \"dateCreated\": \"<dateTime>\"\n  }\n]",
+                          "createdAt": "2026-06-05T15:17:30.000Z",
+                          "updatedAt": "2026-06-05T15:17:30.000Z",
+                          "uid": "35240-f15145d2-40cb-473b-a798-c9042e89a6ed"
+                        },
+                        {
+                          "id": "6d58dfef-9d6b-41f8-893d-634214879d4b",
+                          "name": "Unauthorized.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/rules/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "projects",
+                                ":organization_id_or_slug",
+                                ":project_id_or_slug",
+                                "rules",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                },
+                                {
+                                  "key": "project_id_or_slug"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:17:30.000Z",
+                          "updatedAt": "2026-06-05T15:17:30.000Z",
+                          "uid": "35240-6d58dfef-9d6b-41f8-893d-634214879d4b"
+                        },
+                        {
+                          "id": "06f9b5f0-33e5-4b62-af08-422a69a943d4",
+                          "name": "Forbidden.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/rules/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "projects",
+                                ":organization_id_or_slug",
+                                ":project_id_or_slug",
+                                "rules",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                },
+                                {
+                                  "key": "project_id_or_slug"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:17:30.000Z",
+                          "updatedAt": "2026-06-05T15:17:30.000Z",
+                          "uid": "35240-06f9b5f0-33e5-4b62-af08-422a69a943d4"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:17:30.000Z",
+                      "updatedAt": "2026-06-05T15:17:30.000Z",
+                      "uid": "35240-d133e56a-8f4d-4be3-a71a-82df27dd7d6a"
+                    },
+                    {
+                      "name": "Sentry Create an issue alert rule for a project",
+                      "id": "a0039e3f-657d-45c9-82c6-dd3c361695e9",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"conditions\": [],\n  \"actions\": [],\n  \"actionMatch\": \"none\",\n  \"frequency\": \"<integer>\",\n  \"filterMatch\": \"all\",\n  \"environment\": \"<string>\",\n  \"owner\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/rules/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "projects",
+                            ":organization_id_or_slug",
+                            ":project_id_or_slug",
+                            "rules",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "id": "f8bdd4c7-a735-451b-852a-e7dc37528d5c",
+                              "key": "organization_id_or_slug",
+                              "value": "<string>",
+                              "description": "(Required) The ID or slug of the organization."
+                            },
+                            {
+                              "id": "3c2d6a13-9662-4862-b36a-531159d58640",
+                              "key": "project_id_or_slug",
+                              "value": "<string>",
+                              "description": "(Required) The ID or slug of the project."
+                            }
+                          ]
+                        },
+                        "description": "Creates a new issue alert rule for the given project."
+                      },
+                      "response": [
+                        {
+                          "id": "7fc5de03-e360-4422-b7bb-e1ae3b25bd3b",
+                          "name": "Issue alert rule created.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"conditions\": [],\n  \"actions\": [],\n  \"actionMatch\": \"none\",\n  \"frequency\": \"<integer>\",\n  \"filterMatch\": \"all\",\n  \"environment\": \"<string>\",\n  \"owner\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/rules/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "projects",
+                                ":organization_id_or_slug",
+                                ":project_id_or_slug",
+                                "rules",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                },
+                                {
+                                  "key": "project_id_or_slug"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Created",
+                          "code": 201,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"actionMatch\": \"<string>\",\n  \"filterMatch\": \"<string>\",\n  \"frequency\": \"<integer>\",\n  \"environment\": \"<string>\",\n  \"owner\": \"<string>\",\n  \"dateCreated\": \"<dateTime>\"\n}",
+                          "createdAt": "2026-06-05T15:17:30.000Z",
+                          "updatedAt": "2026-06-05T15:17:30.000Z",
+                          "uid": "35240-7fc5de03-e360-4422-b7bb-e1ae3b25bd3b"
+                        },
+                        {
+                          "id": "6966b973-ecaa-401b-8b2e-aed0f795c8a8",
+                          "name": "Bad request.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"conditions\": [],\n  \"actions\": [],\n  \"actionMatch\": \"none\",\n  \"frequency\": \"<integer>\",\n  \"filterMatch\": \"all\",\n  \"environment\": \"<string>\",\n  \"owner\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/rules/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "projects",
+                                ":organization_id_or_slug",
+                                ":project_id_or_slug",
+                                "rules",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                },
+                                {
+                                  "key": "project_id_or_slug"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:17:30.000Z",
+                          "updatedAt": "2026-06-05T15:17:30.000Z",
+                          "uid": "35240-6966b973-ecaa-401b-8b2e-aed0f795c8a8"
+                        },
+                        {
+                          "id": "0e982262-3e29-4930-94c4-2f57fc7bd72b",
+                          "name": "Unauthorized.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"conditions\": [],\n  \"actions\": [],\n  \"actionMatch\": \"none\",\n  \"frequency\": \"<integer>\",\n  \"filterMatch\": \"all\",\n  \"environment\": \"<string>\",\n  \"owner\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/rules/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "projects",
+                                ":organization_id_or_slug",
+                                ":project_id_or_slug",
+                                "rules",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                },
+                                {
+                                  "key": "project_id_or_slug"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:17:30.000Z",
+                          "updatedAt": "2026-06-05T15:17:30.000Z",
+                          "uid": "35240-0e982262-3e29-4930-94c4-2f57fc7bd72b"
+                        },
+                        {
+                          "id": "c590ddf4-029b-4603-b4c7-1b479b43d585",
+                          "name": "Forbidden.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"conditions\": [],\n  \"actions\": [],\n  \"actionMatch\": \"none\",\n  \"frequency\": \"<integer>\",\n  \"filterMatch\": \"all\",\n  \"environment\": \"<string>\",\n  \"owner\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/rules/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "projects",
+                                ":organization_id_or_slug",
+                                ":project_id_or_slug",
+                                "rules",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                },
+                                {
+                                  "key": "project_id_or_slug"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:17:30.000Z",
+                          "updatedAt": "2026-06-05T15:17:30.000Z",
+                          "uid": "35240-c590ddf4-029b-4603-b4c7-1b479b43d585"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:17:30.000Z",
+                      "updatedAt": "2026-06-05T15:17:30.000Z",
+                      "uid": "35240-a0039e3f-657d-45c9-82c6-dd3c361695e9"
+                    }
+                  ],
+                  "id": "5626fb35-1665-4db3-ab1a-2ed98ba47b59",
+                  "createdAt": "2026-06-05T15:17:30.000Z",
+                  "updatedAt": "2026-06-05T15:17:30.000Z",
+                  "uid": "35240-5626fb35-1665-4db3-ab1a-2ed98ba47b59"
+                }
+              ],
+              "id": "203a8329-77b3-4181-a908-7d130b1b7fd0",
+              "createdAt": "2026-06-05T15:17:30.000Z",
+              "updatedAt": "2026-06-05T15:17:30.000Z",
+              "uid": "35240-203a8329-77b3-4181-a908-7d130b1b7fd0"
+            }
+          ],
+          "id": "a0d3d656-628c-49bd-96c6-1a4810259a17",
+          "createdAt": "2026-06-05T15:17:30.000Z",
+          "updatedAt": "2026-06-05T15:17:30.000Z",
+          "uid": "35240-a0d3d656-628c-49bd-96c6-1a4810259a17"
+        }
+      ],
+      "id": "d473aad0-70a6-4d82-b9ea-c7727350cbaf",
+      "createdAt": "2026-06-05T15:17:30.000Z",
+      "updatedAt": "2026-06-05T15:17:30.000Z",
+      "uid": "35240-d473aad0-70a6-4d82-b9ea-c7727350cbaf"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://sentry.io/api/0"
+    }
+  ]
+}

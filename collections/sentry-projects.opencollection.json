@@ -1,0 +1,718 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sentry Projects API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Projects",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Sentry Create a new project",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sentry.io/api/0/teams/:organization_id_or_slug/:team_id_or_slug/projects/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "team_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the team."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new project bound to a team."
+        },
+        {
+          "info": {
+            "name": "Sentry Retrieve a project",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/projects/:organization_id_or_slug/:project_id_or_slug/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "project_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the project."
+              }
+            ]
+          },
+          "docs": "Returns details for a specific project."
+        },
+        {
+          "info": {
+            "name": "Sentry Update a project",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://sentry.io/api/0/projects/:organization_id_or_slug/:project_id_or_slug/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "project_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the project."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates various attributes and configurable settings for the given project."
+        },
+        {
+          "info": {
+            "name": "Sentry Delete a project",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://sentry.io/api/0/projects/:organization_id_or_slug/:project_id_or_slug/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "project_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the project."
+              }
+            ]
+          },
+          "docs": "Schedules a project for deletion. This action is irreversible."
+        },
+        {
+          "info": {
+            "name": "Sentry List a project's users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/projects/:organization_id_or_slug/:project_id_or_slug/users/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "project_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the project."
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Filter by user search query."
+              }
+            ]
+          },
+          "docs": "Returns a list of users seen within a project."
+        },
+        {
+          "info": {
+            "name": "Sentry Add a team to a project",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sentry.io/api/0/projects/:organization_id_or_slug/:project_id_or_slug/teams/:team_id_or_slug/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "project_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the project."
+              },
+              {
+                "name": "team_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the team."
+              }
+            ]
+          },
+          "docs": "Grants a team access to a project."
+        },
+        {
+          "info": {
+            "name": "Sentry Delete a team from a project",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://sentry.io/api/0/projects/:organization_id_or_slug/:project_id_or_slug/teams/:team_id_or_slug/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "project_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the project."
+              },
+              {
+                "name": "team_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the team."
+              }
+            ]
+          },
+          "docs": "Revokes a team's access to a project."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Client Keys",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Sentry List a project's client keys",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/projects/:organization_id_or_slug/:project_id_or_slug/keys/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "project_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the project."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Pagination cursor."
+              }
+            ]
+          },
+          "docs": "Returns a list of client keys bound to a project."
+        },
+        {
+          "info": {
+            "name": "Sentry Create a new client key",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sentry.io/api/0/projects/:organization_id_or_slug/:project_id_or_slug/keys/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "project_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the project."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new client key bound to a project."
+        },
+        {
+          "info": {
+            "name": "Sentry Retrieve a client key",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/projects/:organization_id_or_slug/:project_id_or_slug/keys/:key_id/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "project_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the project."
+              },
+              {
+                "name": "key_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the client key."
+              }
+            ]
+          },
+          "docs": "Returns a client key bound to a project."
+        },
+        {
+          "info": {
+            "name": "Sentry Update a client key",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://sentry.io/api/0/projects/:organization_id_or_slug/:project_id_or_slug/keys/:key_id/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "project_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the project."
+              },
+              {
+                "name": "key_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the client key."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a client key."
+        },
+        {
+          "info": {
+            "name": "Sentry Delete a client key",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://sentry.io/api/0/projects/:organization_id_or_slug/:project_id_or_slug/keys/:key_id/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "project_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the project."
+              },
+              {
+                "name": "key_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the client key."
+              }
+            ]
+          },
+          "docs": "Deletes a client key."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Service Hooks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Sentry List a project's service hooks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/projects/:organization_id_or_slug/:project_id_or_slug/hooks/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "project_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the project."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Pagination cursor."
+              }
+            ]
+          },
+          "docs": "Returns a list of service hooks bound to a project."
+        },
+        {
+          "info": {
+            "name": "Sentry Register a new service hook",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sentry.io/api/0/projects/:organization_id_or_slug/:project_id_or_slug/hooks/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "project_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the project."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new service hook for a project."
+        },
+        {
+          "info": {
+            "name": "Sentry Retrieve a service hook",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/projects/:organization_id_or_slug/:project_id_or_slug/hooks/:hook_id/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "project_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the project."
+              },
+              {
+                "name": "hook_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the service hook."
+              }
+            ]
+          },
+          "docs": "Returns a service hook bound to a project."
+        },
+        {
+          "info": {
+            "name": "Sentry Update a service hook",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://sentry.io/api/0/projects/:organization_id_or_slug/:project_id_or_slug/hooks/:hook_id/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "project_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the project."
+              },
+              {
+                "name": "hook_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the service hook."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a service hook."
+        },
+        {
+          "info": {
+            "name": "Sentry Remove a service hook",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://sentry.io/api/0/projects/:organization_id_or_slug/:project_id_or_slug/hooks/:hook_id/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "project_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the project."
+              },
+              {
+                "name": "hook_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the service hook."
+              }
+            ]
+          },
+          "docs": "Removes a service hook from a project."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Debug Files",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Sentry List a project's debug information files",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/projects/:organization_id_or_slug/:project_id_or_slug/files/dsyms/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "project_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the project."
+              }
+            ]
+          },
+          "docs": "Returns a list of debug information files for a given project."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Filters",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Sentry List a project's data filters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/projects/:organization_id_or_slug/:project_id_or_slug/filters/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "project_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the project."
+              }
+            ]
+          },
+          "docs": "Returns a list of active inbound data filters for a project."
+        },
+        {
+          "info": {
+            "name": "Sentry Update an inbound data filter",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://sentry.io/api/0/projects/:organization_id_or_slug/:project_id_or_slug/filters/:filter_id/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "project_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the project."
+              },
+              {
+                "name": "filter_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the filter to update."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a project's inbound data filter."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "User Feedback",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Sentry List a project's user feedback",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/projects/:organization_id_or_slug/:project_id_or_slug/user-feedback/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "project_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the project."
+              }
+            ]
+          },
+          "docs": "Returns a list of user feedback items for a project."
+        },
+        {
+          "info": {
+            "name": "Sentry Submit user feedback",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sentry.io/api/0/projects/:organization_id_or_slug/:project_id_or_slug/user-feedback/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "project_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the project."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submits a new user feedback item for a project."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

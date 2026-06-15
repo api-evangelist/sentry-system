@@ -1,0 +1,2823 @@
+{
+  "item": [
+    {
+      "id": "955ba303-9502-4b34-afd4-32ee6c3d7025",
+      "name": "SCIM Members",
+      "description": {
+        "content": "Provision and manage organization members via SCIM",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ab3acafa-43dd-47a8-8c6c-d0b1c7ec7b89",
+          "name": "Sentry List an organization's SCIM members",
+          "request": {
+            "name": "Sentry List an organization's SCIM members",
+            "description": {
+              "content": "Returns a paginated list of organization members using the SCIM protocol.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "organizations",
+                ":organization_id_or_slug",
+                "scim",
+                "v2",
+                "Users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "startIndex",
+                  "value": "<integer>",
+                  "description": "SCIM 1-indexed starting result number."
+                },
+                {
+                  "disabled": false,
+                  "key": "count",
+                  "value": "<integer>",
+                  "description": "Maximum number of results to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "<string>",
+                  "description": "SCIM filter expression (e.g., userName eq \"user@example.com\")."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organization_id_or_slug",
+                  "description": "(Required) The ID or slug of the organization."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3b422100-5d42-476f-b956-222c4c19e365",
+              "name": "A SCIM list response of members.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id_or_slug",
+                    "scim",
+                    "v2",
+                    "Users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startIndex",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "count",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id_or_slug",
+                      "description": "(Required) The ID or slug of the organization."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"schemas\": [\n    \"string\",\n    \"string\"\n  ],\n  \"totalResults\": 1653,\n  \"Resources\": [],\n  \"startIndex\": 6014,\n  \"itemsPerPage\": 8852\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1e494b24-0c88-4dfd-8b3f-7b6b3e749227",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id_or_slug",
+                    "scim",
+                    "v2",
+                    "Users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startIndex",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "count",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id_or_slug",
+                      "description": "(Required) The ID or slug of the organization."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "414a5289-2728-4c65-a1d4-3a485d3d18c9",
+              "name": "Forbidden. Requires Business Plan with SAML2 enabled.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id_or_slug",
+                    "scim",
+                    "v2",
+                    "Users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startIndex",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "count",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id_or_slug",
+                      "description": "(Required) The ID or slug of the organization."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "df1ac320-67fd-4b59-b2d6-067d7e19eec3",
+          "name": "Sentry Provision a new organization member",
+          "request": {
+            "name": "Sentry Provision a new organization member",
+            "description": {
+              "content": "Creates a new organization member via SCIM provisioning.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "organizations",
+                ":organization_id_or_slug",
+                "scim",
+                "v2",
+                "Users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organization_id_or_slug",
+                  "description": "(Required) The ID or slug of the organization."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"schemas\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"userName\": \"<string>\",\n  \"active\": \"<boolean>\",\n  \"name\": {\n    \"givenName\": \"<string>\",\n    \"familyName\": \"<string>\"\n  },\n  \"emails\": [\n    {\n      \"primary\": \"<boolean>\",\n      \"value\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"primary\": \"<boolean>\",\n      \"value\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d38d426a-5db1-488c-bb7d-4584146ddd96",
+              "name": "Member provisioned.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id_or_slug",
+                    "scim",
+                    "v2",
+                    "Users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id_or_slug",
+                      "description": "(Required) The ID or slug of the organization."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"schemas\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"userName\": \"<string>\",\n  \"active\": \"<boolean>\",\n  \"name\": {\n    \"givenName\": \"<string>\",\n    \"familyName\": \"<string>\"\n  },\n  \"emails\": [\n    {\n      \"primary\": \"<boolean>\",\n      \"value\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"primary\": \"<boolean>\",\n      \"value\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"userName\": \"string\",\n  \"active\": false,\n  \"schemas\": [\n    \"string\",\n    \"string\"\n  ],\n  \"name\": {\n    \"givenName\": \"string\",\n    \"familyName\": \"string\"\n  },\n  \"emails\": [\n    {\n      \"primary\": true,\n      \"value\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"primary\": true,\n      \"value\": \"string\",\n      \"type\": \"string\"\n    }\n  ],\n  \"meta\": {\n    \"resourceType\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "28582c0a-c2ca-4c78-a8f0-dfc190ac1601",
+              "name": "Bad request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id_or_slug",
+                    "scim",
+                    "v2",
+                    "Users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id_or_slug",
+                      "description": "(Required) The ID or slug of the organization."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"schemas\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"userName\": \"<string>\",\n  \"active\": \"<boolean>\",\n  \"name\": {\n    \"givenName\": \"<string>\",\n    \"familyName\": \"<string>\"\n  },\n  \"emails\": [\n    {\n      \"primary\": \"<boolean>\",\n      \"value\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"primary\": \"<boolean>\",\n      \"value\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b42829b0-da86-42ec-812e-56475f4fb6e1",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id_or_slug",
+                    "scim",
+                    "v2",
+                    "Users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id_or_slug",
+                      "description": "(Required) The ID or slug of the organization."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"schemas\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"userName\": \"<string>\",\n  \"active\": \"<boolean>\",\n  \"name\": {\n    \"givenName\": \"<string>\",\n    \"familyName\": \"<string>\"\n  },\n  \"emails\": [\n    {\n      \"primary\": \"<boolean>\",\n      \"value\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"primary\": \"<boolean>\",\n      \"value\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6c0879ba-5452-427b-83ef-c8b52b36a0eb",
+              "name": "Forbidden.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id_or_slug",
+                    "scim",
+                    "v2",
+                    "Users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id_or_slug",
+                      "description": "(Required) The ID or slug of the organization."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"schemas\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"userName\": \"<string>\",\n  \"active\": \"<boolean>\",\n  \"name\": {\n    \"givenName\": \"<string>\",\n    \"familyName\": \"<string>\"\n  },\n  \"emails\": [\n    {\n      \"primary\": \"<boolean>\",\n      \"value\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"primary\": \"<boolean>\",\n      \"value\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0576b672-4a96-42f8-8d42-f95bdc3aeec8",
+              "name": "User already exists.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id_or_slug",
+                    "scim",
+                    "v2",
+                    "Users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id_or_slug",
+                      "description": "(Required) The ID or slug of the organization."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"schemas\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"userName\": \"<string>\",\n  \"active\": \"<boolean>\",\n  \"name\": {\n    \"givenName\": \"<string>\",\n    \"familyName\": \"<string>\"\n  },\n  \"emails\": [\n    {\n      \"primary\": \"<boolean>\",\n      \"value\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"primary\": \"<boolean>\",\n      \"value\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c28e1260-de7e-46ee-b1f8-429ac03e0841",
+          "name": "Sentry Query an individual organization member",
+          "request": {
+            "name": "Sentry Query an individual organization member",
+            "description": {
+              "content": "Returns a specific organization member using the SCIM protocol.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "organizations",
+                ":organization_id_or_slug",
+                "scim",
+                "v2",
+                "Users",
+                ":scim_user_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organization_id_or_slug",
+                  "description": "(Required) The ID or slug of the organization."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "scim_user_id",
+                  "description": "(Required) The SCIM user ID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6b99a6e8-02db-448d-8339-cc174247bb1f",
+              "name": "SCIM user details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id_or_slug",
+                    "scim",
+                    "v2",
+                    "Users",
+                    ":scim_user_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id_or_slug",
+                      "description": "(Required) The ID or slug of the organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scim_user_id",
+                      "description": "(Required) The SCIM user ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"userName\": \"string\",\n  \"active\": false,\n  \"schemas\": [\n    \"string\",\n    \"string\"\n  ],\n  \"name\": {\n    \"givenName\": \"string\",\n    \"familyName\": \"string\"\n  },\n  \"emails\": [\n    {\n      \"primary\": true,\n      \"value\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"primary\": true,\n      \"value\": \"string\",\n      \"type\": \"string\"\n    }\n  ],\n  \"meta\": {\n    \"resourceType\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e04047a8-302b-4b3f-a378-4b7e1ac348b2",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id_or_slug",
+                    "scim",
+                    "v2",
+                    "Users",
+                    ":scim_user_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id_or_slug",
+                      "description": "(Required) The ID or slug of the organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scim_user_id",
+                      "description": "(Required) The SCIM user ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "df47d916-e6d0-46fd-a556-87ddf157d51d",
+              "name": "User not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id_or_slug",
+                    "scim",
+                    "v2",
+                    "Users",
+                    ":scim_user_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id_or_slug",
+                      "description": "(Required) The ID or slug of the organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scim_user_id",
+                      "description": "(Required) The SCIM user ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f7634fb8-e547-42c0-8c0a-984c5461e5c2",
+          "name": "Sentry Update an organization member's attributes",
+          "request": {
+            "name": "Sentry Update an organization member's attributes",
+            "description": {
+              "content": "Updates attributes of a SCIM member. Currently supports setting the active attribute to deactivate members.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "organizations",
+                ":organization_id_or_slug",
+                "scim",
+                "v2",
+                "Users",
+                ":scim_user_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organization_id_or_slug",
+                  "description": "(Required) The ID or slug of the organization."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "scim_user_id",
+                  "description": "(Required) The SCIM user ID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"schemas\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"Operations\": [\n    {\n      \"op\": \"<string>\",\n      \"value\": {\n        \"active\": \"<boolean>\"\n      }\n    },\n    {\n      \"op\": \"<string>\",\n      \"value\": {\n        \"active\": \"<boolean>\"\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "cf7b163d-0dc2-42c8-8073-2d60144b830d",
+              "name": "Member updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id_or_slug",
+                    "scim",
+                    "v2",
+                    "Users",
+                    ":scim_user_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id_or_slug",
+                      "description": "(Required) The ID or slug of the organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scim_user_id",
+                      "description": "(Required) The SCIM user ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"schemas\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"Operations\": [\n    {\n      \"op\": \"<string>\",\n      \"value\": {\n        \"active\": \"<boolean>\"\n      }\n    },\n    {\n      \"op\": \"<string>\",\n      \"value\": {\n        \"active\": \"<boolean>\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "32317f9e-7977-4ef9-90f8-c414507c2310",
+              "name": "Bad request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id_or_slug",
+                    "scim",
+                    "v2",
+                    "Users",
+                    ":scim_user_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id_or_slug",
+                      "description": "(Required) The ID or slug of the organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scim_user_id",
+                      "description": "(Required) The SCIM user ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"schemas\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"Operations\": [\n    {\n      \"op\": \"<string>\",\n      \"value\": {\n        \"active\": \"<boolean>\"\n      }\n    },\n    {\n      \"op\": \"<string>\",\n      \"value\": {\n        \"active\": \"<boolean>\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c3993c93-55ce-4d98-a1af-6d46890e9c13",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id_or_slug",
+                    "scim",
+                    "v2",
+                    "Users",
+                    ":scim_user_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id_or_slug",
+                      "description": "(Required) The ID or slug of the organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scim_user_id",
+                      "description": "(Required) The SCIM user ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"schemas\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"Operations\": [\n    {\n      \"op\": \"<string>\",\n      \"value\": {\n        \"active\": \"<boolean>\"\n      }\n    },\n    {\n      \"op\": \"<string>\",\n      \"value\": {\n        \"active\": \"<boolean>\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "52bae31e-920b-4be0-b8c6-b6a886945d07",
+              "name": "User not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id_or_slug",
+                    "scim",
+                    "v2",
+                    "Users",
+                    ":scim_user_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id_or_slug",
+                      "description": "(Required) The ID or slug of the organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scim_user_id",
+                      "description": "(Required) The SCIM user ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"schemas\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"Operations\": [\n    {\n      \"op\": \"<string>\",\n      \"value\": {\n        \"active\": \"<boolean>\"\n      }\n    },\n    {\n      \"op\": \"<string>\",\n      \"value\": {\n        \"active\": \"<boolean>\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "307088d2-a722-4364-b57e-aed34bfee11c",
+          "name": "Sentry Delete an organization member via SCIM",
+          "request": {
+            "name": "Sentry Delete an organization member via SCIM",
+            "description": {
+              "content": "Removes/deactivates an organization member via SCIM.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "organizations",
+                ":organization_id_or_slug",
+                "scim",
+                "v2",
+                "Users",
+                ":scim_user_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organization_id_or_slug",
+                  "description": "(Required) The ID or slug of the organization."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "scim_user_id",
+                  "description": "(Required) The SCIM user ID."
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "be16ad8a-34a8-4b1a-bd6b-5762d3492b60",
+              "name": "Member removed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id_or_slug",
+                    "scim",
+                    "v2",
+                    "Users",
+                    ":scim_user_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id_or_slug",
+                      "description": "(Required) The ID or slug of the organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scim_user_id",
+                      "description": "(Required) The SCIM user ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "182af0f2-da44-43c6-a7c8-4be2ddaffca4",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id_or_slug",
+                    "scim",
+                    "v2",
+                    "Users",
+                    ":scim_user_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id_or_slug",
+                      "description": "(Required) The ID or slug of the organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scim_user_id",
+                      "description": "(Required) The SCIM user ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "56323e06-a3c9-48d0-934a-c0db90f07572",
+              "name": "User not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id_or_slug",
+                    "scim",
+                    "v2",
+                    "Users",
+                    ":scim_user_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id_or_slug",
+                      "description": "(Required) The ID or slug of the organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scim_user_id",
+                      "description": "(Required) The SCIM user ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "be965621-2d70-480c-b57c-fed17388d3b7",
+      "name": "SCIM Teams",
+      "description": {
+        "content": "Provision and manage teams via SCIM",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "fd0a89e0-4e44-4425-8ebe-ecfcfb658077",
+          "name": "Sentry List an organization's paginated teams",
+          "request": {
+            "name": "Sentry List an organization's paginated teams",
+            "description": {
+              "content": "Returns a paginated list of teams using the SCIM protocol.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "organizations",
+                ":organization_id_or_slug",
+                "scim",
+                "v2",
+                "Groups"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "startIndex",
+                  "value": "<integer>",
+                  "description": "SCIM 1-indexed starting result number."
+                },
+                {
+                  "disabled": false,
+                  "key": "count",
+                  "value": "<integer>",
+                  "description": "Maximum number of results."
+                },
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "<string>",
+                  "description": "SCIM filter expression."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organization_id_or_slug",
+                  "description": "(Required) The ID or slug of the organization."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6cdb1a91-ac44-4867-8f99-6be621d1150b",
+              "name": "A SCIM list response of teams.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id_or_slug",
+                    "scim",
+                    "v2",
+                    "Groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startIndex",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "count",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id_or_slug",
+                      "description": "(Required) The ID or slug of the organization."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"schemas\": [\n    \"string\",\n    \"string\"\n  ],\n  \"totalResults\": 1653,\n  \"Resources\": [],\n  \"startIndex\": 6014,\n  \"itemsPerPage\": 8852\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8a1f535a-7110-4361-b4c0-63b84cecd405",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id_or_slug",
+                    "scim",
+                    "v2",
+                    "Groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startIndex",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "count",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id_or_slug",
+                      "description": "(Required) The ID or slug of the organization."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d3b9f34f-2fb2-401e-821a-2db8be4c9a48",
+              "name": "Forbidden.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id_or_slug",
+                    "scim",
+                    "v2",
+                    "Groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startIndex",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "count",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id_or_slug",
+                      "description": "(Required) The ID or slug of the organization."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bf89ecc9-359d-44e7-b7e2-6e4164c16109",
+          "name": "Sentry Provision a new team",
+          "request": {
+            "name": "Sentry Provision a new team",
+            "description": {
+              "content": "Creates a new team via SCIM provisioning.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "organizations",
+                ":organization_id_or_slug",
+                "scim",
+                "v2",
+                "Groups"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organization_id_or_slug",
+                  "description": "(Required) The ID or slug of the organization."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"schemas\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"displayName\": \"<string>\",\n  \"members\": [\n    {\n      \"value\": \"<string>\",\n      \"display\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"display\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "126452bf-7d6a-4f91-be62-e85357f8a442",
+              "name": "Team provisioned.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id_or_slug",
+                    "scim",
+                    "v2",
+                    "Groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id_or_slug",
+                      "description": "(Required) The ID or slug of the organization."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"schemas\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"displayName\": \"<string>\",\n  \"members\": [\n    {\n      \"value\": \"<string>\",\n      \"display\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"display\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"displayName\": \"string\",\n  \"schemas\": [\n    \"string\",\n    \"string\"\n  ],\n  \"members\": [\n    {\n      \"value\": \"string\",\n      \"display\": \"string\"\n    },\n    {\n      \"value\": \"string\",\n      \"display\": \"string\"\n    }\n  ],\n  \"meta\": {\n    \"resourceType\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0011d92c-ccf3-4517-a933-1bfacece4ad3",
+              "name": "Bad request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id_or_slug",
+                    "scim",
+                    "v2",
+                    "Groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id_or_slug",
+                      "description": "(Required) The ID or slug of the organization."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"schemas\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"displayName\": \"<string>\",\n  \"members\": [\n    {\n      \"value\": \"<string>\",\n      \"display\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"display\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0b21cbe2-9230-4e56-8dd4-9174607b1593",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id_or_slug",
+                    "scim",
+                    "v2",
+                    "Groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id_or_slug",
+                      "description": "(Required) The ID or slug of the organization."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"schemas\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"displayName\": \"<string>\",\n  \"members\": [\n    {\n      \"value\": \"<string>\",\n      \"display\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"display\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "df6b30ad-e1ea-4009-9bfa-52fad15caebe",
+              "name": "Team already exists.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id_or_slug",
+                    "scim",
+                    "v2",
+                    "Groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id_or_slug",
+                      "description": "(Required) The ID or slug of the organization."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"schemas\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"displayName\": \"<string>\",\n  \"members\": [\n    {\n      \"value\": \"<string>\",\n      \"display\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"display\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "37439b06-fa61-4baa-b233-92b766e154cf",
+          "name": "Sentry Query an individual team",
+          "request": {
+            "name": "Sentry Query an individual team",
+            "description": {
+              "content": "Returns a specific team using the SCIM protocol.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "organizations",
+                ":organization_id_or_slug",
+                "scim",
+                "v2",
+                "Groups",
+                ":scim_group_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organization_id_or_slug",
+                  "description": "(Required) The ID or slug of the organization."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "scim_group_id",
+                  "description": "(Required) The SCIM group (team) ID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "91c7f8e5-6bb6-4b53-8b8e-ec335872e929",
+              "name": "SCIM team details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id_or_slug",
+                    "scim",
+                    "v2",
+                    "Groups",
+                    ":scim_group_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id_or_slug",
+                      "description": "(Required) The ID or slug of the organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scim_group_id",
+                      "description": "(Required) The SCIM group (team) ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"displayName\": \"string\",\n  \"schemas\": [\n    \"string\",\n    \"string\"\n  ],\n  \"members\": [\n    {\n      \"value\": \"string\",\n      \"display\": \"string\"\n    },\n    {\n      \"value\": \"string\",\n      \"display\": \"string\"\n    }\n  ],\n  \"meta\": {\n    \"resourceType\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4f63ef14-6d63-482e-aa8c-57894b31ed25",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id_or_slug",
+                    "scim",
+                    "v2",
+                    "Groups",
+                    ":scim_group_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id_or_slug",
+                      "description": "(Required) The ID or slug of the organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scim_group_id",
+                      "description": "(Required) The SCIM group (team) ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "90f444b7-3455-41af-ab65-10be04be24fb",
+              "name": "Team not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id_or_slug",
+                    "scim",
+                    "v2",
+                    "Groups",
+                    ":scim_group_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id_or_slug",
+                      "description": "(Required) The ID or slug of the organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scim_group_id",
+                      "description": "(Required) The SCIM group (team) ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c512a59a-f331-4eb6-86c6-d07d911dff29",
+          "name": "Sentry Update a team's attributes",
+          "request": {
+            "name": "Sentry Update a team's attributes",
+            "description": {
+              "content": "Updates team attributes via SCIM, including managing members.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "organizations",
+                ":organization_id_or_slug",
+                "scim",
+                "v2",
+                "Groups",
+                ":scim_group_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organization_id_or_slug",
+                  "description": "(Required) The ID or slug of the organization."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "scim_group_id",
+                  "description": "(Required) The SCIM group (team) ID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"schemas\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"Operations\": [\n    {\n      \"op\": \"<string>\",\n      \"path\": \"<string>\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"op\": \"<string>\",\n      \"path\": \"<string>\",\n      \"value\": \"<object>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0b81cacf-450e-48dd-abf7-7e47be895ac4",
+              "name": "Team updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id_or_slug",
+                    "scim",
+                    "v2",
+                    "Groups",
+                    ":scim_group_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id_or_slug",
+                      "description": "(Required) The ID or slug of the organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scim_group_id",
+                      "description": "(Required) The SCIM group (team) ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"schemas\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"Operations\": [\n    {\n      \"op\": \"<string>\",\n      \"path\": \"<string>\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"op\": \"<string>\",\n      \"path\": \"<string>\",\n      \"value\": \"<object>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "81fd8bfa-f5fe-47d4-8f81-b0a0cd912a34",
+              "name": "Bad request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id_or_slug",
+                    "scim",
+                    "v2",
+                    "Groups",
+                    ":scim_group_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id_or_slug",
+                      "description": "(Required) The ID or slug of the organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scim_group_id",
+                      "description": "(Required) The SCIM group (team) ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"schemas\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"Operations\": [\n    {\n      \"op\": \"<string>\",\n      \"path\": \"<string>\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"op\": \"<string>\",\n      \"path\": \"<string>\",\n      \"value\": \"<object>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "22329b8a-b646-47b3-85a7-df4796cca4a1",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id_or_slug",
+                    "scim",
+                    "v2",
+                    "Groups",
+                    ":scim_group_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id_or_slug",
+                      "description": "(Required) The ID or slug of the organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scim_group_id",
+                      "description": "(Required) The SCIM group (team) ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"schemas\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"Operations\": [\n    {\n      \"op\": \"<string>\",\n      \"path\": \"<string>\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"op\": \"<string>\",\n      \"path\": \"<string>\",\n      \"value\": \"<object>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "54170bd2-76ad-48e1-a5c6-89baaf08db34",
+              "name": "Team not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id_or_slug",
+                    "scim",
+                    "v2",
+                    "Groups",
+                    ":scim_group_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id_or_slug",
+                      "description": "(Required) The ID or slug of the organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scim_group_id",
+                      "description": "(Required) The SCIM group (team) ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"schemas\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"Operations\": [\n    {\n      \"op\": \"<string>\",\n      \"path\": \"<string>\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"op\": \"<string>\",\n      \"path\": \"<string>\",\n      \"value\": \"<object>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "34d04ef1-0bb1-4ab5-aa4e-d88be57a150e",
+          "name": "Sentry Delete an individual team",
+          "request": {
+            "name": "Sentry Delete an individual team",
+            "description": {
+              "content": "Deletes a team via SCIM.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "organizations",
+                ":organization_id_or_slug",
+                "scim",
+                "v2",
+                "Groups",
+                ":scim_group_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organization_id_or_slug",
+                  "description": "(Required) The ID or slug of the organization."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "scim_group_id",
+                  "description": "(Required) The SCIM group (team) ID."
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0c4d88fe-dbdc-4dcf-b1bd-638f9e21de8a",
+              "name": "Team deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id_or_slug",
+                    "scim",
+                    "v2",
+                    "Groups",
+                    ":scim_group_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id_or_slug",
+                      "description": "(Required) The ID or slug of the organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scim_group_id",
+                      "description": "(Required) The SCIM group (team) ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7777b882-cd0e-43ae-bf49-31d3b67eb28b",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id_or_slug",
+                    "scim",
+                    "v2",
+                    "Groups",
+                    ":scim_group_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id_or_slug",
+                      "description": "(Required) The ID or slug of the organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scim_group_id",
+                      "description": "(Required) The SCIM group (team) ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "fcd24a9b-eca6-4351-9902-209586c5082c",
+              "name": "Team not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id_or_slug",
+                    "scim",
+                    "v2",
+                    "Groups",
+                    ":scim_group_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id_or_slug",
+                      "description": "(Required) The ID or slug of the organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scim_group_id",
+                      "description": "(Required) The SCIM group (team) ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://sentry.io/api/0",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "3c69310b-c3ab-48e1-af35-cea0e48a6d3c",
+    "name": "Sentry SCIM API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The SCIM API provides endpoints for federated identity management in Sentry, enabling automated provisioning and deprovisioning of organization members and teams using the System for Cross-Domain Identity Management standard. Requires a Business Plan with SAML2 enabled.\n\nContact Support:\n Name: Sentry Support\n Email: support@sentry.io",
+      "type": "text/plain"
+    }
+  }
+}

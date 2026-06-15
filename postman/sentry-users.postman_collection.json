@@ -1,0 +1,184 @@
+{
+  "info": {
+    "_postman_id": "967f5992-df9d-4602-9986-35bf30906353",
+    "name": "Sentry Users API",
+    "description": "The Users API provides endpoints for retrieving user-related information in Sentry, including listing the organizations that the authenticated user belongs to.\n\nContact Support:\n Name: Sentry Support\n Email: support@sentry.io",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:17:45.000Z",
+    "updatedAt": "2026-06-05T15:17:46.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-967f5992-df9d-4602-9986-35bf30906353"
+  },
+  "item": [
+    {
+      "name": "organizations",
+      "item": [
+        {
+          "name": "Sentry List your organizations",
+          "id": "0bb73bc3-f391-46c7-9d78-543c9c019fbb",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/organizations/?owner=<boolean>&cursor=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "organizations",
+                ""
+              ],
+              "query": [
+                {
+                  "description": "Restrict results to organizations owned by the authenticated user.",
+                  "key": "owner",
+                  "value": "<boolean>"
+                },
+                {
+                  "description": "Pagination cursor.",
+                  "key": "cursor",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Returns a list of organizations available to the authenticated session. This is particularly useful for tokens with access to multiple organizations."
+          },
+          "response": [
+            {
+              "id": "63346e11-cfc8-4991-b3c3-9a9b27433091",
+              "name": "A list of organizations.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/organizations/?owner=<boolean>&cursor=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "organizations",
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "Restrict results to organizations owned by the authenticated user.",
+                      "key": "owner",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "description": "Pagination cursor.",
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "[\n  {\n    \"id\": \"<string>\",\n    \"slug\": \"<string>\",\n    \"name\": \"<string>\",\n    \"dateCreated\": \"<dateTime>\",\n    \"status\": {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\"\n    },\n    \"isEarlyAdopter\": \"<boolean>\",\n    \"avatar\": {\n      \"avatarType\": \"<string>\",\n      \"avatarUuid\": \"<string>\"\n    }\n  },\n  {\n    \"id\": \"<string>\",\n    \"slug\": \"<string>\",\n    \"name\": \"<string>\",\n    \"dateCreated\": \"<dateTime>\",\n    \"status\": {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\"\n    },\n    \"isEarlyAdopter\": \"<boolean>\",\n    \"avatar\": {\n      \"avatarType\": \"<string>\",\n      \"avatarUuid\": \"<string>\"\n    }\n  }\n]",
+              "createdAt": "2026-06-05T15:17:46.000Z",
+              "updatedAt": "2026-06-05T15:17:46.000Z",
+              "uid": "35240-63346e11-cfc8-4991-b3c3-9a9b27433091"
+            },
+            {
+              "id": "81053760-f051-422a-ad70-b6c4e0d37ef5",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/organizations/?owner=<boolean>&cursor=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "organizations",
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "Restrict results to organizations owned by the authenticated user.",
+                      "key": "owner",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "description": "Pagination cursor.",
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-06-05T15:17:46.000Z",
+              "updatedAt": "2026-06-05T15:17:46.000Z",
+              "uid": "35240-81053760-f051-422a-ad70-b6c4e0d37ef5"
+            }
+          ],
+          "createdAt": "2026-06-05T15:17:46.000Z",
+          "updatedAt": "2026-06-05T15:17:46.000Z",
+          "uid": "35240-0bb73bc3-f391-46c7-9d78-543c9c019fbb"
+        }
+      ],
+      "id": "69d16aa1-9661-4431-b7bc-79c397674539",
+      "createdAt": "2026-06-05T15:17:46.000Z",
+      "updatedAt": "2026-06-05T15:17:46.000Z",
+      "uid": "35240-69d16aa1-9661-4431-b7bc-79c397674539"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://sentry.io/api/0"
+    }
+  ]
+}

@@ -1,0 +1,388 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sentry Monitors API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Monitors",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Sentry Fetch an organization's monitors",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/monitors/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Pagination cursor."
+              }
+            ]
+          },
+          "docs": "Returns a list of monitors for the organization. This endpoint is in beta and may change."
+        },
+        {
+          "info": {
+            "name": "Sentry Mutate an organization's monitors",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/monitors/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Bulk update monitors for an organization."
+        },
+        {
+          "info": {
+            "name": "Sentry Bulk delete monitors",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/monitors/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "IDs of monitors to delete."
+              }
+            ]
+          },
+          "docs": "Bulk delete monitors for an organization."
+        },
+        {
+          "info": {
+            "name": "Sentry Create a monitor for a project",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sentry.io/api/0/projects/:organization_id_or_slug/:project_id_or_slug/uptime-monitors/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "project_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the project."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new uptime monitor for a specific project."
+        },
+        {
+          "info": {
+            "name": "Sentry Fetch a monitor",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/uptime-monitors/:monitor_id/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "monitor_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the monitor."
+              }
+            ]
+          },
+          "docs": "Returns details for a specific uptime monitor."
+        },
+        {
+          "info": {
+            "name": "Sentry Update a monitor by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/uptime-monitors/:monitor_id/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "monitor_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the monitor."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an uptime monitor."
+        },
+        {
+          "info": {
+            "name": "Sentry Delete a monitor",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/uptime-monitors/:monitor_id/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "monitor_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the monitor."
+              }
+            ]
+          },
+          "docs": "Deletes an uptime monitor."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Alerts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Sentry Fetch alerts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/alerts/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Pagination cursor."
+              }
+            ]
+          },
+          "docs": "Returns a list of alerts for the organization."
+        },
+        {
+          "info": {
+            "name": "Sentry Create an alert for an organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/alerts/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new alert for the organization."
+        },
+        {
+          "info": {
+            "name": "Sentry Mutate an organization's alerts",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/alerts/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Bulk update alerts for an organization."
+        },
+        {
+          "info": {
+            "name": "Sentry Bulk delete alerts",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/alerts/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "IDs of alerts to delete."
+              }
+            ]
+          },
+          "docs": "Bulk delete alerts for an organization."
+        },
+        {
+          "info": {
+            "name": "Sentry Fetch an alert",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/alerts/:alert_id/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "alert_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the alert."
+              }
+            ]
+          },
+          "docs": "Returns details for a specific alert."
+        },
+        {
+          "info": {
+            "name": "Sentry Update an alert by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/alerts/:alert_id/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "alert_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the alert."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an alert."
+        },
+        {
+          "info": {
+            "name": "Sentry Delete an alert",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/alerts/:alert_id/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "alert_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the alert."
+              }
+            ]
+          },
+          "docs": "Deletes an alert."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

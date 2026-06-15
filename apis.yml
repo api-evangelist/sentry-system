@@ -1,5 +1,6 @@
 name: Sentry
-description: Sentry is an open-source error tracking and performance monitoring platform that helps developers identify, triage,
+description: >-
+  Sentry is an open-source error tracking and performance monitoring platform that helps developers identify, triage,
   and resolve issues in their applications in real-time.
 image: https://sentry-brand.storage.googleapis.com/sentry-logo-black.png
 created: '2024-01-15'
@@ -7,627 +8,550 @@ modified: '2026-05-19'
 specificationVersion: '0.18'
 url: https://sentry.io/apis.json
 apis:
-- name: Sentry API
-  description: The Sentry API provides programmatic access to Sentry's error tracking, performance monitoring, and organizational
-    data. It allows developers to manage projects, issues, releases, and more.
-  image: https://sentry-brand.storage.googleapis.com/sentry-logo-black.png
-  humanURL: https://sentry.io
-  baseURL: https://sentry.io/api/0
-  tags:
-  - Error Tracking
-  - Monitoring
-  - Observability
-  - Performance
-  properties:
+  - name: Sentry API
+    description: >-
+      The Sentry API provides programmatic access to Sentry's error tracking, performance monitoring, and organizational
+      data. It allows developers to manage projects, issues, releases, and more.
+    image: https://sentry-brand.storage.googleapis.com/sentry-logo-black.png
+    humanURL: https://sentry.io
+    baseURL: https://sentry.io/api/0
+    tags:
+      - Error Tracking
+      - Monitoring
+      - Observability
+      - Performance
+    properties:
+      - type: Documentation
+        url: https://docs.sentry.io/api/
+      - type: OpenAPI
+        url: https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json
+      - type: OpenAPI
+        url: openapi/sentry-api-openapi.yml
+      - type: Authentication
+        url: https://docs.sentry.io/api/auth/
+      - type: GettingStarted
+        url: https://docs.sentry.io/api/guides/create-auth-token/
+      - type: RateLimits
+        url: https://docs.sentry.io/api/ratelimits/
+      - type: SDKs
+        url: https://docs.sentry.io/platforms/
+      - type: PostmanCollection
+        url: https://www.postman.com/sentryio/sentry-api-collection/documentation/xtzhckg/sentry-api-collection
+      - type: Webhooks
+        url: https://docs.sentry.io/organization/integrations/integration-platform/webhooks/
+      - type: Pagination
+        url: https://docs.sentry.io/api/pagination/
+      - type: Permissions
+        url: https://docs.sentry.io/api/permissions/
+      - type: Reference
+        url: https://docs.sentry.io/api/requests/
+      - type: JSONSchema
+        url: json-schema/sentry-organization-schema.json
+      - type: JSONSchema
+        url: json-schema/sentry-project-schema.json
+      - type: JSONSchema
+        url: json-schema/sentry-issue-schema.json
+      - type: JSONSchema
+        url: json-schema/sentry-event-schema.json
+      - type: JSONSchema
+        url: json-schema/sentry-team-schema.json
+      - type: JSONSchema
+        url: json-schema/sentry-release-schema.json
+      - type: JSONSchema
+        url: json-schema/sentry-alert-rule-schema.json
+      - type: JSONSchema
+        url: json-schema/sentry-monitor-schema.json
+      - type: JSONSchema
+        url: json-schema/sentry-replay-schema.json
+      - type: JSONLD
+        url: json-ld/sentry-context.jsonld
+    contact:
+      - type: Support
+        url: https://sentry.io/support/
+      - type: Email
+        url: support@sentry.io
+      - type: Twitter
+        url: https://twitter.com/getsentry
+      - type: GitHub
+        url: https://github.com/getsentry
+  - name: Sentry Events and Issues API
+    description: >-
+      The Events and Issues API provides endpoints for managing error events and issues in Sentry, including listing,
+      retrieving, updating, and bulk-mutating issues and their associated events, tags, and hashes.
+    image: https://sentry-brand.storage.googleapis.com/sentry-logo-black.png
+    humanURL: https://docs.sentry.io/api/events/
+    baseURL: https://sentry.io/api/0
+    tags:
+      - Debugging
+      - Error Tracking
+      - Events
+      - Issues
+    properties:
+      - type: Documentation
+        url: https://docs.sentry.io/api/events/
+      - type: OpenAPI
+        url: https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json
+      - type: OpenAPI
+        url: openapi/sentry-events-issues-openapi.yml
+  - name: Sentry Organizations API
+    description: >-
+      The Organizations API provides endpoints for managing Sentry organizations, including retrieving and updating
+      organization details, managing members and their roles, listing projects and repositories, and resolving event and
+      short IDs.
+    image: https://sentry-brand.storage.googleapis.com/sentry-logo-black.png
+    humanURL: https://docs.sentry.io/api/organizations/
+    baseURL: https://sentry.io/api/0
+    tags:
+      - Administration
+      - Members
+      - Organizations
+    properties:
+      - type: Documentation
+        url: https://docs.sentry.io/api/organizations/
+      - type: OpenAPI
+        url: https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json
+      - type: OpenAPI
+        url: openapi/sentry-organizations-openapi.yml
+  - name: Sentry Projects API
+    description: >-
+      The Projects API provides endpoints for managing Sentry projects, including creating, retrieving, updating, and
+      deleting projects, as well as managing client keys, debug files, service hooks, filters, and user feedback.
+    image: https://sentry-brand.storage.googleapis.com/sentry-logo-black.png
+    humanURL: https://docs.sentry.io/api/projects/
+    baseURL: https://sentry.io/api/0
+    tags:
+      - Configuration
+      - Management
+      - Projects
+    properties:
+      - type: Documentation
+        url: https://docs.sentry.io/api/projects/
+      - type: OpenAPI
+        url: https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json
+      - type: OpenAPI
+        url: openapi/sentry-projects-openapi.yml
+  - name: Sentry Teams API
+    description: >-
+      The Teams API provides endpoints for managing teams within Sentry organizations, including creating, retrieving,
+      updating, and deleting teams, managing team members and their roles, and listing projects associated with teams.
+    image: https://sentry-brand.storage.googleapis.com/sentry-logo-black.png
+    humanURL: https://docs.sentry.io/api/teams/
+    baseURL: https://sentry.io/api/0
+    tags:
+      - Collaboration
+      - Members
+      - Teams
+    properties:
+      - type: Documentation
+        url: https://docs.sentry.io/api/teams/
+      - type: OpenAPI
+        url: https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json
+      - type: OpenAPI
+        url: openapi/sentry-teams-openapi.yml
+  - name: Sentry Releases API
+    description: >-
+      The Releases API provides endpoints for managing software releases in Sentry, including creating and managing
+      releases, uploading release files, listing commits, managing deployments, and retrieving release health session
+      statistics.
+    image: https://sentry-brand.storage.googleapis.com/sentry-logo-black.png
+    humanURL: https://docs.sentry.io/api/releases/
+    baseURL: https://sentry.io/api/0
+    tags:
+      - Deployments
+      - Releases
+      - Version Management
+    properties:
+      - type: Documentation
+        url: https://docs.sentry.io/api/releases/
+      - type: OpenAPI
+        url: https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json
+      - type: OpenAPI
+        url: openapi/sentry-releases-openapi.yml
+  - name: Sentry Alerts API
+    description: >-
+      The Alerts API provides endpoints for managing alert rules in Sentry, including creating, retrieving, updating,
+      and deleting metric alert rules and issue alert rules, as well as managing spike protection notification actions.
+    image: https://sentry-brand.storage.googleapis.com/sentry-logo-black.png
+    humanURL: https://docs.sentry.io/api/alerts/
+    baseURL: https://sentry.io/api/0
+    tags:
+      - Alerts
+      - Monitoring
+      - Notifications
+    properties:
+      - type: Documentation
+        url: https://docs.sentry.io/api/alerts/
+      - type: OpenAPI
+        url: https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json
+      - type: OpenAPI
+        url: openapi/sentry-alerts-openapi.yml
+  - name: Sentry Crons API
+    description: >-
+      The Crons API provides endpoints for managing cron job monitors in Sentry, including creating, retrieving,
+      updating, and deleting monitors, managing monitor environments, and retrieving check-in history for tracked
+      scheduled tasks.
+    image: https://sentry-brand.storage.googleapis.com/sentry-logo-black.png
+    humanURL: https://docs.sentry.io/api/crons/
+    baseURL: https://sentry.io/api/0
+    tags:
+      - Crons
+      - Monitoring
+      - Scheduled Tasks
+    properties:
+      - type: Documentation
+        url: https://docs.sentry.io/api/crons/
+      - type: OpenAPI
+        url: https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json
+      - type: OpenAPI
+        url: openapi/sentry-crons-openapi.yml
+  - name: Sentry Dashboards API
+    description: >-
+      The Dashboards API provides endpoints for managing custom dashboards in Sentry organizations, including creating,
+      listing, retrieving, editing, and deleting dashboards for visualizing error and performance data.
+    image: https://sentry-brand.storage.googleapis.com/sentry-logo-black.png
+    humanURL: https://docs.sentry.io/api/dashboards/
+    baseURL: https://sentry.io/api/0
+    tags:
+      - Analytics
+      - Dashboards
+      - Visualization
+    properties:
+      - type: Documentation
+        url: https://docs.sentry.io/api/dashboards/
+      - type: OpenAPI
+        url: https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json
+      - type: OpenAPI
+        url: openapi/sentry-dashboards-openapi.yml
+  - name: Sentry Discover API
+    description: >-
+      The Discover and Performance API provides endpoints for managing saved queries in Sentry, allowing you to create,
+      list, retrieve, edit, and delete organization-level Discover saved queries for slicing and analyzing error and
+      transaction event data.
+    image: https://sentry-brand.storage.googleapis.com/sentry-logo-black.png
+    humanURL: https://docs.sentry.io/api/discover/
+    baseURL: https://sentry.io/api/0
+    tags:
+      - Analytics
+      - Discover
+      - Performance
+      - Queries
+    properties:
+      - type: Documentation
+        url: https://docs.sentry.io/api/discover/
+      - type: OpenAPI
+        url: https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json
+      - type: OpenAPI
+        url: openapi/sentry-discover-openapi.yml
+  - name: Sentry Environments API
+    description: >-
+      The Environments API provides endpoints for managing environments in Sentry, including listing project and
+      organization environments, retrieving individual project environment details, and updating project environment
+      settings.
+    image: https://sentry-brand.storage.googleapis.com/sentry-logo-black.png
+    humanURL: https://docs.sentry.io/api/environments/
+    baseURL: https://sentry.io/api/0
+    tags:
+      - Configuration
+      - Environments
+      - Management
+    properties:
+      - type: Documentation
+        url: https://docs.sentry.io/api/environments/
+      - type: OpenAPI
+        url: https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json
+      - type: OpenAPI
+        url: openapi/sentry-environments-openapi.yml
+  - name: Sentry Explore API
+    description: >-
+      The Explore API provides endpoints for querying and analyzing event data in Sentry, allowing you to slice and dice
+      events in both table and timeseries formats for flexible data analysis and visualization.
+    image: https://sentry-brand.storage.googleapis.com/sentry-logo-black.png
+    humanURL: https://docs.sentry.io/api/explore/
+    baseURL: https://sentry.io/api/0
+    tags:
+      - Analytics
+      - Events
+      - Explore
+    properties:
+      - type: Documentation
+        url: https://docs.sentry.io/api/explore/
+      - type: OpenAPI
+        url: https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json
+      - type: OpenAPI
+        url: openapi/sentry-explore-openapi.yml
+  - name: Sentry Integration Platform API
+    description: >-
+      The Integration Platform API provides endpoints for managing custom integrations in Sentry, including creating and
+      updating external issues, managing integration configurations, listing installations, and retrieving
+      organization-level custom integration details.
+    image: https://sentry-brand.storage.googleapis.com/sentry-logo-black.png
+    humanURL: https://docs.sentry.io/api/integration/
+    baseURL: https://sentry.io/api/0
+    tags:
+      - Integrations
+      - Platform
+      - Webhooks
+    properties:
+      - type: Documentation
+        url: https://docs.sentry.io/api/integration/
+      - type: OpenAPI
+        url: https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json
+      - type: OpenAPI
+        url: openapi/sentry-integration-platform-openapi.yml
+  - name: Sentry Integrations API
+    description: >-
+      The Integrations API provides endpoints for managing third-party integrations within Sentry organizations,
+      including creating and managing data forwarders, handling external user and team records, and controlling
+      integration configurations.
+    image: https://sentry-brand.storage.googleapis.com/sentry-logo-black.png
+    humanURL: https://docs.sentry.io/api/integrations/
+    baseURL: https://sentry.io/api/0
+    tags:
+      - Configuration
+      - Data Forwarding
+      - Integrations
+    properties:
+      - type: Documentation
+        url: https://docs.sentry.io/api/integrations/
+      - type: OpenAPI
+        url: https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json
+      - type: OpenAPI
+        url: openapi/sentry-integrations-openapi.yml
+  - name: Sentry Mobile Builds API
+    description: >-
+      The Mobile Builds API provides endpoints for analyzing mobile application artifacts in Sentry, including
+      retrieving install information and size analysis results for mobile build artifacts.
+    image: https://sentry-brand.storage.googleapis.com/sentry-logo-black.png
+    humanURL: https://docs.sentry.io/api/mobile-builds/
+    baseURL: https://sentry.io/api/0
+    tags:
+      - Artifacts
+      - Builds
+      - Mobile
+    properties:
+      - type: Documentation
+        url: https://docs.sentry.io/api/mobile-builds/
+      - type: OpenAPI
+        url: https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json
+      - type: OpenAPI
+        url: openapi/sentry-mobile-builds-openapi.yml
+  - name: Sentry Monitors API
+    description: >-
+      The Monitors and Alerts API provides beta endpoints for managing monitors and alerts in Sentry, including
+      creating, retrieving, updating, and deleting monitors and alerts, as well as bulk operations at the organization
+      level.
+    image: https://sentry-brand.storage.googleapis.com/sentry-logo-black.png
+    humanURL: https://docs.sentry.io/api/monitors/
+    baseURL: https://sentry.io/api/0
+    tags:
+      - Alerts
+      - Monitors
+      - Uptime
+    properties:
+      - type: Documentation
+        url: https://docs.sentry.io/api/monitors/
+      - type: OpenAPI
+        url: https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json
+      - type: OpenAPI
+        url: openapi/sentry-monitors-openapi.yml
+  - name: Sentry Prevent API
+    description: >-
+      The Prevent API provides endpoints for managing repository integrations and test results in Sentry, including
+      syncing repositories, managing branches, generating upload tokens, and retrieving test result metrics and test
+      suites.
+    image: https://sentry-brand.storage.googleapis.com/sentry-logo-black.png
+    humanURL: https://docs.sentry.io/api/prevent/
+    baseURL: https://sentry.io/api/0
+    tags:
+      - Quality Assurance
+      - Repositories
+      - Testing
+    properties:
+      - type: Documentation
+        url: https://docs.sentry.io/api/prevent/
+      - type: OpenAPI
+        url: https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json
+      - type: OpenAPI
+        url: openapi/sentry-prevent-openapi.yml
+  - name: Sentry Replays API
+    description: >-
+      The Replays API provides endpoints for managing session replays in Sentry, including listing, retrieving, and
+      deleting replay instances, accessing recording segments, listing clicked nodes and selectors, and retrieving
+      replay counts for issues or transactions.
+    image: https://sentry-brand.storage.googleapis.com/sentry-logo-black.png
+    humanURL: https://docs.sentry.io/api/replays/
+    baseURL: https://sentry.io/api/0
+    tags:
+      - Replays
+      - Session Recording
+      - User Experience
+    properties:
+      - type: Documentation
+        url: https://docs.sentry.io/api/replays/
+      - type: OpenAPI
+        url: https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json
+      - type: OpenAPI
+        url: openapi/sentry-replays-openapi.yml
+  - name: Sentry SCIM API
+    description: >-
+      The SCIM API provides endpoints for federated identity management in Sentry, enabling automated provisioning and
+      deprovisioning of organization members and teams using the System for Cross-Domain Identity Management standard.
+      Requires a Business Plan with SAML2 enabled.
+    image: https://sentry-brand.storage.googleapis.com/sentry-logo-black.png
+    humanURL: https://docs.sentry.io/api/scim/
+    baseURL: https://sentry.io/api/0
+    tags:
+      - Enterprise
+      - Identity Management
+      - Provisioning
+      - SCIM
+    properties:
+      - type: Documentation
+        url: https://docs.sentry.io/api/scim/
+      - type: OpenAPI
+        url: https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json
+      - type: OpenAPI
+        url: openapi/sentry-scim-openapi.yml
+  - name: Sentry Seer API
+    description: >-
+      The Seer API provides endpoints for AI-powered issue analysis in Sentry, including listing available AI models,
+      starting AI-assisted issue fixes, and retrieving the state of ongoing fix analyses.
+    image: https://sentry-brand.storage.googleapis.com/sentry-logo-black.png
+    humanURL: https://docs.sentry.io/api/seer/
+    baseURL: https://sentry.io/api/0
+    tags:
+      - AI
+      - Automation
+      - Issue Analysis
+    properties:
+      - type: Documentation
+        url: https://docs.sentry.io/api/seer/
+      - type: OpenAPI
+        url: https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json
+      - type: OpenAPI
+        url: openapi/sentry-seer-openapi.yml
+  - name: Sentry Users API
+    description: >-
+      The Users API provides endpoints for retrieving user-related information in Sentry, including listing the
+      organizations that the authenticated user belongs to.
+    image: https://sentry-brand.storage.googleapis.com/sentry-logo-black.png
+    humanURL: https://docs.sentry.io/api/users/
+    baseURL: https://sentry.io/api/0
+    tags:
+      - Accounts
+      - Authentication
+      - Users
+    properties:
+      - type: Documentation
+        url: https://docs.sentry.io/api/users/
+      - type: OpenAPI
+        url: https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json
+      - type: OpenAPI
+        url: openapi/sentry-users-openapi.yml
+common:
+  - type: PostmanWorkspace
+    url: https://www.postman.com/kinlaneapi/sentry/overview
+  - type: ArazzoWorkflows
+    url: arazzo/
+    workflows:
+      - url: arazzo/sentry-system-capture-user-feedback-workflow.yml
+        name: Sentry Capture User Feedback for an Event
+        summary: Find a recent project event, attach user feedback to it, and confirm the feedback was recorded.
+      - url: arazzo/sentry-system-create-cron-monitor-workflow.yml
+        name: Sentry Create a Cron Monitor and Verify Check-ins
+        summary: Create a cron-job monitor for an organization, confirm it, and list its check-ins.
+      - url: arazzo/sentry-system-create-metric-alert-workflow.yml
+        name: Sentry Create a Metric Alert Rule
+        summary: Create a metric alert rule for an organization, retrieve it, and confirm it appears in the rule list.
+      - url: arazzo/sentry-system-create-team-add-member-workflow.yml
+        name: Sentry Create a Team and Add a Member
+        summary: Create a team, confirm it, add an existing organization member, and verify the team roster.
+      - url: arazzo/sentry-system-cut-release-deploy-workflow.yml
+        name: Sentry Cut a Release and Record a Deploy
+        summary: Create an organization release, confirm it, record a deploy to an environment, and list its deploys.
+      - url: arazzo/sentry-system-grant-team-project-access-workflow.yml
+        name: Sentry Grant a Team Access to a Project
+        summary: Confirm a project, grant a team access to it, and verify the team appears on the project.
+      - url: arazzo/sentry-system-investigate-issue-tags-workflow.yml
+        name: Sentry Investigate an Issue's Tags
+        summary: Find an issue, inspect a tag's distribution and values, then bookmark and assign it for follow-up.
+      - url: arazzo/sentry-system-invite-member-onboard-team-workflow.yml
+        name: Sentry Invite a Member and Onboard to a Team
+        summary: Invite a new member to an organization, confirm the invite, add them to a team, and verify the roster.
+      - url: arazzo/sentry-system-provision-project-key-workflow.yml
+        name: Sentry Provision a Project and Client Key
+        summary: Create a new project under a team, confirm it, and mint a client key (DSN) for the SDK.
+      - url: arazzo/sentry-system-seer-autofix-issue-workflow.yml
+        name: Sentry Run a Seer AI Autofix on an Issue
+        summary: List available Seer models, start an AI autofix for an issue, then poll until the fix completes.
+      - url: arazzo/sentry-system-sync-prevent-repos-workflow.yml
+        name: Sentry Sync Prevent Repositories
+        summary: Trigger a Prevent repository sync from GitHub, poll until it finishes, then list the synced repositories.
+      - url: arazzo/sentry-system-triage-resolve-issue-workflow.yml
+        name: Sentry Triage and Resolve an Issue
+        summary: Find a high-priority unresolved issue in an organization, inspect it, then assign and resolve it.
+  - type: Portal
+    url: https://sentry.io/
+  - type: Website
+    url: https://sentry.io/
   - type: Documentation
-    url: https://docs.sentry.io/api/
-  - type: OpenAPI
-    url: https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json
-  - type: OpenAPI
-    url: openapi/sentry-api-openapi.yml
+    url: https://docs.sentry.io/
+  - type: GettingStarted
+    url: https://docs.sentry.io/product/sentry-basics/
   - type: Authentication
     url: https://docs.sentry.io/api/auth/
-  - type: GettingStarted
-    url: https://docs.sentry.io/api/guides/create-auth-token/
-  - type: RateLimits
-    url: https://docs.sentry.io/api/ratelimits/
+  - type: Pricing
+    url: https://sentry.io/pricing/
+  - type: Blog
+    url: https://blog.sentry.io/
+  - type: GitHubOrganization
+    url: https://github.com/getsentry
+  - type: Discord
+    url: https://discord.gg/sentry
+  - type: SignUp
+    url: https://sentry.io/signup/
+  - type: Login
+    url: https://sentry.io/auth/login/
+  - type: Support
+    url: https://sentry.zendesk.com/hc/en-us/
+  - type: Forum
+    url: https://forum.sentry.io/
+  - type: ChangeLog
+    url: https://sentry.io/changelog/
+  - type: Security
+    url: https://sentry.io/security/
+  - type: Community
+    url: https://sentry.io/community/
+  - type: Self-Hosted
+    url: https://docs.sentry.io/server/
+  - type: Developer Documentation
+    url: https://develop.sentry.dev/
+  - type: CLI
+    url: https://docs.sentry.io/cli/
   - type: SDKs
     url: https://docs.sentry.io/platforms/
-  - type: PostmanCollection
-    url: https://www.postman.com/sentryio/sentry-api-collection/documentation/xtzhckg/sentry-api-collection
-  - type: Webhooks
-    url: https://docs.sentry.io/organization/integrations/integration-platform/webhooks/
-  - type: Pagination
-    url: https://docs.sentry.io/api/pagination/
-  - type: Permissions
-    url: https://docs.sentry.io/api/permissions/
-  - type: Reference
-    url: https://docs.sentry.io/api/requests/
-  - type: JSONSchema
-    url: json-schema/sentry-organization-schema.json
-  - type: JSONSchema
-    url: json-schema/sentry-project-schema.json
-  - type: JSONSchema
-    url: json-schema/sentry-issue-schema.json
-  - type: JSONSchema
-    url: json-schema/sentry-event-schema.json
-  - type: JSONSchema
-    url: json-schema/sentry-team-schema.json
-  - type: JSONSchema
-    url: json-schema/sentry-release-schema.json
-  - type: JSONSchema
-    url: json-schema/sentry-alert-rule-schema.json
-  - type: JSONSchema
-    url: json-schema/sentry-monitor-schema.json
-  - type: JSONSchema
-    url: json-schema/sentry-replay-schema.json
-  - type: JSONLD
-    url: json-ld/sentry-context.jsonld
-  - type: NaftikoCapability
-    url: capabilities/sentry-alerts-issue-alerts.yaml
-  - type: NaftikoCapability
-    url: capabilities/sentry-alerts-metric-alerts.yaml
-  - type: NaftikoCapability
-    url: capabilities/sentry-alerts-spike-protection.yaml
-  - type: NaftikoCapability
-    url: capabilities/sentry-issues.yaml
-  - type: NaftikoCapability
-    url: capabilities/sentry-organizations.yaml
-  - type: NaftikoCapability
-    url: capabilities/sentry-projects.yaml
-  - type: NaftikoCapability
-    url: capabilities/sentry-releases.yaml
-  - type: NaftikoCapability
-    url: capabilities/sentry-teams.yaml
-  - type: NaftikoCapability
-    url: capabilities/sentry-crons-check-ins.yaml
-  - type: NaftikoCapability
-    url: capabilities/sentry-crons-monitors.yaml
-  - type: NaftikoCapability
-    url: capabilities/sentry-dashboards-dashboards.yaml
-  - type: NaftikoCapability
-    url: capabilities/sentry-discover-discover.yaml
-  - type: NaftikoCapability
-    url: capabilities/sentry-environments-environments.yaml
-  - type: NaftikoCapability
-    url: capabilities/sentry-events-issues-events.yaml
-  - type: NaftikoCapability
-    url: capabilities/sentry-events-issues-issues.yaml
-  - type: NaftikoCapability
-    url: capabilities/sentry-explore-explore.yaml
-  - type: NaftikoCapability
-    url: capabilities/sentry-integration-platform-custom-integrations.yaml
-  - type: NaftikoCapability
-    url: capabilities/sentry-integration-platform-external-issues.yaml
-  - type: NaftikoCapability
-    url: capabilities/sentry-integration-platform-installations.yaml
-  - type: NaftikoCapability
-    url: capabilities/sentry-integrations-data-forwarders.yaml
-  - type: NaftikoCapability
-    url: capabilities/sentry-integrations-external-teams.yaml
-  - type: NaftikoCapability
-    url: capabilities/sentry-integrations-external-users.yaml
-  - type: NaftikoCapability
-    url: capabilities/sentry-integrations-integrations.yaml
-  - type: NaftikoCapability
-    url: capabilities/sentry-mobile-builds-mobile-builds.yaml
-  - type: NaftikoCapability
-    url: capabilities/sentry-monitors-alerts.yaml
-  - type: NaftikoCapability
-    url: capabilities/sentry-monitors-monitors.yaml
-  - type: NaftikoCapability
-    url: capabilities/sentry-organizations-members.yaml
-  - type: NaftikoCapability
-    url: capabilities/sentry-organizations-organizations.yaml
-  - type: NaftikoCapability
-    url: capabilities/sentry-organizations-repositories.yaml
-  - type: NaftikoCapability
-    url: capabilities/sentry-prevent-repositories.yaml
-  - type: NaftikoCapability
-    url: capabilities/sentry-prevent-test-results.yaml
-  - type: NaftikoCapability
-    url: capabilities/sentry-prevent-tokens.yaml
-  - type: NaftikoCapability
-    url: capabilities/sentry-projects-client-keys.yaml
-  - type: NaftikoCapability
-    url: capabilities/sentry-projects-debug-files.yaml
-  - type: NaftikoCapability
-    url: capabilities/sentry-projects-filters.yaml
-  - type: NaftikoCapability
-    url: capabilities/sentry-projects-projects.yaml
-  - type: NaftikoCapability
-    url: capabilities/sentry-projects-service-hooks.yaml
-  - type: NaftikoCapability
-    url: capabilities/sentry-projects-user-feedback.yaml
-  - type: NaftikoCapability
-    url: capabilities/sentry-releases-commits.yaml
-  - type: NaftikoCapability
-    url: capabilities/sentry-releases-deploys.yaml
-  - type: NaftikoCapability
-    url: capabilities/sentry-releases-release-files.yaml
-  - type: NaftikoCapability
-    url: capabilities/sentry-releases-releases.yaml
-  - type: NaftikoCapability
-    url: capabilities/sentry-releases-sessions.yaml
-  - type: NaftikoCapability
-    url: capabilities/sentry-replays-interactions.yaml
-  - type: NaftikoCapability
-    url: capabilities/sentry-replays-recording-segments.yaml
-  - type: NaftikoCapability
-    url: capabilities/sentry-replays-replays.yaml
-  - type: NaftikoCapability
-    url: capabilities/sentry-scim-scim-members.yaml
-  - type: NaftikoCapability
-    url: capabilities/sentry-scim-scim-teams.yaml
-  - type: NaftikoCapability
-    url: capabilities/sentry-seer-seer.yaml
-  - type: NaftikoCapability
-    url: capabilities/sentry-teams-members.yaml
-  - type: NaftikoCapability
-    url: capabilities/sentry-teams-teams.yaml
-  - type: NaftikoCapability
-    url: capabilities/sentry-users-users.yaml
-  contact:
-  - type: Support
-    url: https://sentry.io/support/
-  - type: Email
-    url: support@sentry.io
-  - type: Twitter
-    url: https://twitter.com/getsentry
-  - type: GitHub
-    url: https://github.com/getsentry
-- name: Sentry Events and Issues API
-  description: The Events and Issues API provides endpoints for managing error events and issues in Sentry, including listing,
-    retrieving, updating, and bulk-mutating issues and their associated events, tags, and hashes.
-  image: https://sentry-brand.storage.googleapis.com/sentry-logo-black.png
-  humanURL: https://docs.sentry.io/api/events/
-  baseURL: https://sentry.io/api/0
-  tags:
-  - Debugging
-  - Error Tracking
-  - Events
-  - Issues
-  properties:
-  - type: Documentation
-    url: https://docs.sentry.io/api/events/
-  - type: OpenAPI
-    url: https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json
-  - type: OpenAPI
-    url: openapi/sentry-events-issues-openapi.yml
-- name: Sentry Organizations API
-  description: The Organizations API provides endpoints for managing Sentry organizations, including retrieving and updating
-    organization details, managing members and their roles, listing projects and repositories, and resolving event and short
-    IDs.
-  image: https://sentry-brand.storage.googleapis.com/sentry-logo-black.png
-  humanURL: https://docs.sentry.io/api/organizations/
-  baseURL: https://sentry.io/api/0
-  tags:
-  - Administration
-  - Members
-  - Organizations
-  properties:
-  - type: Documentation
-    url: https://docs.sentry.io/api/organizations/
-  - type: OpenAPI
-    url: https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json
-  - type: OpenAPI
-    url: openapi/sentry-organizations-openapi.yml
-- name: Sentry Projects API
-  description: The Projects API provides endpoints for managing Sentry projects, including creating, retrieving, updating,
-    and deleting projects, as well as managing client keys, debug files, service hooks, filters, and user feedback.
-  image: https://sentry-brand.storage.googleapis.com/sentry-logo-black.png
-  humanURL: https://docs.sentry.io/api/projects/
-  baseURL: https://sentry.io/api/0
-  tags:
-  - Configuration
-  - Management
-  - Projects
-  properties:
-  - type: Documentation
-    url: https://docs.sentry.io/api/projects/
-  - type: OpenAPI
-    url: https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json
-  - type: OpenAPI
-    url: openapi/sentry-projects-openapi.yml
-- name: Sentry Teams API
-  description: The Teams API provides endpoints for managing teams within Sentry organizations, including creating, retrieving,
-    updating, and deleting teams, managing team members and their roles, and listing projects associated with teams.
-  image: https://sentry-brand.storage.googleapis.com/sentry-logo-black.png
-  humanURL: https://docs.sentry.io/api/teams/
-  baseURL: https://sentry.io/api/0
-  tags:
-  - Collaboration
-  - Members
-  - Teams
-  properties:
-  - type: Documentation
-    url: https://docs.sentry.io/api/teams/
-  - type: OpenAPI
-    url: https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json
-  - type: OpenAPI
-    url: openapi/sentry-teams-openapi.yml
-- name: Sentry Releases API
-  description: The Releases API provides endpoints for managing software releases in Sentry, including creating and managing
-    releases, uploading release files, listing commits, managing deployments, and retrieving release health session statistics.
-  image: https://sentry-brand.storage.googleapis.com/sentry-logo-black.png
-  humanURL: https://docs.sentry.io/api/releases/
-  baseURL: https://sentry.io/api/0
-  tags:
-  - Deployments
-  - Releases
-  - Version Management
-  properties:
-  - type: Documentation
-    url: https://docs.sentry.io/api/releases/
-  - type: OpenAPI
-    url: https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json
-  - type: OpenAPI
-    url: openapi/sentry-releases-openapi.yml
-- name: Sentry Alerts API
-  description: The Alerts API provides endpoints for managing alert rules in Sentry, including creating, retrieving, updating,
-    and deleting metric alert rules and issue alert rules, as well as managing spike protection notification actions.
-  image: https://sentry-brand.storage.googleapis.com/sentry-logo-black.png
-  humanURL: https://docs.sentry.io/api/alerts/
-  baseURL: https://sentry.io/api/0
-  tags:
-  - Alerts
-  - Monitoring
-  - Notifications
-  properties:
-  - type: Documentation
-    url: https://docs.sentry.io/api/alerts/
-  - type: OpenAPI
-    url: https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json
-  - type: OpenAPI
-    url: openapi/sentry-alerts-openapi.yml
-- name: Sentry Crons API
-  description: The Crons API provides endpoints for managing cron job monitors in Sentry, including creating, retrieving,
-    updating, and deleting monitors, managing monitor environments, and retrieving check-in history for tracked scheduled
-    tasks.
-  image: https://sentry-brand.storage.googleapis.com/sentry-logo-black.png
-  humanURL: https://docs.sentry.io/api/crons/
-  baseURL: https://sentry.io/api/0
-  tags:
-  - Crons
-  - Monitoring
-  - Scheduled Tasks
-  properties:
-  - type: Documentation
-    url: https://docs.sentry.io/api/crons/
-  - type: OpenAPI
-    url: https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json
-  - type: OpenAPI
-    url: openapi/sentry-crons-openapi.yml
-- name: Sentry Dashboards API
-  description: The Dashboards API provides endpoints for managing custom dashboards in Sentry organizations, including creating,
-    listing, retrieving, editing, and deleting dashboards for visualizing error and performance data.
-  image: https://sentry-brand.storage.googleapis.com/sentry-logo-black.png
-  humanURL: https://docs.sentry.io/api/dashboards/
-  baseURL: https://sentry.io/api/0
-  tags:
-  - Analytics
-  - Dashboards
-  - Visualization
-  properties:
-  - type: Documentation
-    url: https://docs.sentry.io/api/dashboards/
-  - type: OpenAPI
-    url: https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json
-  - type: OpenAPI
-    url: openapi/sentry-dashboards-openapi.yml
-- name: Sentry Discover API
-  description: The Discover and Performance API provides endpoints for managing saved queries in Sentry, allowing you to create,
-    list, retrieve, edit, and delete organization-level Discover saved queries for slicing and analyzing error and transaction
-    event data.
-  image: https://sentry-brand.storage.googleapis.com/sentry-logo-black.png
-  humanURL: https://docs.sentry.io/api/discover/
-  baseURL: https://sentry.io/api/0
-  tags:
-  - Analytics
-  - Discover
-  - Performance
-  - Queries
-  properties:
-  - type: Documentation
-    url: https://docs.sentry.io/api/discover/
-  - type: OpenAPI
-    url: https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json
-  - type: OpenAPI
-    url: openapi/sentry-discover-openapi.yml
-- name: Sentry Environments API
-  description: The Environments API provides endpoints for managing environments in Sentry, including listing project and
-    organization environments, retrieving individual project environment details, and updating project environment settings.
-  image: https://sentry-brand.storage.googleapis.com/sentry-logo-black.png
-  humanURL: https://docs.sentry.io/api/environments/
-  baseURL: https://sentry.io/api/0
-  tags:
-  - Configuration
-  - Environments
-  - Management
-  properties:
-  - type: Documentation
-    url: https://docs.sentry.io/api/environments/
-  - type: OpenAPI
-    url: https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json
-  - type: OpenAPI
-    url: openapi/sentry-environments-openapi.yml
-- name: Sentry Explore API
-  description: The Explore API provides endpoints for querying and analyzing event data in Sentry, allowing you to slice and
-    dice events in both table and timeseries formats for flexible data analysis and visualization.
-  image: https://sentry-brand.storage.googleapis.com/sentry-logo-black.png
-  humanURL: https://docs.sentry.io/api/explore/
-  baseURL: https://sentry.io/api/0
-  tags:
-  - Analytics
-  - Events
-  - Explore
-  properties:
-  - type: Documentation
-    url: https://docs.sentry.io/api/explore/
-  - type: OpenAPI
-    url: https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json
-  - type: OpenAPI
-    url: openapi/sentry-explore-openapi.yml
-- name: Sentry Integration Platform API
-  description: The Integration Platform API provides endpoints for managing custom integrations in Sentry, including creating
-    and updating external issues, managing integration configurations, listing installations, and retrieving organization-level
-    custom integration details.
-  image: https://sentry-brand.storage.googleapis.com/sentry-logo-black.png
-  humanURL: https://docs.sentry.io/api/integration/
-  baseURL: https://sentry.io/api/0
-  tags:
-  - Integrations
-  - Platform
-  - Webhooks
-  properties:
-  - type: Documentation
-    url: https://docs.sentry.io/api/integration/
-  - type: OpenAPI
-    url: https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json
-  - type: OpenAPI
-    url: openapi/sentry-integration-platform-openapi.yml
-- name: Sentry Integrations API
-  description: The Integrations API provides endpoints for managing third-party integrations within Sentry organizations,
-    including creating and managing data forwarders, handling external user and team records, and controlling integration
-    configurations.
-  image: https://sentry-brand.storage.googleapis.com/sentry-logo-black.png
-  humanURL: https://docs.sentry.io/api/integrations/
-  baseURL: https://sentry.io/api/0
-  tags:
-  - Configuration
-  - Data Forwarding
-  - Integrations
-  properties:
-  - type: Documentation
-    url: https://docs.sentry.io/api/integrations/
-  - type: OpenAPI
-    url: https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json
-  - type: OpenAPI
-    url: openapi/sentry-integrations-openapi.yml
-- name: Sentry Mobile Builds API
-  description: The Mobile Builds API provides endpoints for analyzing mobile application artifacts in Sentry, including retrieving
-    install information and size analysis results for mobile build artifacts.
-  image: https://sentry-brand.storage.googleapis.com/sentry-logo-black.png
-  humanURL: https://docs.sentry.io/api/mobile-builds/
-  baseURL: https://sentry.io/api/0
-  tags:
-  - Artifacts
-  - Builds
-  - Mobile
-  properties:
-  - type: Documentation
-    url: https://docs.sentry.io/api/mobile-builds/
-  - type: OpenAPI
-    url: https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json
-  - type: OpenAPI
-    url: openapi/sentry-mobile-builds-openapi.yml
-- name: Sentry Monitors API
-  description: The Monitors and Alerts API provides beta endpoints for managing monitors and alerts in Sentry, including creating,
-    retrieving, updating, and deleting monitors and alerts, as well as bulk operations at the organization level.
-  image: https://sentry-brand.storage.googleapis.com/sentry-logo-black.png
-  humanURL: https://docs.sentry.io/api/monitors/
-  baseURL: https://sentry.io/api/0
-  tags:
-  - Alerts
-  - Monitors
-  - Uptime
-  properties:
-  - type: Documentation
-    url: https://docs.sentry.io/api/monitors/
-  - type: OpenAPI
-    url: https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json
-  - type: OpenAPI
-    url: openapi/sentry-monitors-openapi.yml
-- name: Sentry Prevent API
-  description: The Prevent API provides endpoints for managing repository integrations and test results in Sentry, including
-    syncing repositories, managing branches, generating upload tokens, and retrieving test result metrics and test suites.
-  image: https://sentry-brand.storage.googleapis.com/sentry-logo-black.png
-  humanURL: https://docs.sentry.io/api/prevent/
-  baseURL: https://sentry.io/api/0
-  tags:
-  - Quality Assurance
-  - Repositories
-  - Testing
-  properties:
-  - type: Documentation
-    url: https://docs.sentry.io/api/prevent/
-  - type: OpenAPI
-    url: https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json
-  - type: OpenAPI
-    url: openapi/sentry-prevent-openapi.yml
-- name: Sentry Replays API
-  description: The Replays API provides endpoints for managing session replays in Sentry, including listing, retrieving, and
-    deleting replay instances, accessing recording segments, listing clicked nodes and selectors, and retrieving replay counts
-    for issues or transactions.
-  image: https://sentry-brand.storage.googleapis.com/sentry-logo-black.png
-  humanURL: https://docs.sentry.io/api/replays/
-  baseURL: https://sentry.io/api/0
-  tags:
-  - Replays
-  - Session Recording
-  - User Experience
-  properties:
-  - type: Documentation
-    url: https://docs.sentry.io/api/replays/
-  - type: OpenAPI
-    url: https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json
-  - type: OpenAPI
-    url: openapi/sentry-replays-openapi.yml
-- name: Sentry SCIM API
-  description: The SCIM API provides endpoints for federated identity management in Sentry, enabling automated provisioning
-    and deprovisioning of organization members and teams using the System for Cross-Domain Identity Management standard. Requires
-    a Business Plan with SAML2 enabled.
-  image: https://sentry-brand.storage.googleapis.com/sentry-logo-black.png
-  humanURL: https://docs.sentry.io/api/scim/
-  baseURL: https://sentry.io/api/0
-  tags:
-  - Enterprise
-  - Identity Management
-  - Provisioning
-  - SCIM
-  properties:
-  - type: Documentation
-    url: https://docs.sentry.io/api/scim/
-  - type: OpenAPI
-    url: https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json
-  - type: OpenAPI
-    url: openapi/sentry-scim-openapi.yml
-- name: Sentry Seer API
-  description: The Seer API provides endpoints for AI-powered issue analysis in Sentry, including listing available AI models,
-    starting AI-assisted issue fixes, and retrieving the state of ongoing fix analyses.
-  image: https://sentry-brand.storage.googleapis.com/sentry-logo-black.png
-  humanURL: https://docs.sentry.io/api/seer/
-  baseURL: https://sentry.io/api/0
-  tags:
-  - AI
-  - Automation
-  - Issue Analysis
-  properties:
-  - type: Documentation
-    url: https://docs.sentry.io/api/seer/
-  - type: OpenAPI
-    url: https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json
-  - type: OpenAPI
-    url: openapi/sentry-seer-openapi.yml
-- name: Sentry Users API
-  description: The Users API provides endpoints for retrieving user-related information in Sentry, including listing the organizations
-    that the authenticated user belongs to.
-  image: https://sentry-brand.storage.googleapis.com/sentry-logo-black.png
-  humanURL: https://docs.sentry.io/api/users/
-  baseURL: https://sentry.io/api/0
-  tags:
-  - Accounts
-  - Authentication
-  - Users
-  properties:
-  - type: Documentation
-    url: https://docs.sentry.io/api/users/
-  - type: OpenAPI
-    url: https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json
-  - type: OpenAPI
-    url: openapi/sentry-users-openapi.yml
-common:
-- type: ArazzoWorkflows
-  url: arazzo/
-  workflows:
-  - url: arazzo/sentry-system-capture-user-feedback-workflow.yml
-    name: Sentry Capture User Feedback for an Event
-    summary: Find a recent project event, attach user feedback to it, and confirm the feedback was recorded.
-  - url: arazzo/sentry-system-create-cron-monitor-workflow.yml
-    name: Sentry Create a Cron Monitor and Verify Check-ins
-    summary: Create a cron-job monitor for an organization, confirm it, and list its check-ins.
-  - url: arazzo/sentry-system-create-metric-alert-workflow.yml
-    name: Sentry Create a Metric Alert Rule
-    summary: Create a metric alert rule for an organization, retrieve it, and confirm it appears in the rule list.
-  - url: arazzo/sentry-system-create-team-add-member-workflow.yml
-    name: Sentry Create a Team and Add a Member
-    summary: Create a team, confirm it, add an existing organization member, and verify the team roster.
-  - url: arazzo/sentry-system-cut-release-deploy-workflow.yml
-    name: Sentry Cut a Release and Record a Deploy
-    summary: Create an organization release, confirm it, record a deploy to an environment, and list its deploys.
-  - url: arazzo/sentry-system-grant-team-project-access-workflow.yml
-    name: Sentry Grant a Team Access to a Project
-    summary: Confirm a project, grant a team access to it, and verify the team appears on the project.
-  - url: arazzo/sentry-system-investigate-issue-tags-workflow.yml
-    name: Sentry Investigate an Issue's Tags
-    summary: Find an issue, inspect a tag's distribution and values, then bookmark and assign it for follow-up.
-  - url: arazzo/sentry-system-invite-member-onboard-team-workflow.yml
-    name: Sentry Invite a Member and Onboard to a Team
-    summary: Invite a new member to an organization, confirm the invite, add them to a team, and verify the roster.
-  - url: arazzo/sentry-system-provision-project-key-workflow.yml
-    name: Sentry Provision a Project and Client Key
-    summary: Create a new project under a team, confirm it, and mint a client key (DSN) for the SDK.
-  - url: arazzo/sentry-system-seer-autofix-issue-workflow.yml
-    name: Sentry Run a Seer AI Autofix on an Issue
-    summary: List available Seer models, start an AI autofix for an issue, then poll until the fix completes.
-  - url: arazzo/sentry-system-sync-prevent-repos-workflow.yml
-    name: Sentry Sync Prevent Repositories
-    summary: Trigger a Prevent repository sync from GitHub, poll until it finishes, then list the synced repositories.
-  - url: arazzo/sentry-system-triage-resolve-issue-workflow.yml
-    name: Sentry Triage and Resolve an Issue
-    summary: Find a high-priority unresolved issue in an organization, inspect it, then assign and resolve it.
-- type: Portal
-  url: https://sentry.io/
-- type: Website
-  url: https://sentry.io/
-- type: Documentation
-  url: https://docs.sentry.io/
-- type: GettingStarted
-  url: https://docs.sentry.io/product/sentry-basics/
-- type: Authentication
-  url: https://docs.sentry.io/api/auth/
-- type: Pricing
-  url: https://sentry.io/pricing/
-- type: Blog
-  url: https://blog.sentry.io/
-- type: GitHubOrganization
-  url: https://github.com/getsentry
-- type: Discord
-  url: https://discord.gg/sentry
-- type: SignUp
-  url: https://sentry.io/signup/
-- type: Login
-  url: https://sentry.io/auth/login/
-- type: Support
-  url: https://sentry.zendesk.com/hc/en-us/
-- type: Forum
-  url: https://forum.sentry.io/
-- type: ChangeLog
-  url: https://sentry.io/changelog/
-- type: Security
-  url: https://sentry.io/security/
-- type: Community
-  url: https://sentry.io/community/
-- type: Self-Hosted
-  url: https://docs.sentry.io/server/
-- type: Developer Documentation
-  url: https://develop.sentry.dev/
-- type: CLI
-  url: https://docs.sentry.io/cli/
-- type: SDKs
-  url: https://docs.sentry.io/platforms/
-- type: StatusPage
-  url: https://status.sentry.io/
-- type: TermsOfService
-  url: https://sentry.io/terms/
-- type: PrivacyPolicy
-  url: https://sentry.io/privacy/
-- type: Integrations
-  url: https://sentry.io/integrations/
-- type: LLMsTxt
-  url: https://docs.sentry.io/llms.txt
+  - type: StatusPage
+    url: https://status.sentry.io/
+  - type: TermsOfService
+    url: https://sentry.io/terms/
+  - type: PrivacyPolicy
+    url: https://sentry.io/privacy/
+  - type: Integrations
+    url: https://sentry.io/integrations/
+  - type: LLMsTxt
+    url: https://docs.sentry.io/llms.txt
 integrations:
-- name: Github
-- name: Slack
+  - name: Github
+  - name: Slack
 maintainers:
-- name: Kin Lane
-  email: kin@apievangelist.com
+  - name: Kin Lane
+    email: kin@apievangelist.com
 tags:
-- APM
-- Application Monitoring
-- Bug Tracking
-- Developer Tools
-- Error Tracking
-- Observability
-- Performance Monitoring
-- Real-Time Monitoring
+  - APM
+  - Application Monitoring
+  - Bug Tracking
+  - Developer Tools
+  - Error Tracking
+  - Observability
+  - Performance Monitoring
+  - Real-Time Monitoring

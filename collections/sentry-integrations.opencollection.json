@@ -1,0 +1,392 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sentry Integrations API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Integrations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Sentry List an organization's available integrations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/integrations/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "providerKey",
+                "value": "",
+                "type": "query",
+                "description": "Filter by integration provider key."
+              }
+            ]
+          },
+          "docs": "Returns a list of integrations configured for an organization."
+        },
+        {
+          "info": {
+            "name": "Sentry Retrieve an integration for an organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/integrations/:integration_id/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "integration_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the integration."
+              }
+            ]
+          },
+          "docs": "Returns details for a specific integration."
+        },
+        {
+          "info": {
+            "name": "Sentry Delete an integration for an organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/integrations/:integration_id/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "integration_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the integration."
+              }
+            ]
+          },
+          "docs": "Removes an integration from the organization."
+        },
+        {
+          "info": {
+            "name": "Sentry Get integration provider information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/config/integrations/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              }
+            ]
+          },
+          "docs": "Returns available integration providers and their configurations."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Data Forwarders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Sentry Retrieve data forwarders for an organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/data-forwarders/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              }
+            ]
+          },
+          "docs": "Returns a list of data forwarders configured for the organization."
+        },
+        {
+          "info": {
+            "name": "Sentry Create a data forwarder for an organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/data-forwarders/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new data forwarder for the organization."
+        },
+        {
+          "info": {
+            "name": "Sentry Update a data forwarder for an organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/data-forwarders/:forwarder_id/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "forwarder_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the data forwarder."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing data forwarder."
+        },
+        {
+          "info": {
+            "name": "Sentry Delete a data forwarder for an organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/data-forwarders/:forwarder_id/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "forwarder_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the data forwarder."
+              }
+            ]
+          },
+          "docs": "Deletes a data forwarder."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "External Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Sentry Create an external user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/external-users/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a mapping between a Sentry user and an external service user."
+        },
+        {
+          "info": {
+            "name": "Sentry Update an external user",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/external-users/:external_user_id/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "external_user_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the external user."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an external user mapping."
+        },
+        {
+          "info": {
+            "name": "Sentry Delete an external user",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/external-users/:external_user_id/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "external_user_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the external user."
+              }
+            ]
+          },
+          "docs": "Deletes an external user mapping."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "External Teams",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Sentry Create an external team",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/external-teams/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a mapping between a Sentry team and an external service team."
+        },
+        {
+          "info": {
+            "name": "Sentry Update an external team",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/external-teams/:external_team_id/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "external_team_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the external team."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an external team mapping."
+        },
+        {
+          "info": {
+            "name": "Sentry Delete an external team",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/external-teams/:external_team_id/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "external_team_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the external team."
+              }
+            ]
+          },
+          "docs": "Deletes an external team mapping."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

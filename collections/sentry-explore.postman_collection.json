@@ -1,0 +1,1035 @@
+{
+  "item": [
+    {
+      "id": "b60d0c71-d548-4401-ae90-ba64a9f236a9",
+      "name": "Explore",
+      "description": {
+        "content": "Query and analyze event data",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "635ed7c1-f6d2-4d46-9bb5-3f445ad7142b",
+          "name": "Sentry Query Explore events in table format",
+          "request": {
+            "name": "Sentry Query Explore events in table format",
+            "description": {
+              "content": "Returns event data in table format, allowing you to slice and dice your events using various fields and aggregations.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "organizations",
+                ":organization_id_or_slug",
+                "events",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "field",
+                  "value": "<string>",
+                  "description": "(Required) The fields to select (may be specified multiple times)."
+                },
+                {
+                  "disabled": false,
+                  "key": "field",
+                  "value": "<string>",
+                  "description": "(Required) The fields to select (may be specified multiple times)."
+                },
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>",
+                  "description": "An optional Sentry search query to filter events."
+                },
+                {
+                  "disabled": false,
+                  "key": "statsPeriod",
+                  "value": "<string>",
+                  "description": "Stats period (e.g., 24h, 14d)."
+                },
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<dateTime>",
+                  "description": "Start date for the query range."
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<dateTime>",
+                  "description": "End date for the query range."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>",
+                  "description": "Field to sort by (prefix with - for descending)."
+                },
+                {
+                  "disabled": false,
+                  "key": "project",
+                  "value": "<integer>",
+                  "description": "Project IDs to filter by."
+                },
+                {
+                  "disabled": false,
+                  "key": "project",
+                  "value": "<integer>",
+                  "description": "Project IDs to filter by."
+                },
+                {
+                  "disabled": false,
+                  "key": "environment",
+                  "value": "<string>",
+                  "description": "Environment name to filter by."
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "<integer>",
+                  "description": "Number of results per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "Pagination cursor."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organization_id_or_slug",
+                  "description": "(Required) The ID or slug of the organization."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "efd0daaa-b9ba-4b2b-9bd1-a2d489d24a32",
+              "name": "Event data in table format.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id_or_slug",
+                    "events",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "field",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "field",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "statsPeriod",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "project",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "project",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "environment",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id_or_slug",
+                      "description": "(Required) The ID or slug of the organization."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"fields\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2df763d9-affc-484c-bb43-e817870e20c2",
+              "name": "Bad request or invalid query.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id_or_slug",
+                    "events",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "field",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "field",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "statsPeriod",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "project",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "project",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "environment",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id_or_slug",
+                      "description": "(Required) The ID or slug of the organization."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8061a253-6478-457b-9f6d-4629c9a6de8c",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id_or_slug",
+                    "events",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "field",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "field",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "statsPeriod",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "project",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "project",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "environment",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id_or_slug",
+                      "description": "(Required) The ID or slug of the organization."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b59e7345-06d7-4975-a3bb-80221b7f9763",
+              "name": "Forbidden.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id_or_slug",
+                    "events",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "field",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "field",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "statsPeriod",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "project",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "project",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "environment",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id_or_slug",
+                      "description": "(Required) The ID or slug of the organization."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "33e5f948-54e3-4a44-9075-70f8aec7b43d",
+          "name": "Sentry Query Explore events in timeseries format",
+          "request": {
+            "name": "Sentry Query Explore events in timeseries format",
+            "description": {
+              "content": "Returns event data in timeseries format, suitable for charting and visualization over time.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "organizations",
+                ":organization_id_or_slug",
+                "events-stats",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "yAxis",
+                  "value": "<string>",
+                  "description": "(Required) The aggregate field to chart (e.g., count(), p50(transaction.duration))."
+                },
+                {
+                  "disabled": false,
+                  "key": "yAxis",
+                  "value": "<string>",
+                  "description": "(Required) The aggregate field to chart (e.g., count(), p50(transaction.duration))."
+                },
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>",
+                  "description": "An optional search query to filter events."
+                },
+                {
+                  "disabled": false,
+                  "key": "statsPeriod",
+                  "value": "<string>",
+                  "description": "Stats period (e.g., 24h, 14d)."
+                },
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<dateTime>",
+                  "description": "Start date for the query range."
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<dateTime>",
+                  "description": "End date for the query range."
+                },
+                {
+                  "disabled": false,
+                  "key": "interval",
+                  "value": "<string>",
+                  "description": "Resolution interval (e.g., 1h, 1d)."
+                },
+                {
+                  "disabled": false,
+                  "key": "project",
+                  "value": "<integer>",
+                  "description": "Project IDs to filter by."
+                },
+                {
+                  "disabled": false,
+                  "key": "project",
+                  "value": "<integer>",
+                  "description": "Project IDs to filter by."
+                },
+                {
+                  "disabled": false,
+                  "key": "environment",
+                  "value": "<string>",
+                  "description": "Environment name to filter by."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organization_id_or_slug",
+                  "description": "(Required) The ID or slug of the organization."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d44b879a-eac6-4b95-a427-e09e2d394f75",
+              "name": "Event data in timeseries format.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id_or_slug",
+                    "events-stats",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "yAxis",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "yAxis",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "statsPeriod",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "project",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "project",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "environment",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id_or_slug",
+                      "description": "(Required) The ID or slug of the organization."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    [],\n    []\n  ],\n  \"meta\": {},\n  \"start\": \"1987-11-02T02:55:17.661Z\",\n  \"end\": \"1979-07-23T21:57:00.900Z\",\n  \"intervals\": [\n    \"2022-11-01T02:37:41.434Z\",\n    \"1958-10-15T12:49:53.743Z\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5b5dfa26-2698-4a2e-855e-d706b0ab3bdd",
+              "name": "Bad request or invalid query.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id_or_slug",
+                    "events-stats",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "yAxis",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "yAxis",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "statsPeriod",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "project",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "project",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "environment",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id_or_slug",
+                      "description": "(Required) The ID or slug of the organization."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e5cd4aec-adc8-48cf-a658-d4b57f9ad009",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id_or_slug",
+                    "events-stats",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "yAxis",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "yAxis",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "statsPeriod",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "project",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "project",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "environment",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id_or_slug",
+                      "description": "(Required) The ID or slug of the organization."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f567bd57-e192-457f-8391-9dce32feea70",
+              "name": "Forbidden.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id_or_slug",
+                    "events-stats",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "yAxis",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "yAxis",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "statsPeriod",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "project",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "project",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "environment",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id_or_slug",
+                      "description": "(Required) The ID or slug of the organization."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://sentry.io/api/0",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "58e85f3f-49db-4d96-b822-7f0cc799c215",
+    "name": "Sentry Explore API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Explore API provides endpoints for querying and analyzing event data in Sentry, allowing you to slice and dice events in both table and timeseries formats for flexible data analysis and visualization.\n\nContact Support:\n Name: Sentry Support\n Email: support@sentry.io",
+      "type": "text/plain"
+    }
+  }
+}

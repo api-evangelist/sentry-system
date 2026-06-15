@@ -1,0 +1,342 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sentry Crons API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Monitors",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Sentry Retrieve monitors for an organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/monitors/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Pagination cursor."
+              },
+              {
+                "name": "environment",
+                "value": "",
+                "type": "query",
+                "description": "Filter by environment name."
+              }
+            ]
+          },
+          "docs": "Returns a list of monitors for the given organization."
+        },
+        {
+          "info": {
+            "name": "Sentry Create a monitor",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/monitors/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new monitor for the given organization."
+        },
+        {
+          "info": {
+            "name": "Sentry Retrieve a monitor",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/monitors/:monitor_id_or_slug/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "monitor_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the monitor."
+              }
+            ]
+          },
+          "docs": "Returns details for a specific monitor."
+        },
+        {
+          "info": {
+            "name": "Sentry Update a monitor",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/monitors/:monitor_id_or_slug/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "monitor_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the monitor."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a monitor."
+        },
+        {
+          "info": {
+            "name": "Sentry Delete a monitor or monitor environments",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/monitors/:monitor_id_or_slug/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "monitor_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the monitor."
+              },
+              {
+                "name": "environment",
+                "value": "",
+                "type": "query",
+                "description": "Specific environment to delete rather than the entire monitor."
+              }
+            ]
+          },
+          "docs": "Deletes a monitor or specific monitor environments. Use the environment query parameter to selectively delete environments."
+        },
+        {
+          "info": {
+            "name": "Sentry Retrieve a monitor for a project",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/projects/:organization_id_or_slug/:project_id_or_slug/monitors/:monitor_id_or_slug/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "project_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the project."
+              },
+              {
+                "name": "monitor_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the monitor."
+              }
+            ]
+          },
+          "docs": "Returns a monitor scoped to a specific project."
+        },
+        {
+          "info": {
+            "name": "Sentry Update a monitor for a project",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://sentry.io/api/0/projects/:organization_id_or_slug/:project_id_or_slug/monitors/:monitor_id_or_slug/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "project_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the project."
+              },
+              {
+                "name": "monitor_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the monitor."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a monitor scoped to a specific project."
+        },
+        {
+          "info": {
+            "name": "Sentry Delete a monitor or monitor environments for a project",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://sentry.io/api/0/projects/:organization_id_or_slug/:project_id_or_slug/monitors/:monitor_id_or_slug/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "project_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the project."
+              },
+              {
+                "name": "monitor_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the monitor."
+              },
+              {
+                "name": "environment",
+                "value": "",
+                "type": "query",
+                "description": "Specific environment to delete."
+              }
+            ]
+          },
+          "docs": "Deletes a monitor or its environments scoped to a project."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Check-Ins",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Sentry Retrieve check-ins for a monitor",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/monitors/:monitor_id_or_slug/checkins/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "monitor_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the monitor."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Pagination cursor."
+              }
+            ]
+          },
+          "docs": "Returns a list of check-ins for a specific monitor."
+        },
+        {
+          "info": {
+            "name": "Sentry Retrieve check-ins for a monitor by project",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/projects/:organization_id_or_slug/:project_id_or_slug/monitors/:monitor_id_or_slug/checkins/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "project_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the project."
+              },
+              {
+                "name": "monitor_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the monitor."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Pagination cursor."
+              }
+            ]
+          },
+          "docs": "Returns a list of check-ins for a monitor scoped to a project."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

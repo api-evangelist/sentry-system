@@ -1,0 +1,577 @@
+{
+  "item": [
+    {
+      "id": "4e334983-e51b-4f3a-9085-88262ccf63e3",
+      "name": "Mobile Builds",
+      "description": {
+        "content": "Analyze mobile application build artifacts",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8bd6191c-3c34-46ae-a7c7-0b512439e9b0",
+          "name": "Sentry Retrieve install info for a given artifact",
+          "request": {
+            "name": "Sentry Retrieve install info for a given artifact",
+            "description": {
+              "content": "Returns installation information for a specific mobile build artifact, including installation URLs and QR code data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "projects",
+                ":organization_id_or_slug",
+                ":project_id_or_slug",
+                "artifact-bundles",
+                ":bundle_id",
+                "install-info",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organization_id_or_slug",
+                  "description": "(Required) The ID or slug of the organization."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "project_id_or_slug",
+                  "description": "(Required) The ID or slug of the project."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "bundle_id",
+                  "description": "(Required) The ID of the artifact bundle."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d89d0c60-3778-4ac8-a268-0a8bbecc8d21",
+              "name": "Artifact install information.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":organization_id_or_slug",
+                    ":project_id_or_slug",
+                    "artifact-bundles",
+                    ":bundle_id",
+                    "install-info",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id_or_slug",
+                      "description": "(Required) The ID or slug of the organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id_or_slug",
+                      "description": "(Required) The ID or slug of the project."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "bundle_id",
+                      "description": "(Required) The ID of the artifact bundle."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"url\": \"http://ANDcYXioOLYetBqzoXRupYUOMouomC.qgoQzT+Y8qi\",\n  \"bundleId\": \"string\",\n  \"version\": \"string\",\n  \"buildNumber\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "28c79c30-bbc1-49f0-b544-61ea97b78402",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":organization_id_or_slug",
+                    ":project_id_or_slug",
+                    "artifact-bundles",
+                    ":bundle_id",
+                    "install-info",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id_or_slug",
+                      "description": "(Required) The ID or slug of the organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id_or_slug",
+                      "description": "(Required) The ID or slug of the project."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "bundle_id",
+                      "description": "(Required) The ID of the artifact bundle."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9b85da28-c176-432f-89de-dc745da4ef18",
+              "name": "Artifact not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":organization_id_or_slug",
+                    ":project_id_or_slug",
+                    "artifact-bundles",
+                    ":bundle_id",
+                    "install-info",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id_or_slug",
+                      "description": "(Required) The ID or slug of the organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id_or_slug",
+                      "description": "(Required) The ID or slug of the project."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "bundle_id",
+                      "description": "(Required) The ID of the artifact bundle."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3f7ff58c-e04a-4b7e-a901-0f9fa3c7d542",
+          "name": "Sentry Retrieve size analysis results for a given artifact",
+          "request": {
+            "name": "Sentry Retrieve size analysis results for a given artifact",
+            "description": {
+              "content": "Returns size analysis data for a specific mobile build artifact, including breakdown by component and asset type.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "projects",
+                ":organization_id_or_slug",
+                ":project_id_or_slug",
+                "artifact-bundles",
+                ":bundle_id",
+                "size-analysis",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organization_id_or_slug",
+                  "description": "(Required) The ID or slug of the organization."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "project_id_or_slug",
+                  "description": "(Required) The ID or slug of the project."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "bundle_id",
+                  "description": "(Required) The ID of the artifact bundle."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4a646ecc-05d7-4d3f-b234-41371c2fe735",
+              "name": "Size analysis results.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":organization_id_or_slug",
+                    ":project_id_or_slug",
+                    "artifact-bundles",
+                    ":bundle_id",
+                    "size-analysis",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id_or_slug",
+                      "description": "(Required) The ID or slug of the organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id_or_slug",
+                      "description": "(Required) The ID or slug of the project."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "bundle_id",
+                      "description": "(Required) The ID of the artifact bundle."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"totalSize\": 7553,\n  \"downloadSize\": 2884,\n  \"components\": [\n    {\n      \"name\": \"string\",\n      \"size\": 111,\n      \"type\": \"string\"\n    },\n    {\n      \"name\": \"string\",\n      \"size\": 6907,\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8ea5395b-0b53-445c-a903-eda278e3752a",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":organization_id_or_slug",
+                    ":project_id_or_slug",
+                    "artifact-bundles",
+                    ":bundle_id",
+                    "size-analysis",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id_or_slug",
+                      "description": "(Required) The ID or slug of the organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id_or_slug",
+                      "description": "(Required) The ID or slug of the project."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "bundle_id",
+                      "description": "(Required) The ID of the artifact bundle."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "63d3aee1-24a9-451c-b0c8-fb89a88f78d1",
+              "name": "Artifact not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":organization_id_or_slug",
+                    ":project_id_or_slug",
+                    "artifact-bundles",
+                    ":bundle_id",
+                    "size-analysis",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id_or_slug",
+                      "description": "(Required) The ID or slug of the organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id_or_slug",
+                      "description": "(Required) The ID or slug of the project."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "bundle_id",
+                      "description": "(Required) The ID of the artifact bundle."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://sentry.io/api/0",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "ad666051-8a83-4ec1-9e2a-9292c8b10f08",
+    "name": "Sentry Mobile Builds API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Mobile Builds API provides endpoints for analyzing mobile application artifacts in Sentry, including retrieving install information and size analysis results for mobile build artifacts.\n\nContact Support:\n Name: Sentry Support\n Email: support@sentry.io",
+      "type": "text/plain"
+    }
+  }
+}

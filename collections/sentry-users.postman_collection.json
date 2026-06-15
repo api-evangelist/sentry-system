@@ -1,0 +1,192 @@
+{
+  "item": [
+    {
+      "id": "413b663d-5227-4976-b1fc-d7f214209654",
+      "name": "Users",
+      "description": {
+        "content": "Retrieve user-related information",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2a5a3526-ae6a-45b3-a413-f6fd169d70db",
+          "name": "Sentry List your organizations",
+          "request": {
+            "name": "Sentry List your organizations",
+            "description": {
+              "content": "Returns a list of organizations available to the authenticated session. This is particularly useful for tokens with access to multiple organizations.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "organizations",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "owner",
+                  "value": "<boolean>",
+                  "description": "Restrict results to organizations owned by the authenticated user."
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "Pagination cursor."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2cdb1439-4388-4c13-ada8-44e31aae0d01",
+              "name": "A list of organizations.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "owner",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"slug\": \"string\",\n    \"name\": \"string\",\n    \"dateCreated\": \"1955-09-26T09:10:45.313Z\",\n    \"status\": {\n      \"id\": \"string\",\n      \"name\": \"string\"\n    },\n    \"isEarlyAdopter\": false,\n    \"avatar\": {\n      \"avatarType\": \"string\",\n      \"avatarUuid\": \"string\"\n    }\n  },\n  {\n    \"id\": \"string\",\n    \"slug\": \"string\",\n    \"name\": \"string\",\n    \"dateCreated\": \"2001-05-15T10:28:25.189Z\",\n    \"status\": {\n      \"id\": \"string\",\n      \"name\": \"string\"\n    },\n    \"isEarlyAdopter\": true,\n    \"avatar\": {\n      \"avatarType\": \"string\",\n      \"avatarUuid\": \"string\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2b189957-eeb9-4234-97b4-f6f474de93d3",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "owner",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://sentry.io/api/0",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "a52bd5eb-378d-4792-948a-f326585bf5ac",
+    "name": "Sentry Users API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Users API provides endpoints for retrieving user-related information in Sentry, including listing the organizations that the authenticated user belongs to.\n\nContact Support:\n Name: Sentry Support\n Email: support@sentry.io",
+      "type": "text/plain"
+    }
+  }
+}

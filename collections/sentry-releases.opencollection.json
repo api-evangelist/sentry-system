@@ -1,0 +1,540 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sentry Releases API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Releases",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Sentry List an organization's releases",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/releases/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Filter releases by search query."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Pagination cursor."
+              }
+            ]
+          },
+          "docs": "Returns a list of releases for a given organization."
+        },
+        {
+          "info": {
+            "name": "Sentry Create a new release for an organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/releases/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new release for the given organization."
+        },
+        {
+          "info": {
+            "name": "Sentry Retrieve an organization's release",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/releases/:version/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "The version identifier of the release."
+              }
+            ]
+          },
+          "docs": "Returns a release for a given organization."
+        },
+        {
+          "info": {
+            "name": "Sentry Update an organization's release",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/releases/:version/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "The version identifier of the release."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a release for a given organization."
+        },
+        {
+          "info": {
+            "name": "Sentry Delete an organization's release",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/releases/:version/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "The version identifier of the release."
+              }
+            ]
+          },
+          "docs": "Deletes a release for a given organization."
+        },
+        {
+          "info": {
+            "name": "Sentry Retrieve statuses of release thresholds (Alpha)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/release-thresholds/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              }
+            ]
+          },
+          "docs": "Returns the current status of release thresholds for the organization. This endpoint is in alpha and may change."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Deploys",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Sentry List a release's deploys",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/releases/:version/deploys/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "The version identifier of the release."
+              }
+            ]
+          },
+          "docs": "Returns a list of deploys for a given release."
+        },
+        {
+          "info": {
+            "name": "Sentry Create a deploy",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/releases/:version/deploys/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "The version identifier of the release."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a deploy for a given release."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Commits",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Sentry List an organization release's commits",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/releases/:version/commits/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "The version identifier of the release."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Pagination cursor."
+              }
+            ]
+          },
+          "docs": "Returns a list of commits associated with a release."
+        },
+        {
+          "info": {
+            "name": "Sentry Retrieve files changed in a release's commits",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/releases/:version/commitfiles/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "The version identifier of the release."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Pagination cursor."
+              }
+            ]
+          },
+          "docs": "Returns a list of files changed in the commits associated with a release."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Release Files",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Sentry List an organization's release files",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/releases/:version/files/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "The version identifier of the release."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Pagination cursor."
+              }
+            ]
+          },
+          "docs": "Returns a list of files associated with an organization release."
+        },
+        {
+          "info": {
+            "name": "Sentry Upload a new organization release file",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/releases/:version/files/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "The version identifier of the release."
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "file",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "name",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "header",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Uploads a new file for the given release."
+        },
+        {
+          "info": {
+            "name": "Sentry Retrieve an organization release's file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/releases/:version/files/:file_id/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "The version identifier of the release."
+              },
+              {
+                "name": "file_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the file."
+              }
+            ]
+          },
+          "docs": "Returns a file associated with an organization release."
+        },
+        {
+          "info": {
+            "name": "Sentry Update an organization release file",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/releases/:version/files/:file_id/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "The version identifier of the release."
+              },
+              {
+                "name": "file_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the file."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an organization release file."
+        },
+        {
+          "info": {
+            "name": "Sentry Delete an organization release's file",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/releases/:version/files/:file_id/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "The version identifier of the release."
+              },
+              {
+                "name": "file_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the file."
+              }
+            ]
+          },
+          "docs": "Deletes a release file from an organization release."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Sessions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Sentry Retrieve release health session statistics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/sessions/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "field",
+                "value": "",
+                "type": "query",
+                "description": "The session field to query (e.g., sum(session), count_unique(user))."
+              },
+              {
+                "name": "statsPeriod",
+                "value": "",
+                "type": "query",
+                "description": "Stats period (e.g., 24h, 14d)."
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "query",
+                "description": "Project IDs to filter by."
+              },
+              {
+                "name": "environment",
+                "value": "",
+                "type": "query",
+                "description": "Environment name to filter by."
+              }
+            ]
+          },
+          "docs": "Returns release health session statistics for an organization."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

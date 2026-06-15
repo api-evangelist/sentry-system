@@ -1,0 +1,1304 @@
+{
+  "info": {
+    "_postman_id": "dc0de7a9-ebd0-4a62-891b-cac62d10ddcd",
+    "name": "Sentry Discover API",
+    "description": "The Discover and Performance API provides endpoints for managing saved queries in Sentry, allowing you to create, list, retrieve, edit, and delete organization-level Discover saved queries for slicing and analyzing error and transaction event data.\n\nContact Support:\n Name: Sentry Support\n Email: support@sentry.io",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:17:33.000Z",
+    "updatedAt": "2026-06-05T15:17:33.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-dc0de7a9-ebd0-4a62-891b-cac62d10ddcd"
+  },
+  "item": [
+    {
+      "name": "organizations",
+      "item": [
+        {
+          "name": "{organization_id_or_slug}",
+          "item": [
+            {
+              "name": "discover",
+              "item": [
+                {
+                  "name": "saved",
+                  "item": [
+                    {
+                      "name": "{query_id}",
+                      "item": [
+                        {
+                          "name": "Sentry Retrieve an organization's Discover saved query",
+                          "id": "03b0dbf9-1fed-45fd-ba0a-9557cd6ca96e",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/discover/saved/:query_id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "discover",
+                                "saved",
+                                ":query_id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "id": "6cbcaf47-adff-426d-9ca7-ef272158241f",
+                                  "key": "organization_id_or_slug",
+                                  "value": "<string>",
+                                  "description": "(Required) The ID or slug of the organization."
+                                },
+                                {
+                                  "id": "57227a9b-1d33-465b-9811-ddb7134b5df5",
+                                  "key": "query_id",
+                                  "value": "<integer>",
+                                  "description": "(Required) The ID of the saved query."
+                                }
+                              ]
+                            },
+                            "description": "Returns a specific saved Discover query."
+                          },
+                          "response": [
+                            {
+                              "id": "4e7f6749-3c42-45c1-b132-6502c346ecb2",
+                              "name": "Saved query details.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/discover/saved/:query_id/",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "organizations",
+                                    ":organization_id_or_slug",
+                                    "discover",
+                                    "saved",
+                                    ":query_id",
+                                    ""
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "organization_id_or_slug"
+                                    },
+                                    {
+                                      "key": "query_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"query\": \"<string>\",\n  \"projects\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"environment\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"range\": \"<string>\",\n  \"orderby\": \"<string>\",\n  \"version\": \"<integer>\",\n  \"dateCreated\": \"<dateTime>\",\n  \"dateUpdated\": \"<dateTime>\",\n  \"createdBy\": {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"email\": \"<string>\"\n  }\n}",
+                              "createdAt": "2026-06-05T15:17:34.000Z",
+                              "updatedAt": "2026-06-05T15:17:34.000Z",
+                              "uid": "35240-4e7f6749-3c42-45c1-b132-6502c346ecb2"
+                            },
+                            {
+                              "id": "719807fa-8d9f-4770-a177-51b112425280",
+                              "name": "Unauthorized.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/discover/saved/:query_id/",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "organizations",
+                                    ":organization_id_or_slug",
+                                    "discover",
+                                    "saved",
+                                    ":query_id",
+                                    ""
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "organization_id_or_slug"
+                                    },
+                                    {
+                                      "key": "query_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-06-05T15:17:34.000Z",
+                              "updatedAt": "2026-06-05T15:17:34.000Z",
+                              "uid": "35240-719807fa-8d9f-4770-a177-51b112425280"
+                            },
+                            {
+                              "id": "c2a6187c-dc80-4365-a9bc-1c42732a1acb",
+                              "name": "Saved query not found.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/discover/saved/:query_id/",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "organizations",
+                                    ":organization_id_or_slug",
+                                    "discover",
+                                    "saved",
+                                    ":query_id",
+                                    ""
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "organization_id_or_slug"
+                                    },
+                                    {
+                                      "key": "query_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-06-05T15:17:34.000Z",
+                              "updatedAt": "2026-06-05T15:17:34.000Z",
+                              "uid": "35240-c2a6187c-dc80-4365-a9bc-1c42732a1acb"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:17:34.000Z",
+                          "updatedAt": "2026-06-05T15:17:34.000Z",
+                          "uid": "35240-03b0dbf9-1fed-45fd-ba0a-9557cd6ca96e"
+                        },
+                        {
+                          "name": "Sentry Edit an organization's Discover saved query",
+                          "id": "9c8158f5-e967-4d3a-8586-e01fe0e29047",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"query\": \"<string>\",\n  \"projects\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"environment\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"range\": \"<string>\",\n  \"orderby\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/discover/saved/:query_id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "discover",
+                                "saved",
+                                ":query_id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "id": "421f2382-6daf-462a-bfa0-9e7cfa56d6e5",
+                                  "key": "organization_id_or_slug",
+                                  "value": "<string>",
+                                  "description": "(Required) The ID or slug of the organization."
+                                },
+                                {
+                                  "id": "17c75afd-7b19-4616-9dba-ead10f6669e3",
+                                  "key": "query_id",
+                                  "value": "<integer>",
+                                  "description": "(Required) The ID of the saved query."
+                                }
+                              ]
+                            },
+                            "description": "Updates a saved Discover query."
+                          },
+                          "response": [
+                            {
+                              "id": "0003dbb9-f39a-4147-9d76-fc79fe7cce94",
+                              "name": "Saved query updated.",
+                              "originalRequest": {
+                                "method": "PUT",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"name\": \"<string>\",\n  \"fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"query\": \"<string>\",\n  \"projects\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"environment\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"range\": \"<string>\",\n  \"orderby\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/discover/saved/:query_id/",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "organizations",
+                                    ":organization_id_or_slug",
+                                    "discover",
+                                    "saved",
+                                    ":query_id",
+                                    ""
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "organization_id_or_slug"
+                                    },
+                                    {
+                                      "key": "query_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"query\": \"<string>\",\n  \"projects\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"environment\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"range\": \"<string>\",\n  \"orderby\": \"<string>\",\n  \"version\": \"<integer>\",\n  \"dateCreated\": \"<dateTime>\",\n  \"dateUpdated\": \"<dateTime>\",\n  \"createdBy\": {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"email\": \"<string>\"\n  }\n}",
+                              "createdAt": "2026-06-05T15:17:34.000Z",
+                              "updatedAt": "2026-06-05T15:17:34.000Z",
+                              "uid": "35240-0003dbb9-f39a-4147-9d76-fc79fe7cce94"
+                            },
+                            {
+                              "id": "5403e37c-cf43-4902-a4e6-2a694d3eb66a",
+                              "name": "Bad request.",
+                              "originalRequest": {
+                                "method": "PUT",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"name\": \"<string>\",\n  \"fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"query\": \"<string>\",\n  \"projects\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"environment\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"range\": \"<string>\",\n  \"orderby\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/discover/saved/:query_id/",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "organizations",
+                                    ":organization_id_or_slug",
+                                    "discover",
+                                    "saved",
+                                    ":query_id",
+                                    ""
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "organization_id_or_slug"
+                                    },
+                                    {
+                                      "key": "query_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-06-05T15:17:34.000Z",
+                              "updatedAt": "2026-06-05T15:17:34.000Z",
+                              "uid": "35240-5403e37c-cf43-4902-a4e6-2a694d3eb66a"
+                            },
+                            {
+                              "id": "68f1e495-c63e-40f4-bfab-6018349966f5",
+                              "name": "Unauthorized.",
+                              "originalRequest": {
+                                "method": "PUT",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"name\": \"<string>\",\n  \"fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"query\": \"<string>\",\n  \"projects\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"environment\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"range\": \"<string>\",\n  \"orderby\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/discover/saved/:query_id/",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "organizations",
+                                    ":organization_id_or_slug",
+                                    "discover",
+                                    "saved",
+                                    ":query_id",
+                                    ""
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "organization_id_or_slug"
+                                    },
+                                    {
+                                      "key": "query_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-06-05T15:17:34.000Z",
+                              "updatedAt": "2026-06-05T15:17:34.000Z",
+                              "uid": "35240-68f1e495-c63e-40f4-bfab-6018349966f5"
+                            },
+                            {
+                              "id": "c89a8492-3c19-423b-aa33-5a9b4958d9cb",
+                              "name": "Saved query not found.",
+                              "originalRequest": {
+                                "method": "PUT",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"name\": \"<string>\",\n  \"fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"query\": \"<string>\",\n  \"projects\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"environment\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"range\": \"<string>\",\n  \"orderby\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/discover/saved/:query_id/",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "organizations",
+                                    ":organization_id_or_slug",
+                                    "discover",
+                                    "saved",
+                                    ":query_id",
+                                    ""
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "organization_id_or_slug"
+                                    },
+                                    {
+                                      "key": "query_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-06-05T15:17:34.000Z",
+                              "updatedAt": "2026-06-05T15:17:34.000Z",
+                              "uid": "35240-c89a8492-3c19-423b-aa33-5a9b4958d9cb"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:17:34.000Z",
+                          "updatedAt": "2026-06-05T15:17:34.000Z",
+                          "uid": "35240-9c8158f5-e967-4d3a-8586-e01fe0e29047"
+                        },
+                        {
+                          "name": "Sentry Delete an organization's Discover saved query",
+                          "id": "447c03e6-b21e-496f-ae60-41a0793fc86e",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "DELETE",
+                            "header": [],
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/discover/saved/:query_id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "discover",
+                                "saved",
+                                ":query_id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "id": "e1562ad6-ed43-40dc-ba6a-a454e0f66bef",
+                                  "key": "organization_id_or_slug",
+                                  "value": "<string>",
+                                  "description": "(Required) The ID or slug of the organization."
+                                },
+                                {
+                                  "id": "8a3471ed-9807-48d7-9047-c46588214d25",
+                                  "key": "query_id",
+                                  "value": "<integer>",
+                                  "description": "(Required) The ID of the saved query."
+                                }
+                              ]
+                            },
+                            "description": "Deletes a saved Discover query."
+                          },
+                          "response": [
+                            {
+                              "id": "03d1ffa4-7d69-42c4-be6e-e0d26117c954",
+                              "name": "Saved query deleted.",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/discover/saved/:query_id/",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "organizations",
+                                    ":organization_id_or_slug",
+                                    "discover",
+                                    "saved",
+                                    ":query_id",
+                                    ""
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "organization_id_or_slug"
+                                    },
+                                    {
+                                      "key": "query_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "No Content",
+                              "code": 204,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-06-05T15:17:34.000Z",
+                              "updatedAt": "2026-06-05T15:17:34.000Z",
+                              "uid": "35240-03d1ffa4-7d69-42c4-be6e-e0d26117c954"
+                            },
+                            {
+                              "id": "701aff55-03cb-46f0-8756-ff04243b86c3",
+                              "name": "Unauthorized.",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/discover/saved/:query_id/",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "organizations",
+                                    ":organization_id_or_slug",
+                                    "discover",
+                                    "saved",
+                                    ":query_id",
+                                    ""
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "organization_id_or_slug"
+                                    },
+                                    {
+                                      "key": "query_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-06-05T15:17:34.000Z",
+                              "updatedAt": "2026-06-05T15:17:34.000Z",
+                              "uid": "35240-701aff55-03cb-46f0-8756-ff04243b86c3"
+                            },
+                            {
+                              "id": "9146ccbf-021e-40d0-8359-704bd8576032",
+                              "name": "Saved query not found.",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/discover/saved/:query_id/",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "organizations",
+                                    ":organization_id_or_slug",
+                                    "discover",
+                                    "saved",
+                                    ":query_id",
+                                    ""
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "organization_id_or_slug"
+                                    },
+                                    {
+                                      "key": "query_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-06-05T15:17:34.000Z",
+                              "updatedAt": "2026-06-05T15:17:34.000Z",
+                              "uid": "35240-9146ccbf-021e-40d0-8359-704bd8576032"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:17:34.000Z",
+                          "updatedAt": "2026-06-05T15:17:34.000Z",
+                          "uid": "35240-447c03e6-b21e-496f-ae60-41a0793fc86e"
+                        }
+                      ],
+                      "id": "8694f970-9817-4e52-ad3a-1ab137682142",
+                      "createdAt": "2026-06-05T15:17:33.000Z",
+                      "updatedAt": "2026-06-05T15:17:33.000Z",
+                      "uid": "35240-8694f970-9817-4e52-ad3a-1ab137682142"
+                    },
+                    {
+                      "name": "Sentry List an organization's Discover saved queries",
+                      "id": "d2c4094f-6e87-4cca-9c64-1f6bdaf83a53",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/discover/saved/?cursor=<string>&query=<string>&sortBy=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "discover",
+                            "saved",
+                            ""
+                          ],
+                          "query": [
+                            {
+                              "description": "Pagination cursor.",
+                              "key": "cursor",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Search by query name.",
+                              "key": "query",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Sort by field (e.g., dateCreated, dateUpdated, name).",
+                              "key": "sortBy",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "6ca71ec5-6858-46c4-a79d-e47c93141c65",
+                              "key": "organization_id_or_slug",
+                              "value": "<string>",
+                              "description": "(Required) The ID or slug of the organization."
+                            }
+                          ]
+                        },
+                        "description": "Returns a list of saved Discover queries for the given organization."
+                      },
+                      "response": [
+                        {
+                          "id": "d0324a31-9a5f-4484-b4e4-d8c3c1049961",
+                          "name": "A list of saved queries.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/discover/saved/?cursor=<string>&query=<string>&sortBy=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "discover",
+                                "saved",
+                                ""
+                              ],
+                              "query": [
+                                {
+                                  "description": "Pagination cursor.",
+                                  "key": "cursor",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Search by query name.",
+                                  "key": "query",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Sort by field (e.g., dateCreated, dateUpdated, name).",
+                                  "key": "sortBy",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "[\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"fields\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"query\": \"<string>\",\n    \"projects\": [\n      \"<integer>\",\n      \"<integer>\"\n    ],\n    \"environment\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"range\": \"<string>\",\n    \"orderby\": \"<string>\",\n    \"version\": \"<integer>\",\n    \"dateCreated\": \"<dateTime>\",\n    \"dateUpdated\": \"<dateTime>\",\n    \"createdBy\": {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"email\": \"<string>\"\n    }\n  },\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"fields\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"query\": \"<string>\",\n    \"projects\": [\n      \"<integer>\",\n      \"<integer>\"\n    ],\n    \"environment\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"range\": \"<string>\",\n    \"orderby\": \"<string>\",\n    \"version\": \"<integer>\",\n    \"dateCreated\": \"<dateTime>\",\n    \"dateUpdated\": \"<dateTime>\",\n    \"createdBy\": {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"email\": \"<string>\"\n    }\n  }\n]",
+                          "createdAt": "2026-06-05T15:17:34.000Z",
+                          "updatedAt": "2026-06-05T15:17:34.000Z",
+                          "uid": "35240-d0324a31-9a5f-4484-b4e4-d8c3c1049961"
+                        },
+                        {
+                          "id": "b320a439-44cc-41cd-b0d4-841e7a82d8df",
+                          "name": "Unauthorized.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/discover/saved/?cursor=<string>&query=<string>&sortBy=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "discover",
+                                "saved",
+                                ""
+                              ],
+                              "query": [
+                                {
+                                  "description": "Pagination cursor.",
+                                  "key": "cursor",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Search by query name.",
+                                  "key": "query",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Sort by field (e.g., dateCreated, dateUpdated, name).",
+                                  "key": "sortBy",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:17:34.000Z",
+                          "updatedAt": "2026-06-05T15:17:34.000Z",
+                          "uid": "35240-b320a439-44cc-41cd-b0d4-841e7a82d8df"
+                        },
+                        {
+                          "id": "4ea15a05-93d8-4806-a1fa-3cabf2c5e9e3",
+                          "name": "Forbidden.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/discover/saved/?cursor=<string>&query=<string>&sortBy=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "discover",
+                                "saved",
+                                ""
+                              ],
+                              "query": [
+                                {
+                                  "description": "Pagination cursor.",
+                                  "key": "cursor",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Search by query name.",
+                                  "key": "query",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Sort by field (e.g., dateCreated, dateUpdated, name).",
+                                  "key": "sortBy",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:17:34.000Z",
+                          "updatedAt": "2026-06-05T15:17:34.000Z",
+                          "uid": "35240-4ea15a05-93d8-4806-a1fa-3cabf2c5e9e3"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:17:34.000Z",
+                      "updatedAt": "2026-06-05T15:17:34.000Z",
+                      "uid": "35240-d2c4094f-6e87-4cca-9c64-1f6bdaf83a53"
+                    },
+                    {
+                      "name": "Sentry Create a new saved query",
+                      "id": "e56f6ed0-6028-4439-9628-e3a74c9540fd",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"query\": \"<string>\",\n  \"projects\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"environment\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"range\": \"<string>\",\n  \"orderby\": \"<string>\",\n  \"version\": \"<integer>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/discover/saved/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "discover",
+                            "saved",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "id": "4ff605a0-274a-4175-8f6b-0999e8bd1369",
+                              "key": "organization_id_or_slug",
+                              "value": "<string>",
+                              "description": "(Required) The ID or slug of the organization."
+                            }
+                          ]
+                        },
+                        "description": "Creates a new saved Discover query for the given organization."
+                      },
+                      "response": [
+                        {
+                          "id": "25e28ac5-f12a-4fc9-a477-17aad7066f6b",
+                          "name": "Saved query created.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"query\": \"<string>\",\n  \"projects\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"environment\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"range\": \"<string>\",\n  \"orderby\": \"<string>\",\n  \"version\": \"<integer>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/discover/saved/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "discover",
+                                "saved",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Created",
+                          "code": 201,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"query\": \"<string>\",\n  \"projects\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"environment\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"range\": \"<string>\",\n  \"orderby\": \"<string>\",\n  \"version\": \"<integer>\",\n  \"dateCreated\": \"<dateTime>\",\n  \"dateUpdated\": \"<dateTime>\",\n  \"createdBy\": {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"email\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-06-05T15:17:34.000Z",
+                          "updatedAt": "2026-06-05T15:17:34.000Z",
+                          "uid": "35240-25e28ac5-f12a-4fc9-a477-17aad7066f6b"
+                        },
+                        {
+                          "id": "8eee13b2-a08a-47bf-bc34-b93c058bc61c",
+                          "name": "Bad request.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"query\": \"<string>\",\n  \"projects\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"environment\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"range\": \"<string>\",\n  \"orderby\": \"<string>\",\n  \"version\": \"<integer>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/discover/saved/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "discover",
+                                "saved",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:17:34.000Z",
+                          "updatedAt": "2026-06-05T15:17:34.000Z",
+                          "uid": "35240-8eee13b2-a08a-47bf-bc34-b93c058bc61c"
+                        },
+                        {
+                          "id": "4a8fecac-dcb4-4809-b899-a0d5900f8b8d",
+                          "name": "Unauthorized.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"query\": \"<string>\",\n  \"projects\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"environment\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"range\": \"<string>\",\n  \"orderby\": \"<string>\",\n  \"version\": \"<integer>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/discover/saved/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "discover",
+                                "saved",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:17:34.000Z",
+                          "updatedAt": "2026-06-05T15:17:34.000Z",
+                          "uid": "35240-4a8fecac-dcb4-4809-b899-a0d5900f8b8d"
+                        },
+                        {
+                          "id": "7e304746-f19e-4224-95e9-85245afee6ca",
+                          "name": "Forbidden.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"query\": \"<string>\",\n  \"projects\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"environment\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"range\": \"<string>\",\n  \"orderby\": \"<string>\",\n  \"version\": \"<integer>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/discover/saved/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "discover",
+                                "saved",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:17:34.000Z",
+                          "updatedAt": "2026-06-05T15:17:34.000Z",
+                          "uid": "35240-7e304746-f19e-4224-95e9-85245afee6ca"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:17:34.000Z",
+                      "updatedAt": "2026-06-05T15:17:34.000Z",
+                      "uid": "35240-e56f6ed0-6028-4439-9628-e3a74c9540fd"
+                    }
+                  ],
+                  "id": "077d24d6-b1ab-4bd7-93e2-6b5dddfee622",
+                  "createdAt": "2026-06-05T15:17:33.000Z",
+                  "updatedAt": "2026-06-05T15:17:33.000Z",
+                  "uid": "35240-077d24d6-b1ab-4bd7-93e2-6b5dddfee622"
+                }
+              ],
+              "id": "caba5fda-dfee-4e4d-9d18-7da7161cb4cb",
+              "createdAt": "2026-06-05T15:17:33.000Z",
+              "updatedAt": "2026-06-05T15:17:33.000Z",
+              "uid": "35240-caba5fda-dfee-4e4d-9d18-7da7161cb4cb"
+            }
+          ],
+          "id": "0d716373-4b38-4a19-b4a4-22dea89fd861",
+          "createdAt": "2026-06-05T15:17:33.000Z",
+          "updatedAt": "2026-06-05T15:17:33.000Z",
+          "uid": "35240-0d716373-4b38-4a19-b4a4-22dea89fd861"
+        }
+      ],
+      "id": "1d27913d-a804-49fc-b91e-33837f83cc6b",
+      "createdAt": "2026-06-05T15:17:33.000Z",
+      "updatedAt": "2026-06-05T15:17:33.000Z",
+      "uid": "35240-1d27913d-a804-49fc-b91e-33837f83cc6b"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://sentry.io/api/0"
+    }
+  ]
+}

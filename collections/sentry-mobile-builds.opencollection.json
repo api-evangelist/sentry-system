@@ -1,0 +1,86 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sentry Mobile Builds API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Mobile Builds",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Sentry Retrieve install info for a given artifact",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/projects/:organization_id_or_slug/:project_id_or_slug/artifact-bundles/:bundle_id/install-info/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "project_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the project."
+              },
+              {
+                "name": "bundle_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the artifact bundle."
+              }
+            ]
+          },
+          "docs": "Returns installation information for a specific mobile build artifact, including installation URLs and QR code data."
+        },
+        {
+          "info": {
+            "name": "Sentry Retrieve size analysis results for a given artifact",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/projects/:organization_id_or_slug/:project_id_or_slug/artifact-bundles/:bundle_id/size-analysis/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "project_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the project."
+              },
+              {
+                "name": "bundle_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the artifact bundle."
+              }
+            ]
+          },
+          "docs": "Returns size analysis data for a specific mobile build artifact, including breakdown by component and asset type."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

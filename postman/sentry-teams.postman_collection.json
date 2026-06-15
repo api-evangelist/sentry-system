@@ -1,0 +1,3215 @@
+{
+  "info": {
+    "_postman_id": "e1462f79-303a-4dff-afae-7813218dbf67",
+    "name": "Sentry Teams API",
+    "description": "The Teams API provides endpoints for managing teams within Sentry organizations, including creating, retrieving, updating, and deleting teams, managing team members and their roles, and listing projects associated with teams.\n\nContact Support:\n Name: Sentry Support\n Email: support@sentry.io",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:17:27.000Z",
+    "updatedAt": "2026-06-05T15:17:27.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-e1462f79-303a-4dff-afae-7813218dbf67"
+  },
+  "item": [
+    {
+      "name": "organizations",
+      "item": [
+        {
+          "name": "{organization_id_or_slug}",
+          "item": [
+            {
+              "name": "teams",
+              "item": [
+                {
+                  "name": "Sentry List an organization's teams",
+                  "id": "ab18c0e4-647d-483f-995d-07bd21644769",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/teams/?cursor=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "organizations",
+                        ":organization_id_or_slug",
+                        "teams",
+                        ""
+                      ],
+                      "query": [
+                        {
+                          "description": "Pagination cursor.",
+                          "key": "cursor",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "13e6ec0f-ddff-4556-aea9-b73c3d2d0654",
+                          "key": "organization_id_or_slug",
+                          "value": "<string>",
+                          "description": "(Required) The ID or slug of the organization."
+                        }
+                      ]
+                    },
+                    "description": "Returns a list of teams bound to an organization."
+                  },
+                  "response": [
+                    {
+                      "id": "666f6c5e-ff95-4c51-a312-cf2bc7e9c1b1",
+                      "name": "A list of teams.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/teams/?cursor=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "teams",
+                            ""
+                          ],
+                          "query": [
+                            {
+                              "description": "Pagination cursor.",
+                              "key": "cursor",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "organization_id_or_slug"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "[\n  {\n    \"id\": \"<string>\",\n    \"slug\": \"<string>\",\n    \"name\": \"<string>\",\n    \"dateCreated\": \"<dateTime>\",\n    \"isMember\": \"<boolean>\",\n    \"memberCount\": \"<integer>\",\n    \"avatar\": {\n      \"avatarType\": \"<string>\",\n      \"avatarUuid\": \"<string>\"\n    }\n  },\n  {\n    \"id\": \"<string>\",\n    \"slug\": \"<string>\",\n    \"name\": \"<string>\",\n    \"dateCreated\": \"<dateTime>\",\n    \"isMember\": \"<boolean>\",\n    \"memberCount\": \"<integer>\",\n    \"avatar\": {\n      \"avatarType\": \"<string>\",\n      \"avatarUuid\": \"<string>\"\n    }\n  }\n]",
+                      "createdAt": "2026-06-05T15:17:27.000Z",
+                      "updatedAt": "2026-06-05T15:17:27.000Z",
+                      "uid": "35240-666f6c5e-ff95-4c51-a312-cf2bc7e9c1b1"
+                    },
+                    {
+                      "id": "322981a1-5c02-4e2b-aee0-8e52a2a867c8",
+                      "name": "Unauthorized.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/teams/?cursor=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "teams",
+                            ""
+                          ],
+                          "query": [
+                            {
+                              "description": "Pagination cursor.",
+                              "key": "cursor",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "organization_id_or_slug"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:17:27.000Z",
+                      "updatedAt": "2026-06-05T15:17:27.000Z",
+                      "uid": "35240-322981a1-5c02-4e2b-aee0-8e52a2a867c8"
+                    },
+                    {
+                      "id": "e1f2439b-94dd-455b-a64d-0585e074b549",
+                      "name": "Forbidden.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/teams/?cursor=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "teams",
+                            ""
+                          ],
+                          "query": [
+                            {
+                              "description": "Pagination cursor.",
+                              "key": "cursor",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "organization_id_or_slug"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:17:27.000Z",
+                      "updatedAt": "2026-06-05T15:17:27.000Z",
+                      "uid": "35240-e1f2439b-94dd-455b-a64d-0585e074b549"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:17:27.000Z",
+                  "updatedAt": "2026-06-05T15:17:27.000Z",
+                  "uid": "35240-ab18c0e4-647d-483f-995d-07bd21644769"
+                },
+                {
+                  "name": "Sentry Create a new team",
+                  "id": "e851de3c-b63c-4904-b0ef-d809bbe92571",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"slug\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/teams/",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "organizations",
+                        ":organization_id_or_slug",
+                        "teams",
+                        ""
+                      ],
+                      "variable": [
+                        {
+                          "id": "a5d03735-86ce-48b3-b586-fe7f0eb1088c",
+                          "key": "organization_id_or_slug",
+                          "value": "<string>",
+                          "description": "(Required) The ID or slug of the organization."
+                        }
+                      ]
+                    },
+                    "description": "Creates a new team bound to an organization."
+                  },
+                  "response": [
+                    {
+                      "id": "3a940263-ac26-4f7b-84e2-8b99c32e8223",
+                      "name": "Team created.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"slug\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/teams/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "teams",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "key": "organization_id_or_slug"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"slug\": \"<string>\",\n  \"name\": \"<string>\",\n  \"dateCreated\": \"<dateTime>\",\n  \"isMember\": \"<boolean>\",\n  \"memberCount\": \"<integer>\",\n  \"avatar\": {\n    \"avatarType\": \"<string>\",\n    \"avatarUuid\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:17:27.000Z",
+                      "updatedAt": "2026-06-05T15:17:27.000Z",
+                      "uid": "35240-3a940263-ac26-4f7b-84e2-8b99c32e8223"
+                    },
+                    {
+                      "id": "b7c7fe82-b5d1-4cff-9b87-6fc4dd58470d",
+                      "name": "Bad request.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"slug\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/teams/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "teams",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "key": "organization_id_or_slug"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:17:27.000Z",
+                      "updatedAt": "2026-06-05T15:17:27.000Z",
+                      "uid": "35240-b7c7fe82-b5d1-4cff-9b87-6fc4dd58470d"
+                    },
+                    {
+                      "id": "0bd66363-bc4c-477c-b713-f75c5f23d3b2",
+                      "name": "Unauthorized.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"slug\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/teams/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "teams",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "key": "organization_id_or_slug"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:17:27.000Z",
+                      "updatedAt": "2026-06-05T15:17:27.000Z",
+                      "uid": "35240-0bd66363-bc4c-477c-b713-f75c5f23d3b2"
+                    },
+                    {
+                      "id": "2ed322e8-3b49-4350-9989-b6aaea35b94d",
+                      "name": "Forbidden.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"slug\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/teams/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "teams",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "key": "organization_id_or_slug"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:17:27.000Z",
+                      "updatedAt": "2026-06-05T15:17:27.000Z",
+                      "uid": "35240-2ed322e8-3b49-4350-9989-b6aaea35b94d"
+                    },
+                    {
+                      "id": "8b6ab0a6-5a89-431c-91a2-0a9b21ce006d",
+                      "name": "A team with this slug already exists.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"slug\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/teams/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "teams",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "key": "organization_id_or_slug"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Conflict",
+                      "code": 409,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:17:27.000Z",
+                      "updatedAt": "2026-06-05T15:17:27.000Z",
+                      "uid": "35240-8b6ab0a6-5a89-431c-91a2-0a9b21ce006d"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:17:27.000Z",
+                  "updatedAt": "2026-06-05T15:17:27.000Z",
+                  "uid": "35240-e851de3c-b63c-4904-b0ef-d809bbe92571"
+                }
+              ],
+              "id": "447852b0-ed13-47af-93e8-3b27d2816b27",
+              "createdAt": "2026-06-05T15:17:27.000Z",
+              "updatedAt": "2026-06-05T15:17:27.000Z",
+              "uid": "35240-447852b0-ed13-47af-93e8-3b27d2816b27"
+            },
+            {
+              "name": "members",
+              "item": [
+                {
+                  "name": "{member_id}",
+                  "item": [
+                    {
+                      "name": "teams",
+                      "item": [
+                        {
+                          "name": "{team_id_or_slug}",
+                          "item": [
+                            {
+                              "name": "Sentry Add an organization member to a team",
+                              "id": "9771d408-3d39-4698-a03c-3a991947fd0a",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "POST",
+                                "header": [],
+                                "url": {
+                                  "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/members/:member_id/teams/:team_id_or_slug/",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "organizations",
+                                    ":organization_id_or_slug",
+                                    "members",
+                                    ":member_id",
+                                    "teams",
+                                    ":team_id_or_slug",
+                                    ""
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "fbcb55fe-4ae6-473b-bdea-501cb13fa523",
+                                      "key": "organization_id_or_slug",
+                                      "value": "<string>",
+                                      "description": "(Required) The ID or slug of the organization."
+                                    },
+                                    {
+                                      "id": "e0c7f8f5-8cbc-46e9-9b6c-843b3ce41701",
+                                      "key": "member_id",
+                                      "value": "<string>",
+                                      "description": "(Required) The ID of the organization member."
+                                    },
+                                    {
+                                      "id": "dfde6743-e1a2-4614-a3ee-262e0b704b67",
+                                      "key": "team_id_or_slug",
+                                      "value": "<string>",
+                                      "description": "(Required) The ID or slug of the team."
+                                    }
+                                  ]
+                                },
+                                "description": "Adds an existing organization member to a team."
+                              },
+                              "response": [
+                                {
+                                  "id": "69f28fd1-bfe0-4361-8131-5cee0e07d17b",
+                                  "name": "Member added to team.",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/members/:member_id/teams/:team_id_or_slug/",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "organizations",
+                                        ":organization_id_or_slug",
+                                        "members",
+                                        ":member_id",
+                                        "teams",
+                                        ":team_id_or_slug",
+                                        ""
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "organization_id_or_slug"
+                                        },
+                                        {
+                                          "key": "member_id"
+                                        },
+                                        {
+                                          "key": "team_id_or_slug"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Created",
+                                  "code": 201,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-06-05T15:17:27.000Z",
+                                  "updatedAt": "2026-06-05T15:17:27.000Z",
+                                  "uid": "35240-69f28fd1-bfe0-4361-8131-5cee0e07d17b"
+                                },
+                                {
+                                  "id": "d54bcdc7-a392-41f6-8e57-3a5bfa5bc588",
+                                  "name": "Unauthorized.",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/members/:member_id/teams/:team_id_or_slug/",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "organizations",
+                                        ":organization_id_or_slug",
+                                        "members",
+                                        ":member_id",
+                                        "teams",
+                                        ":team_id_or_slug",
+                                        ""
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "organization_id_or_slug"
+                                        },
+                                        {
+                                          "key": "member_id"
+                                        },
+                                        {
+                                          "key": "team_id_or_slug"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-06-05T15:17:27.000Z",
+                                  "updatedAt": "2026-06-05T15:17:27.000Z",
+                                  "uid": "35240-d54bcdc7-a392-41f6-8e57-3a5bfa5bc588"
+                                },
+                                {
+                                  "id": "4cf2cbec-4c64-4440-8ba8-6f5df7e223a0",
+                                  "name": "Forbidden.",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/members/:member_id/teams/:team_id_or_slug/",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "organizations",
+                                        ":organization_id_or_slug",
+                                        "members",
+                                        ":member_id",
+                                        "teams",
+                                        ":team_id_or_slug",
+                                        ""
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "organization_id_or_slug"
+                                        },
+                                        {
+                                          "key": "member_id"
+                                        },
+                                        {
+                                          "key": "team_id_or_slug"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Forbidden",
+                                  "code": 403,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-06-05T15:17:27.000Z",
+                                  "updatedAt": "2026-06-05T15:17:27.000Z",
+                                  "uid": "35240-4cf2cbec-4c64-4440-8ba8-6f5df7e223a0"
+                                },
+                                {
+                                  "id": "58630c64-929e-4f30-8ba2-fcdec6f344e2",
+                                  "name": "Member or team not found.",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/members/:member_id/teams/:team_id_or_slug/",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "organizations",
+                                        ":organization_id_or_slug",
+                                        "members",
+                                        ":member_id",
+                                        "teams",
+                                        ":team_id_or_slug",
+                                        ""
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "organization_id_or_slug"
+                                        },
+                                        {
+                                          "key": "member_id"
+                                        },
+                                        {
+                                          "key": "team_id_or_slug"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Not Found",
+                                  "code": 404,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-06-05T15:17:27.000Z",
+                                  "updatedAt": "2026-06-05T15:17:27.000Z",
+                                  "uid": "35240-58630c64-929e-4f30-8ba2-fcdec6f344e2"
+                                }
+                              ],
+                              "createdAt": "2026-06-05T15:17:27.000Z",
+                              "updatedAt": "2026-06-05T15:17:27.000Z",
+                              "uid": "35240-9771d408-3d39-4698-a03c-3a991947fd0a"
+                            },
+                            {
+                              "name": "Sentry Delete an organization member from a team",
+                              "id": "59e290d7-007b-4ba5-8051-533c33c90dd8",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "DELETE",
+                                "header": [],
+                                "url": {
+                                  "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/members/:member_id/teams/:team_id_or_slug/",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "organizations",
+                                    ":organization_id_or_slug",
+                                    "members",
+                                    ":member_id",
+                                    "teams",
+                                    ":team_id_or_slug",
+                                    ""
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "0b0756ba-07af-411c-852d-0ca34319de79",
+                                      "key": "organization_id_or_slug",
+                                      "value": "<string>",
+                                      "description": "(Required) The ID or slug of the organization."
+                                    },
+                                    {
+                                      "id": "dab4961c-6ffb-4ba0-a10e-9e6d2fdc41f5",
+                                      "key": "member_id",
+                                      "value": "<string>",
+                                      "description": "(Required) The ID of the organization member."
+                                    },
+                                    {
+                                      "id": "5c9a3fb8-0493-4d12-ae5a-c34a04d2b4fb",
+                                      "key": "team_id_or_slug",
+                                      "value": "<string>",
+                                      "description": "(Required) The ID or slug of the team."
+                                    }
+                                  ]
+                                },
+                                "description": "Removes a member from a team."
+                              },
+                              "response": [
+                                {
+                                  "id": "0785a5fa-c25a-4a82-b542-ba0be5ed660f",
+                                  "name": "Member removed from team.",
+                                  "originalRequest": {
+                                    "method": "DELETE",
+                                    "header": [
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/members/:member_id/teams/:team_id_or_slug/",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "organizations",
+                                        ":organization_id_or_slug",
+                                        "members",
+                                        ":member_id",
+                                        "teams",
+                                        ":team_id_or_slug",
+                                        ""
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "organization_id_or_slug"
+                                        },
+                                        {
+                                          "key": "member_id"
+                                        },
+                                        {
+                                          "key": "team_id_or_slug"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-06-05T15:17:27.000Z",
+                                  "updatedAt": "2026-06-05T15:17:27.000Z",
+                                  "uid": "35240-0785a5fa-c25a-4a82-b542-ba0be5ed660f"
+                                },
+                                {
+                                  "id": "6ae1226e-213d-41d6-b92c-6c38bad64b56",
+                                  "name": "Unauthorized.",
+                                  "originalRequest": {
+                                    "method": "DELETE",
+                                    "header": [
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/members/:member_id/teams/:team_id_or_slug/",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "organizations",
+                                        ":organization_id_or_slug",
+                                        "members",
+                                        ":member_id",
+                                        "teams",
+                                        ":team_id_or_slug",
+                                        ""
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "organization_id_or_slug"
+                                        },
+                                        {
+                                          "key": "member_id"
+                                        },
+                                        {
+                                          "key": "team_id_or_slug"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-06-05T15:17:27.000Z",
+                                  "updatedAt": "2026-06-05T15:17:27.000Z",
+                                  "uid": "35240-6ae1226e-213d-41d6-b92c-6c38bad64b56"
+                                },
+                                {
+                                  "id": "8bce412c-82bd-47d8-9d82-e4739dede5a9",
+                                  "name": "Forbidden.",
+                                  "originalRequest": {
+                                    "method": "DELETE",
+                                    "header": [
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/members/:member_id/teams/:team_id_or_slug/",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "organizations",
+                                        ":organization_id_or_slug",
+                                        "members",
+                                        ":member_id",
+                                        "teams",
+                                        ":team_id_or_slug",
+                                        ""
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "organization_id_or_slug"
+                                        },
+                                        {
+                                          "key": "member_id"
+                                        },
+                                        {
+                                          "key": "team_id_or_slug"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Forbidden",
+                                  "code": 403,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-06-05T15:17:27.000Z",
+                                  "updatedAt": "2026-06-05T15:17:27.000Z",
+                                  "uid": "35240-8bce412c-82bd-47d8-9d82-e4739dede5a9"
+                                },
+                                {
+                                  "id": "af81d3df-8d55-4244-98f2-70007cf44ec1",
+                                  "name": "Member or team not found.",
+                                  "originalRequest": {
+                                    "method": "DELETE",
+                                    "header": [
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/members/:member_id/teams/:team_id_or_slug/",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "organizations",
+                                        ":organization_id_or_slug",
+                                        "members",
+                                        ":member_id",
+                                        "teams",
+                                        ":team_id_or_slug",
+                                        ""
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "organization_id_or_slug"
+                                        },
+                                        {
+                                          "key": "member_id"
+                                        },
+                                        {
+                                          "key": "team_id_or_slug"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Not Found",
+                                  "code": 404,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-06-05T15:17:27.000Z",
+                                  "updatedAt": "2026-06-05T15:17:27.000Z",
+                                  "uid": "35240-af81d3df-8d55-4244-98f2-70007cf44ec1"
+                                }
+                              ],
+                              "createdAt": "2026-06-05T15:17:27.000Z",
+                              "updatedAt": "2026-06-05T15:17:27.000Z",
+                              "uid": "35240-59e290d7-007b-4ba5-8051-533c33c90dd8"
+                            },
+                            {
+                              "name": "Sentry Update an organization member's team role",
+                              "id": "96d44912-2c0f-4a82-b9a9-eb6e9b1a404e",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "PUT",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"teamRole\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/members/:member_id/teams/:team_id_or_slug/",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "organizations",
+                                    ":organization_id_or_slug",
+                                    "members",
+                                    ":member_id",
+                                    "teams",
+                                    ":team_id_or_slug",
+                                    ""
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "48a2d22f-e74e-4e8d-84c0-c364ece07728",
+                                      "key": "organization_id_or_slug",
+                                      "value": "<string>",
+                                      "description": "(Required) The ID or slug of the organization."
+                                    },
+                                    {
+                                      "id": "659e1d11-26fc-4dca-a240-c6b226996237",
+                                      "key": "member_id",
+                                      "value": "<string>",
+                                      "description": "(Required) The ID of the organization member."
+                                    },
+                                    {
+                                      "id": "78835b50-567e-402b-a17a-cbe70637e3ca",
+                                      "key": "team_id_or_slug",
+                                      "value": "<string>",
+                                      "description": "(Required) The ID or slug of the team."
+                                    }
+                                  ]
+                                },
+                                "description": "Updates the role of a member within a specific team."
+                              },
+                              "response": [
+                                {
+                                  "id": "e08e0034-192f-44b7-88c7-21e9fb1a4b0d",
+                                  "name": "Team role updated.",
+                                  "originalRequest": {
+                                    "method": "PUT",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"teamRole\": \"<string>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/members/:member_id/teams/:team_id_or_slug/",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "organizations",
+                                        ":organization_id_or_slug",
+                                        "members",
+                                        ":member_id",
+                                        "teams",
+                                        ":team_id_or_slug",
+                                        ""
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "organization_id_or_slug"
+                                        },
+                                        {
+                                          "key": "member_id"
+                                        },
+                                        {
+                                          "key": "team_id_or_slug"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-06-05T15:17:27.000Z",
+                                  "updatedAt": "2026-06-05T15:17:27.000Z",
+                                  "uid": "35240-e08e0034-192f-44b7-88c7-21e9fb1a4b0d"
+                                },
+                                {
+                                  "id": "d0c9a595-fd7c-4b4f-a619-af986c3f6ad7",
+                                  "name": "Bad request.",
+                                  "originalRequest": {
+                                    "method": "PUT",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"teamRole\": \"<string>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/members/:member_id/teams/:team_id_or_slug/",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "organizations",
+                                        ":organization_id_or_slug",
+                                        "members",
+                                        ":member_id",
+                                        "teams",
+                                        ":team_id_or_slug",
+                                        ""
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "organization_id_or_slug"
+                                        },
+                                        {
+                                          "key": "member_id"
+                                        },
+                                        {
+                                          "key": "team_id_or_slug"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Bad Request",
+                                  "code": 400,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-06-05T15:17:27.000Z",
+                                  "updatedAt": "2026-06-05T15:17:27.000Z",
+                                  "uid": "35240-d0c9a595-fd7c-4b4f-a619-af986c3f6ad7"
+                                },
+                                {
+                                  "id": "81b76ed8-f820-4422-95ab-8add371c57bc",
+                                  "name": "Unauthorized.",
+                                  "originalRequest": {
+                                    "method": "PUT",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"teamRole\": \"<string>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/members/:member_id/teams/:team_id_or_slug/",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "organizations",
+                                        ":organization_id_or_slug",
+                                        "members",
+                                        ":member_id",
+                                        "teams",
+                                        ":team_id_or_slug",
+                                        ""
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "organization_id_or_slug"
+                                        },
+                                        {
+                                          "key": "member_id"
+                                        },
+                                        {
+                                          "key": "team_id_or_slug"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-06-05T15:17:27.000Z",
+                                  "updatedAt": "2026-06-05T15:17:27.000Z",
+                                  "uid": "35240-81b76ed8-f820-4422-95ab-8add371c57bc"
+                                },
+                                {
+                                  "id": "e7155ebb-305b-414e-ae7e-eda1f766d11c",
+                                  "name": "Forbidden.",
+                                  "originalRequest": {
+                                    "method": "PUT",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"teamRole\": \"<string>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/members/:member_id/teams/:team_id_or_slug/",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "organizations",
+                                        ":organization_id_or_slug",
+                                        "members",
+                                        ":member_id",
+                                        "teams",
+                                        ":team_id_or_slug",
+                                        ""
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "organization_id_or_slug"
+                                        },
+                                        {
+                                          "key": "member_id"
+                                        },
+                                        {
+                                          "key": "team_id_or_slug"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Forbidden",
+                                  "code": 403,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-06-05T15:17:27.000Z",
+                                  "updatedAt": "2026-06-05T15:17:27.000Z",
+                                  "uid": "35240-e7155ebb-305b-414e-ae7e-eda1f766d11c"
+                                }
+                              ],
+                              "createdAt": "2026-06-05T15:17:27.000Z",
+                              "updatedAt": "2026-06-05T15:17:27.000Z",
+                              "uid": "35240-96d44912-2c0f-4a82-b9a9-eb6e9b1a404e"
+                            }
+                          ],
+                          "id": "93cf63cc-4ab9-4205-ae23-66c12e20c40c",
+                          "createdAt": "2026-06-05T15:17:27.000Z",
+                          "updatedAt": "2026-06-05T15:17:27.000Z",
+                          "uid": "35240-93cf63cc-4ab9-4205-ae23-66c12e20c40c"
+                        }
+                      ],
+                      "id": "05f22c45-432c-44b0-952f-5ffdc7253130",
+                      "createdAt": "2026-06-05T15:17:27.000Z",
+                      "updatedAt": "2026-06-05T15:17:27.000Z",
+                      "uid": "35240-05f22c45-432c-44b0-952f-5ffdc7253130"
+                    }
+                  ],
+                  "id": "dd809228-e408-4c71-b469-7db72a252117",
+                  "createdAt": "2026-06-05T15:17:27.000Z",
+                  "updatedAt": "2026-06-05T15:17:27.000Z",
+                  "uid": "35240-dd809228-e408-4c71-b469-7db72a252117"
+                }
+              ],
+              "id": "8e8c86f3-ebac-4f83-aa79-d33b05345c3e",
+              "createdAt": "2026-06-05T15:17:27.000Z",
+              "updatedAt": "2026-06-05T15:17:27.000Z",
+              "uid": "35240-8e8c86f3-ebac-4f83-aa79-d33b05345c3e"
+            },
+            {
+              "name": "users",
+              "item": [
+                {
+                  "name": "{user_id}",
+                  "item": [
+                    {
+                      "name": "teams",
+                      "item": [
+                        {
+                          "name": "Sentry List a user's teams for an organization",
+                          "id": "27072818-516f-473f-bf5e-735b481dedf7",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/users/:user_id/teams/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "users",
+                                ":user_id",
+                                "teams",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "id": "bd178e34-d8c2-4c52-b80c-36db8b445317",
+                                  "key": "organization_id_or_slug",
+                                  "value": "<string>",
+                                  "description": "(Required) The ID or slug of the organization."
+                                },
+                                {
+                                  "id": "14400de1-5d7d-448a-a8b8-1ec8d7174c5a",
+                                  "key": "user_id",
+                                  "value": "<string>",
+                                  "description": "(Required) The ID of the user."
+                                }
+                              ]
+                            },
+                            "description": "Returns a list of teams the specified user belongs to within an organization."
+                          },
+                          "response": [
+                            {
+                              "id": "249046ba-0cdf-47ea-85f3-12cb989ec878",
+                              "name": "A list of teams.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/users/:user_id/teams/",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "organizations",
+                                    ":organization_id_or_slug",
+                                    "users",
+                                    ":user_id",
+                                    "teams",
+                                    ""
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "organization_id_or_slug"
+                                    },
+                                    {
+                                      "key": "user_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "[\n  {\n    \"id\": \"<string>\",\n    \"slug\": \"<string>\",\n    \"name\": \"<string>\",\n    \"dateCreated\": \"<dateTime>\",\n    \"isMember\": \"<boolean>\",\n    \"memberCount\": \"<integer>\",\n    \"avatar\": {\n      \"avatarType\": \"<string>\",\n      \"avatarUuid\": \"<string>\"\n    }\n  },\n  {\n    \"id\": \"<string>\",\n    \"slug\": \"<string>\",\n    \"name\": \"<string>\",\n    \"dateCreated\": \"<dateTime>\",\n    \"isMember\": \"<boolean>\",\n    \"memberCount\": \"<integer>\",\n    \"avatar\": {\n      \"avatarType\": \"<string>\",\n      \"avatarUuid\": \"<string>\"\n    }\n  }\n]",
+                              "createdAt": "2026-06-05T15:17:27.000Z",
+                              "updatedAt": "2026-06-05T15:17:27.000Z",
+                              "uid": "35240-249046ba-0cdf-47ea-85f3-12cb989ec878"
+                            },
+                            {
+                              "id": "0f3517b4-7e83-487e-88f3-0f4777b3c891",
+                              "name": "Unauthorized.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/users/:user_id/teams/",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "organizations",
+                                    ":organization_id_or_slug",
+                                    "users",
+                                    ":user_id",
+                                    "teams",
+                                    ""
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "organization_id_or_slug"
+                                    },
+                                    {
+                                      "key": "user_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-06-05T15:17:27.000Z",
+                              "updatedAt": "2026-06-05T15:17:27.000Z",
+                              "uid": "35240-0f3517b4-7e83-487e-88f3-0f4777b3c891"
+                            },
+                            {
+                              "id": "abc4055e-cb21-4c66-9830-71a6b65602bb",
+                              "name": "User not found.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/users/:user_id/teams/",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "organizations",
+                                    ":organization_id_or_slug",
+                                    "users",
+                                    ":user_id",
+                                    "teams",
+                                    ""
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "organization_id_or_slug"
+                                    },
+                                    {
+                                      "key": "user_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-06-05T15:17:27.000Z",
+                              "updatedAt": "2026-06-05T15:17:27.000Z",
+                              "uid": "35240-abc4055e-cb21-4c66-9830-71a6b65602bb"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:17:27.000Z",
+                          "updatedAt": "2026-06-05T15:17:27.000Z",
+                          "uid": "35240-27072818-516f-473f-bf5e-735b481dedf7"
+                        }
+                      ],
+                      "id": "d6149d30-cc38-47c9-8f80-13d9f64e0490",
+                      "createdAt": "2026-06-05T15:17:27.000Z",
+                      "updatedAt": "2026-06-05T15:17:27.000Z",
+                      "uid": "35240-d6149d30-cc38-47c9-8f80-13d9f64e0490"
+                    }
+                  ],
+                  "id": "f767cef9-8905-48e6-924c-b6db3c20ba7f",
+                  "createdAt": "2026-06-05T15:17:27.000Z",
+                  "updatedAt": "2026-06-05T15:17:27.000Z",
+                  "uid": "35240-f767cef9-8905-48e6-924c-b6db3c20ba7f"
+                }
+              ],
+              "id": "06d79921-d92f-4d72-92b1-7b7db5f6f0ee",
+              "createdAt": "2026-06-05T15:17:27.000Z",
+              "updatedAt": "2026-06-05T15:17:27.000Z",
+              "uid": "35240-06d79921-d92f-4d72-92b1-7b7db5f6f0ee"
+            }
+          ],
+          "id": "aafc46d4-ba7c-467b-8d03-e2e37f65a5b7",
+          "createdAt": "2026-06-05T15:17:27.000Z",
+          "updatedAt": "2026-06-05T15:17:27.000Z",
+          "uid": "35240-aafc46d4-ba7c-467b-8d03-e2e37f65a5b7"
+        }
+      ],
+      "id": "f3df10e5-9b15-4d10-b1b2-6a2c43796a1e",
+      "createdAt": "2026-06-05T15:17:27.000Z",
+      "updatedAt": "2026-06-05T15:17:27.000Z",
+      "uid": "35240-f3df10e5-9b15-4d10-b1b2-6a2c43796a1e"
+    },
+    {
+      "name": "teams",
+      "item": [
+        {
+          "name": "{organization_id_or_slug}",
+          "item": [
+            {
+              "name": "{team_id_or_slug}",
+              "item": [
+                {
+                  "name": "members",
+                  "item": [
+                    {
+                      "name": "Sentry List a team's members",
+                      "id": "39e0e95c-aebb-47b8-b156-8368486bf096",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/teams/:organization_id_or_slug/:team_id_or_slug/members/?cursor=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "teams",
+                            ":organization_id_or_slug",
+                            ":team_id_or_slug",
+                            "members",
+                            ""
+                          ],
+                          "query": [
+                            {
+                              "description": "Pagination cursor.",
+                              "key": "cursor",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "a427866c-ff28-4616-835f-36b64caf41da",
+                              "key": "organization_id_or_slug",
+                              "value": "<string>",
+                              "description": "(Required) The ID or slug of the organization."
+                            },
+                            {
+                              "id": "46477df0-797a-427d-be84-9ace73061b28",
+                              "key": "team_id_or_slug",
+                              "value": "<string>",
+                              "description": "(Required) The ID or slug of the team."
+                            }
+                          ]
+                        },
+                        "description": "Returns a list of members bound to a team."
+                      },
+                      "response": [
+                        {
+                          "id": "5752dae4-dc2e-485e-8a5f-252c87a7e365",
+                          "name": "A list of team members.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/teams/:organization_id_or_slug/:team_id_or_slug/members/?cursor=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "teams",
+                                ":organization_id_or_slug",
+                                ":team_id_or_slug",
+                                "members",
+                                ""
+                              ],
+                              "query": [
+                                {
+                                  "description": "Pagination cursor.",
+                                  "key": "cursor",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                },
+                                {
+                                  "key": "team_id_or_slug"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "[\n  {\n    \"id\": \"<string>\",\n    \"email\": \"<email>\",\n    \"name\": \"<string>\",\n    \"role\": \"<string>\",\n    \"teamRole\": \"<string>\",\n    \"pending\": \"<boolean>\",\n    \"expired\": \"<boolean>\",\n    \"dateCreated\": \"<dateTime>\"\n  },\n  {\n    \"id\": \"<string>\",\n    \"email\": \"<email>\",\n    \"name\": \"<string>\",\n    \"role\": \"<string>\",\n    \"teamRole\": \"<string>\",\n    \"pending\": \"<boolean>\",\n    \"expired\": \"<boolean>\",\n    \"dateCreated\": \"<dateTime>\"\n  }\n]",
+                          "createdAt": "2026-06-05T15:17:27.000Z",
+                          "updatedAt": "2026-06-05T15:17:27.000Z",
+                          "uid": "35240-5752dae4-dc2e-485e-8a5f-252c87a7e365"
+                        },
+                        {
+                          "id": "53dd95bd-f4e7-4218-aeb6-f064b2ec80bc",
+                          "name": "Unauthorized.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/teams/:organization_id_or_slug/:team_id_or_slug/members/?cursor=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "teams",
+                                ":organization_id_or_slug",
+                                ":team_id_or_slug",
+                                "members",
+                                ""
+                              ],
+                              "query": [
+                                {
+                                  "description": "Pagination cursor.",
+                                  "key": "cursor",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                },
+                                {
+                                  "key": "team_id_or_slug"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:17:27.000Z",
+                          "updatedAt": "2026-06-05T15:17:27.000Z",
+                          "uid": "35240-53dd95bd-f4e7-4218-aeb6-f064b2ec80bc"
+                        },
+                        {
+                          "id": "cc46c848-f4cf-4ffd-906d-3baec54f48ee",
+                          "name": "Team not found.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/teams/:organization_id_or_slug/:team_id_or_slug/members/?cursor=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "teams",
+                                ":organization_id_or_slug",
+                                ":team_id_or_slug",
+                                "members",
+                                ""
+                              ],
+                              "query": [
+                                {
+                                  "description": "Pagination cursor.",
+                                  "key": "cursor",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                },
+                                {
+                                  "key": "team_id_or_slug"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:17:27.000Z",
+                          "updatedAt": "2026-06-05T15:17:27.000Z",
+                          "uid": "35240-cc46c848-f4cf-4ffd-906d-3baec54f48ee"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:17:27.000Z",
+                      "updatedAt": "2026-06-05T15:17:27.000Z",
+                      "uid": "35240-39e0e95c-aebb-47b8-b156-8368486bf096"
+                    }
+                  ],
+                  "id": "942dc747-503e-453e-922d-0757a24df05e",
+                  "createdAt": "2026-06-05T15:17:27.000Z",
+                  "updatedAt": "2026-06-05T15:17:27.000Z",
+                  "uid": "35240-942dc747-503e-453e-922d-0757a24df05e"
+                },
+                {
+                  "name": "projects",
+                  "item": [
+                    {
+                      "name": "Sentry List a team's projects",
+                      "id": "2eac24a6-e3dc-4fda-8d16-97ae35f69003",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/teams/:organization_id_or_slug/:team_id_or_slug/projects/?cursor=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "teams",
+                            ":organization_id_or_slug",
+                            ":team_id_or_slug",
+                            "projects",
+                            ""
+                          ],
+                          "query": [
+                            {
+                              "description": "Pagination cursor.",
+                              "key": "cursor",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "adb7388d-8b9a-4aeb-879e-51f5e710cb8d",
+                              "key": "organization_id_or_slug",
+                              "value": "<string>",
+                              "description": "(Required) The ID or slug of the organization."
+                            },
+                            {
+                              "id": "99bd98e7-0dd8-448e-8f78-3f40f4087f5c",
+                              "key": "team_id_or_slug",
+                              "value": "<string>",
+                              "description": "(Required) The ID or slug of the team."
+                            }
+                          ]
+                        },
+                        "description": "Returns a list of projects bound to a team."
+                      },
+                      "response": [
+                        {
+                          "id": "6f7772a4-499b-4e2d-aee4-969fe6d4b9a5",
+                          "name": "A list of projects.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/teams/:organization_id_or_slug/:team_id_or_slug/projects/?cursor=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "teams",
+                                ":organization_id_or_slug",
+                                ":team_id_or_slug",
+                                "projects",
+                                ""
+                              ],
+                              "query": [
+                                {
+                                  "description": "Pagination cursor.",
+                                  "key": "cursor",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                },
+                                {
+                                  "key": "team_id_or_slug"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "[\n  {\n    \"id\": \"<string>\",\n    \"slug\": \"<string>\",\n    \"name\": \"<string>\",\n    \"platform\": \"<string>\",\n    \"dateCreated\": \"<dateTime>\"\n  },\n  {\n    \"id\": \"<string>\",\n    \"slug\": \"<string>\",\n    \"name\": \"<string>\",\n    \"platform\": \"<string>\",\n    \"dateCreated\": \"<dateTime>\"\n  }\n]",
+                          "createdAt": "2026-06-05T15:17:27.000Z",
+                          "updatedAt": "2026-06-05T15:17:27.000Z",
+                          "uid": "35240-6f7772a4-499b-4e2d-aee4-969fe6d4b9a5"
+                        },
+                        {
+                          "id": "94e62cfb-affa-4d1e-8a53-b6e7fe30ad8a",
+                          "name": "Unauthorized.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/teams/:organization_id_or_slug/:team_id_or_slug/projects/?cursor=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "teams",
+                                ":organization_id_or_slug",
+                                ":team_id_or_slug",
+                                "projects",
+                                ""
+                              ],
+                              "query": [
+                                {
+                                  "description": "Pagination cursor.",
+                                  "key": "cursor",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                },
+                                {
+                                  "key": "team_id_or_slug"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:17:27.000Z",
+                          "updatedAt": "2026-06-05T15:17:27.000Z",
+                          "uid": "35240-94e62cfb-affa-4d1e-8a53-b6e7fe30ad8a"
+                        },
+                        {
+                          "id": "73733025-36fe-42e2-b96e-1f0db1e63ffc",
+                          "name": "Team not found.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/teams/:organization_id_or_slug/:team_id_or_slug/projects/?cursor=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "teams",
+                                ":organization_id_or_slug",
+                                ":team_id_or_slug",
+                                "projects",
+                                ""
+                              ],
+                              "query": [
+                                {
+                                  "description": "Pagination cursor.",
+                                  "key": "cursor",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                },
+                                {
+                                  "key": "team_id_or_slug"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:17:27.000Z",
+                          "updatedAt": "2026-06-05T15:17:27.000Z",
+                          "uid": "35240-73733025-36fe-42e2-b96e-1f0db1e63ffc"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:17:27.000Z",
+                      "updatedAt": "2026-06-05T15:17:27.000Z",
+                      "uid": "35240-2eac24a6-e3dc-4fda-8d16-97ae35f69003"
+                    }
+                  ],
+                  "id": "3d3e9369-1cd8-41ae-966e-41128f83b8c9",
+                  "createdAt": "2026-06-05T15:17:27.000Z",
+                  "updatedAt": "2026-06-05T15:17:27.000Z",
+                  "uid": "35240-3d3e9369-1cd8-41ae-966e-41128f83b8c9"
+                },
+                {
+                  "name": "Sentry Retrieve a team",
+                  "id": "3a995992-2bfc-44e5-a45b-12e00c100050",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/teams/:organization_id_or_slug/:team_id_or_slug/",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "teams",
+                        ":organization_id_or_slug",
+                        ":team_id_or_slug",
+                        ""
+                      ],
+                      "variable": [
+                        {
+                          "id": "59b7a1bf-5783-4a43-8fbb-7b85a7da2fde",
+                          "key": "organization_id_or_slug",
+                          "value": "<string>",
+                          "description": "(Required) The ID or slug of the organization."
+                        },
+                        {
+                          "id": "589e2425-a70a-43c8-9087-5afb75a4184c",
+                          "key": "team_id_or_slug",
+                          "value": "<string>",
+                          "description": "(Required) The ID or slug of the team."
+                        }
+                      ]
+                    },
+                    "description": "Returns details for a specific team."
+                  },
+                  "response": [
+                    {
+                      "id": "1587a893-53f5-44fa-81c4-c87c9b418362",
+                      "name": "Team details.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/teams/:organization_id_or_slug/:team_id_or_slug/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "teams",
+                            ":organization_id_or_slug",
+                            ":team_id_or_slug",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "key": "organization_id_or_slug"
+                            },
+                            {
+                              "key": "team_id_or_slug"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"slug\": \"<string>\",\n  \"name\": \"<string>\",\n  \"dateCreated\": \"<dateTime>\",\n  \"isMember\": \"<boolean>\",\n  \"memberCount\": \"<integer>\",\n  \"avatar\": {\n    \"avatarType\": \"<string>\",\n    \"avatarUuid\": \"<string>\"\n  },\n  \"organization\": {\n    \"id\": \"<string>\",\n    \"slug\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"projects\": [\n    {\n      \"id\": \"<string>\",\n      \"slug\": \"<string>\",\n      \"name\": \"<string>\",\n      \"platform\": \"<string>\",\n      \"dateCreated\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"slug\": \"<string>\",\n      \"name\": \"<string>\",\n      \"platform\": \"<string>\",\n      \"dateCreated\": \"<dateTime>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-06-05T15:17:27.000Z",
+                      "updatedAt": "2026-06-05T15:17:27.000Z",
+                      "uid": "35240-1587a893-53f5-44fa-81c4-c87c9b418362"
+                    },
+                    {
+                      "id": "809324ca-7fad-4569-bdc3-9fc697ffae36",
+                      "name": "Unauthorized.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/teams/:organization_id_or_slug/:team_id_or_slug/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "teams",
+                            ":organization_id_or_slug",
+                            ":team_id_or_slug",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "key": "organization_id_or_slug"
+                            },
+                            {
+                              "key": "team_id_or_slug"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:17:27.000Z",
+                      "updatedAt": "2026-06-05T15:17:27.000Z",
+                      "uid": "35240-809324ca-7fad-4569-bdc3-9fc697ffae36"
+                    },
+                    {
+                      "id": "a3cab687-8514-4a95-bdc4-6a14e12561ab",
+                      "name": "Forbidden.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/teams/:organization_id_or_slug/:team_id_or_slug/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "teams",
+                            ":organization_id_or_slug",
+                            ":team_id_or_slug",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "key": "organization_id_or_slug"
+                            },
+                            {
+                              "key": "team_id_or_slug"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:17:27.000Z",
+                      "updatedAt": "2026-06-05T15:17:27.000Z",
+                      "uid": "35240-a3cab687-8514-4a95-bdc4-6a14e12561ab"
+                    },
+                    {
+                      "id": "bb168974-83e9-42db-a111-c5271084abe5",
+                      "name": "Team not found.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/teams/:organization_id_or_slug/:team_id_or_slug/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "teams",
+                            ":organization_id_or_slug",
+                            ":team_id_or_slug",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "key": "organization_id_or_slug"
+                            },
+                            {
+                              "key": "team_id_or_slug"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:17:27.000Z",
+                      "updatedAt": "2026-06-05T15:17:27.000Z",
+                      "uid": "35240-bb168974-83e9-42db-a111-c5271084abe5"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:17:27.000Z",
+                  "updatedAt": "2026-06-05T15:17:27.000Z",
+                  "uid": "35240-3a995992-2bfc-44e5-a45b-12e00c100050"
+                },
+                {
+                  "name": "Sentry Update a team",
+                  "id": "2b5b3e19-b308-4548-be22-56a3b6799434",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"slug\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/teams/:organization_id_or_slug/:team_id_or_slug/",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "teams",
+                        ":organization_id_or_slug",
+                        ":team_id_or_slug",
+                        ""
+                      ],
+                      "variable": [
+                        {
+                          "id": "4eef61e6-e84f-4fcf-a701-b201819c962e",
+                          "key": "organization_id_or_slug",
+                          "value": "<string>",
+                          "description": "(Required) The ID or slug of the organization."
+                        },
+                        {
+                          "id": "371fb684-bb7e-4fc9-a5a9-0e5b1f112a4c",
+                          "key": "team_id_or_slug",
+                          "value": "<string>",
+                          "description": "(Required) The ID or slug of the team."
+                        }
+                      ]
+                    },
+                    "description": "Updates various attributes of the given team."
+                  },
+                  "response": [
+                    {
+                      "id": "1c53c0d9-ed67-4f17-8104-7543709cf9fd",
+                      "name": "Team updated.",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"slug\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/teams/:organization_id_or_slug/:team_id_or_slug/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "teams",
+                            ":organization_id_or_slug",
+                            ":team_id_or_slug",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "key": "organization_id_or_slug"
+                            },
+                            {
+                              "key": "team_id_or_slug"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"slug\": \"<string>\",\n  \"name\": \"<string>\",\n  \"dateCreated\": \"<dateTime>\",\n  \"isMember\": \"<boolean>\",\n  \"memberCount\": \"<integer>\",\n  \"avatar\": {\n    \"avatarType\": \"<string>\",\n    \"avatarUuid\": \"<string>\"\n  },\n  \"organization\": {\n    \"id\": \"<string>\",\n    \"slug\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"projects\": [\n    {\n      \"id\": \"<string>\",\n      \"slug\": \"<string>\",\n      \"name\": \"<string>\",\n      \"platform\": \"<string>\",\n      \"dateCreated\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"slug\": \"<string>\",\n      \"name\": \"<string>\",\n      \"platform\": \"<string>\",\n      \"dateCreated\": \"<dateTime>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-06-05T15:17:27.000Z",
+                      "updatedAt": "2026-06-05T15:17:27.000Z",
+                      "uid": "35240-1c53c0d9-ed67-4f17-8104-7543709cf9fd"
+                    },
+                    {
+                      "id": "34191e9e-45c5-44d2-ad08-c8797ef90db6",
+                      "name": "Bad request.",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"slug\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/teams/:organization_id_or_slug/:team_id_or_slug/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "teams",
+                            ":organization_id_or_slug",
+                            ":team_id_or_slug",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "key": "organization_id_or_slug"
+                            },
+                            {
+                              "key": "team_id_or_slug"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:17:27.000Z",
+                      "updatedAt": "2026-06-05T15:17:27.000Z",
+                      "uid": "35240-34191e9e-45c5-44d2-ad08-c8797ef90db6"
+                    },
+                    {
+                      "id": "942babf8-cde5-42d4-8e7e-edeb85f93631",
+                      "name": "Unauthorized.",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"slug\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/teams/:organization_id_or_slug/:team_id_or_slug/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "teams",
+                            ":organization_id_or_slug",
+                            ":team_id_or_slug",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "key": "organization_id_or_slug"
+                            },
+                            {
+                              "key": "team_id_or_slug"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:17:27.000Z",
+                      "updatedAt": "2026-06-05T15:17:27.000Z",
+                      "uid": "35240-942babf8-cde5-42d4-8e7e-edeb85f93631"
+                    },
+                    {
+                      "id": "7e89da98-5551-42a1-98f6-93fe279a7c46",
+                      "name": "Forbidden.",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"slug\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/teams/:organization_id_or_slug/:team_id_or_slug/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "teams",
+                            ":organization_id_or_slug",
+                            ":team_id_or_slug",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "key": "organization_id_or_slug"
+                            },
+                            {
+                              "key": "team_id_or_slug"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:17:27.000Z",
+                      "updatedAt": "2026-06-05T15:17:27.000Z",
+                      "uid": "35240-7e89da98-5551-42a1-98f6-93fe279a7c46"
+                    },
+                    {
+                      "id": "2efbeed3-3b78-4f31-91f7-08a5826ab8e2",
+                      "name": "Team not found.",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"slug\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/teams/:organization_id_or_slug/:team_id_or_slug/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "teams",
+                            ":organization_id_or_slug",
+                            ":team_id_or_slug",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "key": "organization_id_or_slug"
+                            },
+                            {
+                              "key": "team_id_or_slug"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:17:27.000Z",
+                      "updatedAt": "2026-06-05T15:17:27.000Z",
+                      "uid": "35240-2efbeed3-3b78-4f31-91f7-08a5826ab8e2"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:17:27.000Z",
+                  "updatedAt": "2026-06-05T15:17:27.000Z",
+                  "uid": "35240-2b5b3e19-b308-4548-be22-56a3b6799434"
+                },
+                {
+                  "name": "Sentry Delete a team",
+                  "id": "c049991e-c009-476e-a0ba-cf4c709d1353",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "DELETE",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/teams/:organization_id_or_slug/:team_id_or_slug/",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "teams",
+                        ":organization_id_or_slug",
+                        ":team_id_or_slug",
+                        ""
+                      ],
+                      "variable": [
+                        {
+                          "id": "9eb32d8c-9e9d-43e8-8b75-732451487ceb",
+                          "key": "organization_id_or_slug",
+                          "value": "<string>",
+                          "description": "(Required) The ID or slug of the organization."
+                        },
+                        {
+                          "id": "650e429e-e10f-467a-8edb-c5d2cb6cb6c1",
+                          "key": "team_id_or_slug",
+                          "value": "<string>",
+                          "description": "(Required) The ID or slug of the team."
+                        }
+                      ]
+                    },
+                    "description": "Schedules a team for deletion."
+                  },
+                  "response": [
+                    {
+                      "id": "870ef31e-7113-4f8e-ad9c-ca99cb42c750",
+                      "name": "Team scheduled for deletion.",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/teams/:organization_id_or_slug/:team_id_or_slug/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "teams",
+                            ":organization_id_or_slug",
+                            ":team_id_or_slug",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "key": "organization_id_or_slug"
+                            },
+                            {
+                              "key": "team_id_or_slug"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:17:27.000Z",
+                      "updatedAt": "2026-06-05T15:17:27.000Z",
+                      "uid": "35240-870ef31e-7113-4f8e-ad9c-ca99cb42c750"
+                    },
+                    {
+                      "id": "f1819a5e-e87f-4b0b-901f-1c21c8f534e7",
+                      "name": "Unauthorized.",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/teams/:organization_id_or_slug/:team_id_or_slug/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "teams",
+                            ":organization_id_or_slug",
+                            ":team_id_or_slug",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "key": "organization_id_or_slug"
+                            },
+                            {
+                              "key": "team_id_or_slug"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:17:27.000Z",
+                      "updatedAt": "2026-06-05T15:17:27.000Z",
+                      "uid": "35240-f1819a5e-e87f-4b0b-901f-1c21c8f534e7"
+                    },
+                    {
+                      "id": "067f1a40-f5af-4685-9d80-e20e0fd90144",
+                      "name": "Forbidden.",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/teams/:organization_id_or_slug/:team_id_or_slug/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "teams",
+                            ":organization_id_or_slug",
+                            ":team_id_or_slug",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "key": "organization_id_or_slug"
+                            },
+                            {
+                              "key": "team_id_or_slug"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:17:27.000Z",
+                      "updatedAt": "2026-06-05T15:17:27.000Z",
+                      "uid": "35240-067f1a40-f5af-4685-9d80-e20e0fd90144"
+                    },
+                    {
+                      "id": "960a65d5-e6f1-4d3e-94d1-59b8fd771652",
+                      "name": "Team not found.",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/teams/:organization_id_or_slug/:team_id_or_slug/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "teams",
+                            ":organization_id_or_slug",
+                            ":team_id_or_slug",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "key": "organization_id_or_slug"
+                            },
+                            {
+                              "key": "team_id_or_slug"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:17:27.000Z",
+                      "updatedAt": "2026-06-05T15:17:27.000Z",
+                      "uid": "35240-960a65d5-e6f1-4d3e-94d1-59b8fd771652"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:17:27.000Z",
+                  "updatedAt": "2026-06-05T15:17:27.000Z",
+                  "uid": "35240-c049991e-c009-476e-a0ba-cf4c709d1353"
+                }
+              ],
+              "id": "bb162e17-0dab-409a-8167-c1a96546a39a",
+              "createdAt": "2026-06-05T15:17:27.000Z",
+              "updatedAt": "2026-06-05T15:17:27.000Z",
+              "uid": "35240-bb162e17-0dab-409a-8167-c1a96546a39a"
+            }
+          ],
+          "id": "19719be7-6ec8-4dd3-b45c-51c185458134",
+          "createdAt": "2026-06-05T15:17:27.000Z",
+          "updatedAt": "2026-06-05T15:17:27.000Z",
+          "uid": "35240-19719be7-6ec8-4dd3-b45c-51c185458134"
+        }
+      ],
+      "id": "2d1b9b4b-e54d-4c4c-a18e-af28d35ae2b3",
+      "createdAt": "2026-06-05T15:17:27.000Z",
+      "updatedAt": "2026-06-05T15:17:27.000Z",
+      "uid": "35240-2d1b9b4b-e54d-4c4c-a18e-af28d35ae2b3"
+    },
+    {
+      "name": "projects",
+      "item": [
+        {
+          "name": "{organization_id_or_slug}",
+          "item": [
+            {
+              "name": "{project_id_or_slug}",
+              "item": [
+                {
+                  "name": "teams",
+                  "item": [
+                    {
+                      "name": "Sentry List a project's teams",
+                      "id": "cab30eed-dea1-4a36-a749-74d7b3d655cc",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/teams/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "projects",
+                            ":organization_id_or_slug",
+                            ":project_id_or_slug",
+                            "teams",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "id": "e94579e7-4427-4a50-938b-0fa5d03d0f9d",
+                              "key": "organization_id_or_slug",
+                              "value": "<string>",
+                              "description": "(Required) The ID or slug of the organization."
+                            },
+                            {
+                              "id": "b3fefe2e-b23a-473e-ad94-35c248ca16d5",
+                              "key": "project_id_or_slug",
+                              "value": "<string>",
+                              "description": "(Required) The ID or slug of the project."
+                            }
+                          ]
+                        },
+                        "description": "Returns a list of teams bound to a project."
+                      },
+                      "response": [
+                        {
+                          "id": "9575ca47-adce-4986-81e9-91b7d34f1537",
+                          "name": "A list of teams.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/teams/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "projects",
+                                ":organization_id_or_slug",
+                                ":project_id_or_slug",
+                                "teams",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                },
+                                {
+                                  "key": "project_id_or_slug"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "[\n  {\n    \"id\": \"<string>\",\n    \"slug\": \"<string>\",\n    \"name\": \"<string>\",\n    \"dateCreated\": \"<dateTime>\",\n    \"isMember\": \"<boolean>\",\n    \"memberCount\": \"<integer>\",\n    \"avatar\": {\n      \"avatarType\": \"<string>\",\n      \"avatarUuid\": \"<string>\"\n    }\n  },\n  {\n    \"id\": \"<string>\",\n    \"slug\": \"<string>\",\n    \"name\": \"<string>\",\n    \"dateCreated\": \"<dateTime>\",\n    \"isMember\": \"<boolean>\",\n    \"memberCount\": \"<integer>\",\n    \"avatar\": {\n      \"avatarType\": \"<string>\",\n      \"avatarUuid\": \"<string>\"\n    }\n  }\n]",
+                          "createdAt": "2026-06-05T15:17:27.000Z",
+                          "updatedAt": "2026-06-05T15:17:27.000Z",
+                          "uid": "35240-9575ca47-adce-4986-81e9-91b7d34f1537"
+                        },
+                        {
+                          "id": "00dd8663-bfb2-4ed8-ace6-b6a4e355b50c",
+                          "name": "Unauthorized.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/teams/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "projects",
+                                ":organization_id_or_slug",
+                                ":project_id_or_slug",
+                                "teams",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                },
+                                {
+                                  "key": "project_id_or_slug"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:17:27.000Z",
+                          "updatedAt": "2026-06-05T15:17:27.000Z",
+                          "uid": "35240-00dd8663-bfb2-4ed8-ace6-b6a4e355b50c"
+                        },
+                        {
+                          "id": "401dfbc9-5294-4dbb-98f8-36657a78957e",
+                          "name": "Project not found.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/teams/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "projects",
+                                ":organization_id_or_slug",
+                                ":project_id_or_slug",
+                                "teams",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                },
+                                {
+                                  "key": "project_id_or_slug"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:17:27.000Z",
+                          "updatedAt": "2026-06-05T15:17:27.000Z",
+                          "uid": "35240-401dfbc9-5294-4dbb-98f8-36657a78957e"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:17:27.000Z",
+                      "updatedAt": "2026-06-05T15:17:27.000Z",
+                      "uid": "35240-cab30eed-dea1-4a36-a749-74d7b3d655cc"
+                    }
+                  ],
+                  "id": "e1050ddc-d438-4ca1-8010-135eb832af15",
+                  "createdAt": "2026-06-05T15:17:27.000Z",
+                  "updatedAt": "2026-06-05T15:17:27.000Z",
+                  "uid": "35240-e1050ddc-d438-4ca1-8010-135eb832af15"
+                }
+              ],
+              "id": "3c58796d-49be-49d6-9a86-d15662fe2fac",
+              "createdAt": "2026-06-05T15:17:27.000Z",
+              "updatedAt": "2026-06-05T15:17:27.000Z",
+              "uid": "35240-3c58796d-49be-49d6-9a86-d15662fe2fac"
+            }
+          ],
+          "id": "171f777a-c919-48f0-b829-8baef58f3aac",
+          "createdAt": "2026-06-05T15:17:27.000Z",
+          "updatedAt": "2026-06-05T15:17:27.000Z",
+          "uid": "35240-171f777a-c919-48f0-b829-8baef58f3aac"
+        }
+      ],
+      "id": "0ce693be-eee2-42d6-a8f0-e7e5c9d08a70",
+      "createdAt": "2026-06-05T15:17:27.000Z",
+      "updatedAt": "2026-06-05T15:17:27.000Z",
+      "uid": "35240-0ce693be-eee2-42d6-a8f0-e7e5c9d08a70"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://sentry.io/api/0"
+    }
+  ]
+}

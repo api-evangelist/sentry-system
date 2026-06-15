@@ -1,0 +1,355 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sentry Replays API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Replays",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Sentry List an organization's replays",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/replays/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Pagination cursor."
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "A search query to filter replays."
+              },
+              {
+                "name": "statsPeriod",
+                "value": "",
+                "type": "query",
+                "description": "Stats period (e.g., 24h, 14d)."
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "query",
+                "description": "Project IDs to filter by."
+              },
+              {
+                "name": "environment",
+                "value": "",
+                "type": "query",
+                "description": "Environment to filter by."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sort order for results."
+              }
+            ]
+          },
+          "docs": "Returns a list of replays for the given organization."
+        },
+        {
+          "info": {
+            "name": "Sentry Retrieve a replay instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/projects/:organization_id_or_slug/:project_id_or_slug/replays/:replay_id/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "project_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the project."
+              },
+              {
+                "name": "replay_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the replay."
+              }
+            ]
+          },
+          "docs": "Returns details for a specific session replay."
+        },
+        {
+          "info": {
+            "name": "Sentry Delete a replay instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://sentry.io/api/0/projects/:organization_id_or_slug/:project_id_or_slug/replays/:replay_id/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "project_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the project."
+              },
+              {
+                "name": "replay_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the replay."
+              }
+            ]
+          },
+          "docs": "Deletes a session replay."
+        },
+        {
+          "info": {
+            "name": "Sentry List users who have viewed a replay",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/projects/:organization_id_or_slug/:project_id_or_slug/replays/:replay_id/viewed-by/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "project_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the project."
+              },
+              {
+                "name": "replay_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the replay."
+              }
+            ]
+          },
+          "docs": "Returns a list of users who have viewed a specific replay."
+        },
+        {
+          "info": {
+            "name": "Sentry Retrieve a count of replays for a given issue or transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/replay-count/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "The search query (e.g., issue.id or transaction)."
+              },
+              {
+                "name": "statsPeriod",
+                "value": "",
+                "type": "query",
+                "description": "Stats period."
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "query",
+                "description": "Project IDs."
+              }
+            ]
+          },
+          "docs": "Returns the count of replays associated with specified issues or transactions."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Recording Segments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Sentry List recording segments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/projects/:organization_id_or_slug/:project_id_or_slug/replays/:replay_id/recording-segments/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "project_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the project."
+              },
+              {
+                "name": "replay_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the replay."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Pagination cursor."
+              }
+            ]
+          },
+          "docs": "Returns a list of recording segments for a given replay."
+        },
+        {
+          "info": {
+            "name": "Sentry Retrieve a recording segment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/projects/:organization_id_or_slug/:project_id_or_slug/replays/:replay_id/recording-segments/:segment_id/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "project_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the project."
+              },
+              {
+                "name": "replay_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the replay."
+              },
+              {
+                "name": "segment_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the recording segment."
+              }
+            ]
+          },
+          "docs": "Returns a specific recording segment."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Interactions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Sentry List an organization's selectors",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/replays/selectors/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "query",
+                "description": "Project IDs to filter by."
+              },
+              {
+                "name": "statsPeriod",
+                "value": "",
+                "type": "query",
+                "description": "Stats period."
+              }
+            ]
+          },
+          "docs": "Returns a list of DOM selectors tracked across organization replays."
+        },
+        {
+          "info": {
+            "name": "Sentry List clicked nodes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/replays/:replay_id/clicks/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "replay_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the replay."
+              }
+            ]
+          },
+          "docs": "Returns a list of clicked DOM nodes within a replay."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

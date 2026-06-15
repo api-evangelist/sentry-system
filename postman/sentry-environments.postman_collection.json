@@ -1,0 +1,1057 @@
+{
+  "info": {
+    "_postman_id": "00cd2f28-4b55-41a5-9774-0a629cb606af",
+    "name": "Sentry Environments API",
+    "description": "The Environments API provides endpoints for managing environments in Sentry, including listing project and organization environments, retrieving individual project environment details, and updating project environment settings.\n\nContact Support:\n Name: Sentry Support\n Email: support@sentry.io",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:17:34.000Z",
+    "updatedAt": "2026-06-05T15:17:34.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-00cd2f28-4b55-41a5-9774-0a629cb606af"
+  },
+  "item": [
+    {
+      "name": "organizations",
+      "item": [
+        {
+          "name": "{organization_id_or_slug}",
+          "item": [
+            {
+              "name": "environments",
+              "item": [
+                {
+                  "name": "Sentry List an organization's environments",
+                  "id": "5cb080eb-859c-44fc-abf4-e9b2e40ea6b2",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/environments/",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "organizations",
+                        ":organization_id_or_slug",
+                        "environments",
+                        ""
+                      ],
+                      "variable": [
+                        {
+                          "id": "cb48bc91-1350-4955-abb9-aff9b46c916a",
+                          "key": "organization_id_or_slug",
+                          "value": "<string>",
+                          "description": "(Required) The ID or slug of the organization."
+                        }
+                      ]
+                    },
+                    "description": "Returns a list of environments for the given organization."
+                  },
+                  "response": [
+                    {
+                      "id": "3319341e-3d93-410c-bac5-a261d0e21530",
+                      "name": "A list of environments.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/environments/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "environments",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "key": "organization_id_or_slug"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "[\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"isHidden\": \"<boolean>\",\n    \"dateCreated\": \"<dateTime>\"\n  },\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"isHidden\": \"<boolean>\",\n    \"dateCreated\": \"<dateTime>\"\n  }\n]",
+                      "createdAt": "2026-06-05T15:17:35.000Z",
+                      "updatedAt": "2026-06-05T15:17:35.000Z",
+                      "uid": "35240-3319341e-3d93-410c-bac5-a261d0e21530"
+                    },
+                    {
+                      "id": "0394645e-576f-42e4-acda-7c2374312fae",
+                      "name": "Unauthorized.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/environments/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "environments",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "key": "organization_id_or_slug"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:17:35.000Z",
+                      "updatedAt": "2026-06-05T15:17:35.000Z",
+                      "uid": "35240-0394645e-576f-42e4-acda-7c2374312fae"
+                    },
+                    {
+                      "id": "45c52745-ef4d-427f-ba13-88afe400b9c6",
+                      "name": "Forbidden.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/environments/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "environments",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "key": "organization_id_or_slug"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:17:35.000Z",
+                      "updatedAt": "2026-06-05T15:17:35.000Z",
+                      "uid": "35240-45c52745-ef4d-427f-ba13-88afe400b9c6"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:17:35.000Z",
+                  "updatedAt": "2026-06-05T15:17:35.000Z",
+                  "uid": "35240-5cb080eb-859c-44fc-abf4-e9b2e40ea6b2"
+                }
+              ],
+              "id": "74a79cb7-619c-4cbc-98f9-07b06d8480b7",
+              "createdAt": "2026-06-05T15:17:35.000Z",
+              "updatedAt": "2026-06-05T15:17:35.000Z",
+              "uid": "35240-74a79cb7-619c-4cbc-98f9-07b06d8480b7"
+            }
+          ],
+          "id": "7d238dae-fa56-4d6f-be64-dc372b6b7531",
+          "createdAt": "2026-06-05T15:17:35.000Z",
+          "updatedAt": "2026-06-05T15:17:35.000Z",
+          "uid": "35240-7d238dae-fa56-4d6f-be64-dc372b6b7531"
+        }
+      ],
+      "id": "efb81a8e-693e-41a2-9623-95f5020ec97c",
+      "createdAt": "2026-06-05T15:17:35.000Z",
+      "updatedAt": "2026-06-05T15:17:35.000Z",
+      "uid": "35240-efb81a8e-693e-41a2-9623-95f5020ec97c"
+    },
+    {
+      "name": "projects",
+      "item": [
+        {
+          "name": "{organization_id_or_slug}",
+          "item": [
+            {
+              "name": "{project_id_or_slug}",
+              "item": [
+                {
+                  "name": "environments",
+                  "item": [
+                    {
+                      "name": "{environment}",
+                      "item": [
+                        {
+                          "name": "Sentry Retrieve a project environment",
+                          "id": "f0022c16-6015-4b8f-8eb8-8a049ca548a2",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/environments/:environment/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "projects",
+                                ":organization_id_or_slug",
+                                ":project_id_or_slug",
+                                "environments",
+                                ":environment",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "id": "0d054cb3-23f4-4569-8729-dd5f4b17f8ab",
+                                  "key": "organization_id_or_slug",
+                                  "value": "<string>",
+                                  "description": "(Required) The ID or slug of the organization."
+                                },
+                                {
+                                  "id": "572e8b83-3b0b-445c-b14d-7324cd0b7b16",
+                                  "key": "project_id_or_slug",
+                                  "value": "<string>",
+                                  "description": "(Required) The ID or slug of the project."
+                                },
+                                {
+                                  "id": "5028a03a-033d-4af6-bd41-f7009be952df",
+                                  "key": "environment",
+                                  "value": "<string>",
+                                  "description": "(Required) The name of the environment."
+                                }
+                              ]
+                            },
+                            "description": "Returns details for a specific project environment."
+                          },
+                          "response": [
+                            {
+                              "id": "90683957-31f7-4906-be02-88016e943d2b",
+                              "name": "Environment details.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/environments/:environment/",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":organization_id_or_slug",
+                                    ":project_id_or_slug",
+                                    "environments",
+                                    ":environment",
+                                    ""
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "organization_id_or_slug"
+                                    },
+                                    {
+                                      "key": "project_id_or_slug"
+                                    },
+                                    {
+                                      "key": "environment"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"isHidden\": \"<boolean>\",\n  \"dateCreated\": \"<dateTime>\"\n}",
+                              "createdAt": "2026-06-05T15:17:35.000Z",
+                              "updatedAt": "2026-06-05T15:17:35.000Z",
+                              "uid": "35240-90683957-31f7-4906-be02-88016e943d2b"
+                            },
+                            {
+                              "id": "b13255d7-4486-4406-b87e-83b47684640b",
+                              "name": "Unauthorized.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/environments/:environment/",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":organization_id_or_slug",
+                                    ":project_id_or_slug",
+                                    "environments",
+                                    ":environment",
+                                    ""
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "organization_id_or_slug"
+                                    },
+                                    {
+                                      "key": "project_id_or_slug"
+                                    },
+                                    {
+                                      "key": "environment"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-06-05T15:17:35.000Z",
+                              "updatedAt": "2026-06-05T15:17:35.000Z",
+                              "uid": "35240-b13255d7-4486-4406-b87e-83b47684640b"
+                            },
+                            {
+                              "id": "c5afb50d-a464-4074-9313-0eee6e81466d",
+                              "name": "Environment not found.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/environments/:environment/",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":organization_id_or_slug",
+                                    ":project_id_or_slug",
+                                    "environments",
+                                    ":environment",
+                                    ""
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "organization_id_or_slug"
+                                    },
+                                    {
+                                      "key": "project_id_or_slug"
+                                    },
+                                    {
+                                      "key": "environment"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-06-05T15:17:35.000Z",
+                              "updatedAt": "2026-06-05T15:17:35.000Z",
+                              "uid": "35240-c5afb50d-a464-4074-9313-0eee6e81466d"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:17:35.000Z",
+                          "updatedAt": "2026-06-05T15:17:35.000Z",
+                          "uid": "35240-f0022c16-6015-4b8f-8eb8-8a049ca548a2"
+                        },
+                        {
+                          "name": "Sentry Update a project environment",
+                          "id": "f4f6e1d5-ca04-4ad6-98b5-8f1701ae09c0",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"isHidden\": \"<boolean>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/environments/:environment/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "projects",
+                                ":organization_id_or_slug",
+                                ":project_id_or_slug",
+                                "environments",
+                                ":environment",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "id": "debad6a1-43ae-4559-b9fa-2657b33c2256",
+                                  "key": "organization_id_or_slug",
+                                  "value": "<string>",
+                                  "description": "(Required) The ID or slug of the organization."
+                                },
+                                {
+                                  "id": "0fe553de-f525-401f-b7e4-82ae8204a24d",
+                                  "key": "project_id_or_slug",
+                                  "value": "<string>",
+                                  "description": "(Required) The ID or slug of the project."
+                                },
+                                {
+                                  "id": "b05d9c9b-9ca6-4622-a602-0604e4c65629",
+                                  "key": "environment",
+                                  "value": "<string>",
+                                  "description": "(Required) The name of the environment."
+                                }
+                              ]
+                            },
+                            "description": "Updates settings for a project environment."
+                          },
+                          "response": [
+                            {
+                              "id": "d066bb61-cbf1-45f7-af59-63d0d76114b4",
+                              "name": "Environment updated.",
+                              "originalRequest": {
+                                "method": "PUT",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"isHidden\": \"<boolean>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/environments/:environment/",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":organization_id_or_slug",
+                                    ":project_id_or_slug",
+                                    "environments",
+                                    ":environment",
+                                    ""
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "organization_id_or_slug"
+                                    },
+                                    {
+                                      "key": "project_id_or_slug"
+                                    },
+                                    {
+                                      "key": "environment"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"isHidden\": \"<boolean>\",\n  \"dateCreated\": \"<dateTime>\"\n}",
+                              "createdAt": "2026-06-05T15:17:35.000Z",
+                              "updatedAt": "2026-06-05T15:17:35.000Z",
+                              "uid": "35240-d066bb61-cbf1-45f7-af59-63d0d76114b4"
+                            },
+                            {
+                              "id": "7c05a341-d020-47ad-b266-5ed8b3c20e33",
+                              "name": "Bad request.",
+                              "originalRequest": {
+                                "method": "PUT",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"isHidden\": \"<boolean>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/environments/:environment/",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":organization_id_or_slug",
+                                    ":project_id_or_slug",
+                                    "environments",
+                                    ":environment",
+                                    ""
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "organization_id_or_slug"
+                                    },
+                                    {
+                                      "key": "project_id_or_slug"
+                                    },
+                                    {
+                                      "key": "environment"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-06-05T15:17:35.000Z",
+                              "updatedAt": "2026-06-05T15:17:35.000Z",
+                              "uid": "35240-7c05a341-d020-47ad-b266-5ed8b3c20e33"
+                            },
+                            {
+                              "id": "ec45f508-d6ff-44d9-b307-6849392f8dc5",
+                              "name": "Unauthorized.",
+                              "originalRequest": {
+                                "method": "PUT",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"isHidden\": \"<boolean>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/environments/:environment/",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":organization_id_or_slug",
+                                    ":project_id_or_slug",
+                                    "environments",
+                                    ":environment",
+                                    ""
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "organization_id_or_slug"
+                                    },
+                                    {
+                                      "key": "project_id_or_slug"
+                                    },
+                                    {
+                                      "key": "environment"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-06-05T15:17:35.000Z",
+                              "updatedAt": "2026-06-05T15:17:35.000Z",
+                              "uid": "35240-ec45f508-d6ff-44d9-b307-6849392f8dc5"
+                            },
+                            {
+                              "id": "df1b5c17-8d58-486d-982a-4f7617f96089",
+                              "name": "Environment not found.",
+                              "originalRequest": {
+                                "method": "PUT",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"isHidden\": \"<boolean>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/environments/:environment/",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":organization_id_or_slug",
+                                    ":project_id_or_slug",
+                                    "environments",
+                                    ":environment",
+                                    ""
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "organization_id_or_slug"
+                                    },
+                                    {
+                                      "key": "project_id_or_slug"
+                                    },
+                                    {
+                                      "key": "environment"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-06-05T15:17:35.000Z",
+                              "updatedAt": "2026-06-05T15:17:35.000Z",
+                              "uid": "35240-df1b5c17-8d58-486d-982a-4f7617f96089"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:17:35.000Z",
+                          "updatedAt": "2026-06-05T15:17:35.000Z",
+                          "uid": "35240-f4f6e1d5-ca04-4ad6-98b5-8f1701ae09c0"
+                        }
+                      ],
+                      "id": "9a96a7ad-e14f-4988-9ccb-44475b1c2f2a",
+                      "createdAt": "2026-06-05T15:17:35.000Z",
+                      "updatedAt": "2026-06-05T15:17:35.000Z",
+                      "uid": "35240-9a96a7ad-e14f-4988-9ccb-44475b1c2f2a"
+                    },
+                    {
+                      "name": "Sentry List a project's environments",
+                      "id": "6c4fa928-c3ae-4d91-b40e-f4b991bd11e2",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/environments/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "projects",
+                            ":organization_id_or_slug",
+                            ":project_id_or_slug",
+                            "environments",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "id": "e99bc866-e527-4059-af2c-5271ccdb8075",
+                              "key": "organization_id_or_slug",
+                              "value": "<string>",
+                              "description": "(Required) The ID or slug of the organization."
+                            },
+                            {
+                              "id": "1e9d39f8-c8c8-4f16-a179-95e7c93c0821",
+                              "key": "project_id_or_slug",
+                              "value": "<string>",
+                              "description": "(Required) The ID or slug of the project."
+                            }
+                          ]
+                        },
+                        "description": "Returns a list of environments for the given project."
+                      },
+                      "response": [
+                        {
+                          "id": "f9cbfe60-f719-468e-9275-899683633fcc",
+                          "name": "A list of environments.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/environments/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "projects",
+                                ":organization_id_or_slug",
+                                ":project_id_or_slug",
+                                "environments",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                },
+                                {
+                                  "key": "project_id_or_slug"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "[\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"isHidden\": \"<boolean>\",\n    \"dateCreated\": \"<dateTime>\"\n  },\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"isHidden\": \"<boolean>\",\n    \"dateCreated\": \"<dateTime>\"\n  }\n]",
+                          "createdAt": "2026-06-05T15:17:35.000Z",
+                          "updatedAt": "2026-06-05T15:17:35.000Z",
+                          "uid": "35240-f9cbfe60-f719-468e-9275-899683633fcc"
+                        },
+                        {
+                          "id": "7cb2819a-01ba-43d4-a053-69c4a2038135",
+                          "name": "Unauthorized.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/environments/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "projects",
+                                ":organization_id_or_slug",
+                                ":project_id_or_slug",
+                                "environments",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                },
+                                {
+                                  "key": "project_id_or_slug"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:17:35.000Z",
+                          "updatedAt": "2026-06-05T15:17:35.000Z",
+                          "uid": "35240-7cb2819a-01ba-43d4-a053-69c4a2038135"
+                        },
+                        {
+                          "id": "cc38941e-8b77-4588-8577-cc37b6f49a45",
+                          "name": "Forbidden.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/environments/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "projects",
+                                ":organization_id_or_slug",
+                                ":project_id_or_slug",
+                                "environments",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                },
+                                {
+                                  "key": "project_id_or_slug"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:17:35.000Z",
+                          "updatedAt": "2026-06-05T15:17:35.000Z",
+                          "uid": "35240-cc38941e-8b77-4588-8577-cc37b6f49a45"
+                        },
+                        {
+                          "id": "860798b4-edd1-4cd5-8b18-30b8cc9cd491",
+                          "name": "Project not found.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/projects/:organization_id_or_slug/:project_id_or_slug/environments/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "projects",
+                                ":organization_id_or_slug",
+                                ":project_id_or_slug",
+                                "environments",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                },
+                                {
+                                  "key": "project_id_or_slug"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:17:35.000Z",
+                          "updatedAt": "2026-06-05T15:17:35.000Z",
+                          "uid": "35240-860798b4-edd1-4cd5-8b18-30b8cc9cd491"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:17:35.000Z",
+                      "updatedAt": "2026-06-05T15:17:35.000Z",
+                      "uid": "35240-6c4fa928-c3ae-4d91-b40e-f4b991bd11e2"
+                    }
+                  ],
+                  "id": "948cc279-4ebc-4949-89e7-898291cb950f",
+                  "createdAt": "2026-06-05T15:17:35.000Z",
+                  "updatedAt": "2026-06-05T15:17:35.000Z",
+                  "uid": "35240-948cc279-4ebc-4949-89e7-898291cb950f"
+                }
+              ],
+              "id": "eaa1fb6d-019d-4a14-be22-98f20c6879b9",
+              "createdAt": "2026-06-05T15:17:35.000Z",
+              "updatedAt": "2026-06-05T15:17:35.000Z",
+              "uid": "35240-eaa1fb6d-019d-4a14-be22-98f20c6879b9"
+            }
+          ],
+          "id": "82595dba-5429-4d31-9752-7d0a71b8fc8d",
+          "createdAt": "2026-06-05T15:17:35.000Z",
+          "updatedAt": "2026-06-05T15:17:35.000Z",
+          "uid": "35240-82595dba-5429-4d31-9752-7d0a71b8fc8d"
+        }
+      ],
+      "id": "48bcadf5-7ad7-4881-99ca-b5331cbdae14",
+      "createdAt": "2026-06-05T15:17:35.000Z",
+      "updatedAt": "2026-06-05T15:17:35.000Z",
+      "uid": "35240-48bcadf5-7ad7-4881-99ca-b5331cbdae14"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://sentry.io/api/0"
+    }
+  ]
+}

@@ -1,0 +1,529 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sentry Events and Issues API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Issues",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Sentry List an organization's issues",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/issues/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "An optional Sentry structured search query."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "A pointer to the last object fetched and its sort order for pagination."
+              },
+              {
+                "name": "statsPeriod",
+                "value": "",
+                "type": "query",
+                "description": "An optional stat period (can be one of 24h, 14d, or empty string)."
+              },
+              {
+                "name": "shortIdLookup",
+                "value": "",
+                "type": "query",
+                "description": "If this is set to true then short IDs are looked up by this criteria."
+              }
+            ]
+          },
+          "docs": "Returns a list of issues bound to an organization. All parameters are supplied as query string parameters."
+        },
+        {
+          "info": {
+            "name": "Sentry Bulk mutate an organization's issues",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/issues/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "A list of IDs of the issues to be mutated."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Bulk mutate various attributes on issues. The list of issues to modify is given through the query string parameters."
+        },
+        {
+          "info": {
+            "name": "Sentry Bulk remove an organization's issues",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/issues/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "A list of IDs of the issues to be removed."
+              }
+            ]
+          },
+          "docs": "Permanently remove the given issues. The list of issues to modify is given through the id query string parameter."
+        },
+        {
+          "info": {
+            "name": "Sentry List a project's issues",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/projects/:organization_id_or_slug/:project_id_or_slug/issues/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "project_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the project."
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "An optional Sentry structured search query."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Pagination cursor."
+              },
+              {
+                "name": "statsPeriod",
+                "value": "",
+                "type": "query",
+                "description": "An optional stat period."
+              }
+            ]
+          },
+          "docs": "Returns a list of issues bound to a project."
+        },
+        {
+          "info": {
+            "name": "Sentry Bulk mutate a list of issues",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://sentry.io/api/0/projects/:organization_id_or_slug/:project_id_or_slug/issues/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "project_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the project."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "A list of IDs of the issues to be mutated."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Bulk mutate various attributes on issues for a given project. The list of issues to modify is given through the id query string parameter."
+        },
+        {
+          "info": {
+            "name": "Sentry Bulk remove a list of issues",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://sentry.io/api/0/projects/:organization_id_or_slug/:project_id_or_slug/issues/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "project_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the project."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "A list of IDs of the issues to be removed."
+              }
+            ]
+          },
+          "docs": "Permanently remove the given issues from a project. The list of issues to modify is given through the id query string parameter."
+        },
+        {
+          "info": {
+            "name": "Sentry Retrieve an issue",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/issues/:issue_id/",
+            "params": [
+              {
+                "name": "issue_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the issue."
+              }
+            ]
+          },
+          "docs": "Returns details on an individual issue including a representative event."
+        },
+        {
+          "info": {
+            "name": "Sentry Update an issue",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://sentry.io/api/0/issues/:issue_id/",
+            "params": [
+              {
+                "name": "issue_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the issue."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an individual issue's attributes. Only the attributes submitted are modified."
+        },
+        {
+          "info": {
+            "name": "Sentry Remove an issue",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://sentry.io/api/0/issues/:issue_id/",
+            "params": [
+              {
+                "name": "issue_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the issue."
+              }
+            ]
+          },
+          "docs": "Removes an individual issue."
+        },
+        {
+          "info": {
+            "name": "Sentry List an issue's hashes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/issues/:issue_id/hashes/",
+            "params": [
+              {
+                "name": "issue_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the issue."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Pagination cursor."
+              }
+            ]
+          },
+          "docs": "Returns a list of hashes (fingerprints) that are assigned to an issue."
+        },
+        {
+          "info": {
+            "name": "Sentry Retrieve tag details for an issue",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/issues/:issue_id/tags/:key/",
+            "params": [
+              {
+                "name": "issue_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the issue."
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "path",
+                "description": "The tag key to look up."
+              }
+            ]
+          },
+          "docs": "Returns details for a given tag key related to an issue."
+        },
+        {
+          "info": {
+            "name": "Sentry List a tag's values for an issue",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/issues/:issue_id/tags/:key/values/",
+            "params": [
+              {
+                "name": "issue_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the issue."
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "path",
+                "description": "The tag key to look up."
+              }
+            ]
+          },
+          "docs": "Returns a list of unique tag values for the given tag key on an issue."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Events",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Sentry List an issue's events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/issues/:issue_id/events/",
+            "params": [
+              {
+                "name": "issue_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the issue."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Pagination cursor."
+              },
+              {
+                "name": "full",
+                "value": "",
+                "type": "query",
+                "description": "If true, the event payload will include the full event body."
+              }
+            ]
+          },
+          "docs": "Returns a list of events bound to an issue."
+        },
+        {
+          "info": {
+            "name": "Sentry List a project's error events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/projects/:organization_id_or_slug/:project_id_or_slug/events/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "project_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the project."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Pagination cursor."
+              },
+              {
+                "name": "full",
+                "value": "",
+                "type": "query",
+                "description": "If true, include full event body."
+              }
+            ]
+          },
+          "docs": "Returns a list of events bound to a project."
+        },
+        {
+          "info": {
+            "name": "Sentry Retrieve an event for a project",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/projects/:organization_id_or_slug/:project_id_or_slug/events/:event_id/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "project_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the project."
+              },
+              {
+                "name": "event_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the event to retrieve."
+              }
+            ]
+          },
+          "docs": "Returns a specific event bound to a project."
+        },
+        {
+          "info": {
+            "name": "Sentry Retrieve an issue event",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/issues/:issue_id/events/:event_id/",
+            "params": [
+              {
+                "name": "issue_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the issue."
+              },
+              {
+                "name": "event_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the event to retrieve."
+              }
+            ]
+          },
+          "docs": "Returns a specific event bound to an issue."
+        },
+        {
+          "info": {
+            "name": "Sentry Debug issues related to source maps for a given event",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/projects/:organization_id_or_slug/:project_id_or_slug/events/:event_id/source-map-debug/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "project_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the project."
+              },
+              {
+                "name": "event_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the event to debug."
+              }
+            ]
+          },
+          "docs": "Returns information about source map processing for a specific event, helping to troubleshoot source map issues."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

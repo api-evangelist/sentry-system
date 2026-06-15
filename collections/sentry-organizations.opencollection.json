@@ -1,0 +1,421 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sentry Organizations API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Organizations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Sentry Retrieve an organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              }
+            ]
+          },
+          "docs": "Returns details for a specific organization."
+        },
+        {
+          "info": {
+            "name": "Sentry Update an organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates various attributes and configurable settings for the given organization."
+        },
+        {
+          "info": {
+            "name": "Sentry List organization projects",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/projects/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Pagination cursor."
+              }
+            ]
+          },
+          "docs": "Returns a list of projects bound to the organization."
+        },
+        {
+          "info": {
+            "name": "Sentry Resolve a short ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/shortids/:short_id/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "short_id",
+                "value": "",
+                "type": "path",
+                "description": "The short ID to resolve (e.g., PROJECT-123)."
+              }
+            ]
+          },
+          "docs": "Resolves a short ID to the project slug and internal issue ID, useful for URL construction."
+        },
+        {
+          "info": {
+            "name": "Sentry Resolve an event ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/eventids/:event_id/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "event_id",
+                "value": "",
+                "type": "path",
+                "description": "The event ID to resolve."
+              }
+            ]
+          },
+          "docs": "Resolves an event ID to the event's project and issue."
+        },
+        {
+          "info": {
+            "name": "Sentry Retrieve event counts (v2)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/stats_v2/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "field",
+                "value": "",
+                "type": "query",
+                "description": "The field to query (e.g., sum(quantity), sum(times_seen))."
+              },
+              {
+                "name": "statsPeriod",
+                "value": "",
+                "type": "query",
+                "description": "Stats period (e.g., 24h, 14d)."
+              },
+              {
+                "name": "groupBy",
+                "value": "",
+                "type": "query",
+                "description": "Group results by category, outcome, or project."
+              }
+            ]
+          },
+          "docs": "Returns event counts for the organization, optionally grouped by project."
+        },
+        {
+          "info": {
+            "name": "Sentry List organization trusted relays",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/relay_usage/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              }
+            ]
+          },
+          "docs": "Returns a list of trusted relays for the organization."
+        },
+        {
+          "info": {
+            "name": "Sentry List organization client keys",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/client-keys/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Pagination cursor."
+              }
+            ]
+          },
+          "docs": "Returns a list of client keys bound to the organization."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Members",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Sentry List organization members",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/members/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Pagination cursor."
+              }
+            ]
+          },
+          "docs": "Returns a list of members bound to the organization."
+        },
+        {
+          "info": {
+            "name": "Sentry Add a member to an organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/members/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a member to an organization by email address."
+        },
+        {
+          "info": {
+            "name": "Sentry Retrieve an organization member",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/members/:member_id/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "member_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the member to retrieve."
+              }
+            ]
+          },
+          "docs": "Returns details for a specific organization member."
+        },
+        {
+          "info": {
+            "name": "Sentry Update organization member roles",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/members/:member_id/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "member_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the member to retrieve."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the role and team memberships for an organization member."
+        },
+        {
+          "info": {
+            "name": "Sentry Delete an organization member",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/members/:member_id/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "member_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the member to retrieve."
+              }
+            ]
+          },
+          "docs": "Removes a member from an organization."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Repositories",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Sentry List organization repositories",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/repos/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Pagination cursor."
+              }
+            ]
+          },
+          "docs": "Returns a list of version control repositories for a given organization."
+        },
+        {
+          "info": {
+            "name": "Sentry List repository commits",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/repos/:repo_id/commits/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "repo_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the repository."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Pagination cursor."
+              }
+            ]
+          },
+          "docs": "Returns a list of commits for a given repository."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,163 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sentry Discover API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Discover",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Sentry List an organization's Discover saved queries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/discover/saved/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Pagination cursor."
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Search by query name."
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "Sort by field (e.g., dateCreated, dateUpdated, name)."
+              }
+            ]
+          },
+          "docs": "Returns a list of saved Discover queries for the given organization."
+        },
+        {
+          "info": {
+            "name": "Sentry Create a new saved query",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/discover/saved/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new saved Discover query for the given organization."
+        },
+        {
+          "info": {
+            "name": "Sentry Retrieve an organization's Discover saved query",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/discover/saved/:query_id/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "query_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the saved query."
+              }
+            ]
+          },
+          "docs": "Returns a specific saved Discover query."
+        },
+        {
+          "info": {
+            "name": "Sentry Edit an organization's Discover saved query",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/discover/saved/:query_id/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "query_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the saved query."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a saved Discover query."
+        },
+        {
+          "info": {
+            "name": "Sentry Delete an organization's Discover saved query",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/discover/saved/:query_id/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "query_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the saved query."
+              }
+            ]
+          },
+          "docs": "Deletes a saved Discover query."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,1347 @@
+{
+  "item": [
+    {
+      "id": "a25b8961-d641-409a-af20-20088aeb3e6d",
+      "name": "Dashboards",
+      "description": {
+        "content": "Manage custom dashboards and their widgets",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7939c208-11bc-4c75-9c5f-d9cb9a8d27e4",
+          "name": "Sentry List an organization's custom dashboards",
+          "request": {
+            "name": "Sentry List an organization's custom dashboards",
+            "description": {
+              "content": "Returns a list of custom dashboards for the given organization.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "organizations",
+                ":organization_id_or_slug",
+                "dashboards",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "Pagination cursor."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organization_id_or_slug",
+                  "description": "(Required) The ID or slug of the organization."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8ff99c2c-2a9a-4193-9bc6-16f481181a9f",
+              "name": "A list of dashboards.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id_or_slug",
+                    "dashboards",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id_or_slug",
+                      "description": "(Required) The ID or slug of the organization."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"title\": \"string\",\n    \"dateCreated\": \"1953-07-03T22:28:36.255Z\",\n    \"createdBy\": {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"email\": \"string\"\n    },\n    \"widgetDisplay\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  {\n    \"id\": \"string\",\n    \"title\": \"string\",\n    \"dateCreated\": \"2008-08-20T07:14:58.972Z\",\n    \"createdBy\": {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"email\": \"string\"\n    },\n    \"widgetDisplay\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d4a03dbe-f23f-41f9-a98e-5bef1e02987c",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id_or_slug",
+                    "dashboards",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id_or_slug",
+                      "description": "(Required) The ID or slug of the organization."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "28b27288-580e-4c2b-873e-eec2d2ec26cc",
+              "name": "Forbidden.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id_or_slug",
+                    "dashboards",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id_or_slug",
+                      "description": "(Required) The ID or slug of the organization."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f34fe775-8825-4d3c-9103-f99bf31c6f7b",
+          "name": "Sentry Create a new dashboard for an organization",
+          "request": {
+            "name": "Sentry Create a new dashboard for an organization",
+            "description": {
+              "content": "Creates a new custom dashboard for the given organization.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "organizations",
+                ":organization_id_or_slug",
+                "dashboards",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organization_id_or_slug",
+                  "description": "(Required) The ID or slug of the organization."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"<string>\",\n  \"widgets\": [\n    {\n      \"title\": \"<string>\",\n      \"displayType\": \"<string>\",\n      \"queries\": [\n        {\n          \"id\": \"<string>\",\n          \"name\": \"<string>\",\n          \"fields\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"conditions\": \"<string>\",\n          \"orderby\": \"<string>\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"name\": \"<string>\",\n          \"fields\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"conditions\": \"<string>\",\n          \"orderby\": \"<string>\"\n        }\n      ],\n      \"id\": \"<string>\",\n      \"interval\": \"<string>\",\n      \"layout\": {\n        \"x\": \"<integer>\",\n        \"y\": \"<integer>\",\n        \"w\": \"<integer>\",\n        \"h\": \"<integer>\",\n        \"minH\": \"<integer>\"\n      }\n    },\n    {\n      \"title\": \"<string>\",\n      \"displayType\": \"<string>\",\n      \"queries\": [\n        {\n          \"id\": \"<string>\",\n          \"name\": \"<string>\",\n          \"fields\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"conditions\": \"<string>\",\n          \"orderby\": \"<string>\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"name\": \"<string>\",\n          \"fields\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"conditions\": \"<string>\",\n          \"orderby\": \"<string>\"\n        }\n      ],\n      \"id\": \"<string>\",\n      \"interval\": \"<string>\",\n      \"layout\": {\n        \"x\": \"<integer>\",\n        \"y\": \"<integer>\",\n        \"w\": \"<integer>\",\n        \"h\": \"<integer>\",\n        \"minH\": \"<integer>\"\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f7522504-e4e0-4dce-bafa-e689caefcdcd",
+              "name": "Dashboard created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id_or_slug",
+                    "dashboards",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id_or_slug",
+                      "description": "(Required) The ID or slug of the organization."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"<string>\",\n  \"widgets\": [\n    {\n      \"title\": \"string\",\n      \"displayType\": \"bar\",\n      \"queries\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"fields\": [\n            \"string\",\n            \"string\"\n          ],\n          \"conditions\": \"string\",\n          \"orderby\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"fields\": [\n            \"string\",\n            \"string\"\n          ],\n          \"conditions\": \"string\",\n          \"orderby\": \"string\"\n        }\n      ],\n      \"id\": \"string\",\n      \"interval\": \"string\",\n      \"layout\": {\n        \"x\": 2089,\n        \"y\": 1570,\n        \"w\": 4562,\n        \"h\": 4600,\n        \"minH\": 5286\n      }\n    },\n    {\n      \"title\": \"string\",\n      \"displayType\": \"line\",\n      \"queries\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"fields\": [\n            \"string\",\n            \"string\"\n          ],\n          \"conditions\": \"string\",\n          \"orderby\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"fields\": [\n            \"string\",\n            \"string\"\n          ],\n          \"conditions\": \"string\",\n          \"orderby\": \"string\"\n        }\n      ],\n      \"id\": \"string\",\n      \"interval\": \"string\",\n      \"layout\": {\n        \"x\": 4701,\n        \"y\": 3370,\n        \"w\": 3512,\n        \"h\": 2334,\n        \"minH\": 6833\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"title\": \"string\",\n  \"dateCreated\": \"1975-04-16T15:37:43.976Z\",\n  \"createdBy\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"email\": \"string\"\n  },\n  \"widgets\": [\n    {\n      \"title\": \"string\",\n      \"displayType\": \"top_n\",\n      \"queries\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"fields\": [\n            \"string\",\n            \"string\"\n          ],\n          \"conditions\": \"string\",\n          \"orderby\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"fields\": [\n            \"string\",\n            \"string\"\n          ],\n          \"conditions\": \"string\",\n          \"orderby\": \"string\"\n        }\n      ],\n      \"id\": \"string\",\n      \"interval\": \"string\",\n      \"layout\": {\n        \"x\": 7748,\n        \"y\": 3688,\n        \"w\": 5682,\n        \"h\": 1573,\n        \"minH\": 338\n      }\n    },\n    {\n      \"title\": \"string\",\n      \"displayType\": \"area\",\n      \"queries\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"fields\": [\n            \"string\",\n            \"string\"\n          ],\n          \"conditions\": \"string\",\n          \"orderby\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"fields\": [\n            \"string\",\n            \"string\"\n          ],\n          \"conditions\": \"string\",\n          \"orderby\": \"string\"\n        }\n      ],\n      \"id\": \"string\",\n      \"interval\": \"string\",\n      \"layout\": {\n        \"x\": 97,\n        \"y\": 6954,\n        \"w\": 8658,\n        \"h\": 9747,\n        \"minH\": 1828\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4785dca5-0c23-4293-8862-c26884b39014",
+              "name": "Bad request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id_or_slug",
+                    "dashboards",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id_or_slug",
+                      "description": "(Required) The ID or slug of the organization."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"<string>\",\n  \"widgets\": [\n    {\n      \"title\": \"string\",\n      \"displayType\": \"bar\",\n      \"queries\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"fields\": [\n            \"string\",\n            \"string\"\n          ],\n          \"conditions\": \"string\",\n          \"orderby\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"fields\": [\n            \"string\",\n            \"string\"\n          ],\n          \"conditions\": \"string\",\n          \"orderby\": \"string\"\n        }\n      ],\n      \"id\": \"string\",\n      \"interval\": \"string\",\n      \"layout\": {\n        \"x\": 2089,\n        \"y\": 1570,\n        \"w\": 4562,\n        \"h\": 4600,\n        \"minH\": 5286\n      }\n    },\n    {\n      \"title\": \"string\",\n      \"displayType\": \"line\",\n      \"queries\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"fields\": [\n            \"string\",\n            \"string\"\n          ],\n          \"conditions\": \"string\",\n          \"orderby\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"fields\": [\n            \"string\",\n            \"string\"\n          ],\n          \"conditions\": \"string\",\n          \"orderby\": \"string\"\n        }\n      ],\n      \"id\": \"string\",\n      \"interval\": \"string\",\n      \"layout\": {\n        \"x\": 4701,\n        \"y\": 3370,\n        \"w\": 3512,\n        \"h\": 2334,\n        \"minH\": 6833\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4dbb925c-415b-4367-8420-7c685a2f2c49",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id_or_slug",
+                    "dashboards",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id_or_slug",
+                      "description": "(Required) The ID or slug of the organization."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"<string>\",\n  \"widgets\": [\n    {\n      \"title\": \"string\",\n      \"displayType\": \"bar\",\n      \"queries\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"fields\": [\n            \"string\",\n            \"string\"\n          ],\n          \"conditions\": \"string\",\n          \"orderby\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"fields\": [\n            \"string\",\n            \"string\"\n          ],\n          \"conditions\": \"string\",\n          \"orderby\": \"string\"\n        }\n      ],\n      \"id\": \"string\",\n      \"interval\": \"string\",\n      \"layout\": {\n        \"x\": 2089,\n        \"y\": 1570,\n        \"w\": 4562,\n        \"h\": 4600,\n        \"minH\": 5286\n      }\n    },\n    {\n      \"title\": \"string\",\n      \"displayType\": \"line\",\n      \"queries\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"fields\": [\n            \"string\",\n            \"string\"\n          ],\n          \"conditions\": \"string\",\n          \"orderby\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"fields\": [\n            \"string\",\n            \"string\"\n          ],\n          \"conditions\": \"string\",\n          \"orderby\": \"string\"\n        }\n      ],\n      \"id\": \"string\",\n      \"interval\": \"string\",\n      \"layout\": {\n        \"x\": 4701,\n        \"y\": 3370,\n        \"w\": 3512,\n        \"h\": 2334,\n        \"minH\": 6833\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "76745279-02cb-4dde-a3ef-a35eac24a1fe",
+              "name": "Forbidden.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id_or_slug",
+                    "dashboards",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id_or_slug",
+                      "description": "(Required) The ID or slug of the organization."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"<string>\",\n  \"widgets\": [\n    {\n      \"title\": \"string\",\n      \"displayType\": \"bar\",\n      \"queries\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"fields\": [\n            \"string\",\n            \"string\"\n          ],\n          \"conditions\": \"string\",\n          \"orderby\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"fields\": [\n            \"string\",\n            \"string\"\n          ],\n          \"conditions\": \"string\",\n          \"orderby\": \"string\"\n        }\n      ],\n      \"id\": \"string\",\n      \"interval\": \"string\",\n      \"layout\": {\n        \"x\": 2089,\n        \"y\": 1570,\n        \"w\": 4562,\n        \"h\": 4600,\n        \"minH\": 5286\n      }\n    },\n    {\n      \"title\": \"string\",\n      \"displayType\": \"line\",\n      \"queries\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"fields\": [\n            \"string\",\n            \"string\"\n          ],\n          \"conditions\": \"string\",\n          \"orderby\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"fields\": [\n            \"string\",\n            \"string\"\n          ],\n          \"conditions\": \"string\",\n          \"orderby\": \"string\"\n        }\n      ],\n      \"id\": \"string\",\n      \"interval\": \"string\",\n      \"layout\": {\n        \"x\": 4701,\n        \"y\": 3370,\n        \"w\": 3512,\n        \"h\": 2334,\n        \"minH\": 6833\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e5300632-18e5-4773-9cd3-0d48ad2c0018",
+          "name": "Sentry Retrieve an organization's custom dashboard",
+          "request": {
+            "name": "Sentry Retrieve an organization's custom dashboard",
+            "description": {
+              "content": "Returns a custom dashboard with its widgets.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "organizations",
+                ":organization_id_or_slug",
+                "dashboards",
+                ":dashboard_id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organization_id_or_slug",
+                  "description": "(Required) The ID or slug of the organization."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "dashboard_id",
+                  "description": "(Required) The ID of the dashboard."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "12adc40a-e1ae-497f-acbd-7fd085904e25",
+              "name": "Dashboard details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id_or_slug",
+                    "dashboards",
+                    ":dashboard_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id_or_slug",
+                      "description": "(Required) The ID or slug of the organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "dashboard_id",
+                      "description": "(Required) The ID of the dashboard."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"title\": \"string\",\n  \"dateCreated\": \"1975-04-16T15:37:43.976Z\",\n  \"createdBy\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"email\": \"string\"\n  },\n  \"widgets\": [\n    {\n      \"title\": \"string\",\n      \"displayType\": \"top_n\",\n      \"queries\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"fields\": [\n            \"string\",\n            \"string\"\n          ],\n          \"conditions\": \"string\",\n          \"orderby\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"fields\": [\n            \"string\",\n            \"string\"\n          ],\n          \"conditions\": \"string\",\n          \"orderby\": \"string\"\n        }\n      ],\n      \"id\": \"string\",\n      \"interval\": \"string\",\n      \"layout\": {\n        \"x\": 7748,\n        \"y\": 3688,\n        \"w\": 5682,\n        \"h\": 1573,\n        \"minH\": 338\n      }\n    },\n    {\n      \"title\": \"string\",\n      \"displayType\": \"area\",\n      \"queries\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"fields\": [\n            \"string\",\n            \"string\"\n          ],\n          \"conditions\": \"string\",\n          \"orderby\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"fields\": [\n            \"string\",\n            \"string\"\n          ],\n          \"conditions\": \"string\",\n          \"orderby\": \"string\"\n        }\n      ],\n      \"id\": \"string\",\n      \"interval\": \"string\",\n      \"layout\": {\n        \"x\": 97,\n        \"y\": 6954,\n        \"w\": 8658,\n        \"h\": 9747,\n        \"minH\": 1828\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cd6aa094-ed6c-4b1b-8c87-9b6d045a2402",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id_or_slug",
+                    "dashboards",
+                    ":dashboard_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id_or_slug",
+                      "description": "(Required) The ID or slug of the organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "dashboard_id",
+                      "description": "(Required) The ID of the dashboard."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "858e361f-99e8-4179-b459-5a3b9a348848",
+              "name": "Dashboard not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id_or_slug",
+                    "dashboards",
+                    ":dashboard_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id_or_slug",
+                      "description": "(Required) The ID or slug of the organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "dashboard_id",
+                      "description": "(Required) The ID of the dashboard."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1d9ee136-b018-44ec-9f89-223771c303a1",
+          "name": "Sentry Edit an organization's custom dashboard",
+          "request": {
+            "name": "Sentry Edit an organization's custom dashboard",
+            "description": {
+              "content": "Updates a custom dashboard.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "organizations",
+                ":organization_id_or_slug",
+                "dashboards",
+                ":dashboard_id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organization_id_or_slug",
+                  "description": "(Required) The ID or slug of the organization."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "dashboard_id",
+                  "description": "(Required) The ID of the dashboard."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"<string>\",\n  \"widgets\": [\n    {\n      \"title\": \"<string>\",\n      \"displayType\": \"<string>\",\n      \"queries\": [\n        {\n          \"id\": \"<string>\",\n          \"name\": \"<string>\",\n          \"fields\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"conditions\": \"<string>\",\n          \"orderby\": \"<string>\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"name\": \"<string>\",\n          \"fields\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"conditions\": \"<string>\",\n          \"orderby\": \"<string>\"\n        }\n      ],\n      \"id\": \"<string>\",\n      \"interval\": \"<string>\",\n      \"layout\": {\n        \"x\": \"<integer>\",\n        \"y\": \"<integer>\",\n        \"w\": \"<integer>\",\n        \"h\": \"<integer>\",\n        \"minH\": \"<integer>\"\n      }\n    },\n    {\n      \"title\": \"<string>\",\n      \"displayType\": \"<string>\",\n      \"queries\": [\n        {\n          \"id\": \"<string>\",\n          \"name\": \"<string>\",\n          \"fields\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"conditions\": \"<string>\",\n          \"orderby\": \"<string>\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"name\": \"<string>\",\n          \"fields\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"conditions\": \"<string>\",\n          \"orderby\": \"<string>\"\n        }\n      ],\n      \"id\": \"<string>\",\n      \"interval\": \"<string>\",\n      \"layout\": {\n        \"x\": \"<integer>\",\n        \"y\": \"<integer>\",\n        \"w\": \"<integer>\",\n        \"h\": \"<integer>\",\n        \"minH\": \"<integer>\"\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a4723887-2339-42f5-b67c-b36ba91c085a",
+              "name": "Dashboard updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id_or_slug",
+                    "dashboards",
+                    ":dashboard_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id_or_slug",
+                      "description": "(Required) The ID or slug of the organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "dashboard_id",
+                      "description": "(Required) The ID of the dashboard."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"<string>\",\n  \"widgets\": [\n    {\n      \"title\": \"string\",\n      \"displayType\": \"stacked_area\",\n      \"queries\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"fields\": [\n            \"string\",\n            \"string\"\n          ],\n          \"conditions\": \"string\",\n          \"orderby\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"fields\": [\n            \"string\",\n            \"string\"\n          ],\n          \"conditions\": \"string\",\n          \"orderby\": \"string\"\n        }\n      ],\n      \"id\": \"string\",\n      \"interval\": \"string\",\n      \"layout\": {\n        \"x\": 7436,\n        \"y\": 9270,\n        \"w\": 8652,\n        \"h\": 7039,\n        \"minH\": 9677\n      }\n    },\n    {\n      \"title\": \"string\",\n      \"displayType\": \"bar\",\n      \"queries\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"fields\": [\n            \"string\",\n            \"string\"\n          ],\n          \"conditions\": \"string\",\n          \"orderby\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"fields\": [\n            \"string\",\n            \"string\"\n          ],\n          \"conditions\": \"string\",\n          \"orderby\": \"string\"\n        }\n      ],\n      \"id\": \"string\",\n      \"interval\": \"string\",\n      \"layout\": {\n        \"x\": 7576,\n        \"y\": 545,\n        \"w\": 9960,\n        \"h\": 4544,\n        \"minH\": 527\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"title\": \"string\",\n  \"dateCreated\": \"1975-04-16T15:37:43.976Z\",\n  \"createdBy\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"email\": \"string\"\n  },\n  \"widgets\": [\n    {\n      \"title\": \"string\",\n      \"displayType\": \"top_n\",\n      \"queries\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"fields\": [\n            \"string\",\n            \"string\"\n          ],\n          \"conditions\": \"string\",\n          \"orderby\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"fields\": [\n            \"string\",\n            \"string\"\n          ],\n          \"conditions\": \"string\",\n          \"orderby\": \"string\"\n        }\n      ],\n      \"id\": \"string\",\n      \"interval\": \"string\",\n      \"layout\": {\n        \"x\": 7748,\n        \"y\": 3688,\n        \"w\": 5682,\n        \"h\": 1573,\n        \"minH\": 338\n      }\n    },\n    {\n      \"title\": \"string\",\n      \"displayType\": \"area\",\n      \"queries\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"fields\": [\n            \"string\",\n            \"string\"\n          ],\n          \"conditions\": \"string\",\n          \"orderby\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"fields\": [\n            \"string\",\n            \"string\"\n          ],\n          \"conditions\": \"string\",\n          \"orderby\": \"string\"\n        }\n      ],\n      \"id\": \"string\",\n      \"interval\": \"string\",\n      \"layout\": {\n        \"x\": 97,\n        \"y\": 6954,\n        \"w\": 8658,\n        \"h\": 9747,\n        \"minH\": 1828\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dae8abb7-c6e9-4e2a-97c6-7154daa2269b",
+              "name": "Bad request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id_or_slug",
+                    "dashboards",
+                    ":dashboard_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id_or_slug",
+                      "description": "(Required) The ID or slug of the organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "dashboard_id",
+                      "description": "(Required) The ID of the dashboard."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"<string>\",\n  \"widgets\": [\n    {\n      \"title\": \"string\",\n      \"displayType\": \"stacked_area\",\n      \"queries\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"fields\": [\n            \"string\",\n            \"string\"\n          ],\n          \"conditions\": \"string\",\n          \"orderby\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"fields\": [\n            \"string\",\n            \"string\"\n          ],\n          \"conditions\": \"string\",\n          \"orderby\": \"string\"\n        }\n      ],\n      \"id\": \"string\",\n      \"interval\": \"string\",\n      \"layout\": {\n        \"x\": 7436,\n        \"y\": 9270,\n        \"w\": 8652,\n        \"h\": 7039,\n        \"minH\": 9677\n      }\n    },\n    {\n      \"title\": \"string\",\n      \"displayType\": \"bar\",\n      \"queries\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"fields\": [\n            \"string\",\n            \"string\"\n          ],\n          \"conditions\": \"string\",\n          \"orderby\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"fields\": [\n            \"string\",\n            \"string\"\n          ],\n          \"conditions\": \"string\",\n          \"orderby\": \"string\"\n        }\n      ],\n      \"id\": \"string\",\n      \"interval\": \"string\",\n      \"layout\": {\n        \"x\": 7576,\n        \"y\": 545,\n        \"w\": 9960,\n        \"h\": 4544,\n        \"minH\": 527\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "dcc01987-923d-47c0-aa86-77403a36abcd",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id_or_slug",
+                    "dashboards",
+                    ":dashboard_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id_or_slug",
+                      "description": "(Required) The ID or slug of the organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "dashboard_id",
+                      "description": "(Required) The ID of the dashboard."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"<string>\",\n  \"widgets\": [\n    {\n      \"title\": \"string\",\n      \"displayType\": \"stacked_area\",\n      \"queries\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"fields\": [\n            \"string\",\n            \"string\"\n          ],\n          \"conditions\": \"string\",\n          \"orderby\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"fields\": [\n            \"string\",\n            \"string\"\n          ],\n          \"conditions\": \"string\",\n          \"orderby\": \"string\"\n        }\n      ],\n      \"id\": \"string\",\n      \"interval\": \"string\",\n      \"layout\": {\n        \"x\": 7436,\n        \"y\": 9270,\n        \"w\": 8652,\n        \"h\": 7039,\n        \"minH\": 9677\n      }\n    },\n    {\n      \"title\": \"string\",\n      \"displayType\": \"bar\",\n      \"queries\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"fields\": [\n            \"string\",\n            \"string\"\n          ],\n          \"conditions\": \"string\",\n          \"orderby\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"fields\": [\n            \"string\",\n            \"string\"\n          ],\n          \"conditions\": \"string\",\n          \"orderby\": \"string\"\n        }\n      ],\n      \"id\": \"string\",\n      \"interval\": \"string\",\n      \"layout\": {\n        \"x\": 7576,\n        \"y\": 545,\n        \"w\": 9960,\n        \"h\": 4544,\n        \"minH\": 527\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ff418197-cfb0-4eaf-8477-916fe14966ba",
+              "name": "Dashboard not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id_or_slug",
+                    "dashboards",
+                    ":dashboard_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id_or_slug",
+                      "description": "(Required) The ID or slug of the organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "dashboard_id",
+                      "description": "(Required) The ID of the dashboard."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"<string>\",\n  \"widgets\": [\n    {\n      \"title\": \"string\",\n      \"displayType\": \"stacked_area\",\n      \"queries\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"fields\": [\n            \"string\",\n            \"string\"\n          ],\n          \"conditions\": \"string\",\n          \"orderby\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"fields\": [\n            \"string\",\n            \"string\"\n          ],\n          \"conditions\": \"string\",\n          \"orderby\": \"string\"\n        }\n      ],\n      \"id\": \"string\",\n      \"interval\": \"string\",\n      \"layout\": {\n        \"x\": 7436,\n        \"y\": 9270,\n        \"w\": 8652,\n        \"h\": 7039,\n        \"minH\": 9677\n      }\n    },\n    {\n      \"title\": \"string\",\n      \"displayType\": \"bar\",\n      \"queries\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"fields\": [\n            \"string\",\n            \"string\"\n          ],\n          \"conditions\": \"string\",\n          \"orderby\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"fields\": [\n            \"string\",\n            \"string\"\n          ],\n          \"conditions\": \"string\",\n          \"orderby\": \"string\"\n        }\n      ],\n      \"id\": \"string\",\n      \"interval\": \"string\",\n      \"layout\": {\n        \"x\": 7576,\n        \"y\": 545,\n        \"w\": 9960,\n        \"h\": 4544,\n        \"minH\": 527\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "520e9c83-761a-40a9-83fe-ca7197ebc822",
+          "name": "Sentry Delete an organization's custom dashboard",
+          "request": {
+            "name": "Sentry Delete an organization's custom dashboard",
+            "description": {
+              "content": "Deletes a custom dashboard.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "organizations",
+                ":organization_id_or_slug",
+                "dashboards",
+                ":dashboard_id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organization_id_or_slug",
+                  "description": "(Required) The ID or slug of the organization."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "dashboard_id",
+                  "description": "(Required) The ID of the dashboard."
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "58fbaddd-6aa2-4bcf-b33d-49aacac1d03d",
+              "name": "Dashboard deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id_or_slug",
+                    "dashboards",
+                    ":dashboard_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id_or_slug",
+                      "description": "(Required) The ID or slug of the organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "dashboard_id",
+                      "description": "(Required) The ID of the dashboard."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "cb67f128-082f-4750-8f1b-5cd098ba638e",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id_or_slug",
+                    "dashboards",
+                    ":dashboard_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id_or_slug",
+                      "description": "(Required) The ID or slug of the organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "dashboard_id",
+                      "description": "(Required) The ID of the dashboard."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f7442136-2632-4adb-9a9d-d98cd6b4d85d",
+              "name": "Dashboard not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id_or_slug",
+                    "dashboards",
+                    ":dashboard_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id_or_slug",
+                      "description": "(Required) The ID or slug of the organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "dashboard_id",
+                      "description": "(Required) The ID of the dashboard."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://sentry.io/api/0",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "e5974bf4-a331-4f1c-9ad6-233dad3dfa20",
+    "name": "Sentry Dashboards API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Dashboards API provides endpoints for managing custom dashboards in Sentry organizations, including creating, listing, retrieving, editing, and deleting dashboards for visualizing error and performance data.\n\nContact Support:\n Name: Sentry Support\n Email: support@sentry.io",
+      "type": "text/plain"
+    }
+  }
+}

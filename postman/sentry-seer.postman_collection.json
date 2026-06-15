@@ -1,0 +1,748 @@
+{
+  "info": {
+    "_postman_id": "e50db0ac-2584-4eed-afe4-53c74c5dfdf8",
+    "name": "Sentry Seer API",
+    "description": "The Seer API provides endpoints for AI-powered issue analysis in Sentry, including listing available AI models, starting AI-assisted issue fixes, and retrieving the state of ongoing fix analyses.\n\nContact Support:\n Name: Sentry Support\n Email: support@sentry.io",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:17:44.000Z",
+    "updatedAt": "2026-06-05T15:17:45.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-e50db0ac-2584-4eed-afe4-53c74c5dfdf8"
+  },
+  "item": [
+    {
+      "name": "organizations",
+      "item": [
+        {
+          "name": "{organization_id_or_slug}",
+          "item": [
+            {
+              "name": "seer",
+              "item": [
+                {
+                  "name": "models",
+                  "item": [
+                    {
+                      "name": "Sentry List Seer AI models",
+                      "id": "04ae923a-bcf2-4b8b-adcf-ab3d5bed33f3",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/seer/models/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organization_id_or_slug",
+                            "seer",
+                            "models",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "id": "15f84b2e-9ae0-44c1-8d52-dbf49bcfe363",
+                              "key": "organization_id_or_slug",
+                              "value": "<string>",
+                              "description": "(Required) The ID or slug of the organization."
+                            }
+                          ]
+                        },
+                        "description": "Returns a list of available AI models for Seer issue analysis."
+                      },
+                      "response": [
+                        {
+                          "id": "1980cdd0-0bc3-40e6-9a5d-1f5ff9efb185",
+                          "name": "A list of available AI models.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/seer/models/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "seer",
+                                "models",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "[\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"isAvailable\": \"<boolean>\"\n  },\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"isAvailable\": \"<boolean>\"\n  }\n]",
+                          "createdAt": "2026-06-05T15:17:45.000Z",
+                          "updatedAt": "2026-06-05T15:17:45.000Z",
+                          "uid": "35240-1980cdd0-0bc3-40e6-9a5d-1f5ff9efb185"
+                        },
+                        {
+                          "id": "b6d9822a-a602-4d4b-8749-a6d481a45ef1",
+                          "name": "Unauthorized.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/seer/models/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "seer",
+                                "models",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:17:45.000Z",
+                          "updatedAt": "2026-06-05T15:17:45.000Z",
+                          "uid": "35240-b6d9822a-a602-4d4b-8749-a6d481a45ef1"
+                        },
+                        {
+                          "id": "fe439068-2336-43ac-aaf5-a9606eaf3f4b",
+                          "name": "Forbidden.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organization_id_or_slug/seer/models/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organization_id_or_slug",
+                                "seer",
+                                "models",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organization_id_or_slug"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:17:45.000Z",
+                          "updatedAt": "2026-06-05T15:17:45.000Z",
+                          "uid": "35240-fe439068-2336-43ac-aaf5-a9606eaf3f4b"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:17:45.000Z",
+                      "updatedAt": "2026-06-05T15:17:45.000Z",
+                      "uid": "35240-04ae923a-bcf2-4b8b-adcf-ab3d5bed33f3"
+                    }
+                  ],
+                  "id": "092d3274-22cb-48ca-8889-a9a4fee33d3c",
+                  "createdAt": "2026-06-05T15:17:45.000Z",
+                  "updatedAt": "2026-06-05T15:17:45.000Z",
+                  "uid": "35240-092d3274-22cb-48ca-8889-a9a4fee33d3c"
+                }
+              ],
+              "id": "2cac64ec-121f-4d04-b49a-3fad14eeaa71",
+              "createdAt": "2026-06-05T15:17:45.000Z",
+              "updatedAt": "2026-06-05T15:17:45.000Z",
+              "uid": "35240-2cac64ec-121f-4d04-b49a-3fad14eeaa71"
+            }
+          ],
+          "id": "987c4c49-f57a-475c-92a2-acbc34bc561f",
+          "createdAt": "2026-06-05T15:17:45.000Z",
+          "updatedAt": "2026-06-05T15:17:45.000Z",
+          "uid": "35240-987c4c49-f57a-475c-92a2-acbc34bc561f"
+        }
+      ],
+      "id": "94993b65-be09-473b-8a86-a37b39787fc5",
+      "createdAt": "2026-06-05T15:17:45.000Z",
+      "updatedAt": "2026-06-05T15:17:45.000Z",
+      "uid": "35240-94993b65-be09-473b-8a86-a37b39787fc5"
+    },
+    {
+      "name": "issues",
+      "item": [
+        {
+          "name": "{issue_id}",
+          "item": [
+            {
+              "name": "seer",
+              "item": [
+                {
+                  "name": "autofix",
+                  "item": [
+                    {
+                      "name": "Sentry Start Seer issue fix",
+                      "id": "7d46b4e0-f3a3-4032-835c-449fbba099a5",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"instruction\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/issues/:issue_id/seer/autofix/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "issues",
+                            ":issue_id",
+                            "seer",
+                            "autofix",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "id": "85dad7df-8e35-44e7-8850-32ec7752f50d",
+                              "key": "issue_id",
+                              "value": "<string>",
+                              "description": "(Required) The ID of the issue."
+                            }
+                          ]
+                        },
+                        "description": "Initiates an AI-powered issue fix analysis using Seer. The fix runs asynchronously and its state can be polled."
+                      },
+                      "response": [
+                        {
+                          "id": "b8af2fa9-045c-4da4-bc2a-7c4226aa6712",
+                          "name": "Fix analysis started.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"instruction\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/issues/:issue_id/seer/autofix/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "issues",
+                                ":issue_id",
+                                "seer",
+                                "autofix",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "issue_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Accepted",
+                          "code": 202,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"autofix\": {\n    \"status\": \"completed\",\n    \"createdAt\": \"<dateTime>\",\n    \"completedAt\": \"<dateTime>\",\n    \"steps\": [\n      {\n        \"id\": \"<string>\",\n        \"title\": \"<string>\",\n        \"status\": \"<string>\",\n        \"completedMessage\": \"<string>\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"title\": \"<string>\",\n        \"status\": \"<string>\",\n        \"completedMessage\": \"<string>\"\n      }\n    ],\n    \"fix\": {\n      \"title\": \"<string>\",\n      \"description\": \"<string>\",\n      \"pr_url\": \"<uri>\"\n    }\n  }\n}",
+                          "createdAt": "2026-06-05T15:17:45.000Z",
+                          "updatedAt": "2026-06-05T15:17:45.000Z",
+                          "uid": "35240-b8af2fa9-045c-4da4-bc2a-7c4226aa6712"
+                        },
+                        {
+                          "id": "afbddff5-efa6-4d70-b520-42ea4784caea",
+                          "name": "Bad request.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"instruction\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/issues/:issue_id/seer/autofix/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "issues",
+                                ":issue_id",
+                                "seer",
+                                "autofix",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "issue_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:17:45.000Z",
+                          "updatedAt": "2026-06-05T15:17:45.000Z",
+                          "uid": "35240-afbddff5-efa6-4d70-b520-42ea4784caea"
+                        },
+                        {
+                          "id": "471db44c-5cbb-4e2e-b3c7-ff0cac2c33b4",
+                          "name": "Unauthorized.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"instruction\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/issues/:issue_id/seer/autofix/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "issues",
+                                ":issue_id",
+                                "seer",
+                                "autofix",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "issue_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:17:45.000Z",
+                          "updatedAt": "2026-06-05T15:17:45.000Z",
+                          "uid": "35240-471db44c-5cbb-4e2e-b3c7-ff0cac2c33b4"
+                        },
+                        {
+                          "id": "6410ba57-a6fc-4f2b-ad54-c26e42bdfec3",
+                          "name": "Issue not found.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"instruction\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/issues/:issue_id/seer/autofix/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "issues",
+                                ":issue_id",
+                                "seer",
+                                "autofix",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "issue_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:17:45.000Z",
+                          "updatedAt": "2026-06-05T15:17:45.000Z",
+                          "uid": "35240-6410ba57-a6fc-4f2b-ad54-c26e42bdfec3"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:17:45.000Z",
+                      "updatedAt": "2026-06-05T15:17:45.000Z",
+                      "uid": "35240-7d46b4e0-f3a3-4032-835c-449fbba099a5"
+                    },
+                    {
+                      "name": "Sentry Retrieve Seer issue fix state",
+                      "id": "55413fdd-a7ed-4b97-8524-6690008962fa",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/issues/:issue_id/seer/autofix/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "issues",
+                            ":issue_id",
+                            "seer",
+                            "autofix",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "id": "71595b43-a3a3-4e8c-b2d0-6b30f6f3cd65",
+                              "key": "issue_id",
+                              "value": "<string>",
+                              "description": "(Required) The ID of the issue."
+                            }
+                          ]
+                        },
+                        "description": "Returns the current state of a Seer issue fix analysis."
+                      },
+                      "response": [
+                        {
+                          "id": "1d221ee9-4a76-4a67-883e-5ceb4962fd08",
+                          "name": "The current state of the fix analysis.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/issues/:issue_id/seer/autofix/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "issues",
+                                ":issue_id",
+                                "seer",
+                                "autofix",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "issue_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"autofix\": {\n    \"status\": \"completed\",\n    \"createdAt\": \"<dateTime>\",\n    \"completedAt\": \"<dateTime>\",\n    \"steps\": [\n      {\n        \"id\": \"<string>\",\n        \"title\": \"<string>\",\n        \"status\": \"<string>\",\n        \"completedMessage\": \"<string>\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"title\": \"<string>\",\n        \"status\": \"<string>\",\n        \"completedMessage\": \"<string>\"\n      }\n    ],\n    \"fix\": {\n      \"title\": \"<string>\",\n      \"description\": \"<string>\",\n      \"pr_url\": \"<uri>\"\n    }\n  }\n}",
+                          "createdAt": "2026-06-05T15:17:45.000Z",
+                          "updatedAt": "2026-06-05T15:17:45.000Z",
+                          "uid": "35240-1d221ee9-4a76-4a67-883e-5ceb4962fd08"
+                        },
+                        {
+                          "id": "6939af14-19ac-46d1-b239-8f3c7ea28e74",
+                          "name": "Unauthorized.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/issues/:issue_id/seer/autofix/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "issues",
+                                ":issue_id",
+                                "seer",
+                                "autofix",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "issue_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:17:45.000Z",
+                          "updatedAt": "2026-06-05T15:17:45.000Z",
+                          "uid": "35240-6939af14-19ac-46d1-b239-8f3c7ea28e74"
+                        },
+                        {
+                          "id": "406ec3cf-af23-4122-aba2-cb108cf83cd7",
+                          "name": "Issue or fix state not found.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/issues/:issue_id/seer/autofix/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "issues",
+                                ":issue_id",
+                                "seer",
+                                "autofix",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "issue_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:17:45.000Z",
+                          "updatedAt": "2026-06-05T15:17:45.000Z",
+                          "uid": "35240-406ec3cf-af23-4122-aba2-cb108cf83cd7"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:17:45.000Z",
+                      "updatedAt": "2026-06-05T15:17:45.000Z",
+                      "uid": "35240-55413fdd-a7ed-4b97-8524-6690008962fa"
+                    }
+                  ],
+                  "id": "eec2e7d1-3113-4e85-86e6-2b9159fff260",
+                  "createdAt": "2026-06-05T15:17:45.000Z",
+                  "updatedAt": "2026-06-05T15:17:45.000Z",
+                  "uid": "35240-eec2e7d1-3113-4e85-86e6-2b9159fff260"
+                }
+              ],
+              "id": "432749af-520b-46ae-bff5-ce7675de83c5",
+              "createdAt": "2026-06-05T15:17:45.000Z",
+              "updatedAt": "2026-06-05T15:17:45.000Z",
+              "uid": "35240-432749af-520b-46ae-bff5-ce7675de83c5"
+            }
+          ],
+          "id": "e1d6f744-95f1-40f6-94dd-6bda1d1758ab",
+          "createdAt": "2026-06-05T15:17:45.000Z",
+          "updatedAt": "2026-06-05T15:17:45.000Z",
+          "uid": "35240-e1d6f744-95f1-40f6-94dd-6bda1d1758ab"
+        }
+      ],
+      "id": "ad705b7e-5bb0-4d18-8857-e9a3656c1738",
+      "createdAt": "2026-06-05T15:17:45.000Z",
+      "updatedAt": "2026-06-05T15:17:45.000Z",
+      "uid": "35240-ad705b7e-5bb0-4d18-8857-e9a3656c1738"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://sentry.io/api/0"
+    }
+  ]
+}
