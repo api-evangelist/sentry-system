@@ -1,0 +1,46 @@
+generated: '2026-06-20'
+method: searched
+source: https://sentry.io/.well-known/oauth-authorization-server
+docs: https://docs.sentry.io/api/permissions/
+notes: >-
+  Sentry auth tokens (user, organization, and internal/public integration tokens) are scope-bearing.
+  The authoritative scope list is published in Sentry's RFC 8414 OAuth authorization-server document;
+  descriptions and the GET/PUT-POST/DELETE permission-level mapping come from the API permissions docs.
+  OpenAPI specs in this repo declare only bearer/DSN security schemes, so the scope surface is not
+  derivable from them and is captured here from the provider's own OAuth metadata.
+schemes:
+  - name: OAuth2
+    source: https://sentry.io/.well-known/oauth-authorization-server
+    flows:
+      - flow: authorizationCode
+        authorizationUrl: https://sentry.io/oauth/authorize/
+        tokenUrl: https://sentry.io/oauth/token/
+        pkce: S256
+        grant_types: [authorization_code, refresh_token]
+scopes:
+  - {scope: openid, description: OpenID Connect authentication}
+  - {scope: email, description: Access the user's email address}
+  - {scope: profile, description: Access the user's basic profile}
+  - {scope: org:read, description: Read organization details (GET organization endpoints)}
+  - {scope: org:write, description: Create/update organizations (PUT/POST organization endpoints)}
+  - {scope: org:admin, description: Delete organizations and full admin (DELETE organization endpoints)}
+  - {scope: org:billing, description: Access organization billing information}
+  - {scope: org:ci, description: CI and deployment workflows — upload source maps, create releases, manage code mappings}
+  - {scope: org:integrations, description: Manage organization integrations}
+  - {scope: project:read, description: Read project details (GET project endpoints)}
+  - {scope: project:write, description: Create/update projects (PUT/POST project endpoints)}
+  - {scope: project:admin, description: Delete projects and full admin (DELETE project endpoints)}
+  - {scope: project:releases, description: Access project and organization release endpoints}
+  - {scope: project:distribution, description: Access project distribution/artifact endpoints}
+  - {scope: team:read, description: Read team details (GET team endpoints)}
+  - {scope: team:write, description: Create/update teams (PUT/POST team endpoints)}
+  - {scope: team:admin, description: Delete teams and full admin (DELETE team endpoints)}
+  - {scope: member:read, description: Read organization members (GET member endpoints)}
+  - {scope: member:invite, description: Invite members to the organization}
+  - {scope: member:write, description: Create/update members (PUT/POST member endpoints)}
+  - {scope: member:admin, description: Remove members and full admin (DELETE member endpoints)}
+  - {scope: event:read, description: Read issues and events (GET event endpoints)}
+  - {scope: event:write, description: Update issues and events (PUT event endpoints)}
+  - {scope: event:admin, description: Delete issues and events (DELETE event endpoints)}
+  - {scope: alerts:read, description: Read alert rules}
+  - {scope: alerts:write, description: Create/update/delete alert rules}

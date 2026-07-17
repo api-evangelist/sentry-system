@@ -1,0 +1,21 @@
+generated: '2026-06-20'
+method: searched
+host: https://sentry.io
+documents:
+  - path: /.well-known/security.txt          # RFC 9116
+    status: 200
+    file: sentry-system-security.txt
+  - path: /.well-known/oauth-authorization-server  # RFC 8414
+    status: 200
+    file: sentry-system-oauth-authorization-server.json
+  - path: /.well-known/api-catalog             # RFC 9727 linkset (points at /api/0/ and mcp.sentry.dev/mcp)
+    status: 200
+    file: sentry-system-api-catalog.json
+  - path: /.well-known/openid-configuration    # redirects to /auth/login/.well-known/ (302, org-scoped)
+    status: 302
+  - path: /.well-known/ai-plugin.json
+    status: 301
+notes: >-
+  Sentry exposes a public RFC 8414 OAuth 2.0 authorization-server document declaring PKCE (S256),
+  authorization_code + refresh_token grants, and 25 scopes. The api-catalog linkset advertises both the
+  REST API (https://sentry.io/api/0/) and the remote MCP server (https://mcp.sentry.dev/mcp).

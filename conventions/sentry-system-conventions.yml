@@ -1,0 +1,39 @@
+generated: '2026-06-20'
+method: searched
+source: https://docs.sentry.io/api/ + openapi/*.yml
+authentication:
+  style: bearer-token
+  header: "Authorization: Bearer <auth-token>"
+  token_types: [user auth token, organization auth token, internal integration token, public integration (OAuth) token]
+  scopes: scopes/sentry-system-scopes.yml
+  ref: authentication/sentry-system-authentication.yml
+  docs: https://docs.sentry.io/api/auth/
+pagination:
+  style: cursor
+  mechanism: RFC 5988 Link header (rel="next"/"previous" with results=true/false and a cursor token)
+  params: [cursor, per_page]
+  response: Link header; body is a bare JSON array of resources
+  docs: https://docs.sentry.io/api/pagination/
+idempotency:
+  supported: false
+  note: No idempotency-key header is documented; writes are not declared idempotent beyond HTTP method semantics.
+rate_limiting:
+  signaled_via: [X-Sentry-Rate-Limit-Limit, X-Sentry-Rate-Limit-Remaining, X-Sentry-Rate-Limit-Reset, Retry-After]
+  status: 429
+  ref: rate-limits/sentry-system-rate-limits.yml
+  docs: https://docs.sentry.io/api/ratelimits/
+error_envelope:
+  content_type: application/json
+  shape: '{"detail": "message"}'  # plus per-field arrays for 400 validation
+  ref: errors/sentry-system-problem-types.yml
+  docs: https://docs.sentry.io/api/requests/
+versioning:
+  style: uri-path
+  base: /api/0/
+  ref: lifecycle/sentry-system-lifecycle.yml
+identifiers:
+  style: slugs-and-ids
+  note: Organizations, projects, and teams are addressed by URL slug (or numeric id); issues have both a numeric id and a short id (e.g. PROJECT-1AB).
+webhooks:
+  supported: true
+  docs: https://docs.sentry.io/organization/integrations/integration-platform/webhooks/

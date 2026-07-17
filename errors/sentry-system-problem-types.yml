@@ -1,0 +1,23 @@
+generated: '2026-06-20'
+method: derived
+source: openapi/*.yml
+format: sentry-detail-envelope
+docs: https://docs.sentry.io/api/requests/
+envelope:
+  # Sentry does NOT use RFC 9457 application/problem+json. Errors are returned as a JSON object
+  # with a top-level "detail" string (and, for validation errors, field-keyed arrays of messages).
+  content_type: application/json
+  fields:
+    detail: Human-readable error message (string)
+    field_errors: For 400 validation failures, an object of field -> [messages]
+problems:
+  - {status: 400, title: Bad Request, meaning: Invalid parameters or malformed request body; validation errors return per-field messages, count_in_specs: 51}
+  - {status: 401, title: Unauthorized, meaning: Missing or invalid authentication token (bearer auth token or DSN), count_in_specs: 200}
+  - {status: 403, title: Forbidden, meaning: Authenticated but the token lacks the required scope/permission for the resource, count_in_specs: 94}
+  - {status: 404, title: Not Found, meaning: The organization, project, team, issue, or other resource does not exist or is not visible to the token, count_in_specs: 119}
+  - {status: 409, title: Conflict, meaning: The request conflicts with the current state of the resource (e.g. slug already in use), count_in_specs: 4}
+  - {status: 429, title: Too Many Requests, meaning: Rate limit exceeded; see X-Sentry-Rate-Limit-* and Retry-After headers, source: docs, doc: https://docs.sentry.io/api/ratelimits/}
+notes: >-
+  Status/description derived mechanically from 4xx/5xx responses across the 21 OpenAPI files in this repo.
+  No responses declare application/problem+json, so this is captured as Sentry's native {detail} envelope,
+  not RFC 9457. 429 is added from the published rate-limit docs (not enumerated in the specs).

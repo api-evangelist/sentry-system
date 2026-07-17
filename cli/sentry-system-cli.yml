@@ -1,0 +1,35 @@
+generated: '2026-06-20'
+method: searched
+source: https://docs.sentry.io/cli/
+name: sentry-cli
+description: >-
+  Official Sentry command-line tool for connecting to the Sentry API — managing releases and source maps,
+  uploading debug information files (dSYM/ProGuard/Breakpad), sending events, managing code mappings, and
+  running/checking cron monitors.
+binary: sentry-cli
+package_ref: packages/sentry-system-packages.yml   # @sentry/cli (npm), sentry-cli (pypi)
+repo: https://github.com/getsentry/sentry-cli
+install:
+  - {method: npm, command: "npm install @sentry/cli"}
+  - {method: npx, command: "npx @sentry/cli"}
+  - {method: homebrew, command: "brew install getsentry/tools/sentry-cli"}
+  - {method: curl, command: "curl -sL https://sentry.io/get-cli/ | sh"}
+  - {method: pip, command: "pip install sentry-cli"}
+  - {method: docker, command: "docker run --rm -v $(pwd):/work getsentry/sentry-cli"}
+auth:
+  env: [SENTRY_AUTH_TOKEN, SENTRY_ORG, SENTRY_PROJECT, SENTRY_DSN]
+  command: "sentry-cli login"
+commands:
+  - {group: releases, description: Create, edit, finalize and delete releases; associate commits and deploys}
+  - {group: sourcemaps, description: Upload and manage JavaScript source maps and artifact bundles}
+  - {group: debug-files (difutil), description: Validate, bundle and upload debug information files}
+  - {group: projects, description: List and manage projects}
+  - {group: deploys, description: Record deployments against a release}
+  - {group: send-event, description: Send a one-off event/message to Sentry}
+  - {group: send-metric, description: Emit application metrics}
+  - {group: monitors, description: Run and check in cron monitors (sentry-cli monitors run)}
+  - {group: send-envelope, description: Send a raw event envelope}
+  - {group: info, description: Print configuration and authentication status}
+  - {group: login, description: Authenticate the CLI with an auth token}
+  - {group: organizations, description: List organizations}
+  - {group: repos, description: Manage repository associations for commit tracking}

@@ -1,0 +1,91 @@
+generated: '2026-06-20'
+method: derived
+source: openapi/*.yml + json-schema/*.json
+docs: https://docs.sentry.io/api/
+notes: >-
+  Entity graph derived from the URL nesting of the OpenAPI paths (organizations -> projects/teams ->
+  issues/releases/...) and the JSON Schemas present in json-schema/. Sentry addresses most resources by
+  slug within an organization scope; issues carry both a numeric id and a short id.
+entities:
+  - name: Organization
+    id: slug
+    relationships:
+      - {kind: has_many, target: Project, via: organization}
+      - {kind: has_many, target: Team, via: organization}
+      - {kind: has_many, target: OrganizationMember, via: organization}
+      - {kind: has_many, target: Release, via: organization}
+      - {kind: has_many, target: Repository, via: organization}
+      - {kind: has_many, target: Dashboard, via: organization}
+      - {kind: has_many, target: SavedQuery, via: organization}
+      - {kind: has_many, target: Integration, via: organization}
+  - name: Team
+    id: slug
+    relationships:
+      - {kind: belongs_to, target: Organization, via: organization}
+      - {kind: has_many, target: TeamMember, via: team}
+      - {kind: has_many, target: Project, via: teams}   # many-to-many
+  - name: Project
+    id: slug
+    relationships:
+      - {kind: belongs_to, target: Organization, via: organization}
+      - {kind: has_many, target: Team, via: teams}      # many-to-many
+      - {kind: has_many, target: ClientKey, via: project}
+      - {kind: has_many, target: Issue, via: project}
+      - {kind: has_many, target: Release, via: projects}
+      - {kind: has_many, target: ServiceHook, via: project}
+      - {kind: has_many, target: Environment, via: project}
+      - {kind: has_many, target: DebugFile, via: project}
+      - {kind: has_many, target: Monitor, via: project}
+      - {kind: has_many, target: Replay, via: project}
+  - name: OrganizationMember
+    id: id
+    relationships:
+      - {kind: belongs_to, target: Organization, via: organization}
+      - {kind: has_many, target: TeamMember, via: member}
+  - name: TeamMember
+    id: id
+    relationships:
+      - {kind: belongs_to, target: Team, via: team}
+      - {kind: belongs_to, target: OrganizationMember, via: member}
+  - name: Issue
+    id: id
+    also_addressed_by: short_id
+    relationships:
+      - {kind: belongs_to, target: Project, via: project}
+      - {kind: has_many, target: Event, via: issue}
+  - name: Event
+    id: eventID
+    relationships:
+      - {kind: belongs_to, target: Issue, via: issue}
+      - {kind: belongs_to, target: Project, via: project}
+  - name: Release
+    id: version
+    relationships:
+      - {kind: belongs_to, target: Organization, via: organization}
+      - {kind: has_many, target: Deploy, via: release}
+      - {kind: has_many, target: Commit, via: release}
+      - {kind: has_many, target: ReleaseFile, via: release}
+  - name: Monitor
+    id: slug
+    relationships:
+      - {kind: belongs_to, target: Project, via: project}
+      - {kind: has_many, target: CheckIn, via: monitor}
+  - name: Dashboard
+    id: id
+    relationships:
+      - {kind: belongs_to, target: Organization, via: organization}
+      - {kind: has_many, target: Widget, via: dashboard}
+  - name: Replay
+    id: replay_id
+    relationships:
+      - {kind: belongs_to, target: Project, via: project}
+      - {kind: has_many, target: RecordingSegment, via: replay}
+  - name: ClientKey
+    id: id
+    relationships:
+      - {kind: belongs_to, target: Project, via: project}
+  - name: Integration
+    id: id
+    relationships:
+      - {kind: belongs_to, target: Organization, via: organization}
+      - {kind: has_many, target: ExternalIssue, via: integration}

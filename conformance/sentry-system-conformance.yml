@@ -1,0 +1,17 @@
+generated: '2026-06-20'
+method: derived
+source: openapi/*.yml + https://docs.sentry.io/api/
+standards:
+  - {id: oauth2, conforms: true, evidence: "RFC 8414 authorization-server metadata at sentry.io/.well-known/oauth-authorization-server (authorization_code + refresh_token, 25 scopes)"}
+  - {id: oauth2-pkce, conforms: true, evidence: "code_challenge_methods_supported: [S256]"}
+  - {id: oidc, conforms: true, evidence: "openid/email/profile scopes advertised; openid-configuration endpoint present (org-scoped redirect)"}
+  - {id: rfc9116-security-txt, conforms: true, evidence: "signed /.well-known/security.txt with Contact/Policy/Encryption"}
+  - {id: rfc9727-api-catalog, conforms: true, evidence: "/.well-known/api-catalog linkset advertises the REST API and MCP server"}
+  - {id: scim2, conforms: true, evidence: "openapi/sentry-scim-openapi.yml exposes SCIM 2.0 Users/Groups provisioning (Business plan + SAML2)"}
+  - {id: cursor-pagination, conforms: true, evidence: "Link-header cursor pagination documented and present across specs (docs.sentry.io/api/pagination/)"}
+  - {id: rfc9457-problem-details, conforms: false, evidence: "errors use a native {detail} JSON envelope, not application/problem+json"}
+  - {id: rfc8594-sunset-header, conforms: false, evidence: "no Sunset/Deprecation header policy documented; no deprecated operations in specs"}
+  - {id: fhir-r4, conforms: false}
+  - {id: fapi, conforms: false}
+  - {id: odata, conforms: false}
+  - {id: json-api, conforms: false}

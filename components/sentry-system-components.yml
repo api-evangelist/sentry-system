@@ -1,0 +1,26 @@
+generated: '2026-06-20'
+method: searched
+source: https://docs.sentry.io/
+notes: >-
+  Client-side / embeddable surfaces Sentry ships, distinct from the server-side SDKs in packages/.
+components:
+  - family: User Feedback
+    description: Embeddable feedback widget that lets end users submit reports (with optional screenshots) attached to Sentry events.
+    kind: browser-widget
+    loader: "@sentry/browser feedbackIntegration() / Sentry.getFeedback()"
+    docs: https://docs.sentry.io/product/user-feedback/
+  - family: Loader Script
+    description: CDN-hosted async loader that installs and initializes the browser JS SDK from a project's DSN without bundling.
+    kind: cdn-loader
+    loader: "https://js.sentry-cdn.com/<publicKey>.min.js"
+    docs: https://docs.sentry.io/platforms/javascript/install/loader/
+  - family: Spotlight
+    description: Local development debug overlay that surfaces Sentry errors, traces, and logs in the browser during dev.
+    kind: dev-overlay
+    loader: "@spotlightjs/spotlight"
+    docs: https://spotlightjs.com/
+  - family: Crash Report Modal
+    description: Prebuilt hosted modal dialog for collecting user feedback on the last error event (showReportDialog).
+    kind: hosted-modal
+    loader: "Sentry.showReportDialog()"
+    docs: https://docs.sentry.io/platforms/javascript/user-feedback/
