@@ -1,0 +1,134 @@
+openapi: 3.1.0
+info:
+  title: Sentry Alerts Commits API
+  description: The Alerts API provides endpoints for managing alert rules in Sentry, including creating, retrieving, updating, and deleting metric alert rules and issue alert rules, as well as managing spike protection notification actions.
+  version: 0.0.1
+  contact:
+    name: Sentry Support
+    url: https://sentry.io/support/
+    email: support@sentry.io
+servers:
+- url: https://sentry.io/api/0
+  description: Sentry Production API
+security:
+- BearerAuth: []
+tags:
+- name: Commits
+  description: Manage commits associated with releases
+paths:
+  /organizations/{organization_id_or_slug}/releases/{version}/commits/:
+    get:
+      operationId: listOrganizationReleaseCommits
+      summary: Sentry List an organization release's commits
+      description: Returns a list of commits associated with a release.
+      tags:
+      - Commits
+      parameters:
+      - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      - $ref: '#/components/parameters/Version'
+      - name: cursor
+        in: query
+        description: Pagination cursor.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A list of commits.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Commit'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Release not found.
+  /organizations/{organization_id_or_slug}/releases/{version}/commitfiles/:
+    get:
+      operationId: listReleaseCommitFiles
+      summary: Sentry Retrieve files changed in a release's commits
+      description: Returns a list of files changed in the commits associated with a release.
+      tags:
+      - Commits
+      parameters:
+      - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      - $ref: '#/components/parameters/Version'
+      - name: cursor
+        in: query
+        description: Pagination cursor.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A list of changed files.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    filename:
+                      type: string
+                    type:
+                      type: string
+                      enum:
+                      - A
+                      - M
+                      - D
+                    id:
+                      type: string
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Release not found.
+components:
+  schemas:
+    Commit:
+      type: object
+      properties:
+        id:
+          type: string
+        message:
+          type: string
+        dateCreated:
+          type: string
+          format: date-time
+        author:
+          type: object
+          properties:
+            name:
+              type: string
+            email:
+              type: string
+              format: email
+        repository:
+          type: object
+          properties:
+            id:
+              type: string
+            name:
+              type: string
+      required:
+      - id
+  parameters:
+    Version:
+      name: version
+      in: path
+      required: true
+      description: The version identifier of the release.
+      schema:
+        type: string
+    OrganizationIdOrSlug:
+      name: organization_id_or_slug
+      in: path
+      required: true
+      description: The ID or slug of the organization.
+      schema:
+        type: string
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: Authentication token for the Sentry API.

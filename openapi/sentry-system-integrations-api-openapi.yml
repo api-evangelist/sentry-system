@@ -1,0 +1,171 @@
+openapi: 3.1.0
+info:
+  title: Sentry Alerts Integrations API
+  description: The Alerts API provides endpoints for managing alert rules in Sentry, including creating, retrieving, updating, and deleting metric alert rules and issue alert rules, as well as managing spike protection notification actions.
+  version: 0.0.1
+  contact:
+    name: Sentry Support
+    url: https://sentry.io/support/
+    email: support@sentry.io
+servers:
+- url: https://sentry.io/api/0
+  description: Sentry Production API
+security:
+- BearerAuth: []
+tags:
+- name: Integrations
+  description: Manage third-party integrations
+paths:
+  /organizations/{organization_id_or_slug}/integrations/:
+    get:
+      operationId: listOrganizationIntegrations
+      summary: Sentry List an organization's available integrations
+      description: Returns a list of integrations configured for an organization.
+      tags:
+      - Integrations
+      parameters:
+      - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      - name: providerKey
+        in: query
+        description: Filter by integration provider key.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A list of integrations.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Integration'
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+  /organizations/{organization_id_or_slug}/integrations/{integration_id}/:
+    get:
+      operationId: retrieveOrganizationIntegration
+      summary: Sentry Retrieve an integration for an organization
+      description: Returns details for a specific integration.
+      tags:
+      - Integrations
+      parameters:
+      - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      - $ref: '#/components/parameters/IntegrationId'
+      responses:
+        '200':
+          description: Integration details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Integration'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Integration not found.
+    delete:
+      operationId: deleteOrganizationIntegration
+      summary: Sentry Delete an integration for an organization
+      description: Removes an integration from the organization.
+      tags:
+      - Integrations
+      parameters:
+      - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      - $ref: '#/components/parameters/IntegrationId'
+      responses:
+        '204':
+          description: Integration deleted.
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Integration not found.
+  /organizations/{organization_id_or_slug}/config/integrations/:
+    get:
+      operationId: getIntegrationProviderInfo
+      summary: Sentry Get integration provider information
+      description: Returns available integration providers and their configurations.
+      tags:
+      - Integrations
+      parameters:
+      - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      responses:
+        '200':
+          description: Integration provider information.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  providers:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        key:
+                          type: string
+                        name:
+                          type: string
+                        canAdd:
+                          type: boolean
+                        features:
+                          type: array
+                          items:
+                            type: string
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+components:
+  parameters:
+    OrganizationIdOrSlug:
+      name: organization_id_or_slug
+      in: path
+      required: true
+      description: The ID or slug of the organization.
+      schema:
+        type: string
+    IntegrationId:
+      name: integration_id
+      in: path
+      required: true
+      description: The ID of the integration.
+      schema:
+        type: string
+  schemas:
+    Integration:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        icon:
+          type: string
+          nullable: true
+        domainName:
+          type: string
+        provider:
+          type: object
+          properties:
+            key:
+              type: string
+            name:
+              type: string
+        status:
+          type: string
+        configData:
+          type: object
+          nullable: true
+        dateCreated:
+          type: string
+          format: date-time
+      required:
+      - id
+      - name
+      - provider
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: Authentication token for the Sentry API.

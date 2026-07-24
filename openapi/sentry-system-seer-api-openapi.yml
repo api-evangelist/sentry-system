@@ -1,23 +1,20 @@
 openapi: 3.1.0
 info:
-  title: Sentry Seer API
-  description: >-
-    The Seer API provides endpoints for AI-powered issue analysis in Sentry,
-    including listing available AI models, starting AI-assisted issue fixes, and
-    retrieving the state of ongoing fix analyses.
+  title: Sentry Alerts Seer API
+  description: The Alerts API provides endpoints for managing alert rules in Sentry, including creating, retrieving, updating, and deleting metric alert rules and issue alert rules, as well as managing spike protection notification actions.
   version: 0.0.1
   contact:
     name: Sentry Support
     url: https://sentry.io/support/
     email: support@sentry.io
 servers:
-  - url: https://sentry.io/api/0
-    description: Sentry Production API
+- url: https://sentry.io/api/0
+  description: Sentry Production API
 security:
-  - BearerAuth: []
+- BearerAuth: []
 tags:
-  - name: Seer
-    description: AI-powered issue analysis and fix suggestions
+- name: Seer
+  description: AI-powered issue analysis and fix suggestions
 paths:
   /organizations/{organization_id_or_slug}/seer/models/:
     get:
@@ -25,9 +22,9 @@ paths:
       summary: Sentry List Seer AI models
       description: Returns a list of available AI models for Seer issue analysis.
       tags:
-        - Seer
+      - Seer
       parameters:
-        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      - $ref: '#/components/parameters/OrganizationIdOrSlug'
       responses:
         '200':
           description: A list of available AI models.
@@ -45,13 +42,11 @@ paths:
     post:
       operationId: startSeerIssueFix
       summary: Sentry Start Seer issue fix
-      description: >-
-        Initiates an AI-powered issue fix analysis using Seer. The fix runs
-        asynchronously and its state can be polled.
+      description: Initiates an AI-powered issue fix analysis using Seer. The fix runs asynchronously and its state can be polled.
       tags:
-        - Seer
+      - Seer
       parameters:
-        - $ref: '#/components/parameters/IssueId'
+      - $ref: '#/components/parameters/IssueId'
       requestBody:
         content:
           application/json:
@@ -82,9 +77,9 @@ paths:
       summary: Sentry Retrieve Seer issue fix state
       description: Returns the current state of a Seer issue fix analysis.
       tags:
-        - Seer
+      - Seer
       parameters:
-        - $ref: '#/components/parameters/IssueId'
+      - $ref: '#/components/parameters/IssueId'
       responses:
         '200':
           description: The current state of the fix analysis.
@@ -100,11 +95,6 @@ paths:
         '404':
           description: Issue or fix state not found.
 components:
-  securitySchemes:
-    BearerAuth:
-      type: http
-      scheme: bearer
-      description: Authentication token for the Sentry API.
   parameters:
     OrganizationIdOrSlug:
       name: organization_id_or_slug
@@ -133,18 +123,18 @@ components:
         isAvailable:
           type: boolean
       required:
-        - id
-        - name
+      - id
+      - name
     SeerAutofixState:
       type: object
       properties:
         status:
           type: string
           enum:
-            - pending
-            - processing
-            - completed
-            - error
+          - pending
+          - processing
+          - completed
+          - error
         createdAt:
           type: string
           format: date-time
@@ -179,5 +169,10 @@ components:
               format: uri
               nullable: true
       required:
-        - status
-        - createdAt
+      - status
+      - createdAt
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: Authentication token for the Sentry API.

@@ -1,0 +1,419 @@
+openapi: 3.1.0
+info:
+  title: Sentry Alerts Members API
+  description: The Alerts API provides endpoints for managing alert rules in Sentry, including creating, retrieving, updating, and deleting metric alert rules and issue alert rules, as well as managing spike protection notification actions.
+  version: 0.0.1
+  contact:
+    name: Sentry Support
+    url: https://sentry.io/support/
+    email: support@sentry.io
+servers:
+- url: https://sentry.io/api/0
+  description: Sentry Production API
+security:
+- BearerAuth: []
+tags:
+- name: Members
+  description: Manage organization members and their roles
+paths:
+  /organizations/{organization_id_or_slug}/members/:
+    get:
+      operationId: listOrganizationMembers
+      summary: Sentry List organization members
+      description: Returns a list of members bound to the organization.
+      tags:
+      - Members
+      parameters:
+      - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      - name: cursor
+        in: query
+        description: Pagination cursor.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A list of organization members.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OrganizationMember'
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+    post:
+      operationId: addOrganizationMember
+      summary: Sentry Add a member to an organization
+      description: Adds a member to an organization by email address.
+      tags:
+      - Members
+      parameters:
+      - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - email
+              - role
+              properties:
+                email:
+                  type: string
+                  format: email
+                  description: The email address to invite.
+                role:
+                  type: string
+                  description: The role for the member (e.g., member, admin, manager, owner).
+                teams:
+                  type: array
+                  items:
+                    type: string
+                  description: Team slugs to add the member to.
+      responses:
+        '201':
+          description: Member invitation sent.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationMember'
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+  /organizations/{organization_id_or_slug}/members/{member_id}/:
+    get:
+      operationId: retrieveOrganizationMember
+      summary: Sentry Retrieve an organization member
+      description: Returns details for a specific organization member.
+      tags:
+      - Members
+      parameters:
+      - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      - $ref: '#/components/parameters/MemberId'
+      responses:
+        '200':
+          description: Member details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationMember'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Member not found.
+    put:
+      operationId: updateOrganizationMemberRoles
+      summary: Sentry Update organization member roles
+      description: Updates the role and team memberships for an organization member.
+      tags:
+      - Members
+      parameters:
+      - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      - $ref: '#/components/parameters/MemberId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                role:
+                  type: string
+                  description: The organization-level role.
+                teams:
+                  type: array
+                  items:
+                    type: string
+                  description: Team slugs to assign.
+      responses:
+        '200':
+          description: Member updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationMember'
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+    delete:
+      operationId: deleteOrganizationMember
+      summary: Sentry Delete an organization member
+      description: Removes a member from an organization.
+      tags:
+      - Members
+      parameters:
+      - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      - $ref: '#/components/parameters/MemberId'
+      responses:
+        '204':
+          description: Member removed successfully.
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+        '404':
+          description: Member not found.
+  /teams/{organization_id_or_slug}/{team_id_or_slug}/members/:
+    get:
+      operationId: listTeamMembers
+      summary: Sentry List a team's members
+      description: Returns a list of members bound to a team.
+      tags:
+      - Members
+      parameters:
+      - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      - $ref: '#/components/parameters/TeamIdOrSlug'
+      - name: cursor
+        in: query
+        description: Pagination cursor.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A list of team members.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TeamMember'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Team not found.
+  /organizations/{organization_id_or_slug}/members/{member_id}/teams/{team_id_or_slug}/:
+    post:
+      operationId: addMemberToTeam
+      summary: Sentry Add an organization member to a team
+      description: Adds an existing organization member to a team.
+      tags:
+      - Members
+      parameters:
+      - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      - $ref: '#/components/parameters/MemberId_2'
+      - $ref: '#/components/parameters/TeamIdOrSlug'
+      responses:
+        '201':
+          description: Member added to team.
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+        '404':
+          description: Member or team not found.
+    delete:
+      operationId: removeMemberFromTeam
+      summary: Sentry Delete an organization member from a team
+      description: Removes a member from a team.
+      tags:
+      - Members
+      parameters:
+      - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      - $ref: '#/components/parameters/MemberId_2'
+      - $ref: '#/components/parameters/TeamIdOrSlug'
+      responses:
+        '200':
+          description: Member removed from team.
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+        '404':
+          description: Member or team not found.
+    put:
+      operationId: updateMemberTeamRole
+      summary: Sentry Update an organization member's team role
+      description: Updates the role of a member within a specific team.
+      tags:
+      - Members
+      parameters:
+      - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      - $ref: '#/components/parameters/MemberId_2'
+      - $ref: '#/components/parameters/TeamIdOrSlug'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                teamRole:
+                  type: string
+                  description: The new team-level role for the member.
+      responses:
+        '200':
+          description: Team role updated.
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+  /organizations/{organization_id_or_slug}/users/{user_id}/teams/:
+    get:
+      operationId: listUserTeams
+      summary: Sentry List a user's teams for an organization
+      description: Returns a list of teams the specified user belongs to within an organization.
+      tags:
+      - Members
+      parameters:
+      - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      - name: user_id
+        in: path
+        required: true
+        description: The ID of the user.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A list of teams.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Team'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: User not found.
+components:
+  parameters:
+    MemberId_2:
+      name: member_id
+      in: path
+      required: true
+      description: The ID of the organization member.
+      schema:
+        type: string
+    TeamIdOrSlug:
+      name: team_id_or_slug
+      in: path
+      required: true
+      description: The ID or slug of the team.
+      schema:
+        type: string
+    MemberId:
+      name: member_id
+      in: path
+      required: true
+      description: The ID of the member to retrieve.
+      schema:
+        type: string
+    OrganizationIdOrSlug:
+      name: organization_id_or_slug
+      in: path
+      required: true
+      description: The ID or slug of the organization.
+      schema:
+        type: string
+  schemas:
+    Team:
+      type: object
+      properties:
+        id:
+          type: string
+        slug:
+          type: string
+        name:
+          type: string
+        dateCreated:
+          type: string
+          format: date-time
+        isMember:
+          type: boolean
+        memberCount:
+          type: integer
+        avatar:
+          type: object
+          properties:
+            avatarType:
+              type: string
+            avatarUuid:
+              type: string
+              nullable: true
+      required:
+      - id
+      - slug
+      - name
+    TeamMember:
+      type: object
+      properties:
+        id:
+          type: string
+        email:
+          type: string
+          format: email
+        name:
+          type: string
+        role:
+          type: string
+        teamRole:
+          type: string
+          nullable: true
+        pending:
+          type: boolean
+        expired:
+          type: boolean
+        dateCreated:
+          type: string
+          format: date-time
+      required:
+      - id
+      - email
+    OrganizationMember:
+      type: object
+      properties:
+        id:
+          type: string
+        email:
+          type: string
+          format: email
+        name:
+          type: string
+        role:
+          type: string
+        roleName:
+          type: string
+        pending:
+          type: boolean
+        expired:
+          type: boolean
+        dateCreated:
+          type: string
+          format: date-time
+        user:
+          type: object
+          nullable: true
+          properties:
+            id:
+              type: string
+            name:
+              type: string
+            username:
+              type: string
+            email:
+              type: string
+              format: email
+        teams:
+          type: array
+          items:
+            type: string
+      required:
+      - id
+      - email
+      - role
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: Authentication token for the Sentry API.

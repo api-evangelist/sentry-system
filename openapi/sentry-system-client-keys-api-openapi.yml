@@ -1,0 +1,227 @@
+openapi: 3.1.0
+info:
+  title: Sentry Alerts Client Keys API
+  description: The Alerts API provides endpoints for managing alert rules in Sentry, including creating, retrieving, updating, and deleting metric alert rules and issue alert rules, as well as managing spike protection notification actions.
+  version: 0.0.1
+  contact:
+    name: Sentry Support
+    url: https://sentry.io/support/
+    email: support@sentry.io
+servers:
+- url: https://sentry.io/api/0
+  description: Sentry Production API
+security:
+- BearerAuth: []
+tags:
+- name: Client Keys
+  description: Manage project client keys (DSNs)
+paths:
+  /projects/{organization_id_or_slug}/{project_id_or_slug}/keys/:
+    get:
+      operationId: listProjectClientKeys
+      summary: Sentry List a project's client keys
+      description: Returns a list of client keys bound to a project.
+      tags:
+      - Client Keys
+      parameters:
+      - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      - $ref: '#/components/parameters/ProjectIdOrSlug'
+      - name: cursor
+        in: query
+        description: Pagination cursor.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A list of client keys.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ClientKey'
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+    post:
+      operationId: createProjectClientKey
+      summary: Sentry Create a new client key
+      description: Creates a new client key bound to a project.
+      tags:
+      - Client Keys
+      parameters:
+      - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      - $ref: '#/components/parameters/ProjectIdOrSlug'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - name
+              properties:
+                name:
+                  type: string
+                  description: The name for the new key.
+      responses:
+        '201':
+          description: Client key created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientKey'
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+  /projects/{organization_id_or_slug}/{project_id_or_slug}/keys/{key_id}/:
+    get:
+      operationId: retrieveProjectClientKey
+      summary: Sentry Retrieve a client key
+      description: Returns a client key bound to a project.
+      tags:
+      - Client Keys
+      parameters:
+      - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      - $ref: '#/components/parameters/ProjectIdOrSlug'
+      - $ref: '#/components/parameters/KeyId'
+      responses:
+        '200':
+          description: Client key details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientKey'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Client key not found.
+    put:
+      operationId: updateProjectClientKey
+      summary: Sentry Update a client key
+      description: Updates a client key.
+      tags:
+      - Client Keys
+      parameters:
+      - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      - $ref: '#/components/parameters/ProjectIdOrSlug'
+      - $ref: '#/components/parameters/KeyId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: The new name for the client key.
+                isActive:
+                  type: boolean
+                  description: Toggle key active status.
+      responses:
+        '200':
+          description: Client key updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientKey'
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Client key not found.
+    delete:
+      operationId: deleteProjectClientKey
+      summary: Sentry Delete a client key
+      description: Deletes a client key.
+      tags:
+      - Client Keys
+      parameters:
+      - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      - $ref: '#/components/parameters/ProjectIdOrSlug'
+      - $ref: '#/components/parameters/KeyId'
+      responses:
+        '204':
+          description: Client key deleted.
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Client key not found.
+components:
+  parameters:
+    KeyId:
+      name: key_id
+      in: path
+      required: true
+      description: The ID of the client key.
+      schema:
+        type: string
+    OrganizationIdOrSlug:
+      name: organization_id_or_slug
+      in: path
+      required: true
+      description: The ID or slug of the organization.
+      schema:
+        type: string
+    ProjectIdOrSlug:
+      name: project_id_or_slug
+      in: path
+      required: true
+      description: The ID or slug of the project.
+      schema:
+        type: string
+  schemas:
+    ClientKey:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        label:
+          type: string
+        public:
+          type: string
+          description: The public key portion of the DSN.
+        secret:
+          type: string
+          description: The secret key portion of the DSN.
+        projectId:
+          type: integer
+        isActive:
+          type: boolean
+        dateCreated:
+          type: string
+          format: date-time
+        dsn:
+          type: object
+          properties:
+            secret:
+              type: string
+            public:
+              type: string
+            csp:
+              type: string
+            security:
+              type: string
+            minidump:
+              type: string
+            unreal:
+              type: string
+            cdn:
+              type: string
+      required:
+      - id
+      - name
+      - public
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: Authentication token for the Sentry API.

@@ -1,0 +1,103 @@
+openapi: 3.1.0
+info:
+  title: Sentry Alerts Spike Protection API
+  description: The Alerts API provides endpoints for managing alert rules in Sentry, including creating, retrieving, updating, and deleting metric alert rules and issue alert rules, as well as managing spike protection notification actions.
+  version: 0.0.1
+  contact:
+    name: Sentry Support
+    url: https://sentry.io/support/
+    email: support@sentry.io
+servers:
+- url: https://sentry.io/api/0
+  description: Sentry Production API
+security:
+- BearerAuth: []
+tags:
+- name: Spike Protection
+  description: Manage spike protection notification actions
+paths:
+  /organizations/{organization_id_or_slug}/spike-protections/:
+    get:
+      operationId: listSpikeProtectionNotifications
+      summary: Sentry List spike protection notifications
+      description: Returns a list of spike protection notification actions.
+      tags:
+      - Spike Protection
+      parameters:
+      - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      responses:
+        '200':
+          description: A list of spike protection notification actions.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SpikeProtectionAction'
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+    post:
+      operationId: createSpikeProtectionNotification
+      summary: Sentry Create a spike protection notification action
+      description: Creates a new spike protection notification action.
+      tags:
+      - Spike Protection
+      parameters:
+      - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - projects
+              properties:
+                projects:
+                  type: array
+                  items:
+                    type: string
+                  description: Project slugs to enable spike protection for.
+      responses:
+        '201':
+          description: Spike protection notification created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SpikeProtectionAction'
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized.
+components:
+  parameters:
+    OrganizationIdOrSlug:
+      name: organization_id_or_slug
+      in: path
+      required: true
+      description: The ID or slug of the organization.
+      schema:
+        type: string
+  schemas:
+    SpikeProtectionAction:
+      type: object
+      properties:
+        id:
+          type: string
+        projects:
+          type: array
+          items:
+            type: string
+        dateCreated:
+          type: string
+          format: date-time
+      required:
+      - id
+      - projects
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: Authentication token for the Sentry API.

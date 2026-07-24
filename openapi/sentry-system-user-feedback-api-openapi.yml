@@ -1,0 +1,129 @@
+openapi: 3.1.0
+info:
+  title: Sentry Alerts User Feedback API
+  description: The Alerts API provides endpoints for managing alert rules in Sentry, including creating, retrieving, updating, and deleting metric alert rules and issue alert rules, as well as managing spike protection notification actions.
+  version: 0.0.1
+  contact:
+    name: Sentry Support
+    url: https://sentry.io/support/
+    email: support@sentry.io
+servers:
+- url: https://sentry.io/api/0
+  description: Sentry Production API
+security:
+- BearerAuth: []
+tags:
+- name: User Feedback
+  description: Manage user feedback submissions
+paths:
+  /projects/{organization_id_or_slug}/{project_id_or_slug}/user-feedback/:
+    get:
+      operationId: listProjectUserFeedback
+      summary: Sentry List a project's user feedback
+      description: Returns a list of user feedback items for a project.
+      tags:
+      - User Feedback
+      parameters:
+      - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      - $ref: '#/components/parameters/ProjectIdOrSlug'
+      responses:
+        '200':
+          description: A list of user feedback.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserFeedback'
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+    post:
+      operationId: submitProjectUserFeedback
+      summary: Sentry Submit user feedback
+      description: Submits a new user feedback item for a project.
+      tags:
+      - User Feedback
+      parameters:
+      - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      - $ref: '#/components/parameters/ProjectIdOrSlug'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - event_id
+              - name
+              - email
+              - comments
+              properties:
+                event_id:
+                  type: string
+                  description: The event ID associated with this feedback.
+                name:
+                  type: string
+                  description: The name of the user submitting feedback.
+                email:
+                  type: string
+                  format: email
+                  description: The email of the user.
+                comments:
+                  type: string
+                  description: The feedback comments.
+      responses:
+        '200':
+          description: User feedback submitted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserFeedback'
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized.
+components:
+  parameters:
+    OrganizationIdOrSlug:
+      name: organization_id_or_slug
+      in: path
+      required: true
+      description: The ID or slug of the organization.
+      schema:
+        type: string
+    ProjectIdOrSlug:
+      name: project_id_or_slug
+      in: path
+      required: true
+      description: The ID or slug of the project.
+      schema:
+        type: string
+  schemas:
+    UserFeedback:
+      type: object
+      properties:
+        id:
+          type: string
+        eventID:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        comments:
+          type: string
+        dateCreated:
+          type: string
+          format: date-time
+      required:
+      - id
+      - eventID
+      - comments
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: Authentication token for the Sentry API.

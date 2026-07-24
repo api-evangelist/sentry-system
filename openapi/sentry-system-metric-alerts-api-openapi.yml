@@ -1,0 +1,275 @@
+openapi: 3.1.0
+info:
+  title: Sentry Alerts Metric Alerts API
+  description: The Alerts API provides endpoints for managing alert rules in Sentry, including creating, retrieving, updating, and deleting metric alert rules and issue alert rules, as well as managing spike protection notification actions.
+  version: 0.0.1
+  contact:
+    name: Sentry Support
+    url: https://sentry.io/support/
+    email: support@sentry.io
+servers:
+- url: https://sentry.io/api/0
+  description: Sentry Production API
+security:
+- BearerAuth: []
+tags:
+- name: Metric Alerts
+  description: Manage metric alert rules at the organization level
+paths:
+  /organizations/{organization_id_or_slug}/alert-rules/:
+    get:
+      operationId: listMetricAlertRules
+      summary: Sentry List an organization's metric alert rules
+      description: Returns a list of metric alert rules for an organization.
+      tags:
+      - Metric Alerts
+      parameters:
+      - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      - name: cursor
+        in: query
+        description: Pagination cursor.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A list of metric alert rules.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MetricAlertRule'
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+    post:
+      operationId: createMetricAlertRule
+      summary: Sentry Create a metric alert rule for an organization
+      description: Creates a new metric alert rule for the given organization.
+      tags:
+      - Metric Alerts
+      parameters:
+      - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - name
+              - aggregate
+              - timeWindow
+              - triggers
+              properties:
+                name:
+                  type: string
+                  description: The name of the alert rule.
+                aggregate:
+                  type: string
+                  description: The aggregation function (e.g., count(), p50(transaction.duration)).
+                dataset:
+                  type: string
+                  description: The dataset to query (e.g., events, transactions, sessions).
+                query:
+                  type: string
+                  description: An optional Sentry search query to filter events.
+                timeWindow:
+                  type: integer
+                  description: The time window in minutes to evaluate the alert.
+                environment:
+                  type: string
+                  description: The environment to filter by.
+                projects:
+                  type: array
+                  items:
+                    type: string
+                  description: The project slugs to apply the alert to.
+                triggers:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      label:
+                        type: string
+                      alertThreshold:
+                        type: number
+                      actions:
+                        type: array
+                        items:
+                          type: object
+                  description: The trigger conditions for the alert.
+                owner:
+                  type: string
+                  description: The owner of the alert (user:id or team:id).
+      responses:
+        '201':
+          description: Metric alert rule created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetricAlertRule'
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+  /organizations/{organization_id_or_slug}/alert-rules/{alert_rule_id}/:
+    get:
+      operationId: retrieveMetricAlertRule
+      summary: Sentry Retrieve a metric alert rule for an organization
+      description: Returns a specific metric alert rule.
+      tags:
+      - Metric Alerts
+      parameters:
+      - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      - $ref: '#/components/parameters/AlertRuleId'
+      responses:
+        '200':
+          description: Metric alert rule details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetricAlertRule'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Alert rule not found.
+    put:
+      operationId: updateMetricAlertRule
+      summary: Sentry Update a metric alert rule
+      description: Updates a metric alert rule.
+      tags:
+      - Metric Alerts
+      parameters:
+      - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      - $ref: '#/components/parameters/AlertRuleId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                aggregate:
+                  type: string
+                query:
+                  type: string
+                timeWindow:
+                  type: integer
+                triggers:
+                  type: array
+                  items:
+                    type: object
+                owner:
+                  type: string
+      responses:
+        '200':
+          description: Metric alert rule updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetricAlertRule'
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Alert rule not found.
+    delete:
+      operationId: deleteMetricAlertRule
+      summary: Sentry Delete a metric alert rule
+      description: Deletes a metric alert rule.
+      tags:
+      - Metric Alerts
+      parameters:
+      - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      - $ref: '#/components/parameters/AlertRuleId'
+      responses:
+        '204':
+          description: Alert rule deleted.
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Alert rule not found.
+components:
+  parameters:
+    OrganizationIdOrSlug:
+      name: organization_id_or_slug
+      in: path
+      required: true
+      description: The ID or slug of the organization.
+      schema:
+        type: string
+    AlertRuleId:
+      name: alert_rule_id
+      in: path
+      required: true
+      description: The ID of the metric alert rule.
+      schema:
+        type: integer
+  schemas:
+    MetricAlertRule:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        aggregate:
+          type: string
+        dataset:
+          type: string
+        query:
+          type: string
+        timeWindow:
+          type: integer
+        environment:
+          type: string
+          nullable: true
+        projects:
+          type: array
+          items:
+            type: string
+        triggers:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              label:
+                type: string
+              alertThreshold:
+                type: number
+              resolveThreshold:
+                type: number
+                nullable: true
+              thresholdType:
+                type: integer
+              actions:
+                type: array
+                items:
+                  type: object
+        owner:
+          type: string
+          nullable: true
+        dateCreated:
+          type: string
+          format: date-time
+        dateModified:
+          type: string
+          format: date-time
+      required:
+      - id
+      - name
+      - aggregate
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: Authentication token for the Sentry API.

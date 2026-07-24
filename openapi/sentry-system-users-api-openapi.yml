@@ -1,45 +1,39 @@
 openapi: 3.1.0
 info:
-  title: Sentry Users API
-  description: >-
-    The Users API provides endpoints for retrieving user-related information in
-    Sentry, including listing the organizations that the authenticated user
-    belongs to.
+  title: Sentry Alerts Users API
+  description: The Alerts API provides endpoints for managing alert rules in Sentry, including creating, retrieving, updating, and deleting metric alert rules and issue alert rules, as well as managing spike protection notification actions.
   version: 0.0.1
   contact:
     name: Sentry Support
     url: https://sentry.io/support/
     email: support@sentry.io
 servers:
-  - url: https://sentry.io/api/0
-    description: Sentry Production API
+- url: https://sentry.io/api/0
+  description: Sentry Production API
 security:
-  - BearerAuth: []
+- BearerAuth: []
 tags:
-  - name: Users
-    description: Retrieve user-related information
+- name: Users
+  description: Retrieve user-related information
 paths:
   /organizations/:
     get:
       operationId: listUserOrganizations
       summary: Sentry List your organizations
-      description: >-
-        Returns a list of organizations available to the authenticated session.
-        This is particularly useful for tokens with access to multiple
-        organizations.
+      description: Returns a list of organizations available to the authenticated session. This is particularly useful for tokens with access to multiple organizations.
       tags:
-        - Users
+      - Users
       parameters:
-        - name: owner
-          in: query
-          description: Restrict results to organizations owned by the authenticated user.
-          schema:
-            type: boolean
-        - name: cursor
-          in: query
-          description: Pagination cursor.
-          schema:
-            type: string
+      - name: owner
+        in: query
+        description: Restrict results to organizations owned by the authenticated user.
+        schema:
+          type: boolean
+      - name: cursor
+        in: query
+        description: Pagination cursor.
+        schema:
+          type: string
       responses:
         '200':
           description: A list of organizations.
@@ -52,11 +46,6 @@ paths:
         '401':
           description: Unauthorized.
 components:
-  securitySchemes:
-    BearerAuth:
-      type: http
-      scheme: bearer
-      description: Authentication token for the Sentry API.
   schemas:
     Organization:
       type: object
@@ -88,6 +77,11 @@ components:
               type: string
               nullable: true
       required:
-        - id
-        - slug
-        - name
+      - id
+      - slug
+      - name
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: Authentication token for the Sentry API.

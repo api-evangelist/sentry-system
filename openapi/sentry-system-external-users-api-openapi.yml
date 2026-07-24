@@ -1,0 +1,125 @@
+openapi: 3.1.0
+info:
+  title: Sentry Alerts External Users API
+  description: The Alerts API provides endpoints for managing alert rules in Sentry, including creating, retrieving, updating, and deleting metric alert rules and issue alert rules, as well as managing spike protection notification actions.
+  version: 0.0.1
+  contact:
+    name: Sentry Support
+    url: https://sentry.io/support/
+    email: support@sentry.io
+servers:
+- url: https://sentry.io/api/0
+  description: Sentry Production API
+security:
+- BearerAuth: []
+tags:
+- name: External Users
+  description: Manage external user mappings
+paths:
+  /organizations/{organization_id_or_slug}/external-users/:
+    post:
+      operationId: createExternalUser
+      summary: Sentry Create an external user
+      description: Creates a mapping between a Sentry user and an external service user.
+      tags:
+      - External Users
+      parameters:
+      - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - externalName
+              - provider
+              - memberId
+              properties:
+                externalName:
+                  type: string
+                  description: The external service username.
+                provider:
+                  type: string
+                  description: The integration provider (e.g., github, gitlab).
+                memberId:
+                  type: integer
+                  description: The Sentry member ID.
+                integrationId:
+                  type: integer
+                  description: The integration ID.
+      responses:
+        '201':
+          description: External user created.
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized.
+  /organizations/{organization_id_or_slug}/external-users/{external_user_id}/:
+    put:
+      operationId: updateExternalUser
+      summary: Sentry Update an external user
+      description: Updates an external user mapping.
+      tags:
+      - External Users
+      parameters:
+      - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      - name: external_user_id
+        in: path
+        required: true
+        description: The ID of the external user.
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                externalName:
+                  type: string
+                provider:
+                  type: string
+      responses:
+        '200':
+          description: External user updated.
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Not found.
+    delete:
+      operationId: deleteExternalUser
+      summary: Sentry Delete an external user
+      description: Deletes an external user mapping.
+      tags:
+      - External Users
+      parameters:
+      - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      - name: external_user_id
+        in: path
+        required: true
+        description: The ID of the external user.
+        schema:
+          type: string
+      responses:
+        '204':
+          description: External user deleted.
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Not found.
+components:
+  parameters:
+    OrganizationIdOrSlug:
+      name: organization_id_or_slug
+      in: path
+      required: true
+      description: The ID or slug of the organization.
+      schema:
+        type: string
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: Authentication token for the Sentry API.

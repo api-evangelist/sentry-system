@@ -1,23 +1,20 @@
 openapi: 3.1.0
 info:
-  title: Sentry Dashboards API
-  description: >-
-    The Dashboards API provides endpoints for managing custom dashboards in
-    Sentry organizations, including creating, listing, retrieving, editing, and
-    deleting dashboards for visualizing error and performance data.
+  title: Sentry Alerts Dashboards API
+  description: The Alerts API provides endpoints for managing alert rules in Sentry, including creating, retrieving, updating, and deleting metric alert rules and issue alert rules, as well as managing spike protection notification actions.
   version: 0.0.1
   contact:
     name: Sentry Support
     url: https://sentry.io/support/
     email: support@sentry.io
 servers:
-  - url: https://sentry.io/api/0
-    description: Sentry Production API
+- url: https://sentry.io/api/0
+  description: Sentry Production API
 security:
-  - BearerAuth: []
+- BearerAuth: []
 tags:
-  - name: Dashboards
-    description: Manage custom dashboards and their widgets
+- name: Dashboards
+  description: Manage custom dashboards and their widgets
 paths:
   /organizations/{organization_id_or_slug}/dashboards/:
     get:
@@ -25,14 +22,14 @@ paths:
       summary: Sentry List an organization's custom dashboards
       description: Returns a list of custom dashboards for the given organization.
       tags:
-        - Dashboards
+      - Dashboards
       parameters:
-        - $ref: '#/components/parameters/OrganizationIdOrSlug'
-        - name: cursor
-          in: query
-          description: Pagination cursor.
-          schema:
-            type: string
+      - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      - name: cursor
+        in: query
+        description: Pagination cursor.
+        schema:
+          type: string
       responses:
         '200':
           description: A list of dashboards.
@@ -51,9 +48,9 @@ paths:
       summary: Sentry Create a new dashboard for an organization
       description: Creates a new custom dashboard for the given organization.
       tags:
-        - Dashboards
+      - Dashboards
       parameters:
-        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      - $ref: '#/components/parameters/OrganizationIdOrSlug'
       requestBody:
         required: true
         content:
@@ -61,7 +58,7 @@ paths:
             schema:
               type: object
               required:
-                - title
+              - title
               properties:
                 title:
                   type: string
@@ -90,10 +87,10 @@ paths:
       summary: Sentry Retrieve an organization's custom dashboard
       description: Returns a custom dashboard with its widgets.
       tags:
-        - Dashboards
+      - Dashboards
       parameters:
-        - $ref: '#/components/parameters/OrganizationIdOrSlug'
-        - $ref: '#/components/parameters/DashboardId'
+      - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      - $ref: '#/components/parameters/DashboardId'
       responses:
         '200':
           description: Dashboard details.
@@ -110,10 +107,10 @@ paths:
       summary: Sentry Edit an organization's custom dashboard
       description: Updates a custom dashboard.
       tags:
-        - Dashboards
+      - Dashboards
       parameters:
-        - $ref: '#/components/parameters/OrganizationIdOrSlug'
-        - $ref: '#/components/parameters/DashboardId'
+      - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      - $ref: '#/components/parameters/DashboardId'
       requestBody:
         required: true
         content:
@@ -145,10 +142,10 @@ paths:
       summary: Sentry Delete an organization's custom dashboard
       description: Deletes a custom dashboard.
       tags:
-        - Dashboards
+      - Dashboards
       parameters:
-        - $ref: '#/components/parameters/OrganizationIdOrSlug'
-        - $ref: '#/components/parameters/DashboardId'
+      - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      - $ref: '#/components/parameters/DashboardId'
       responses:
         '204':
           description: Dashboard deleted.
@@ -157,53 +154,7 @@ paths:
         '404':
           description: Dashboard not found.
 components:
-  securitySchemes:
-    BearerAuth:
-      type: http
-      scheme: bearer
-      description: Authentication token for the Sentry API.
-  parameters:
-    OrganizationIdOrSlug:
-      name: organization_id_or_slug
-      in: path
-      required: true
-      description: The ID or slug of the organization.
-      schema:
-        type: string
-    DashboardId:
-      name: dashboard_id
-      in: path
-      required: true
-      description: The ID of the dashboard.
-      schema:
-        type: string
   schemas:
-    DashboardSummary:
-      type: object
-      properties:
-        id:
-          type: string
-        title:
-          type: string
-        dateCreated:
-          type: string
-          format: date-time
-        createdBy:
-          type: object
-          properties:
-            id:
-              type: string
-            name:
-              type: string
-            email:
-              type: string
-        widgetDisplay:
-          type: array
-          items:
-            type: string
-      required:
-        - id
-        - title
     Dashboard:
       type: object
       properties:
@@ -228,8 +179,34 @@ components:
           items:
             $ref: '#/components/schemas/Widget'
       required:
-        - id
-        - title
+      - id
+      - title
+    DashboardSummary:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        dateCreated:
+          type: string
+          format: date-time
+        createdBy:
+          type: object
+          properties:
+            id:
+              type: string
+            name:
+              type: string
+            email:
+              type: string
+        widgetDisplay:
+          type: array
+          items:
+            type: string
+      required:
+      - id
+      - title
     Widget:
       type: object
       properties:
@@ -240,13 +217,13 @@ components:
         displayType:
           type: string
           enum:
-            - line
-            - area
-            - stacked_area
-            - bar
-            - table
-            - big_number
-            - top_n
+          - line
+          - area
+          - stacked_area
+          - bar
+          - table
+          - big_number
+          - top_n
         interval:
           type: string
         queries:
@@ -271,7 +248,7 @@ components:
           properties:
             x:
               type: integer
-            'y':
+            y:
               type: integer
             w:
               type: integer
@@ -280,6 +257,26 @@ components:
             minH:
               type: integer
       required:
-        - title
-        - displayType
-        - queries
+      - title
+      - displayType
+      - queries
+  parameters:
+    OrganizationIdOrSlug:
+      name: organization_id_or_slug
+      in: path
+      required: true
+      description: The ID or slug of the organization.
+      schema:
+        type: string
+    DashboardId:
+      name: dashboard_id
+      in: path
+      required: true
+      description: The ID of the dashboard.
+      schema:
+        type: string
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: Authentication token for the Sentry API.

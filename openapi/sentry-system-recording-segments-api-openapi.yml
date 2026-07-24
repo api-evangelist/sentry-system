@@ -1,0 +1,121 @@
+openapi: 3.1.0
+info:
+  title: Sentry Alerts Recording Segments API
+  description: The Alerts API provides endpoints for managing alert rules in Sentry, including creating, retrieving, updating, and deleting metric alert rules and issue alert rules, as well as managing spike protection notification actions.
+  version: 0.0.1
+  contact:
+    name: Sentry Support
+    url: https://sentry.io/support/
+    email: support@sentry.io
+servers:
+- url: https://sentry.io/api/0
+  description: Sentry Production API
+security:
+- BearerAuth: []
+tags:
+- name: Recording Segments
+  description: Access replay recording segments
+paths:
+  /projects/{organization_id_or_slug}/{project_id_or_slug}/replays/{replay_id}/recording-segments/:
+    get:
+      operationId: listRecordingSegments
+      summary: Sentry List recording segments
+      description: Returns a list of recording segments for a given replay.
+      tags:
+      - Recording Segments
+      parameters:
+      - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      - $ref: '#/components/parameters/ProjectIdOrSlug'
+      - $ref: '#/components/parameters/ReplayId'
+      - name: cursor
+        in: query
+        description: Pagination cursor.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A list of recording segments.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RecordingSegment'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Replay not found.
+  /projects/{organization_id_or_slug}/{project_id_or_slug}/replays/{replay_id}/recording-segments/{segment_id}/:
+    get:
+      operationId: retrieveRecordingSegment
+      summary: Sentry Retrieve a recording segment
+      description: Returns a specific recording segment.
+      tags:
+      - Recording Segments
+      parameters:
+      - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      - $ref: '#/components/parameters/ProjectIdOrSlug'
+      - $ref: '#/components/parameters/ReplayId'
+      - name: segment_id
+        in: path
+        required: true
+        description: The ID of the recording segment.
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Recording segment data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecordingSegment'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Segment not found.
+components:
+  parameters:
+    OrganizationIdOrSlug:
+      name: organization_id_or_slug
+      in: path
+      required: true
+      description: The ID or slug of the organization.
+      schema:
+        type: string
+    ProjectIdOrSlug:
+      name: project_id_or_slug
+      in: path
+      required: true
+      description: The ID or slug of the project.
+      schema:
+        type: string
+    ReplayId:
+      name: replay_id
+      in: path
+      required: true
+      description: The ID of the replay.
+      schema:
+        type: string
+        format: uuid
+  schemas:
+    RecordingSegment:
+      type: object
+      properties:
+        id:
+          type: integer
+        replayId:
+          type: string
+          format: uuid
+        segmentId:
+          type: integer
+        dateAdded:
+          type: string
+          format: date-time
+      required:
+      - id
+      - segmentId
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: Authentication token for the Sentry API.

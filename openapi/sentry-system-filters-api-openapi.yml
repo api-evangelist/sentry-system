@@ -1,0 +1,101 @@
+openapi: 3.1.0
+info:
+  title: Sentry Alerts Filters API
+  description: The Alerts API provides endpoints for managing alert rules in Sentry, including creating, retrieving, updating, and deleting metric alert rules and issue alert rules, as well as managing spike protection notification actions.
+  version: 0.0.1
+  contact:
+    name: Sentry Support
+    url: https://sentry.io/support/
+    email: support@sentry.io
+servers:
+- url: https://sentry.io/api/0
+  description: Sentry Production API
+security:
+- BearerAuth: []
+tags:
+- name: Filters
+  description: Manage inbound data filters
+paths:
+  /projects/{organization_id_or_slug}/{project_id_or_slug}/filters/:
+    get:
+      operationId: listProjectFilters
+      summary: Sentry List a project's data filters
+      description: Returns a list of active inbound data filters for a project.
+      tags:
+      - Filters
+      parameters:
+      - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      - $ref: '#/components/parameters/ProjectIdOrSlug'
+      responses:
+        '200':
+          description: A list of data filters.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    active:
+                      type: boolean
+                      description: Whether the filter is enabled.
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+  /projects/{organization_id_or_slug}/{project_id_or_slug}/filters/{filter_id}/:
+    put:
+      operationId: updateProjectFilter
+      summary: Sentry Update an inbound data filter
+      description: Updates a project's inbound data filter.
+      tags:
+      - Filters
+      parameters:
+      - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      - $ref: '#/components/parameters/ProjectIdOrSlug'
+      - name: filter_id
+        in: path
+        required: true
+        description: The ID of the filter to update.
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                active:
+                  type: boolean
+                  description: Toggle filter active status.
+      responses:
+        '200':
+          description: Filter updated.
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+components:
+  parameters:
+    OrganizationIdOrSlug:
+      name: organization_id_or_slug
+      in: path
+      required: true
+      description: The ID or slug of the organization.
+      schema:
+        type: string
+    ProjectIdOrSlug:
+      name: project_id_or_slug
+      in: path
+      required: true
+      description: The ID or slug of the project.
+      schema:
+        type: string
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: Authentication token for the Sentry API.

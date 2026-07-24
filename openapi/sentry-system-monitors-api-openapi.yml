@@ -1,26 +1,20 @@
 openapi: 3.1.0
 info:
-  title: Sentry Crons API
-  description: >-
-    The Crons API provides endpoints for managing cron job monitors in Sentry,
-    including creating, retrieving, updating, and deleting monitors, managing
-    monitor environments, and retrieving check-in history for tracked scheduled
-    tasks.
+  title: Sentry Alerts Monitors API
+  description: The Alerts API provides endpoints for managing alert rules in Sentry, including creating, retrieving, updating, and deleting metric alert rules and issue alert rules, as well as managing spike protection notification actions.
   version: 0.0.1
   contact:
     name: Sentry Support
     url: https://sentry.io/support/
     email: support@sentry.io
 servers:
-  - url: https://sentry.io/api/0
-    description: Sentry Production API
+- url: https://sentry.io/api/0
+  description: Sentry Production API
 security:
-  - BearerAuth: []
+- BearerAuth: []
 tags:
-  - name: Check-Ins
-    description: View monitor check-in history
-  - name: Monitors
-    description: Manage cron job monitors
+- name: Monitors
+  description: Manage cron job monitors
 paths:
   /organizations/{organization_id_or_slug}/monitors/:
     get:
@@ -28,19 +22,19 @@ paths:
       summary: Sentry Retrieve monitors for an organization
       description: Returns a list of monitors for the given organization.
       tags:
-        - Monitors
+      - Monitors
       parameters:
-        - $ref: '#/components/parameters/OrganizationIdOrSlug'
-        - name: cursor
-          in: query
-          description: Pagination cursor.
-          schema:
-            type: string
-        - name: environment
-          in: query
-          description: Filter by environment name.
-          schema:
-            type: string
+      - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      - name: cursor
+        in: query
+        description: Pagination cursor.
+        schema:
+          type: string
+      - name: environment
+        in: query
+        description: Filter by environment name.
+        schema:
+          type: string
       responses:
         '200':
           description: A list of monitors.
@@ -59,9 +53,9 @@ paths:
       summary: Sentry Create a monitor
       description: Creates a new monitor for the given organization.
       tags:
-        - Monitors
+      - Monitors
       parameters:
-        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      - $ref: '#/components/parameters/OrganizationIdOrSlug'
       requestBody:
         required: true
         content:
@@ -69,9 +63,9 @@ paths:
             schema:
               type: object
               required:
-                - name
-                - type
-                - config
+              - name
+              - type
+              - config
               properties:
                 name:
                   type: string
@@ -82,27 +76,27 @@ paths:
                 type:
                   type: string
                   enum:
-                    - cron_job
+                  - cron_job
                   description: The type of monitor.
                 config:
                   type: object
                   required:
-                    - schedule_type
-                    - schedule
+                  - schedule_type
+                  - schedule
                   properties:
                     schedule_type:
                       type: string
                       enum:
-                        - crontab
-                        - interval
+                      - crontab
+                      - interval
                     schedule:
                       oneOf:
-                        - type: string
-                          description: Crontab expression.
-                        - type: array
-                          items:
-                            type: integer
-                          description: Interval value and unit.
+                      - type: string
+                        description: Crontab expression.
+                      - type: array
+                        items:
+                          type: integer
+                        description: Interval value and unit.
                     checkin_margin:
                       type: integer
                       description: Margin of minutes before a check-in is marked as missed.
@@ -128,16 +122,66 @@ paths:
           description: Unauthorized.
         '403':
           description: Forbidden.
+    put:
+      operationId: mutateOrganizationMonitors
+      summary: Sentry Mutate an organization's monitors
+      description: Bulk update monitors for an organization.
+      tags:
+      - Monitors
+      parameters:
+      - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ids:
+                  type: array
+                  items:
+                    type: string
+                status:
+                  type: string
+      responses:
+        '200':
+          description: Monitors updated.
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+    delete:
+      operationId: bulkDeleteMonitors
+      summary: Sentry Bulk delete monitors
+      description: Bulk delete monitors for an organization.
+      tags:
+      - Monitors
+      parameters:
+      - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      - name: id
+        in: query
+        description: IDs of monitors to delete.
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        '204':
+          description: Monitors deleted.
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
   /organizations/{organization_id_or_slug}/monitors/{monitor_id_or_slug}/:
     get:
       operationId: retrieveMonitor
       summary: Sentry Retrieve a monitor
       description: Returns details for a specific monitor.
       tags:
-        - Monitors
+      - Monitors
       parameters:
-        - $ref: '#/components/parameters/OrganizationIdOrSlug'
-        - $ref: '#/components/parameters/MonitorIdOrSlug'
+      - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      - $ref: '#/components/parameters/MonitorIdOrSlug'
       responses:
         '200':
           description: Monitor details.
@@ -154,10 +198,10 @@ paths:
       summary: Sentry Update a monitor
       description: Updates a monitor.
       tags:
-        - Monitors
+      - Monitors
       parameters:
-        - $ref: '#/components/parameters/OrganizationIdOrSlug'
-        - $ref: '#/components/parameters/MonitorIdOrSlug'
+      - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      - $ref: '#/components/parameters/MonitorIdOrSlug'
       requestBody:
         required: true
         content:
@@ -176,10 +220,10 @@ paths:
                       type: string
                     schedule:
                       oneOf:
-                        - type: string
-                        - type: array
-                          items:
-                            type: integer
+                      - type: string
+                      - type: array
+                        items:
+                          type: integer
                     checkin_margin:
                       type: integer
                     max_runtime:
@@ -202,50 +246,20 @@ paths:
     delete:
       operationId: deleteMonitor
       summary: Sentry Delete a monitor or monitor environments
-      description: >-
-        Deletes a monitor or specific monitor environments. Use the environment
-        query parameter to selectively delete environments.
+      description: Deletes a monitor or specific monitor environments. Use the environment query parameter to selectively delete environments.
       tags:
-        - Monitors
+      - Monitors
       parameters:
-        - $ref: '#/components/parameters/OrganizationIdOrSlug'
-        - $ref: '#/components/parameters/MonitorIdOrSlug'
-        - name: environment
-          in: query
-          description: Specific environment to delete rather than the entire monitor.
-          schema:
-            type: string
+      - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      - $ref: '#/components/parameters/MonitorIdOrSlug'
+      - name: environment
+        in: query
+        description: Specific environment to delete rather than the entire monitor.
+        schema:
+          type: string
       responses:
         '202':
           description: Monitor or environment scheduled for deletion.
-        '401':
-          description: Unauthorized.
-        '404':
-          description: Monitor not found.
-  /organizations/{organization_id_or_slug}/monitors/{monitor_id_or_slug}/checkins/:
-    get:
-      operationId: listMonitorCheckIns
-      summary: Sentry Retrieve check-ins for a monitor
-      description: Returns a list of check-ins for a specific monitor.
-      tags:
-        - Check-Ins
-      parameters:
-        - $ref: '#/components/parameters/OrganizationIdOrSlug'
-        - $ref: '#/components/parameters/MonitorIdOrSlug'
-        - name: cursor
-          in: query
-          description: Pagination cursor.
-          schema:
-            type: string
-      responses:
-        '200':
-          description: A list of check-ins.
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/CheckIn'
         '401':
           description: Unauthorized.
         '404':
@@ -256,11 +270,11 @@ paths:
       summary: Sentry Retrieve a monitor for a project
       description: Returns a monitor scoped to a specific project.
       tags:
-        - Monitors
+      - Monitors
       parameters:
-        - $ref: '#/components/parameters/OrganizationIdOrSlug'
-        - $ref: '#/components/parameters/ProjectIdOrSlug'
-        - $ref: '#/components/parameters/MonitorIdOrSlug'
+      - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      - $ref: '#/components/parameters/ProjectIdOrSlug'
+      - $ref: '#/components/parameters/MonitorIdOrSlug'
       responses:
         '200':
           description: Monitor details.
@@ -277,11 +291,11 @@ paths:
       summary: Sentry Update a monitor for a project
       description: Updates a monitor scoped to a specific project.
       tags:
-        - Monitors
+      - Monitors
       parameters:
-        - $ref: '#/components/parameters/OrganizationIdOrSlug'
-        - $ref: '#/components/parameters/ProjectIdOrSlug'
-        - $ref: '#/components/parameters/MonitorIdOrSlug'
+      - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      - $ref: '#/components/parameters/ProjectIdOrSlug'
+      - $ref: '#/components/parameters/MonitorIdOrSlug'
       requestBody:
         required: true
         content:
@@ -311,16 +325,16 @@ paths:
       summary: Sentry Delete a monitor or monitor environments for a project
       description: Deletes a monitor or its environments scoped to a project.
       tags:
-        - Monitors
+      - Monitors
       parameters:
-        - $ref: '#/components/parameters/OrganizationIdOrSlug'
-        - $ref: '#/components/parameters/ProjectIdOrSlug'
-        - $ref: '#/components/parameters/MonitorIdOrSlug'
-        - name: environment
-          in: query
-          description: Specific environment to delete.
-          schema:
-            type: string
+      - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      - $ref: '#/components/parameters/ProjectIdOrSlug'
+      - $ref: '#/components/parameters/MonitorIdOrSlug'
+      - name: environment
+        in: query
+        description: Specific environment to delete.
+        schema:
+          type: string
       responses:
         '202':
           description: Monitor or environment scheduled for deletion.
@@ -328,47 +342,127 @@ paths:
           description: Unauthorized.
         '404':
           description: Monitor not found.
-  /projects/{organization_id_or_slug}/{project_id_or_slug}/monitors/{monitor_id_or_slug}/checkins/:
-    get:
-      operationId: listMonitorCheckInsForProject
-      summary: Sentry Retrieve check-ins for a monitor by project
-      description: Returns a list of check-ins for a monitor scoped to a project.
+  /projects/{organization_id_or_slug}/{project_id_or_slug}/uptime-monitors/:
+    post:
+      operationId: createProjectMonitor
+      summary: Sentry Create a monitor for a project
+      description: Creates a new uptime monitor for a specific project.
       tags:
-        - Check-Ins
+      - Monitors
       parameters:
-        - $ref: '#/components/parameters/OrganizationIdOrSlug'
-        - $ref: '#/components/parameters/ProjectIdOrSlug'
-        - $ref: '#/components/parameters/MonitorIdOrSlug'
-        - name: cursor
-          in: query
-          description: Pagination cursor.
-          schema:
-            type: string
+      - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      - $ref: '#/components/parameters/ProjectIdOrSlug'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - name
+              - url
+              properties:
+                name:
+                  type: string
+                  description: The name of the monitor.
+                url:
+                  type: string
+                  format: uri
+                  description: The URL to monitor.
+                intervalSeconds:
+                  type: integer
+                  description: Check interval in seconds.
       responses:
-        '200':
-          description: A list of check-ins.
+        '201':
+          description: Monitor created.
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/CheckIn'
+                $ref: '#/components/schemas/UptimeMonitor'
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized.
+  /organizations/{organization_id_or_slug}/uptime-monitors/{monitor_id}/:
+    get:
+      operationId: fetchMonitor
+      summary: Sentry Fetch a monitor
+      description: Returns details for a specific uptime monitor.
+      tags:
+      - Monitors
+      parameters:
+      - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      - $ref: '#/components/parameters/MonitorId'
+      responses:
+        '200':
+          description: Monitor details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UptimeMonitor'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Monitor not found.
+    put:
+      operationId: updateMonitor
+      summary: Sentry Update a monitor by ID
+      description: Updates an uptime monitor.
+      tags:
+      - Monitors
+      parameters:
+      - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      - $ref: '#/components/parameters/MonitorId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                url:
+                  type: string
+                  format: uri
+                intervalSeconds:
+                  type: integer
+      responses:
+        '200':
+          description: Monitor updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UptimeMonitor'
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Monitor not found.
+    delete:
+      operationId: deleteMonitor
+      summary: Sentry Delete a monitor
+      description: Deletes an uptime monitor.
+      tags:
+      - Monitors
+      parameters:
+      - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      - $ref: '#/components/parameters/MonitorId'
+      responses:
+        '204':
+          description: Monitor deleted.
         '401':
           description: Unauthorized.
         '404':
           description: Monitor not found.
 components:
-  securitySchemes:
-    BearerAuth:
-      type: http
-      scheme: bearer
-      description: Authentication token for the Sentry API.
   parameters:
-    OrganizationIdOrSlug:
-      name: organization_id_or_slug
+    MonitorId:
+      name: monitor_id
       in: path
       required: true
-      description: The ID or slug of the organization.
+      description: The ID of the monitor.
       schema:
         type: string
     ProjectIdOrSlug:
@@ -376,6 +470,13 @@ components:
       in: path
       required: true
       description: The ID or slug of the project.
+      schema:
+        type: string
+    OrganizationIdOrSlug:
+      name: organization_id_or_slug
+      in: path
+      required: true
+      description: The ID or slug of the organization.
       schema:
         type: string
     MonitorIdOrSlug:
@@ -386,6 +487,29 @@ components:
       schema:
         type: string
   schemas:
+    UptimeMonitor:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        url:
+          type: string
+          format: uri
+        status:
+          type: string
+        intervalSeconds:
+          type: integer
+        projectSlug:
+          type: string
+        dateCreated:
+          type: string
+          format: date-time
+      required:
+      - id
+      - name
+      - url
     Monitor:
       type: object
       properties:
@@ -404,10 +528,10 @@ components:
               type: string
             schedule:
               oneOf:
-                - type: string
-                - type: array
-                  items:
-                    type: integer
+              - type: string
+              - type: array
+                items:
+                  type: integer
             checkin_margin:
               type: integer
               nullable: true
@@ -448,33 +572,12 @@ components:
                 format: date-time
                 nullable: true
       required:
-        - id
-        - name
-        - type
-        - config
-    CheckIn:
-      type: object
-      properties:
-        id:
-          type: string
-        status:
-          type: string
-          enum:
-            - ok
-            - error
-            - in_progress
-            - missed
-            - timeout
-        duration:
-          type: integer
-          nullable: true
-          description: Duration in milliseconds.
-        dateCreated:
-          type: string
-          format: date-time
-        environment:
-          type: string
-      required:
-        - id
-        - status
-        - dateCreated
+      - id
+      - name
+      - type
+      - config
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: Authentication token for the Sentry API.

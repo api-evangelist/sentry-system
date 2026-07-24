@@ -1,24 +1,20 @@
 openapi: 3.1.0
 info:
-  title: Sentry Discover API
-  description: >-
-    The Discover and Performance API provides endpoints for managing saved
-    queries in Sentry, allowing you to create, list, retrieve, edit, and delete
-    organization-level Discover saved queries for slicing and analyzing error
-    and transaction event data.
+  title: Sentry Alerts Discover API
+  description: The Alerts API provides endpoints for managing alert rules in Sentry, including creating, retrieving, updating, and deleting metric alert rules and issue alert rules, as well as managing spike protection notification actions.
   version: 0.0.1
   contact:
     name: Sentry Support
     url: https://sentry.io/support/
     email: support@sentry.io
 servers:
-  - url: https://sentry.io/api/0
-    description: Sentry Production API
+- url: https://sentry.io/api/0
+  description: Sentry Production API
 security:
-  - BearerAuth: []
+- BearerAuth: []
 tags:
-  - name: Discover
-    description: Manage saved Discover queries
+- name: Discover
+  description: Manage saved Discover queries
 paths:
   /organizations/{organization_id_or_slug}/discover/saved/:
     get:
@@ -26,24 +22,24 @@ paths:
       summary: Sentry List an organization's Discover saved queries
       description: Returns a list of saved Discover queries for the given organization.
       tags:
-        - Discover
+      - Discover
       parameters:
-        - $ref: '#/components/parameters/OrganizationIdOrSlug'
-        - name: cursor
-          in: query
-          description: Pagination cursor.
-          schema:
-            type: string
-        - name: query
-          in: query
-          description: Search by query name.
-          schema:
-            type: string
-        - name: sortBy
-          in: query
-          description: Sort by field (e.g., dateCreated, dateUpdated, name).
-          schema:
-            type: string
+      - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      - name: cursor
+        in: query
+        description: Pagination cursor.
+        schema:
+          type: string
+      - name: query
+        in: query
+        description: Search by query name.
+        schema:
+          type: string
+      - name: sortBy
+        in: query
+        description: Sort by field (e.g., dateCreated, dateUpdated, name).
+        schema:
+          type: string
       responses:
         '200':
           description: A list of saved queries.
@@ -62,9 +58,9 @@ paths:
       summary: Sentry Create a new saved query
       description: Creates a new saved Discover query for the given organization.
       tags:
-        - Discover
+      - Discover
       parameters:
-        - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      - $ref: '#/components/parameters/OrganizationIdOrSlug'
       requestBody:
         required: true
         content:
@@ -72,8 +68,8 @@ paths:
             schema:
               type: object
               required:
-                - name
-                - fields
+              - name
+              - fields
               properties:
                 name:
                   type: string
@@ -124,10 +120,10 @@ paths:
       summary: Sentry Retrieve an organization's Discover saved query
       description: Returns a specific saved Discover query.
       tags:
-        - Discover
+      - Discover
       parameters:
-        - $ref: '#/components/parameters/OrganizationIdOrSlug'
-        - $ref: '#/components/parameters/QueryId'
+      - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      - $ref: '#/components/parameters/QueryId'
       responses:
         '200':
           description: Saved query details.
@@ -144,10 +140,10 @@ paths:
       summary: Sentry Edit an organization's Discover saved query
       description: Updates a saved Discover query.
       tags:
-        - Discover
+      - Discover
       parameters:
-        - $ref: '#/components/parameters/OrganizationIdOrSlug'
-        - $ref: '#/components/parameters/QueryId'
+      - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      - $ref: '#/components/parameters/QueryId'
       requestBody:
         required: true
         content:
@@ -193,10 +189,10 @@ paths:
       summary: Sentry Delete an organization's Discover saved query
       description: Deletes a saved Discover query.
       tags:
-        - Discover
+      - Discover
       parameters:
-        - $ref: '#/components/parameters/OrganizationIdOrSlug'
-        - $ref: '#/components/parameters/QueryId'
+      - $ref: '#/components/parameters/OrganizationIdOrSlug'
+      - $ref: '#/components/parameters/QueryId'
       responses:
         '204':
           description: Saved query deleted.
@@ -205,11 +201,6 @@ paths:
         '404':
           description: Saved query not found.
 components:
-  securitySchemes:
-    BearerAuth:
-      type: http
-      scheme: bearer
-      description: Authentication token for the Sentry API.
   parameters:
     OrganizationIdOrSlug:
       name: organization_id_or_slug
@@ -270,6 +261,11 @@ components:
             email:
               type: string
       required:
-        - id
-        - name
-        - fields
+      - id
+      - name
+      - fields
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: Authentication token for the Sentry API.
