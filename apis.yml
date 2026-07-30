@@ -2,494 +2,4029 @@ name: Sentry
 description: >-
   Sentry is an open-source error tracking and performance monitoring platform that helps developers identify, triage,
   and resolve issues in their applications in real-time.
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 image: https://sentry-brand.storage.googleapis.com/sentry-logo-black.png
 created: '2024-01-15'
 modified: '2026-06-20'
 specificationVersion: '0.18'
 url: https://sentry.io/apis.json
 apis:
-  - name: Sentry API
-    description: >-
-      The Sentry API provides programmatic access to Sentry's error tracking, performance monitoring, and organizational
-      data. It allows developers to manage projects, issues, releases, and more.
-    image: https://sentry-brand.storage.googleapis.com/sentry-logo-black.png
-    humanURL: https://sentry.io
-    baseURL: https://sentry.io/api/0
-    tags:
-      - Error Tracking
-      - Monitoring
-      - Observability
-      - Performance
-    properties:
-      - type: Documentation
-        url: https://docs.sentry.io/api/
-      - type: OpenAPI
-        url: https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json
-      - type: OpenAPI
-        url: openapi/sentry-api-openapi.yml
-      - type: Overlay
-        url: overlays/sentry-system-api-overlay.yaml
-      - type: Authentication
-        url: https://docs.sentry.io/api/auth/
-      - type: GettingStarted
-        url: https://docs.sentry.io/api/guides/create-auth-token/
-      - type: RateLimits
-        url: https://docs.sentry.io/api/ratelimits/
-      - type: SDKs
-        url: https://docs.sentry.io/platforms/
-      - type: PostmanCollection
-        url: https://www.postman.com/sentryio/sentry-api-collection/documentation/xtzhckg/sentry-api-collection
-      - type: Webhooks
-        url: https://docs.sentry.io/organization/integrations/integration-platform/webhooks/
-      - type: Pagination
-        url: https://docs.sentry.io/api/pagination/
-      - type: Permissions
-        url: https://docs.sentry.io/api/permissions/
-      - type: Reference
-        url: https://docs.sentry.io/api/requests/
-      - type: JSONSchema
-        url: json-schema/sentry-organization-schema.json
-      - type: JSONSchema
-        url: json-schema/sentry-project-schema.json
-      - type: JSONSchema
-        url: json-schema/sentry-issue-schema.json
-      - type: JSONSchema
-        url: json-schema/sentry-event-schema.json
-      - type: JSONSchema
-        url: json-schema/sentry-team-schema.json
-      - type: JSONSchema
-        url: json-schema/sentry-release-schema.json
-      - type: JSONSchema
-        url: json-schema/sentry-alert-rule-schema.json
-      - type: JSONSchema
-        url: json-schema/sentry-monitor-schema.json
-      - type: JSONSchema
-        url: json-schema/sentry-replay-schema.json
-      - type: JSONLD
-        url: json-ld/sentry-context.jsonld
-    contact:
-      - type: Support
-        url: https://sentry.io/support/
-      - type: Email
-        url: support@sentry.io
-      - type: Twitter
-        url: https://twitter.com/getsentry
-      - type: GitHub
-        url: https://github.com/getsentry
-  - name: Sentry Events and Issues API
-    description: >-
-      The Events and Issues API provides endpoints for managing error events and issues in Sentry, including listing,
-      retrieving, updating, and bulk-mutating issues and their associated events, tags, and hashes.
-    image: https://sentry-brand.storage.googleapis.com/sentry-logo-black.png
-    humanURL: https://docs.sentry.io/api/events/
-    baseURL: https://sentry.io/api/0
-    tags:
-      - Debugging
-      - Error Tracking
-      - Events
-      - Issues
-    properties:
-      - type: Documentation
-        url: https://docs.sentry.io/api/events/
-      - type: OpenAPI
-        url: https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json
-      - type: OpenAPI
-        url: openapi/sentry-events-issues-openapi.yml
-      - type: Overlay
-        url: overlays/sentry-system-events-issues-overlay.yaml
-  - name: Sentry Organizations API
-    description: >-
-      The Organizations API provides endpoints for managing Sentry organizations, including retrieving and updating
-      organization details, managing members and their roles, listing projects and repositories, and resolving event and
-      short IDs.
-    image: https://sentry-brand.storage.googleapis.com/sentry-logo-black.png
-    humanURL: https://docs.sentry.io/api/organizations/
-    baseURL: https://sentry.io/api/0
-    tags:
-      - Administration
-      - Members
-      - Organizations
-    properties:
-      - type: Documentation
-        url: https://docs.sentry.io/api/organizations/
-      - type: OpenAPI
-        url: https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json
-      - type: OpenAPI
-        url: openapi/sentry-organizations-openapi.yml
-      - type: Overlay
-        url: overlays/sentry-system-organizations-overlay.yaml
-  - name: Sentry Projects API
-    description: >-
-      The Projects API provides endpoints for managing Sentry projects, including creating, retrieving, updating, and
-      deleting projects, as well as managing client keys, debug files, service hooks, filters, and user feedback.
-    image: https://sentry-brand.storage.googleapis.com/sentry-logo-black.png
-    humanURL: https://docs.sentry.io/api/projects/
-    baseURL: https://sentry.io/api/0
-    tags:
-      - Configuration
-      - Management
-      - Projects
-    properties:
-      - type: Documentation
-        url: https://docs.sentry.io/api/projects/
-      - type: OpenAPI
-        url: https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json
-      - type: OpenAPI
-        url: openapi/sentry-projects-openapi.yml
-      - type: Overlay
-        url: overlays/sentry-system-projects-overlay.yaml
-  - name: Sentry Teams API
-    description: >-
-      The Teams API provides endpoints for managing teams within Sentry organizations, including creating, retrieving,
-      updating, and deleting teams, managing team members and their roles, and listing projects associated with teams.
-    image: https://sentry-brand.storage.googleapis.com/sentry-logo-black.png
-    humanURL: https://docs.sentry.io/api/teams/
-    baseURL: https://sentry.io/api/0
-    tags:
-      - Collaboration
-      - Members
-      - Teams
-    properties:
-      - type: Documentation
-        url: https://docs.sentry.io/api/teams/
-      - type: OpenAPI
-        url: https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json
-      - type: OpenAPI
-        url: openapi/sentry-teams-openapi.yml
-      - type: Overlay
-        url: overlays/sentry-system-teams-overlay.yaml
-  - name: Sentry Releases API
-    description: >-
-      The Releases API provides endpoints for managing software releases in Sentry, including creating and managing
-      releases, uploading release files, listing commits, managing deployments, and retrieving release health session
-      statistics.
-    image: https://sentry-brand.storage.googleapis.com/sentry-logo-black.png
-    humanURL: https://docs.sentry.io/api/releases/
-    baseURL: https://sentry.io/api/0
-    tags:
-      - Deployments
-      - Releases
-      - Version Management
-    properties:
-      - type: Documentation
-        url: https://docs.sentry.io/api/releases/
-      - type: OpenAPI
-        url: https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json
-      - type: OpenAPI
-        url: openapi/sentry-releases-openapi.yml
-      - type: Overlay
-        url: overlays/sentry-system-releases-overlay.yaml
-  - name: Sentry Alerts API
-    description: >-
-      The Alerts API provides endpoints for managing alert rules in Sentry, including creating, retrieving, updating,
-      and deleting metric alert rules and issue alert rules, as well as managing spike protection notification actions.
-    image: https://sentry-brand.storage.googleapis.com/sentry-logo-black.png
-    humanURL: https://docs.sentry.io/api/alerts/
-    baseURL: https://sentry.io/api/0
-    tags:
-      - Alerts
-      - Monitoring
-      - Notifications
-    properties:
-      - type: Documentation
-        url: https://docs.sentry.io/api/alerts/
-      - type: OpenAPI
-        url: https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json
-      - type: OpenAPI
-        url: openapi/sentry-alerts-openapi.yml
-      - type: Overlay
-        url: overlays/sentry-system-alerts-overlay.yaml
-  - name: Sentry Crons API
-    description: >-
-      The Crons API provides endpoints for managing cron job monitors in Sentry, including creating, retrieving,
-      updating, and deleting monitors, managing monitor environments, and retrieving check-in history for tracked
-      scheduled tasks.
-    image: https://sentry-brand.storage.googleapis.com/sentry-logo-black.png
-    humanURL: https://docs.sentry.io/api/crons/
-    baseURL: https://sentry.io/api/0
-    tags:
-      - Crons
-      - Monitoring
-      - Scheduled Tasks
-    properties:
-      - type: Documentation
-        url: https://docs.sentry.io/api/crons/
-      - type: OpenAPI
-        url: https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json
-      - type: OpenAPI
-        url: openapi/sentry-crons-openapi.yml
-      - type: Overlay
-        url: overlays/sentry-system-crons-overlay.yaml
-  - name: Sentry Dashboards API
-    description: >-
-      The Dashboards API provides endpoints for managing custom dashboards in Sentry organizations, including creating,
-      listing, retrieving, editing, and deleting dashboards for visualizing error and performance data.
-    image: https://sentry-brand.storage.googleapis.com/sentry-logo-black.png
-    humanURL: https://docs.sentry.io/api/dashboards/
-    baseURL: https://sentry.io/api/0
-    tags:
-      - Analytics
-      - Dashboards
-      - Visualization
-    properties:
-      - type: Documentation
-        url: https://docs.sentry.io/api/dashboards/
-      - type: OpenAPI
-        url: https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json
-      - type: OpenAPI
-        url: openapi/sentry-dashboards-openapi.yml
-      - type: Overlay
-        url: overlays/sentry-system-dashboards-overlay.yaml
-  - name: Sentry Discover API
-    description: >-
-      The Discover and Performance API provides endpoints for managing saved queries in Sentry, allowing you to create,
-      list, retrieve, edit, and delete organization-level Discover saved queries for slicing and analyzing error and
-      transaction event data.
-    image: https://sentry-brand.storage.googleapis.com/sentry-logo-black.png
-    humanURL: https://docs.sentry.io/api/discover/
-    baseURL: https://sentry.io/api/0
-    tags:
-      - Analytics
-      - Discover
-      - Performance
-      - Queries
-    properties:
-      - type: Documentation
-        url: https://docs.sentry.io/api/discover/
-      - type: OpenAPI
-        url: https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json
-      - type: OpenAPI
-        url: openapi/sentry-discover-openapi.yml
-      - type: Overlay
-        url: overlays/sentry-system-discover-overlay.yaml
-  - name: Sentry Environments API
-    description: >-
-      The Environments API provides endpoints for managing environments in Sentry, including listing project and
-      organization environments, retrieving individual project environment details, and updating project environment
-      settings.
-    image: https://sentry-brand.storage.googleapis.com/sentry-logo-black.png
-    humanURL: https://docs.sentry.io/api/environments/
-    baseURL: https://sentry.io/api/0
-    tags:
-      - Configuration
-      - Environments
-      - Management
-    properties:
-      - type: Documentation
-        url: https://docs.sentry.io/api/environments/
-      - type: OpenAPI
-        url: https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json
-      - type: OpenAPI
-        url: openapi/sentry-environments-openapi.yml
-      - type: Overlay
-        url: overlays/sentry-system-environments-overlay.yaml
-  - name: Sentry Explore API
-    description: >-
-      The Explore API provides endpoints for querying and analyzing event data in Sentry, allowing you to slice and dice
-      events in both table and timeseries formats for flexible data analysis and visualization.
-    image: https://sentry-brand.storage.googleapis.com/sentry-logo-black.png
-    humanURL: https://docs.sentry.io/api/explore/
-    baseURL: https://sentry.io/api/0
-    tags:
-      - Analytics
-      - Events
-      - Explore
-    properties:
-      - type: Documentation
-        url: https://docs.sentry.io/api/explore/
-      - type: OpenAPI
-        url: https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json
-      - type: OpenAPI
-        url: openapi/sentry-explore-openapi.yml
-      - type: Overlay
-        url: overlays/sentry-system-explore-overlay.yaml
-  - name: Sentry Integration Platform API
-    description: >-
-      The Integration Platform API provides endpoints for managing custom integrations in Sentry, including creating and
-      updating external issues, managing integration configurations, listing installations, and retrieving
-      organization-level custom integration details.
-    image: https://sentry-brand.storage.googleapis.com/sentry-logo-black.png
-    humanURL: https://docs.sentry.io/api/integration/
-    baseURL: https://sentry.io/api/0
-    tags:
-      - Integrations
-      - Platform
-      - Webhooks
-    properties:
-      - type: Documentation
-        url: https://docs.sentry.io/api/integration/
-      - type: OpenAPI
-        url: https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json
-      - type: OpenAPI
-        url: openapi/sentry-integration-platform-openapi.yml
-      - type: Overlay
-        url: overlays/sentry-system-integration-platform-overlay.yaml
-  - name: Sentry Integrations API
-    description: >-
-      The Integrations API provides endpoints for managing third-party integrations within Sentry organizations,
-      including creating and managing data forwarders, handling external user and team records, and controlling
-      integration configurations.
-    image: https://sentry-brand.storage.googleapis.com/sentry-logo-black.png
-    humanURL: https://docs.sentry.io/api/integrations/
-    baseURL: https://sentry.io/api/0
-    tags:
-      - Configuration
-      - Data Forwarding
-      - Integrations
-    properties:
-      - type: Documentation
-        url: https://docs.sentry.io/api/integrations/
-      - type: OpenAPI
-        url: https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json
-      - type: OpenAPI
-        url: openapi/sentry-integrations-openapi.yml
-      - type: Overlay
-        url: overlays/sentry-system-integrations-overlay.yaml
-  - name: Sentry Mobile Builds API
-    description: >-
-      The Mobile Builds API provides endpoints for analyzing mobile application artifacts in Sentry, including
-      retrieving install information and size analysis results for mobile build artifacts.
-    image: https://sentry-brand.storage.googleapis.com/sentry-logo-black.png
-    humanURL: https://docs.sentry.io/api/mobile-builds/
-    baseURL: https://sentry.io/api/0
-    tags:
-      - Artifacts
-      - Builds
-      - Mobile
-    properties:
-      - type: Documentation
-        url: https://docs.sentry.io/api/mobile-builds/
-      - type: OpenAPI
-        url: https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json
-      - type: OpenAPI
-        url: openapi/sentry-mobile-builds-openapi.yml
-      - type: Overlay
-        url: overlays/sentry-system-mobile-builds-overlay.yaml
-  - name: Sentry Monitors API
-    description: >-
-      The Monitors and Alerts API provides beta endpoints for managing monitors and alerts in Sentry, including
-      creating, retrieving, updating, and deleting monitors and alerts, as well as bulk operations at the organization
-      level.
-    image: https://sentry-brand.storage.googleapis.com/sentry-logo-black.png
-    humanURL: https://docs.sentry.io/api/monitors/
-    baseURL: https://sentry.io/api/0
-    tags:
-      - Alerts
-      - Monitors
-      - Uptime
-    properties:
-      - type: Documentation
-        url: https://docs.sentry.io/api/monitors/
-      - type: OpenAPI
-        url: https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json
-      - type: OpenAPI
-        url: openapi/sentry-monitors-openapi.yml
-      - type: Overlay
-        url: overlays/sentry-system-monitors-overlay.yaml
-  - name: Sentry Prevent API
-    description: >-
-      The Prevent API provides endpoints for managing repository integrations and test results in Sentry, including
-      syncing repositories, managing branches, generating upload tokens, and retrieving test result metrics and test
-      suites.
-    image: https://sentry-brand.storage.googleapis.com/sentry-logo-black.png
-    humanURL: https://docs.sentry.io/api/prevent/
-    baseURL: https://sentry.io/api/0
-    tags:
-      - Quality Assurance
-      - Repositories
-      - Testing
-    properties:
-      - type: Documentation
-        url: https://docs.sentry.io/api/prevent/
-      - type: OpenAPI
-        url: https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json
-      - type: OpenAPI
-        url: openapi/sentry-prevent-openapi.yml
-      - type: Overlay
-        url: overlays/sentry-system-prevent-overlay.yaml
-  - name: Sentry Replays API
-    description: >-
-      The Replays API provides endpoints for managing session replays in Sentry, including listing, retrieving, and
-      deleting replay instances, accessing recording segments, listing clicked nodes and selectors, and retrieving
-      replay counts for issues or transactions.
-    image: https://sentry-brand.storage.googleapis.com/sentry-logo-black.png
-    humanURL: https://docs.sentry.io/api/replays/
-    baseURL: https://sentry.io/api/0
-    tags:
-      - Replays
-      - Session Recording
-      - User Experience
-    properties:
-      - type: Documentation
-        url: https://docs.sentry.io/api/replays/
-      - type: OpenAPI
-        url: https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json
-      - type: OpenAPI
-        url: openapi/sentry-replays-openapi.yml
-      - type: Overlay
-        url: overlays/sentry-system-replays-overlay.yaml
-  - name: Sentry SCIM API
-    description: >-
-      The SCIM API provides endpoints for federated identity management in Sentry, enabling automated provisioning and
-      deprovisioning of organization members and teams using the System for Cross-Domain Identity Management standard.
-      Requires a Business Plan with SAML2 enabled.
-    image: https://sentry-brand.storage.googleapis.com/sentry-logo-black.png
-    humanURL: https://docs.sentry.io/api/scim/
-    baseURL: https://sentry.io/api/0
-    tags:
-      - Enterprise
-      - Identity Management
-      - Provisioning
-      - SCIM
-    properties:
-      - type: Documentation
-        url: https://docs.sentry.io/api/scim/
-      - type: OpenAPI
-        url: https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json
-      - type: OpenAPI
-        url: openapi/sentry-scim-openapi.yml
-      - type: Overlay
-        url: overlays/sentry-system-scim-overlay.yaml
-  - name: Sentry Seer API
-    description: >-
-      The Seer API provides endpoints for AI-powered issue analysis in Sentry, including listing available AI models,
-      starting AI-assisted issue fixes, and retrieving the state of ongoing fix analyses.
-    image: https://sentry-brand.storage.googleapis.com/sentry-logo-black.png
-    humanURL: https://docs.sentry.io/api/seer/
-    baseURL: https://sentry.io/api/0
-    tags:
-      - AI
-      - Automation
-      - Issue Analysis
-    properties:
-      - type: Documentation
-        url: https://docs.sentry.io/api/seer/
-      - type: OpenAPI
-        url: https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json
-      - type: OpenAPI
-        url: openapi/sentry-seer-openapi.yml
-      - type: Overlay
-        url: overlays/sentry-system-seer-overlay.yaml
-  - name: Sentry Users API
-    description: >-
-      The Users API provides endpoints for retrieving user-related information in Sentry, including listing the
-      organizations that the authenticated user belongs to.
-    image: https://sentry-brand.storage.googleapis.com/sentry-logo-black.png
-    humanURL: https://docs.sentry.io/api/users/
-    baseURL: https://sentry.io/api/0
-    tags:
-      - Accounts
-      - Authentication
-      - Users
-    properties:
-      - type: Documentation
-        url: https://docs.sentry.io/api/users/
-      - type: OpenAPI
-        url: https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json
-      - type: OpenAPI
-        url: openapi/sentry-users-openapi.yml
-      - type: Overlay
-        url: overlays/sentry-system-users-overlay.yaml
+- aid: sentry-system:sentry-system-alerts-api
+  name: Sentry Alerts API
+  description: Manage alerts (beta)
+  humanURL: https://sentry.io
+  baseURL: https://sentry.io/api/0
+  tags:
+  - Alerts
+  properties:
+  - type: OpenAPI
+    url: openapi/sentry-system-alerts-api-openapi.yml
+  - type: Documentation
+    url: https://docs.sentry.io/api/
+  - type: Authentication
+    url: https://docs.sentry.io/api/auth/
+  - type: GettingStarted
+    url: https://docs.sentry.io/api/guides/create-auth-token/
+  - type: RateLimits
+    url: https://docs.sentry.io/api/ratelimits/
+  - type: SDKs
+    url: https://docs.sentry.io/platforms/
+  - type: PostmanCollection
+    url: >-
+      https://www.postman.com/sentryio/sentry-api-collection/documentation/xtzhckg/sentry-api-collection
+  - type: Webhooks
+    url: https://docs.sentry.io/organization/integrations/integration-platform/webhooks/
+  - type: Pagination
+    url: https://docs.sentry.io/api/pagination/
+  - type: Permissions
+    url: https://docs.sentry.io/api/permissions/
+  - type: Reference
+    url: https://docs.sentry.io/api/requests/
+  - type: JSONSchema
+    url: json-schema/sentry-organization-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-project-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-issue-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-event-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-team-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-release-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-alert-rule-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-monitor-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-replay-schema.json
+  - type: JSONLD
+    url: json-ld/sentry-context.jsonld
+  - type: Documentation
+    url: https://docs.sentry.io/api/events/
+  - type: Documentation
+    url: https://docs.sentry.io/api/organizations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/projects/
+  - type: Documentation
+    url: https://docs.sentry.io/api/teams/
+  - type: Documentation
+    url: https://docs.sentry.io/api/releases/
+  - type: Documentation
+    url: https://docs.sentry.io/api/alerts/
+  - type: Documentation
+    url: https://docs.sentry.io/api/crons/
+  - type: Documentation
+    url: https://docs.sentry.io/api/dashboards/
+  - type: Documentation
+    url: https://docs.sentry.io/api/discover/
+  - type: Documentation
+    url: https://docs.sentry.io/api/environments/
+  - type: Documentation
+    url: https://docs.sentry.io/api/explore/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integration/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integrations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/mobile-builds/
+  - type: Documentation
+    url: https://docs.sentry.io/api/monitors/
+  - type: Documentation
+    url: https://docs.sentry.io/api/prevent/
+  - type: Documentation
+    url: https://docs.sentry.io/api/replays/
+  - type: Documentation
+    url: https://docs.sentry.io/api/scim/
+  - type: Documentation
+    url: https://docs.sentry.io/api/seer/
+  - type: Documentation
+    url: https://docs.sentry.io/api/users/
+- aid: sentry-system:sentry-system-check-ins-api
+  name: Sentry Check-Ins API
+  description: View monitor check-in history
+  humanURL: https://sentry.io
+  baseURL: https://sentry.io/api/0
+  tags:
+  - Check-Ins
+  properties:
+  - type: OpenAPI
+    url: openapi/sentry-system-check-ins-api-openapi.yml
+  - type: Documentation
+    url: https://docs.sentry.io/api/
+  - type: Authentication
+    url: https://docs.sentry.io/api/auth/
+  - type: GettingStarted
+    url: https://docs.sentry.io/api/guides/create-auth-token/
+  - type: RateLimits
+    url: https://docs.sentry.io/api/ratelimits/
+  - type: SDKs
+    url: https://docs.sentry.io/platforms/
+  - type: PostmanCollection
+    url: >-
+      https://www.postman.com/sentryio/sentry-api-collection/documentation/xtzhckg/sentry-api-collection
+  - type: Webhooks
+    url: https://docs.sentry.io/organization/integrations/integration-platform/webhooks/
+  - type: Pagination
+    url: https://docs.sentry.io/api/pagination/
+  - type: Permissions
+    url: https://docs.sentry.io/api/permissions/
+  - type: Reference
+    url: https://docs.sentry.io/api/requests/
+  - type: JSONSchema
+    url: json-schema/sentry-organization-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-project-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-issue-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-event-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-team-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-release-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-alert-rule-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-monitor-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-replay-schema.json
+  - type: JSONLD
+    url: json-ld/sentry-context.jsonld
+  - type: Documentation
+    url: https://docs.sentry.io/api/events/
+  - type: Documentation
+    url: https://docs.sentry.io/api/organizations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/projects/
+  - type: Documentation
+    url: https://docs.sentry.io/api/teams/
+  - type: Documentation
+    url: https://docs.sentry.io/api/releases/
+  - type: Documentation
+    url: https://docs.sentry.io/api/alerts/
+  - type: Documentation
+    url: https://docs.sentry.io/api/crons/
+  - type: Documentation
+    url: https://docs.sentry.io/api/dashboards/
+  - type: Documentation
+    url: https://docs.sentry.io/api/discover/
+  - type: Documentation
+    url: https://docs.sentry.io/api/environments/
+  - type: Documentation
+    url: https://docs.sentry.io/api/explore/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integration/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integrations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/mobile-builds/
+  - type: Documentation
+    url: https://docs.sentry.io/api/monitors/
+  - type: Documentation
+    url: https://docs.sentry.io/api/prevent/
+  - type: Documentation
+    url: https://docs.sentry.io/api/replays/
+  - type: Documentation
+    url: https://docs.sentry.io/api/scim/
+  - type: Documentation
+    url: https://docs.sentry.io/api/seer/
+  - type: Documentation
+    url: https://docs.sentry.io/api/users/
+- aid: sentry-system:sentry-system-client-keys-api
+  name: Sentry Client Keys API
+  description: Manage project client keys (DSNs)
+  humanURL: https://sentry.io
+  baseURL: https://sentry.io/api/0
+  tags:
+  - Client Keys
+  properties:
+  - type: OpenAPI
+    url: openapi/sentry-system-client-keys-api-openapi.yml
+  - type: Documentation
+    url: https://docs.sentry.io/api/
+  - type: Authentication
+    url: https://docs.sentry.io/api/auth/
+  - type: GettingStarted
+    url: https://docs.sentry.io/api/guides/create-auth-token/
+  - type: RateLimits
+    url: https://docs.sentry.io/api/ratelimits/
+  - type: SDKs
+    url: https://docs.sentry.io/platforms/
+  - type: PostmanCollection
+    url: >-
+      https://www.postman.com/sentryio/sentry-api-collection/documentation/xtzhckg/sentry-api-collection
+  - type: Webhooks
+    url: https://docs.sentry.io/organization/integrations/integration-platform/webhooks/
+  - type: Pagination
+    url: https://docs.sentry.io/api/pagination/
+  - type: Permissions
+    url: https://docs.sentry.io/api/permissions/
+  - type: Reference
+    url: https://docs.sentry.io/api/requests/
+  - type: JSONSchema
+    url: json-schema/sentry-organization-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-project-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-issue-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-event-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-team-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-release-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-alert-rule-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-monitor-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-replay-schema.json
+  - type: JSONLD
+    url: json-ld/sentry-context.jsonld
+  - type: Documentation
+    url: https://docs.sentry.io/api/events/
+  - type: Documentation
+    url: https://docs.sentry.io/api/organizations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/projects/
+  - type: Documentation
+    url: https://docs.sentry.io/api/teams/
+  - type: Documentation
+    url: https://docs.sentry.io/api/releases/
+  - type: Documentation
+    url: https://docs.sentry.io/api/alerts/
+  - type: Documentation
+    url: https://docs.sentry.io/api/crons/
+  - type: Documentation
+    url: https://docs.sentry.io/api/dashboards/
+  - type: Documentation
+    url: https://docs.sentry.io/api/discover/
+  - type: Documentation
+    url: https://docs.sentry.io/api/environments/
+  - type: Documentation
+    url: https://docs.sentry.io/api/explore/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integration/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integrations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/mobile-builds/
+  - type: Documentation
+    url: https://docs.sentry.io/api/monitors/
+  - type: Documentation
+    url: https://docs.sentry.io/api/prevent/
+  - type: Documentation
+    url: https://docs.sentry.io/api/replays/
+  - type: Documentation
+    url: https://docs.sentry.io/api/scim/
+  - type: Documentation
+    url: https://docs.sentry.io/api/seer/
+  - type: Documentation
+    url: https://docs.sentry.io/api/users/
+- aid: sentry-system:sentry-system-commits-api
+  name: Sentry Commits API
+  description: Manage commits associated with releases
+  humanURL: https://sentry.io
+  baseURL: https://sentry.io/api/0
+  tags:
+  - Commits
+  properties:
+  - type: OpenAPI
+    url: openapi/sentry-system-commits-api-openapi.yml
+  - type: Documentation
+    url: https://docs.sentry.io/api/
+  - type: Authentication
+    url: https://docs.sentry.io/api/auth/
+  - type: GettingStarted
+    url: https://docs.sentry.io/api/guides/create-auth-token/
+  - type: RateLimits
+    url: https://docs.sentry.io/api/ratelimits/
+  - type: SDKs
+    url: https://docs.sentry.io/platforms/
+  - type: PostmanCollection
+    url: >-
+      https://www.postman.com/sentryio/sentry-api-collection/documentation/xtzhckg/sentry-api-collection
+  - type: Webhooks
+    url: https://docs.sentry.io/organization/integrations/integration-platform/webhooks/
+  - type: Pagination
+    url: https://docs.sentry.io/api/pagination/
+  - type: Permissions
+    url: https://docs.sentry.io/api/permissions/
+  - type: Reference
+    url: https://docs.sentry.io/api/requests/
+  - type: JSONSchema
+    url: json-schema/sentry-organization-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-project-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-issue-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-event-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-team-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-release-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-alert-rule-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-monitor-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-replay-schema.json
+  - type: JSONLD
+    url: json-ld/sentry-context.jsonld
+  - type: Documentation
+    url: https://docs.sentry.io/api/events/
+  - type: Documentation
+    url: https://docs.sentry.io/api/organizations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/projects/
+  - type: Documentation
+    url: https://docs.sentry.io/api/teams/
+  - type: Documentation
+    url: https://docs.sentry.io/api/releases/
+  - type: Documentation
+    url: https://docs.sentry.io/api/alerts/
+  - type: Documentation
+    url: https://docs.sentry.io/api/crons/
+  - type: Documentation
+    url: https://docs.sentry.io/api/dashboards/
+  - type: Documentation
+    url: https://docs.sentry.io/api/discover/
+  - type: Documentation
+    url: https://docs.sentry.io/api/environments/
+  - type: Documentation
+    url: https://docs.sentry.io/api/explore/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integration/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integrations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/mobile-builds/
+  - type: Documentation
+    url: https://docs.sentry.io/api/monitors/
+  - type: Documentation
+    url: https://docs.sentry.io/api/prevent/
+  - type: Documentation
+    url: https://docs.sentry.io/api/replays/
+  - type: Documentation
+    url: https://docs.sentry.io/api/scim/
+  - type: Documentation
+    url: https://docs.sentry.io/api/seer/
+  - type: Documentation
+    url: https://docs.sentry.io/api/users/
+- aid: sentry-system:sentry-system-custom-integrations-api
+  name: Sentry Custom Integrations API
+  description: Manage custom integrations
+  humanURL: https://sentry.io
+  baseURL: https://sentry.io/api/0
+  tags:
+  - Custom Integrations
+  properties:
+  - type: OpenAPI
+    url: openapi/sentry-system-custom-integrations-api-openapi.yml
+  - type: Documentation
+    url: https://docs.sentry.io/api/
+  - type: Authentication
+    url: https://docs.sentry.io/api/auth/
+  - type: GettingStarted
+    url: https://docs.sentry.io/api/guides/create-auth-token/
+  - type: RateLimits
+    url: https://docs.sentry.io/api/ratelimits/
+  - type: SDKs
+    url: https://docs.sentry.io/platforms/
+  - type: PostmanCollection
+    url: >-
+      https://www.postman.com/sentryio/sentry-api-collection/documentation/xtzhckg/sentry-api-collection
+  - type: Webhooks
+    url: https://docs.sentry.io/organization/integrations/integration-platform/webhooks/
+  - type: Pagination
+    url: https://docs.sentry.io/api/pagination/
+  - type: Permissions
+    url: https://docs.sentry.io/api/permissions/
+  - type: Reference
+    url: https://docs.sentry.io/api/requests/
+  - type: JSONSchema
+    url: json-schema/sentry-organization-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-project-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-issue-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-event-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-team-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-release-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-alert-rule-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-monitor-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-replay-schema.json
+  - type: JSONLD
+    url: json-ld/sentry-context.jsonld
+  - type: Documentation
+    url: https://docs.sentry.io/api/events/
+  - type: Documentation
+    url: https://docs.sentry.io/api/organizations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/projects/
+  - type: Documentation
+    url: https://docs.sentry.io/api/teams/
+  - type: Documentation
+    url: https://docs.sentry.io/api/releases/
+  - type: Documentation
+    url: https://docs.sentry.io/api/alerts/
+  - type: Documentation
+    url: https://docs.sentry.io/api/crons/
+  - type: Documentation
+    url: https://docs.sentry.io/api/dashboards/
+  - type: Documentation
+    url: https://docs.sentry.io/api/discover/
+  - type: Documentation
+    url: https://docs.sentry.io/api/environments/
+  - type: Documentation
+    url: https://docs.sentry.io/api/explore/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integration/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integrations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/mobile-builds/
+  - type: Documentation
+    url: https://docs.sentry.io/api/monitors/
+  - type: Documentation
+    url: https://docs.sentry.io/api/prevent/
+  - type: Documentation
+    url: https://docs.sentry.io/api/replays/
+  - type: Documentation
+    url: https://docs.sentry.io/api/scim/
+  - type: Documentation
+    url: https://docs.sentry.io/api/seer/
+  - type: Documentation
+    url: https://docs.sentry.io/api/users/
+- aid: sentry-system:sentry-system-dashboards-api
+  name: Sentry Dashboards API
+  description: Manage custom dashboards and their widgets
+  humanURL: https://sentry.io
+  baseURL: https://sentry.io/api/0
+  tags:
+  - Dashboards
+  properties:
+  - type: OpenAPI
+    url: openapi/sentry-system-dashboards-api-openapi.yml
+  - type: Documentation
+    url: https://docs.sentry.io/api/
+  - type: Authentication
+    url: https://docs.sentry.io/api/auth/
+  - type: GettingStarted
+    url: https://docs.sentry.io/api/guides/create-auth-token/
+  - type: RateLimits
+    url: https://docs.sentry.io/api/ratelimits/
+  - type: SDKs
+    url: https://docs.sentry.io/platforms/
+  - type: PostmanCollection
+    url: >-
+      https://www.postman.com/sentryio/sentry-api-collection/documentation/xtzhckg/sentry-api-collection
+  - type: Webhooks
+    url: https://docs.sentry.io/organization/integrations/integration-platform/webhooks/
+  - type: Pagination
+    url: https://docs.sentry.io/api/pagination/
+  - type: Permissions
+    url: https://docs.sentry.io/api/permissions/
+  - type: Reference
+    url: https://docs.sentry.io/api/requests/
+  - type: JSONSchema
+    url: json-schema/sentry-organization-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-project-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-issue-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-event-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-team-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-release-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-alert-rule-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-monitor-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-replay-schema.json
+  - type: JSONLD
+    url: json-ld/sentry-context.jsonld
+  - type: Documentation
+    url: https://docs.sentry.io/api/events/
+  - type: Documentation
+    url: https://docs.sentry.io/api/organizations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/projects/
+  - type: Documentation
+    url: https://docs.sentry.io/api/teams/
+  - type: Documentation
+    url: https://docs.sentry.io/api/releases/
+  - type: Documentation
+    url: https://docs.sentry.io/api/alerts/
+  - type: Documentation
+    url: https://docs.sentry.io/api/crons/
+  - type: Documentation
+    url: https://docs.sentry.io/api/dashboards/
+  - type: Documentation
+    url: https://docs.sentry.io/api/discover/
+  - type: Documentation
+    url: https://docs.sentry.io/api/environments/
+  - type: Documentation
+    url: https://docs.sentry.io/api/explore/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integration/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integrations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/mobile-builds/
+  - type: Documentation
+    url: https://docs.sentry.io/api/monitors/
+  - type: Documentation
+    url: https://docs.sentry.io/api/prevent/
+  - type: Documentation
+    url: https://docs.sentry.io/api/replays/
+  - type: Documentation
+    url: https://docs.sentry.io/api/scim/
+  - type: Documentation
+    url: https://docs.sentry.io/api/seer/
+  - type: Documentation
+    url: https://docs.sentry.io/api/users/
+- aid: sentry-system:sentry-system-data-forwarders-api
+  name: Sentry Data Forwarders API
+  description: Manage data forwarding configurations
+  humanURL: https://sentry.io
+  baseURL: https://sentry.io/api/0
+  tags:
+  - Data Forwarders
+  properties:
+  - type: OpenAPI
+    url: openapi/sentry-system-data-forwarders-api-openapi.yml
+  - type: Documentation
+    url: https://docs.sentry.io/api/
+  - type: Authentication
+    url: https://docs.sentry.io/api/auth/
+  - type: GettingStarted
+    url: https://docs.sentry.io/api/guides/create-auth-token/
+  - type: RateLimits
+    url: https://docs.sentry.io/api/ratelimits/
+  - type: SDKs
+    url: https://docs.sentry.io/platforms/
+  - type: PostmanCollection
+    url: >-
+      https://www.postman.com/sentryio/sentry-api-collection/documentation/xtzhckg/sentry-api-collection
+  - type: Webhooks
+    url: https://docs.sentry.io/organization/integrations/integration-platform/webhooks/
+  - type: Pagination
+    url: https://docs.sentry.io/api/pagination/
+  - type: Permissions
+    url: https://docs.sentry.io/api/permissions/
+  - type: Reference
+    url: https://docs.sentry.io/api/requests/
+  - type: JSONSchema
+    url: json-schema/sentry-organization-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-project-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-issue-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-event-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-team-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-release-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-alert-rule-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-monitor-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-replay-schema.json
+  - type: JSONLD
+    url: json-ld/sentry-context.jsonld
+  - type: Documentation
+    url: https://docs.sentry.io/api/events/
+  - type: Documentation
+    url: https://docs.sentry.io/api/organizations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/projects/
+  - type: Documentation
+    url: https://docs.sentry.io/api/teams/
+  - type: Documentation
+    url: https://docs.sentry.io/api/releases/
+  - type: Documentation
+    url: https://docs.sentry.io/api/alerts/
+  - type: Documentation
+    url: https://docs.sentry.io/api/crons/
+  - type: Documentation
+    url: https://docs.sentry.io/api/dashboards/
+  - type: Documentation
+    url: https://docs.sentry.io/api/discover/
+  - type: Documentation
+    url: https://docs.sentry.io/api/environments/
+  - type: Documentation
+    url: https://docs.sentry.io/api/explore/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integration/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integrations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/mobile-builds/
+  - type: Documentation
+    url: https://docs.sentry.io/api/monitors/
+  - type: Documentation
+    url: https://docs.sentry.io/api/prevent/
+  - type: Documentation
+    url: https://docs.sentry.io/api/replays/
+  - type: Documentation
+    url: https://docs.sentry.io/api/scim/
+  - type: Documentation
+    url: https://docs.sentry.io/api/seer/
+  - type: Documentation
+    url: https://docs.sentry.io/api/users/
+- aid: sentry-system:sentry-system-debug-files-api
+  name: Sentry Debug Files API
+  description: Manage debug information files
+  humanURL: https://sentry.io
+  baseURL: https://sentry.io/api/0
+  tags:
+  - Debug Files
+  properties:
+  - type: OpenAPI
+    url: openapi/sentry-system-debug-files-api-openapi.yml
+  - type: Documentation
+    url: https://docs.sentry.io/api/
+  - type: Authentication
+    url: https://docs.sentry.io/api/auth/
+  - type: GettingStarted
+    url: https://docs.sentry.io/api/guides/create-auth-token/
+  - type: RateLimits
+    url: https://docs.sentry.io/api/ratelimits/
+  - type: SDKs
+    url: https://docs.sentry.io/platforms/
+  - type: PostmanCollection
+    url: >-
+      https://www.postman.com/sentryio/sentry-api-collection/documentation/xtzhckg/sentry-api-collection
+  - type: Webhooks
+    url: https://docs.sentry.io/organization/integrations/integration-platform/webhooks/
+  - type: Pagination
+    url: https://docs.sentry.io/api/pagination/
+  - type: Permissions
+    url: https://docs.sentry.io/api/permissions/
+  - type: Reference
+    url: https://docs.sentry.io/api/requests/
+  - type: JSONSchema
+    url: json-schema/sentry-organization-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-project-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-issue-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-event-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-team-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-release-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-alert-rule-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-monitor-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-replay-schema.json
+  - type: JSONLD
+    url: json-ld/sentry-context.jsonld
+  - type: Documentation
+    url: https://docs.sentry.io/api/events/
+  - type: Documentation
+    url: https://docs.sentry.io/api/organizations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/projects/
+  - type: Documentation
+    url: https://docs.sentry.io/api/teams/
+  - type: Documentation
+    url: https://docs.sentry.io/api/releases/
+  - type: Documentation
+    url: https://docs.sentry.io/api/alerts/
+  - type: Documentation
+    url: https://docs.sentry.io/api/crons/
+  - type: Documentation
+    url: https://docs.sentry.io/api/dashboards/
+  - type: Documentation
+    url: https://docs.sentry.io/api/discover/
+  - type: Documentation
+    url: https://docs.sentry.io/api/environments/
+  - type: Documentation
+    url: https://docs.sentry.io/api/explore/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integration/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integrations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/mobile-builds/
+  - type: Documentation
+    url: https://docs.sentry.io/api/monitors/
+  - type: Documentation
+    url: https://docs.sentry.io/api/prevent/
+  - type: Documentation
+    url: https://docs.sentry.io/api/replays/
+  - type: Documentation
+    url: https://docs.sentry.io/api/scim/
+  - type: Documentation
+    url: https://docs.sentry.io/api/seer/
+  - type: Documentation
+    url: https://docs.sentry.io/api/users/
+- aid: sentry-system:sentry-system-deploys-api
+  name: Sentry Deploys API
+  description: Manage deployments of releases
+  humanURL: https://sentry.io
+  baseURL: https://sentry.io/api/0
+  tags:
+  - Deploys
+  properties:
+  - type: OpenAPI
+    url: openapi/sentry-system-deploys-api-openapi.yml
+  - type: Documentation
+    url: https://docs.sentry.io/api/
+  - type: Authentication
+    url: https://docs.sentry.io/api/auth/
+  - type: GettingStarted
+    url: https://docs.sentry.io/api/guides/create-auth-token/
+  - type: RateLimits
+    url: https://docs.sentry.io/api/ratelimits/
+  - type: SDKs
+    url: https://docs.sentry.io/platforms/
+  - type: PostmanCollection
+    url: >-
+      https://www.postman.com/sentryio/sentry-api-collection/documentation/xtzhckg/sentry-api-collection
+  - type: Webhooks
+    url: https://docs.sentry.io/organization/integrations/integration-platform/webhooks/
+  - type: Pagination
+    url: https://docs.sentry.io/api/pagination/
+  - type: Permissions
+    url: https://docs.sentry.io/api/permissions/
+  - type: Reference
+    url: https://docs.sentry.io/api/requests/
+  - type: JSONSchema
+    url: json-schema/sentry-organization-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-project-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-issue-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-event-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-team-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-release-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-alert-rule-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-monitor-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-replay-schema.json
+  - type: JSONLD
+    url: json-ld/sentry-context.jsonld
+  - type: Documentation
+    url: https://docs.sentry.io/api/events/
+  - type: Documentation
+    url: https://docs.sentry.io/api/organizations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/projects/
+  - type: Documentation
+    url: https://docs.sentry.io/api/teams/
+  - type: Documentation
+    url: https://docs.sentry.io/api/releases/
+  - type: Documentation
+    url: https://docs.sentry.io/api/alerts/
+  - type: Documentation
+    url: https://docs.sentry.io/api/crons/
+  - type: Documentation
+    url: https://docs.sentry.io/api/dashboards/
+  - type: Documentation
+    url: https://docs.sentry.io/api/discover/
+  - type: Documentation
+    url: https://docs.sentry.io/api/environments/
+  - type: Documentation
+    url: https://docs.sentry.io/api/explore/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integration/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integrations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/mobile-builds/
+  - type: Documentation
+    url: https://docs.sentry.io/api/monitors/
+  - type: Documentation
+    url: https://docs.sentry.io/api/prevent/
+  - type: Documentation
+    url: https://docs.sentry.io/api/replays/
+  - type: Documentation
+    url: https://docs.sentry.io/api/scim/
+  - type: Documentation
+    url: https://docs.sentry.io/api/seer/
+  - type: Documentation
+    url: https://docs.sentry.io/api/users/
+- aid: sentry-system:sentry-system-discover-api
+  name: Sentry Discover API
+  description: Manage saved Discover queries
+  humanURL: https://sentry.io
+  baseURL: https://sentry.io/api/0
+  tags:
+  - Discover
+  properties:
+  - type: OpenAPI
+    url: openapi/sentry-system-discover-api-openapi.yml
+  - type: Documentation
+    url: https://docs.sentry.io/api/
+  - type: Authentication
+    url: https://docs.sentry.io/api/auth/
+  - type: GettingStarted
+    url: https://docs.sentry.io/api/guides/create-auth-token/
+  - type: RateLimits
+    url: https://docs.sentry.io/api/ratelimits/
+  - type: SDKs
+    url: https://docs.sentry.io/platforms/
+  - type: PostmanCollection
+    url: >-
+      https://www.postman.com/sentryio/sentry-api-collection/documentation/xtzhckg/sentry-api-collection
+  - type: Webhooks
+    url: https://docs.sentry.io/organization/integrations/integration-platform/webhooks/
+  - type: Pagination
+    url: https://docs.sentry.io/api/pagination/
+  - type: Permissions
+    url: https://docs.sentry.io/api/permissions/
+  - type: Reference
+    url: https://docs.sentry.io/api/requests/
+  - type: JSONSchema
+    url: json-schema/sentry-organization-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-project-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-issue-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-event-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-team-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-release-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-alert-rule-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-monitor-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-replay-schema.json
+  - type: JSONLD
+    url: json-ld/sentry-context.jsonld
+  - type: Documentation
+    url: https://docs.sentry.io/api/events/
+  - type: Documentation
+    url: https://docs.sentry.io/api/organizations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/projects/
+  - type: Documentation
+    url: https://docs.sentry.io/api/teams/
+  - type: Documentation
+    url: https://docs.sentry.io/api/releases/
+  - type: Documentation
+    url: https://docs.sentry.io/api/alerts/
+  - type: Documentation
+    url: https://docs.sentry.io/api/crons/
+  - type: Documentation
+    url: https://docs.sentry.io/api/dashboards/
+  - type: Documentation
+    url: https://docs.sentry.io/api/discover/
+  - type: Documentation
+    url: https://docs.sentry.io/api/environments/
+  - type: Documentation
+    url: https://docs.sentry.io/api/explore/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integration/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integrations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/mobile-builds/
+  - type: Documentation
+    url: https://docs.sentry.io/api/monitors/
+  - type: Documentation
+    url: https://docs.sentry.io/api/prevent/
+  - type: Documentation
+    url: https://docs.sentry.io/api/replays/
+  - type: Documentation
+    url: https://docs.sentry.io/api/scim/
+  - type: Documentation
+    url: https://docs.sentry.io/api/seer/
+  - type: Documentation
+    url: https://docs.sentry.io/api/users/
+- aid: sentry-system:sentry-system-environments-api
+  name: Sentry Environments API
+  description: Manage project and organization environments
+  humanURL: https://sentry.io
+  baseURL: https://sentry.io/api/0
+  tags:
+  - Environments
+  properties:
+  - type: OpenAPI
+    url: openapi/sentry-system-environments-api-openapi.yml
+  - type: Documentation
+    url: https://docs.sentry.io/api/
+  - type: Authentication
+    url: https://docs.sentry.io/api/auth/
+  - type: GettingStarted
+    url: https://docs.sentry.io/api/guides/create-auth-token/
+  - type: RateLimits
+    url: https://docs.sentry.io/api/ratelimits/
+  - type: SDKs
+    url: https://docs.sentry.io/platforms/
+  - type: PostmanCollection
+    url: >-
+      https://www.postman.com/sentryio/sentry-api-collection/documentation/xtzhckg/sentry-api-collection
+  - type: Webhooks
+    url: https://docs.sentry.io/organization/integrations/integration-platform/webhooks/
+  - type: Pagination
+    url: https://docs.sentry.io/api/pagination/
+  - type: Permissions
+    url: https://docs.sentry.io/api/permissions/
+  - type: Reference
+    url: https://docs.sentry.io/api/requests/
+  - type: JSONSchema
+    url: json-schema/sentry-organization-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-project-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-issue-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-event-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-team-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-release-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-alert-rule-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-monitor-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-replay-schema.json
+  - type: JSONLD
+    url: json-ld/sentry-context.jsonld
+  - type: Documentation
+    url: https://docs.sentry.io/api/events/
+  - type: Documentation
+    url: https://docs.sentry.io/api/organizations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/projects/
+  - type: Documentation
+    url: https://docs.sentry.io/api/teams/
+  - type: Documentation
+    url: https://docs.sentry.io/api/releases/
+  - type: Documentation
+    url: https://docs.sentry.io/api/alerts/
+  - type: Documentation
+    url: https://docs.sentry.io/api/crons/
+  - type: Documentation
+    url: https://docs.sentry.io/api/dashboards/
+  - type: Documentation
+    url: https://docs.sentry.io/api/discover/
+  - type: Documentation
+    url: https://docs.sentry.io/api/environments/
+  - type: Documentation
+    url: https://docs.sentry.io/api/explore/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integration/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integrations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/mobile-builds/
+  - type: Documentation
+    url: https://docs.sentry.io/api/monitors/
+  - type: Documentation
+    url: https://docs.sentry.io/api/prevent/
+  - type: Documentation
+    url: https://docs.sentry.io/api/replays/
+  - type: Documentation
+    url: https://docs.sentry.io/api/scim/
+  - type: Documentation
+    url: https://docs.sentry.io/api/seer/
+  - type: Documentation
+    url: https://docs.sentry.io/api/users/
+- aid: sentry-system:sentry-system-events-api
+  name: Sentry Events API
+  description: Access and manage error and transaction events
+  humanURL: https://sentry.io
+  baseURL: https://sentry.io/api/0
+  tags:
+  - Events
+  properties:
+  - type: OpenAPI
+    url: openapi/sentry-system-events-api-openapi.yml
+  - type: Documentation
+    url: https://docs.sentry.io/api/
+  - type: Authentication
+    url: https://docs.sentry.io/api/auth/
+  - type: GettingStarted
+    url: https://docs.sentry.io/api/guides/create-auth-token/
+  - type: RateLimits
+    url: https://docs.sentry.io/api/ratelimits/
+  - type: SDKs
+    url: https://docs.sentry.io/platforms/
+  - type: PostmanCollection
+    url: >-
+      https://www.postman.com/sentryio/sentry-api-collection/documentation/xtzhckg/sentry-api-collection
+  - type: Webhooks
+    url: https://docs.sentry.io/organization/integrations/integration-platform/webhooks/
+  - type: Pagination
+    url: https://docs.sentry.io/api/pagination/
+  - type: Permissions
+    url: https://docs.sentry.io/api/permissions/
+  - type: Reference
+    url: https://docs.sentry.io/api/requests/
+  - type: JSONSchema
+    url: json-schema/sentry-organization-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-project-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-issue-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-event-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-team-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-release-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-alert-rule-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-monitor-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-replay-schema.json
+  - type: JSONLD
+    url: json-ld/sentry-context.jsonld
+  - type: Documentation
+    url: https://docs.sentry.io/api/events/
+  - type: Documentation
+    url: https://docs.sentry.io/api/organizations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/projects/
+  - type: Documentation
+    url: https://docs.sentry.io/api/teams/
+  - type: Documentation
+    url: https://docs.sentry.io/api/releases/
+  - type: Documentation
+    url: https://docs.sentry.io/api/alerts/
+  - type: Documentation
+    url: https://docs.sentry.io/api/crons/
+  - type: Documentation
+    url: https://docs.sentry.io/api/dashboards/
+  - type: Documentation
+    url: https://docs.sentry.io/api/discover/
+  - type: Documentation
+    url: https://docs.sentry.io/api/environments/
+  - type: Documentation
+    url: https://docs.sentry.io/api/explore/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integration/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integrations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/mobile-builds/
+  - type: Documentation
+    url: https://docs.sentry.io/api/monitors/
+  - type: Documentation
+    url: https://docs.sentry.io/api/prevent/
+  - type: Documentation
+    url: https://docs.sentry.io/api/replays/
+  - type: Documentation
+    url: https://docs.sentry.io/api/scim/
+  - type: Documentation
+    url: https://docs.sentry.io/api/seer/
+  - type: Documentation
+    url: https://docs.sentry.io/api/users/
+- aid: sentry-system:sentry-system-explore-api
+  name: Sentry Explore API
+  description: Query and analyze event data
+  humanURL: https://sentry.io
+  baseURL: https://sentry.io/api/0
+  tags:
+  - Explore
+  properties:
+  - type: OpenAPI
+    url: openapi/sentry-system-explore-api-openapi.yml
+  - type: Documentation
+    url: https://docs.sentry.io/api/
+  - type: Authentication
+    url: https://docs.sentry.io/api/auth/
+  - type: GettingStarted
+    url: https://docs.sentry.io/api/guides/create-auth-token/
+  - type: RateLimits
+    url: https://docs.sentry.io/api/ratelimits/
+  - type: SDKs
+    url: https://docs.sentry.io/platforms/
+  - type: PostmanCollection
+    url: >-
+      https://www.postman.com/sentryio/sentry-api-collection/documentation/xtzhckg/sentry-api-collection
+  - type: Webhooks
+    url: https://docs.sentry.io/organization/integrations/integration-platform/webhooks/
+  - type: Pagination
+    url: https://docs.sentry.io/api/pagination/
+  - type: Permissions
+    url: https://docs.sentry.io/api/permissions/
+  - type: Reference
+    url: https://docs.sentry.io/api/requests/
+  - type: JSONSchema
+    url: json-schema/sentry-organization-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-project-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-issue-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-event-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-team-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-release-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-alert-rule-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-monitor-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-replay-schema.json
+  - type: JSONLD
+    url: json-ld/sentry-context.jsonld
+  - type: Documentation
+    url: https://docs.sentry.io/api/events/
+  - type: Documentation
+    url: https://docs.sentry.io/api/organizations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/projects/
+  - type: Documentation
+    url: https://docs.sentry.io/api/teams/
+  - type: Documentation
+    url: https://docs.sentry.io/api/releases/
+  - type: Documentation
+    url: https://docs.sentry.io/api/alerts/
+  - type: Documentation
+    url: https://docs.sentry.io/api/crons/
+  - type: Documentation
+    url: https://docs.sentry.io/api/dashboards/
+  - type: Documentation
+    url: https://docs.sentry.io/api/discover/
+  - type: Documentation
+    url: https://docs.sentry.io/api/environments/
+  - type: Documentation
+    url: https://docs.sentry.io/api/explore/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integration/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integrations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/mobile-builds/
+  - type: Documentation
+    url: https://docs.sentry.io/api/monitors/
+  - type: Documentation
+    url: https://docs.sentry.io/api/prevent/
+  - type: Documentation
+    url: https://docs.sentry.io/api/replays/
+  - type: Documentation
+    url: https://docs.sentry.io/api/scim/
+  - type: Documentation
+    url: https://docs.sentry.io/api/seer/
+  - type: Documentation
+    url: https://docs.sentry.io/api/users/
+- aid: sentry-system:sentry-system-external-issues-api
+  name: Sentry External Issues API
+  description: Manage external issue links
+  humanURL: https://sentry.io
+  baseURL: https://sentry.io/api/0
+  tags:
+  - External Issues
+  properties:
+  - type: OpenAPI
+    url: openapi/sentry-system-external-issues-api-openapi.yml
+  - type: Documentation
+    url: https://docs.sentry.io/api/
+  - type: Authentication
+    url: https://docs.sentry.io/api/auth/
+  - type: GettingStarted
+    url: https://docs.sentry.io/api/guides/create-auth-token/
+  - type: RateLimits
+    url: https://docs.sentry.io/api/ratelimits/
+  - type: SDKs
+    url: https://docs.sentry.io/platforms/
+  - type: PostmanCollection
+    url: >-
+      https://www.postman.com/sentryio/sentry-api-collection/documentation/xtzhckg/sentry-api-collection
+  - type: Webhooks
+    url: https://docs.sentry.io/organization/integrations/integration-platform/webhooks/
+  - type: Pagination
+    url: https://docs.sentry.io/api/pagination/
+  - type: Permissions
+    url: https://docs.sentry.io/api/permissions/
+  - type: Reference
+    url: https://docs.sentry.io/api/requests/
+  - type: JSONSchema
+    url: json-schema/sentry-organization-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-project-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-issue-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-event-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-team-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-release-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-alert-rule-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-monitor-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-replay-schema.json
+  - type: JSONLD
+    url: json-ld/sentry-context.jsonld
+  - type: Documentation
+    url: https://docs.sentry.io/api/events/
+  - type: Documentation
+    url: https://docs.sentry.io/api/organizations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/projects/
+  - type: Documentation
+    url: https://docs.sentry.io/api/teams/
+  - type: Documentation
+    url: https://docs.sentry.io/api/releases/
+  - type: Documentation
+    url: https://docs.sentry.io/api/alerts/
+  - type: Documentation
+    url: https://docs.sentry.io/api/crons/
+  - type: Documentation
+    url: https://docs.sentry.io/api/dashboards/
+  - type: Documentation
+    url: https://docs.sentry.io/api/discover/
+  - type: Documentation
+    url: https://docs.sentry.io/api/environments/
+  - type: Documentation
+    url: https://docs.sentry.io/api/explore/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integration/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integrations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/mobile-builds/
+  - type: Documentation
+    url: https://docs.sentry.io/api/monitors/
+  - type: Documentation
+    url: https://docs.sentry.io/api/prevent/
+  - type: Documentation
+    url: https://docs.sentry.io/api/replays/
+  - type: Documentation
+    url: https://docs.sentry.io/api/scim/
+  - type: Documentation
+    url: https://docs.sentry.io/api/seer/
+  - type: Documentation
+    url: https://docs.sentry.io/api/users/
+- aid: sentry-system:sentry-system-external-teams-api
+  name: Sentry External Teams API
+  description: Manage external team mappings
+  humanURL: https://sentry.io
+  baseURL: https://sentry.io/api/0
+  tags:
+  - External Teams
+  properties:
+  - type: OpenAPI
+    url: openapi/sentry-system-external-teams-api-openapi.yml
+  - type: Documentation
+    url: https://docs.sentry.io/api/
+  - type: Authentication
+    url: https://docs.sentry.io/api/auth/
+  - type: GettingStarted
+    url: https://docs.sentry.io/api/guides/create-auth-token/
+  - type: RateLimits
+    url: https://docs.sentry.io/api/ratelimits/
+  - type: SDKs
+    url: https://docs.sentry.io/platforms/
+  - type: PostmanCollection
+    url: >-
+      https://www.postman.com/sentryio/sentry-api-collection/documentation/xtzhckg/sentry-api-collection
+  - type: Webhooks
+    url: https://docs.sentry.io/organization/integrations/integration-platform/webhooks/
+  - type: Pagination
+    url: https://docs.sentry.io/api/pagination/
+  - type: Permissions
+    url: https://docs.sentry.io/api/permissions/
+  - type: Reference
+    url: https://docs.sentry.io/api/requests/
+  - type: JSONSchema
+    url: json-schema/sentry-organization-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-project-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-issue-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-event-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-team-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-release-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-alert-rule-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-monitor-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-replay-schema.json
+  - type: JSONLD
+    url: json-ld/sentry-context.jsonld
+  - type: Documentation
+    url: https://docs.sentry.io/api/events/
+  - type: Documentation
+    url: https://docs.sentry.io/api/organizations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/projects/
+  - type: Documentation
+    url: https://docs.sentry.io/api/teams/
+  - type: Documentation
+    url: https://docs.sentry.io/api/releases/
+  - type: Documentation
+    url: https://docs.sentry.io/api/alerts/
+  - type: Documentation
+    url: https://docs.sentry.io/api/crons/
+  - type: Documentation
+    url: https://docs.sentry.io/api/dashboards/
+  - type: Documentation
+    url: https://docs.sentry.io/api/discover/
+  - type: Documentation
+    url: https://docs.sentry.io/api/environments/
+  - type: Documentation
+    url: https://docs.sentry.io/api/explore/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integration/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integrations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/mobile-builds/
+  - type: Documentation
+    url: https://docs.sentry.io/api/monitors/
+  - type: Documentation
+    url: https://docs.sentry.io/api/prevent/
+  - type: Documentation
+    url: https://docs.sentry.io/api/replays/
+  - type: Documentation
+    url: https://docs.sentry.io/api/scim/
+  - type: Documentation
+    url: https://docs.sentry.io/api/seer/
+  - type: Documentation
+    url: https://docs.sentry.io/api/users/
+- aid: sentry-system:sentry-system-external-users-api
+  name: Sentry External Users API
+  description: Manage external user mappings
+  humanURL: https://sentry.io
+  baseURL: https://sentry.io/api/0
+  tags:
+  - External Users
+  properties:
+  - type: OpenAPI
+    url: openapi/sentry-system-external-users-api-openapi.yml
+  - type: Documentation
+    url: https://docs.sentry.io/api/
+  - type: Authentication
+    url: https://docs.sentry.io/api/auth/
+  - type: GettingStarted
+    url: https://docs.sentry.io/api/guides/create-auth-token/
+  - type: RateLimits
+    url: https://docs.sentry.io/api/ratelimits/
+  - type: SDKs
+    url: https://docs.sentry.io/platforms/
+  - type: PostmanCollection
+    url: >-
+      https://www.postman.com/sentryio/sentry-api-collection/documentation/xtzhckg/sentry-api-collection
+  - type: Webhooks
+    url: https://docs.sentry.io/organization/integrations/integration-platform/webhooks/
+  - type: Pagination
+    url: https://docs.sentry.io/api/pagination/
+  - type: Permissions
+    url: https://docs.sentry.io/api/permissions/
+  - type: Reference
+    url: https://docs.sentry.io/api/requests/
+  - type: JSONSchema
+    url: json-schema/sentry-organization-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-project-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-issue-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-event-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-team-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-release-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-alert-rule-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-monitor-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-replay-schema.json
+  - type: JSONLD
+    url: json-ld/sentry-context.jsonld
+  - type: Documentation
+    url: https://docs.sentry.io/api/events/
+  - type: Documentation
+    url: https://docs.sentry.io/api/organizations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/projects/
+  - type: Documentation
+    url: https://docs.sentry.io/api/teams/
+  - type: Documentation
+    url: https://docs.sentry.io/api/releases/
+  - type: Documentation
+    url: https://docs.sentry.io/api/alerts/
+  - type: Documentation
+    url: https://docs.sentry.io/api/crons/
+  - type: Documentation
+    url: https://docs.sentry.io/api/dashboards/
+  - type: Documentation
+    url: https://docs.sentry.io/api/discover/
+  - type: Documentation
+    url: https://docs.sentry.io/api/environments/
+  - type: Documentation
+    url: https://docs.sentry.io/api/explore/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integration/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integrations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/mobile-builds/
+  - type: Documentation
+    url: https://docs.sentry.io/api/monitors/
+  - type: Documentation
+    url: https://docs.sentry.io/api/prevent/
+  - type: Documentation
+    url: https://docs.sentry.io/api/replays/
+  - type: Documentation
+    url: https://docs.sentry.io/api/scim/
+  - type: Documentation
+    url: https://docs.sentry.io/api/seer/
+  - type: Documentation
+    url: https://docs.sentry.io/api/users/
+- aid: sentry-system:sentry-system-filters-api
+  name: Sentry Filters API
+  description: Manage inbound data filters
+  humanURL: https://sentry.io
+  baseURL: https://sentry.io/api/0
+  tags:
+  - Filters
+  properties:
+  - type: OpenAPI
+    url: openapi/sentry-system-filters-api-openapi.yml
+  - type: Documentation
+    url: https://docs.sentry.io/api/
+  - type: Authentication
+    url: https://docs.sentry.io/api/auth/
+  - type: GettingStarted
+    url: https://docs.sentry.io/api/guides/create-auth-token/
+  - type: RateLimits
+    url: https://docs.sentry.io/api/ratelimits/
+  - type: SDKs
+    url: https://docs.sentry.io/platforms/
+  - type: PostmanCollection
+    url: >-
+      https://www.postman.com/sentryio/sentry-api-collection/documentation/xtzhckg/sentry-api-collection
+  - type: Webhooks
+    url: https://docs.sentry.io/organization/integrations/integration-platform/webhooks/
+  - type: Pagination
+    url: https://docs.sentry.io/api/pagination/
+  - type: Permissions
+    url: https://docs.sentry.io/api/permissions/
+  - type: Reference
+    url: https://docs.sentry.io/api/requests/
+  - type: JSONSchema
+    url: json-schema/sentry-organization-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-project-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-issue-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-event-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-team-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-release-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-alert-rule-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-monitor-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-replay-schema.json
+  - type: JSONLD
+    url: json-ld/sentry-context.jsonld
+  - type: Documentation
+    url: https://docs.sentry.io/api/events/
+  - type: Documentation
+    url: https://docs.sentry.io/api/organizations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/projects/
+  - type: Documentation
+    url: https://docs.sentry.io/api/teams/
+  - type: Documentation
+    url: https://docs.sentry.io/api/releases/
+  - type: Documentation
+    url: https://docs.sentry.io/api/alerts/
+  - type: Documentation
+    url: https://docs.sentry.io/api/crons/
+  - type: Documentation
+    url: https://docs.sentry.io/api/dashboards/
+  - type: Documentation
+    url: https://docs.sentry.io/api/discover/
+  - type: Documentation
+    url: https://docs.sentry.io/api/environments/
+  - type: Documentation
+    url: https://docs.sentry.io/api/explore/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integration/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integrations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/mobile-builds/
+  - type: Documentation
+    url: https://docs.sentry.io/api/monitors/
+  - type: Documentation
+    url: https://docs.sentry.io/api/prevent/
+  - type: Documentation
+    url: https://docs.sentry.io/api/replays/
+  - type: Documentation
+    url: https://docs.sentry.io/api/scim/
+  - type: Documentation
+    url: https://docs.sentry.io/api/seer/
+  - type: Documentation
+    url: https://docs.sentry.io/api/users/
+- aid: sentry-system:sentry-system-installations-api
+  name: Sentry Installations API
+  description: Manage integration installations
+  humanURL: https://sentry.io
+  baseURL: https://sentry.io/api/0
+  tags:
+  - Installations
+  properties:
+  - type: OpenAPI
+    url: openapi/sentry-system-installations-api-openapi.yml
+  - type: Documentation
+    url: https://docs.sentry.io/api/
+  - type: Authentication
+    url: https://docs.sentry.io/api/auth/
+  - type: GettingStarted
+    url: https://docs.sentry.io/api/guides/create-auth-token/
+  - type: RateLimits
+    url: https://docs.sentry.io/api/ratelimits/
+  - type: SDKs
+    url: https://docs.sentry.io/platforms/
+  - type: PostmanCollection
+    url: >-
+      https://www.postman.com/sentryio/sentry-api-collection/documentation/xtzhckg/sentry-api-collection
+  - type: Webhooks
+    url: https://docs.sentry.io/organization/integrations/integration-platform/webhooks/
+  - type: Pagination
+    url: https://docs.sentry.io/api/pagination/
+  - type: Permissions
+    url: https://docs.sentry.io/api/permissions/
+  - type: Reference
+    url: https://docs.sentry.io/api/requests/
+  - type: JSONSchema
+    url: json-schema/sentry-organization-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-project-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-issue-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-event-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-team-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-release-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-alert-rule-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-monitor-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-replay-schema.json
+  - type: JSONLD
+    url: json-ld/sentry-context.jsonld
+  - type: Documentation
+    url: https://docs.sentry.io/api/events/
+  - type: Documentation
+    url: https://docs.sentry.io/api/organizations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/projects/
+  - type: Documentation
+    url: https://docs.sentry.io/api/teams/
+  - type: Documentation
+    url: https://docs.sentry.io/api/releases/
+  - type: Documentation
+    url: https://docs.sentry.io/api/alerts/
+  - type: Documentation
+    url: https://docs.sentry.io/api/crons/
+  - type: Documentation
+    url: https://docs.sentry.io/api/dashboards/
+  - type: Documentation
+    url: https://docs.sentry.io/api/discover/
+  - type: Documentation
+    url: https://docs.sentry.io/api/environments/
+  - type: Documentation
+    url: https://docs.sentry.io/api/explore/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integration/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integrations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/mobile-builds/
+  - type: Documentation
+    url: https://docs.sentry.io/api/monitors/
+  - type: Documentation
+    url: https://docs.sentry.io/api/prevent/
+  - type: Documentation
+    url: https://docs.sentry.io/api/replays/
+  - type: Documentation
+    url: https://docs.sentry.io/api/scim/
+  - type: Documentation
+    url: https://docs.sentry.io/api/seer/
+  - type: Documentation
+    url: https://docs.sentry.io/api/users/
+- aid: sentry-system:sentry-system-integrations-api
+  name: Sentry Integrations API
+  description: Manage third-party integrations
+  humanURL: https://sentry.io
+  baseURL: https://sentry.io/api/0
+  tags:
+  - Integrations
+  properties:
+  - type: OpenAPI
+    url: openapi/sentry-system-integrations-api-openapi.yml
+  - type: Documentation
+    url: https://docs.sentry.io/api/
+  - type: Authentication
+    url: https://docs.sentry.io/api/auth/
+  - type: GettingStarted
+    url: https://docs.sentry.io/api/guides/create-auth-token/
+  - type: RateLimits
+    url: https://docs.sentry.io/api/ratelimits/
+  - type: SDKs
+    url: https://docs.sentry.io/platforms/
+  - type: PostmanCollection
+    url: >-
+      https://www.postman.com/sentryio/sentry-api-collection/documentation/xtzhckg/sentry-api-collection
+  - type: Webhooks
+    url: https://docs.sentry.io/organization/integrations/integration-platform/webhooks/
+  - type: Pagination
+    url: https://docs.sentry.io/api/pagination/
+  - type: Permissions
+    url: https://docs.sentry.io/api/permissions/
+  - type: Reference
+    url: https://docs.sentry.io/api/requests/
+  - type: JSONSchema
+    url: json-schema/sentry-organization-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-project-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-issue-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-event-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-team-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-release-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-alert-rule-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-monitor-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-replay-schema.json
+  - type: JSONLD
+    url: json-ld/sentry-context.jsonld
+  - type: Documentation
+    url: https://docs.sentry.io/api/events/
+  - type: Documentation
+    url: https://docs.sentry.io/api/organizations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/projects/
+  - type: Documentation
+    url: https://docs.sentry.io/api/teams/
+  - type: Documentation
+    url: https://docs.sentry.io/api/releases/
+  - type: Documentation
+    url: https://docs.sentry.io/api/alerts/
+  - type: Documentation
+    url: https://docs.sentry.io/api/crons/
+  - type: Documentation
+    url: https://docs.sentry.io/api/dashboards/
+  - type: Documentation
+    url: https://docs.sentry.io/api/discover/
+  - type: Documentation
+    url: https://docs.sentry.io/api/environments/
+  - type: Documentation
+    url: https://docs.sentry.io/api/explore/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integration/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integrations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/mobile-builds/
+  - type: Documentation
+    url: https://docs.sentry.io/api/monitors/
+  - type: Documentation
+    url: https://docs.sentry.io/api/prevent/
+  - type: Documentation
+    url: https://docs.sentry.io/api/replays/
+  - type: Documentation
+    url: https://docs.sentry.io/api/scim/
+  - type: Documentation
+    url: https://docs.sentry.io/api/seer/
+  - type: Documentation
+    url: https://docs.sentry.io/api/users/
+- aid: sentry-system:sentry-system-interactions-api
+  name: Sentry Interactions API
+  description: View user interactions within replays
+  humanURL: https://sentry.io
+  baseURL: https://sentry.io/api/0
+  tags:
+  - Interactions
+  properties:
+  - type: OpenAPI
+    url: openapi/sentry-system-interactions-api-openapi.yml
+  - type: Documentation
+    url: https://docs.sentry.io/api/
+  - type: Authentication
+    url: https://docs.sentry.io/api/auth/
+  - type: GettingStarted
+    url: https://docs.sentry.io/api/guides/create-auth-token/
+  - type: RateLimits
+    url: https://docs.sentry.io/api/ratelimits/
+  - type: SDKs
+    url: https://docs.sentry.io/platforms/
+  - type: PostmanCollection
+    url: >-
+      https://www.postman.com/sentryio/sentry-api-collection/documentation/xtzhckg/sentry-api-collection
+  - type: Webhooks
+    url: https://docs.sentry.io/organization/integrations/integration-platform/webhooks/
+  - type: Pagination
+    url: https://docs.sentry.io/api/pagination/
+  - type: Permissions
+    url: https://docs.sentry.io/api/permissions/
+  - type: Reference
+    url: https://docs.sentry.io/api/requests/
+  - type: JSONSchema
+    url: json-schema/sentry-organization-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-project-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-issue-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-event-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-team-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-release-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-alert-rule-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-monitor-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-replay-schema.json
+  - type: JSONLD
+    url: json-ld/sentry-context.jsonld
+  - type: Documentation
+    url: https://docs.sentry.io/api/events/
+  - type: Documentation
+    url: https://docs.sentry.io/api/organizations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/projects/
+  - type: Documentation
+    url: https://docs.sentry.io/api/teams/
+  - type: Documentation
+    url: https://docs.sentry.io/api/releases/
+  - type: Documentation
+    url: https://docs.sentry.io/api/alerts/
+  - type: Documentation
+    url: https://docs.sentry.io/api/crons/
+  - type: Documentation
+    url: https://docs.sentry.io/api/dashboards/
+  - type: Documentation
+    url: https://docs.sentry.io/api/discover/
+  - type: Documentation
+    url: https://docs.sentry.io/api/environments/
+  - type: Documentation
+    url: https://docs.sentry.io/api/explore/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integration/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integrations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/mobile-builds/
+  - type: Documentation
+    url: https://docs.sentry.io/api/monitors/
+  - type: Documentation
+    url: https://docs.sentry.io/api/prevent/
+  - type: Documentation
+    url: https://docs.sentry.io/api/replays/
+  - type: Documentation
+    url: https://docs.sentry.io/api/scim/
+  - type: Documentation
+    url: https://docs.sentry.io/api/seer/
+  - type: Documentation
+    url: https://docs.sentry.io/api/users/
+- aid: sentry-system:sentry-system-issue-alerts-api
+  name: Sentry Issue Alerts API
+  description: Manage issue alert rules at the project level
+  humanURL: https://sentry.io
+  baseURL: https://sentry.io/api/0
+  tags:
+  - Issue Alerts
+  properties:
+  - type: OpenAPI
+    url: openapi/sentry-system-issue-alerts-api-openapi.yml
+  - type: Documentation
+    url: https://docs.sentry.io/api/
+  - type: Authentication
+    url: https://docs.sentry.io/api/auth/
+  - type: GettingStarted
+    url: https://docs.sentry.io/api/guides/create-auth-token/
+  - type: RateLimits
+    url: https://docs.sentry.io/api/ratelimits/
+  - type: SDKs
+    url: https://docs.sentry.io/platforms/
+  - type: PostmanCollection
+    url: >-
+      https://www.postman.com/sentryio/sentry-api-collection/documentation/xtzhckg/sentry-api-collection
+  - type: Webhooks
+    url: https://docs.sentry.io/organization/integrations/integration-platform/webhooks/
+  - type: Pagination
+    url: https://docs.sentry.io/api/pagination/
+  - type: Permissions
+    url: https://docs.sentry.io/api/permissions/
+  - type: Reference
+    url: https://docs.sentry.io/api/requests/
+  - type: JSONSchema
+    url: json-schema/sentry-organization-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-project-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-issue-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-event-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-team-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-release-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-alert-rule-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-monitor-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-replay-schema.json
+  - type: JSONLD
+    url: json-ld/sentry-context.jsonld
+  - type: Documentation
+    url: https://docs.sentry.io/api/events/
+  - type: Documentation
+    url: https://docs.sentry.io/api/organizations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/projects/
+  - type: Documentation
+    url: https://docs.sentry.io/api/teams/
+  - type: Documentation
+    url: https://docs.sentry.io/api/releases/
+  - type: Documentation
+    url: https://docs.sentry.io/api/alerts/
+  - type: Documentation
+    url: https://docs.sentry.io/api/crons/
+  - type: Documentation
+    url: https://docs.sentry.io/api/dashboards/
+  - type: Documentation
+    url: https://docs.sentry.io/api/discover/
+  - type: Documentation
+    url: https://docs.sentry.io/api/environments/
+  - type: Documentation
+    url: https://docs.sentry.io/api/explore/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integration/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integrations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/mobile-builds/
+  - type: Documentation
+    url: https://docs.sentry.io/api/monitors/
+  - type: Documentation
+    url: https://docs.sentry.io/api/prevent/
+  - type: Documentation
+    url: https://docs.sentry.io/api/replays/
+  - type: Documentation
+    url: https://docs.sentry.io/api/scim/
+  - type: Documentation
+    url: https://docs.sentry.io/api/seer/
+  - type: Documentation
+    url: https://docs.sentry.io/api/users/
+- aid: sentry-system:sentry-system-issues-api
+  name: Sentry Issues API
+  description: Manage error issues
+  humanURL: https://sentry.io
+  baseURL: https://sentry.io/api/0
+  tags:
+  - Issues
+  properties:
+  - type: OpenAPI
+    url: openapi/sentry-system-issues-api-openapi.yml
+  - type: Documentation
+    url: https://docs.sentry.io/api/
+  - type: Authentication
+    url: https://docs.sentry.io/api/auth/
+  - type: GettingStarted
+    url: https://docs.sentry.io/api/guides/create-auth-token/
+  - type: RateLimits
+    url: https://docs.sentry.io/api/ratelimits/
+  - type: SDKs
+    url: https://docs.sentry.io/platforms/
+  - type: PostmanCollection
+    url: >-
+      https://www.postman.com/sentryio/sentry-api-collection/documentation/xtzhckg/sentry-api-collection
+  - type: Webhooks
+    url: https://docs.sentry.io/organization/integrations/integration-platform/webhooks/
+  - type: Pagination
+    url: https://docs.sentry.io/api/pagination/
+  - type: Permissions
+    url: https://docs.sentry.io/api/permissions/
+  - type: Reference
+    url: https://docs.sentry.io/api/requests/
+  - type: JSONSchema
+    url: json-schema/sentry-organization-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-project-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-issue-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-event-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-team-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-release-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-alert-rule-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-monitor-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-replay-schema.json
+  - type: JSONLD
+    url: json-ld/sentry-context.jsonld
+  - type: Documentation
+    url: https://docs.sentry.io/api/events/
+  - type: Documentation
+    url: https://docs.sentry.io/api/organizations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/projects/
+  - type: Documentation
+    url: https://docs.sentry.io/api/teams/
+  - type: Documentation
+    url: https://docs.sentry.io/api/releases/
+  - type: Documentation
+    url: https://docs.sentry.io/api/alerts/
+  - type: Documentation
+    url: https://docs.sentry.io/api/crons/
+  - type: Documentation
+    url: https://docs.sentry.io/api/dashboards/
+  - type: Documentation
+    url: https://docs.sentry.io/api/discover/
+  - type: Documentation
+    url: https://docs.sentry.io/api/environments/
+  - type: Documentation
+    url: https://docs.sentry.io/api/explore/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integration/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integrations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/mobile-builds/
+  - type: Documentation
+    url: https://docs.sentry.io/api/monitors/
+  - type: Documentation
+    url: https://docs.sentry.io/api/prevent/
+  - type: Documentation
+    url: https://docs.sentry.io/api/replays/
+  - type: Documentation
+    url: https://docs.sentry.io/api/scim/
+  - type: Documentation
+    url: https://docs.sentry.io/api/seer/
+  - type: Documentation
+    url: https://docs.sentry.io/api/users/
+- aid: sentry-system:sentry-system-members-api
+  name: Sentry Members API
+  description: Manage organization members and their roles
+  humanURL: https://sentry.io
+  baseURL: https://sentry.io/api/0
+  tags:
+  - Members
+  properties:
+  - type: OpenAPI
+    url: openapi/sentry-system-members-api-openapi.yml
+  - type: Documentation
+    url: https://docs.sentry.io/api/
+  - type: Authentication
+    url: https://docs.sentry.io/api/auth/
+  - type: GettingStarted
+    url: https://docs.sentry.io/api/guides/create-auth-token/
+  - type: RateLimits
+    url: https://docs.sentry.io/api/ratelimits/
+  - type: SDKs
+    url: https://docs.sentry.io/platforms/
+  - type: PostmanCollection
+    url: >-
+      https://www.postman.com/sentryio/sentry-api-collection/documentation/xtzhckg/sentry-api-collection
+  - type: Webhooks
+    url: https://docs.sentry.io/organization/integrations/integration-platform/webhooks/
+  - type: Pagination
+    url: https://docs.sentry.io/api/pagination/
+  - type: Permissions
+    url: https://docs.sentry.io/api/permissions/
+  - type: Reference
+    url: https://docs.sentry.io/api/requests/
+  - type: JSONSchema
+    url: json-schema/sentry-organization-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-project-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-issue-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-event-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-team-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-release-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-alert-rule-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-monitor-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-replay-schema.json
+  - type: JSONLD
+    url: json-ld/sentry-context.jsonld
+  - type: Documentation
+    url: https://docs.sentry.io/api/events/
+  - type: Documentation
+    url: https://docs.sentry.io/api/organizations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/projects/
+  - type: Documentation
+    url: https://docs.sentry.io/api/teams/
+  - type: Documentation
+    url: https://docs.sentry.io/api/releases/
+  - type: Documentation
+    url: https://docs.sentry.io/api/alerts/
+  - type: Documentation
+    url: https://docs.sentry.io/api/crons/
+  - type: Documentation
+    url: https://docs.sentry.io/api/dashboards/
+  - type: Documentation
+    url: https://docs.sentry.io/api/discover/
+  - type: Documentation
+    url: https://docs.sentry.io/api/environments/
+  - type: Documentation
+    url: https://docs.sentry.io/api/explore/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integration/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integrations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/mobile-builds/
+  - type: Documentation
+    url: https://docs.sentry.io/api/monitors/
+  - type: Documentation
+    url: https://docs.sentry.io/api/prevent/
+  - type: Documentation
+    url: https://docs.sentry.io/api/replays/
+  - type: Documentation
+    url: https://docs.sentry.io/api/scim/
+  - type: Documentation
+    url: https://docs.sentry.io/api/seer/
+  - type: Documentation
+    url: https://docs.sentry.io/api/users/
+- aid: sentry-system:sentry-system-metric-alerts-api
+  name: Sentry Metric Alerts API
+  description: Manage metric alert rules at the organization level
+  humanURL: https://sentry.io
+  baseURL: https://sentry.io/api/0
+  tags:
+  - Metric Alerts
+  properties:
+  - type: OpenAPI
+    url: openapi/sentry-system-metric-alerts-api-openapi.yml
+  - type: Documentation
+    url: https://docs.sentry.io/api/
+  - type: Authentication
+    url: https://docs.sentry.io/api/auth/
+  - type: GettingStarted
+    url: https://docs.sentry.io/api/guides/create-auth-token/
+  - type: RateLimits
+    url: https://docs.sentry.io/api/ratelimits/
+  - type: SDKs
+    url: https://docs.sentry.io/platforms/
+  - type: PostmanCollection
+    url: >-
+      https://www.postman.com/sentryio/sentry-api-collection/documentation/xtzhckg/sentry-api-collection
+  - type: Webhooks
+    url: https://docs.sentry.io/organization/integrations/integration-platform/webhooks/
+  - type: Pagination
+    url: https://docs.sentry.io/api/pagination/
+  - type: Permissions
+    url: https://docs.sentry.io/api/permissions/
+  - type: Reference
+    url: https://docs.sentry.io/api/requests/
+  - type: JSONSchema
+    url: json-schema/sentry-organization-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-project-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-issue-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-event-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-team-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-release-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-alert-rule-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-monitor-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-replay-schema.json
+  - type: JSONLD
+    url: json-ld/sentry-context.jsonld
+  - type: Documentation
+    url: https://docs.sentry.io/api/events/
+  - type: Documentation
+    url: https://docs.sentry.io/api/organizations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/projects/
+  - type: Documentation
+    url: https://docs.sentry.io/api/teams/
+  - type: Documentation
+    url: https://docs.sentry.io/api/releases/
+  - type: Documentation
+    url: https://docs.sentry.io/api/alerts/
+  - type: Documentation
+    url: https://docs.sentry.io/api/crons/
+  - type: Documentation
+    url: https://docs.sentry.io/api/dashboards/
+  - type: Documentation
+    url: https://docs.sentry.io/api/discover/
+  - type: Documentation
+    url: https://docs.sentry.io/api/environments/
+  - type: Documentation
+    url: https://docs.sentry.io/api/explore/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integration/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integrations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/mobile-builds/
+  - type: Documentation
+    url: https://docs.sentry.io/api/monitors/
+  - type: Documentation
+    url: https://docs.sentry.io/api/prevent/
+  - type: Documentation
+    url: https://docs.sentry.io/api/replays/
+  - type: Documentation
+    url: https://docs.sentry.io/api/scim/
+  - type: Documentation
+    url: https://docs.sentry.io/api/seer/
+  - type: Documentation
+    url: https://docs.sentry.io/api/users/
+- aid: sentry-system:sentry-system-mobile-builds-api
+  name: Sentry Mobile Builds API
+  description: Analyze mobile application build artifacts
+  humanURL: https://sentry.io
+  baseURL: https://sentry.io/api/0
+  tags:
+  - Mobile Builds
+  properties:
+  - type: OpenAPI
+    url: openapi/sentry-system-mobile-builds-api-openapi.yml
+  - type: Documentation
+    url: https://docs.sentry.io/api/
+  - type: Authentication
+    url: https://docs.sentry.io/api/auth/
+  - type: GettingStarted
+    url: https://docs.sentry.io/api/guides/create-auth-token/
+  - type: RateLimits
+    url: https://docs.sentry.io/api/ratelimits/
+  - type: SDKs
+    url: https://docs.sentry.io/platforms/
+  - type: PostmanCollection
+    url: >-
+      https://www.postman.com/sentryio/sentry-api-collection/documentation/xtzhckg/sentry-api-collection
+  - type: Webhooks
+    url: https://docs.sentry.io/organization/integrations/integration-platform/webhooks/
+  - type: Pagination
+    url: https://docs.sentry.io/api/pagination/
+  - type: Permissions
+    url: https://docs.sentry.io/api/permissions/
+  - type: Reference
+    url: https://docs.sentry.io/api/requests/
+  - type: JSONSchema
+    url: json-schema/sentry-organization-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-project-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-issue-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-event-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-team-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-release-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-alert-rule-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-monitor-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-replay-schema.json
+  - type: JSONLD
+    url: json-ld/sentry-context.jsonld
+  - type: Documentation
+    url: https://docs.sentry.io/api/events/
+  - type: Documentation
+    url: https://docs.sentry.io/api/organizations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/projects/
+  - type: Documentation
+    url: https://docs.sentry.io/api/teams/
+  - type: Documentation
+    url: https://docs.sentry.io/api/releases/
+  - type: Documentation
+    url: https://docs.sentry.io/api/alerts/
+  - type: Documentation
+    url: https://docs.sentry.io/api/crons/
+  - type: Documentation
+    url: https://docs.sentry.io/api/dashboards/
+  - type: Documentation
+    url: https://docs.sentry.io/api/discover/
+  - type: Documentation
+    url: https://docs.sentry.io/api/environments/
+  - type: Documentation
+    url: https://docs.sentry.io/api/explore/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integration/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integrations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/mobile-builds/
+  - type: Documentation
+    url: https://docs.sentry.io/api/monitors/
+  - type: Documentation
+    url: https://docs.sentry.io/api/prevent/
+  - type: Documentation
+    url: https://docs.sentry.io/api/replays/
+  - type: Documentation
+    url: https://docs.sentry.io/api/scim/
+  - type: Documentation
+    url: https://docs.sentry.io/api/seer/
+  - type: Documentation
+    url: https://docs.sentry.io/api/users/
+- aid: sentry-system:sentry-system-monitors-api
+  name: Sentry Monitors API
+  description: Manage cron job monitors
+  humanURL: https://sentry.io
+  baseURL: https://sentry.io/api/0
+  tags:
+  - Monitors
+  properties:
+  - type: OpenAPI
+    url: openapi/sentry-system-monitors-api-openapi.yml
+  - type: Documentation
+    url: https://docs.sentry.io/api/
+  - type: Authentication
+    url: https://docs.sentry.io/api/auth/
+  - type: GettingStarted
+    url: https://docs.sentry.io/api/guides/create-auth-token/
+  - type: RateLimits
+    url: https://docs.sentry.io/api/ratelimits/
+  - type: SDKs
+    url: https://docs.sentry.io/platforms/
+  - type: PostmanCollection
+    url: >-
+      https://www.postman.com/sentryio/sentry-api-collection/documentation/xtzhckg/sentry-api-collection
+  - type: Webhooks
+    url: https://docs.sentry.io/organization/integrations/integration-platform/webhooks/
+  - type: Pagination
+    url: https://docs.sentry.io/api/pagination/
+  - type: Permissions
+    url: https://docs.sentry.io/api/permissions/
+  - type: Reference
+    url: https://docs.sentry.io/api/requests/
+  - type: JSONSchema
+    url: json-schema/sentry-organization-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-project-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-issue-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-event-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-team-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-release-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-alert-rule-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-monitor-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-replay-schema.json
+  - type: JSONLD
+    url: json-ld/sentry-context.jsonld
+  - type: Documentation
+    url: https://docs.sentry.io/api/events/
+  - type: Documentation
+    url: https://docs.sentry.io/api/organizations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/projects/
+  - type: Documentation
+    url: https://docs.sentry.io/api/teams/
+  - type: Documentation
+    url: https://docs.sentry.io/api/releases/
+  - type: Documentation
+    url: https://docs.sentry.io/api/alerts/
+  - type: Documentation
+    url: https://docs.sentry.io/api/crons/
+  - type: Documentation
+    url: https://docs.sentry.io/api/dashboards/
+  - type: Documentation
+    url: https://docs.sentry.io/api/discover/
+  - type: Documentation
+    url: https://docs.sentry.io/api/environments/
+  - type: Documentation
+    url: https://docs.sentry.io/api/explore/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integration/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integrations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/mobile-builds/
+  - type: Documentation
+    url: https://docs.sentry.io/api/monitors/
+  - type: Documentation
+    url: https://docs.sentry.io/api/prevent/
+  - type: Documentation
+    url: https://docs.sentry.io/api/replays/
+  - type: Documentation
+    url: https://docs.sentry.io/api/scim/
+  - type: Documentation
+    url: https://docs.sentry.io/api/seer/
+  - type: Documentation
+    url: https://docs.sentry.io/api/users/
+- aid: sentry-system:sentry-system-organizations-api
+  name: Sentry Organizations API
+  description: Manage Sentry organizations
+  humanURL: https://sentry.io
+  baseURL: https://sentry.io/api/0
+  tags:
+  - Organizations
+  properties:
+  - type: OpenAPI
+    url: openapi/sentry-system-organizations-api-openapi.yml
+  - type: Documentation
+    url: https://docs.sentry.io/api/
+  - type: Authentication
+    url: https://docs.sentry.io/api/auth/
+  - type: GettingStarted
+    url: https://docs.sentry.io/api/guides/create-auth-token/
+  - type: RateLimits
+    url: https://docs.sentry.io/api/ratelimits/
+  - type: SDKs
+    url: https://docs.sentry.io/platforms/
+  - type: PostmanCollection
+    url: >-
+      https://www.postman.com/sentryio/sentry-api-collection/documentation/xtzhckg/sentry-api-collection
+  - type: Webhooks
+    url: https://docs.sentry.io/organization/integrations/integration-platform/webhooks/
+  - type: Pagination
+    url: https://docs.sentry.io/api/pagination/
+  - type: Permissions
+    url: https://docs.sentry.io/api/permissions/
+  - type: Reference
+    url: https://docs.sentry.io/api/requests/
+  - type: JSONSchema
+    url: json-schema/sentry-organization-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-project-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-issue-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-event-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-team-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-release-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-alert-rule-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-monitor-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-replay-schema.json
+  - type: JSONLD
+    url: json-ld/sentry-context.jsonld
+  - type: Documentation
+    url: https://docs.sentry.io/api/events/
+  - type: Documentation
+    url: https://docs.sentry.io/api/organizations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/projects/
+  - type: Documentation
+    url: https://docs.sentry.io/api/teams/
+  - type: Documentation
+    url: https://docs.sentry.io/api/releases/
+  - type: Documentation
+    url: https://docs.sentry.io/api/alerts/
+  - type: Documentation
+    url: https://docs.sentry.io/api/crons/
+  - type: Documentation
+    url: https://docs.sentry.io/api/dashboards/
+  - type: Documentation
+    url: https://docs.sentry.io/api/discover/
+  - type: Documentation
+    url: https://docs.sentry.io/api/environments/
+  - type: Documentation
+    url: https://docs.sentry.io/api/explore/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integration/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integrations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/mobile-builds/
+  - type: Documentation
+    url: https://docs.sentry.io/api/monitors/
+  - type: Documentation
+    url: https://docs.sentry.io/api/prevent/
+  - type: Documentation
+    url: https://docs.sentry.io/api/replays/
+  - type: Documentation
+    url: https://docs.sentry.io/api/scim/
+  - type: Documentation
+    url: https://docs.sentry.io/api/seer/
+  - type: Documentation
+    url: https://docs.sentry.io/api/users/
+- aid: sentry-system:sentry-system-projects-api
+  name: Sentry Projects API
+  description: Manage projects within organizations
+  humanURL: https://sentry.io
+  baseURL: https://sentry.io/api/0
+  tags:
+  - Projects
+  properties:
+  - type: OpenAPI
+    url: openapi/sentry-system-projects-api-openapi.yml
+  - type: Documentation
+    url: https://docs.sentry.io/api/
+  - type: Authentication
+    url: https://docs.sentry.io/api/auth/
+  - type: GettingStarted
+    url: https://docs.sentry.io/api/guides/create-auth-token/
+  - type: RateLimits
+    url: https://docs.sentry.io/api/ratelimits/
+  - type: SDKs
+    url: https://docs.sentry.io/platforms/
+  - type: PostmanCollection
+    url: >-
+      https://www.postman.com/sentryio/sentry-api-collection/documentation/xtzhckg/sentry-api-collection
+  - type: Webhooks
+    url: https://docs.sentry.io/organization/integrations/integration-platform/webhooks/
+  - type: Pagination
+    url: https://docs.sentry.io/api/pagination/
+  - type: Permissions
+    url: https://docs.sentry.io/api/permissions/
+  - type: Reference
+    url: https://docs.sentry.io/api/requests/
+  - type: JSONSchema
+    url: json-schema/sentry-organization-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-project-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-issue-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-event-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-team-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-release-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-alert-rule-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-monitor-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-replay-schema.json
+  - type: JSONLD
+    url: json-ld/sentry-context.jsonld
+  - type: Documentation
+    url: https://docs.sentry.io/api/events/
+  - type: Documentation
+    url: https://docs.sentry.io/api/organizations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/projects/
+  - type: Documentation
+    url: https://docs.sentry.io/api/teams/
+  - type: Documentation
+    url: https://docs.sentry.io/api/releases/
+  - type: Documentation
+    url: https://docs.sentry.io/api/alerts/
+  - type: Documentation
+    url: https://docs.sentry.io/api/crons/
+  - type: Documentation
+    url: https://docs.sentry.io/api/dashboards/
+  - type: Documentation
+    url: https://docs.sentry.io/api/discover/
+  - type: Documentation
+    url: https://docs.sentry.io/api/environments/
+  - type: Documentation
+    url: https://docs.sentry.io/api/explore/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integration/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integrations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/mobile-builds/
+  - type: Documentation
+    url: https://docs.sentry.io/api/monitors/
+  - type: Documentation
+    url: https://docs.sentry.io/api/prevent/
+  - type: Documentation
+    url: https://docs.sentry.io/api/replays/
+  - type: Documentation
+    url: https://docs.sentry.io/api/scim/
+  - type: Documentation
+    url: https://docs.sentry.io/api/seer/
+  - type: Documentation
+    url: https://docs.sentry.io/api/users/
+- aid: sentry-system:sentry-system-recording-segments-api
+  name: Sentry Recording Segments API
+  description: Access replay recording segments
+  humanURL: https://sentry.io
+  baseURL: https://sentry.io/api/0
+  tags:
+  - Recording Segments
+  properties:
+  - type: OpenAPI
+    url: openapi/sentry-system-recording-segments-api-openapi.yml
+  - type: Documentation
+    url: https://docs.sentry.io/api/
+  - type: Authentication
+    url: https://docs.sentry.io/api/auth/
+  - type: GettingStarted
+    url: https://docs.sentry.io/api/guides/create-auth-token/
+  - type: RateLimits
+    url: https://docs.sentry.io/api/ratelimits/
+  - type: SDKs
+    url: https://docs.sentry.io/platforms/
+  - type: PostmanCollection
+    url: >-
+      https://www.postman.com/sentryio/sentry-api-collection/documentation/xtzhckg/sentry-api-collection
+  - type: Webhooks
+    url: https://docs.sentry.io/organization/integrations/integration-platform/webhooks/
+  - type: Pagination
+    url: https://docs.sentry.io/api/pagination/
+  - type: Permissions
+    url: https://docs.sentry.io/api/permissions/
+  - type: Reference
+    url: https://docs.sentry.io/api/requests/
+  - type: JSONSchema
+    url: json-schema/sentry-organization-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-project-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-issue-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-event-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-team-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-release-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-alert-rule-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-monitor-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-replay-schema.json
+  - type: JSONLD
+    url: json-ld/sentry-context.jsonld
+  - type: Documentation
+    url: https://docs.sentry.io/api/events/
+  - type: Documentation
+    url: https://docs.sentry.io/api/organizations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/projects/
+  - type: Documentation
+    url: https://docs.sentry.io/api/teams/
+  - type: Documentation
+    url: https://docs.sentry.io/api/releases/
+  - type: Documentation
+    url: https://docs.sentry.io/api/alerts/
+  - type: Documentation
+    url: https://docs.sentry.io/api/crons/
+  - type: Documentation
+    url: https://docs.sentry.io/api/dashboards/
+  - type: Documentation
+    url: https://docs.sentry.io/api/discover/
+  - type: Documentation
+    url: https://docs.sentry.io/api/environments/
+  - type: Documentation
+    url: https://docs.sentry.io/api/explore/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integration/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integrations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/mobile-builds/
+  - type: Documentation
+    url: https://docs.sentry.io/api/monitors/
+  - type: Documentation
+    url: https://docs.sentry.io/api/prevent/
+  - type: Documentation
+    url: https://docs.sentry.io/api/replays/
+  - type: Documentation
+    url: https://docs.sentry.io/api/scim/
+  - type: Documentation
+    url: https://docs.sentry.io/api/seer/
+  - type: Documentation
+    url: https://docs.sentry.io/api/users/
+- aid: sentry-system:sentry-system-release-files-api
+  name: Sentry Release Files API
+  description: Manage files associated with releases
+  humanURL: https://sentry.io
+  baseURL: https://sentry.io/api/0
+  tags:
+  - Release Files
+  properties:
+  - type: OpenAPI
+    url: openapi/sentry-system-release-files-api-openapi.yml
+  - type: Documentation
+    url: https://docs.sentry.io/api/
+  - type: Authentication
+    url: https://docs.sentry.io/api/auth/
+  - type: GettingStarted
+    url: https://docs.sentry.io/api/guides/create-auth-token/
+  - type: RateLimits
+    url: https://docs.sentry.io/api/ratelimits/
+  - type: SDKs
+    url: https://docs.sentry.io/platforms/
+  - type: PostmanCollection
+    url: >-
+      https://www.postman.com/sentryio/sentry-api-collection/documentation/xtzhckg/sentry-api-collection
+  - type: Webhooks
+    url: https://docs.sentry.io/organization/integrations/integration-platform/webhooks/
+  - type: Pagination
+    url: https://docs.sentry.io/api/pagination/
+  - type: Permissions
+    url: https://docs.sentry.io/api/permissions/
+  - type: Reference
+    url: https://docs.sentry.io/api/requests/
+  - type: JSONSchema
+    url: json-schema/sentry-organization-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-project-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-issue-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-event-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-team-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-release-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-alert-rule-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-monitor-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-replay-schema.json
+  - type: JSONLD
+    url: json-ld/sentry-context.jsonld
+  - type: Documentation
+    url: https://docs.sentry.io/api/events/
+  - type: Documentation
+    url: https://docs.sentry.io/api/organizations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/projects/
+  - type: Documentation
+    url: https://docs.sentry.io/api/teams/
+  - type: Documentation
+    url: https://docs.sentry.io/api/releases/
+  - type: Documentation
+    url: https://docs.sentry.io/api/alerts/
+  - type: Documentation
+    url: https://docs.sentry.io/api/crons/
+  - type: Documentation
+    url: https://docs.sentry.io/api/dashboards/
+  - type: Documentation
+    url: https://docs.sentry.io/api/discover/
+  - type: Documentation
+    url: https://docs.sentry.io/api/environments/
+  - type: Documentation
+    url: https://docs.sentry.io/api/explore/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integration/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integrations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/mobile-builds/
+  - type: Documentation
+    url: https://docs.sentry.io/api/monitors/
+  - type: Documentation
+    url: https://docs.sentry.io/api/prevent/
+  - type: Documentation
+    url: https://docs.sentry.io/api/replays/
+  - type: Documentation
+    url: https://docs.sentry.io/api/scim/
+  - type: Documentation
+    url: https://docs.sentry.io/api/seer/
+  - type: Documentation
+    url: https://docs.sentry.io/api/users/
+- aid: sentry-system:sentry-system-releases-api
+  name: Sentry Releases API
+  description: Manage software releases
+  humanURL: https://sentry.io
+  baseURL: https://sentry.io/api/0
+  tags:
+  - Releases
+  properties:
+  - type: OpenAPI
+    url: openapi/sentry-system-releases-api-openapi.yml
+  - type: Documentation
+    url: https://docs.sentry.io/api/
+  - type: Authentication
+    url: https://docs.sentry.io/api/auth/
+  - type: GettingStarted
+    url: https://docs.sentry.io/api/guides/create-auth-token/
+  - type: RateLimits
+    url: https://docs.sentry.io/api/ratelimits/
+  - type: SDKs
+    url: https://docs.sentry.io/platforms/
+  - type: PostmanCollection
+    url: >-
+      https://www.postman.com/sentryio/sentry-api-collection/documentation/xtzhckg/sentry-api-collection
+  - type: Webhooks
+    url: https://docs.sentry.io/organization/integrations/integration-platform/webhooks/
+  - type: Pagination
+    url: https://docs.sentry.io/api/pagination/
+  - type: Permissions
+    url: https://docs.sentry.io/api/permissions/
+  - type: Reference
+    url: https://docs.sentry.io/api/requests/
+  - type: JSONSchema
+    url: json-schema/sentry-organization-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-project-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-issue-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-event-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-team-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-release-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-alert-rule-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-monitor-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-replay-schema.json
+  - type: JSONLD
+    url: json-ld/sentry-context.jsonld
+  - type: Documentation
+    url: https://docs.sentry.io/api/events/
+  - type: Documentation
+    url: https://docs.sentry.io/api/organizations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/projects/
+  - type: Documentation
+    url: https://docs.sentry.io/api/teams/
+  - type: Documentation
+    url: https://docs.sentry.io/api/releases/
+  - type: Documentation
+    url: https://docs.sentry.io/api/alerts/
+  - type: Documentation
+    url: https://docs.sentry.io/api/crons/
+  - type: Documentation
+    url: https://docs.sentry.io/api/dashboards/
+  - type: Documentation
+    url: https://docs.sentry.io/api/discover/
+  - type: Documentation
+    url: https://docs.sentry.io/api/environments/
+  - type: Documentation
+    url: https://docs.sentry.io/api/explore/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integration/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integrations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/mobile-builds/
+  - type: Documentation
+    url: https://docs.sentry.io/api/monitors/
+  - type: Documentation
+    url: https://docs.sentry.io/api/prevent/
+  - type: Documentation
+    url: https://docs.sentry.io/api/replays/
+  - type: Documentation
+    url: https://docs.sentry.io/api/scim/
+  - type: Documentation
+    url: https://docs.sentry.io/api/seer/
+  - type: Documentation
+    url: https://docs.sentry.io/api/users/
+- aid: sentry-system:sentry-system-replays-api
+  name: Sentry Replays API
+  description: Manage session replays
+  humanURL: https://sentry.io
+  baseURL: https://sentry.io/api/0
+  tags:
+  - Replays
+  properties:
+  - type: OpenAPI
+    url: openapi/sentry-system-replays-api-openapi.yml
+  - type: Documentation
+    url: https://docs.sentry.io/api/
+  - type: Authentication
+    url: https://docs.sentry.io/api/auth/
+  - type: GettingStarted
+    url: https://docs.sentry.io/api/guides/create-auth-token/
+  - type: RateLimits
+    url: https://docs.sentry.io/api/ratelimits/
+  - type: SDKs
+    url: https://docs.sentry.io/platforms/
+  - type: PostmanCollection
+    url: >-
+      https://www.postman.com/sentryio/sentry-api-collection/documentation/xtzhckg/sentry-api-collection
+  - type: Webhooks
+    url: https://docs.sentry.io/organization/integrations/integration-platform/webhooks/
+  - type: Pagination
+    url: https://docs.sentry.io/api/pagination/
+  - type: Permissions
+    url: https://docs.sentry.io/api/permissions/
+  - type: Reference
+    url: https://docs.sentry.io/api/requests/
+  - type: JSONSchema
+    url: json-schema/sentry-organization-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-project-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-issue-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-event-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-team-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-release-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-alert-rule-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-monitor-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-replay-schema.json
+  - type: JSONLD
+    url: json-ld/sentry-context.jsonld
+  - type: Documentation
+    url: https://docs.sentry.io/api/events/
+  - type: Documentation
+    url: https://docs.sentry.io/api/organizations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/projects/
+  - type: Documentation
+    url: https://docs.sentry.io/api/teams/
+  - type: Documentation
+    url: https://docs.sentry.io/api/releases/
+  - type: Documentation
+    url: https://docs.sentry.io/api/alerts/
+  - type: Documentation
+    url: https://docs.sentry.io/api/crons/
+  - type: Documentation
+    url: https://docs.sentry.io/api/dashboards/
+  - type: Documentation
+    url: https://docs.sentry.io/api/discover/
+  - type: Documentation
+    url: https://docs.sentry.io/api/environments/
+  - type: Documentation
+    url: https://docs.sentry.io/api/explore/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integration/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integrations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/mobile-builds/
+  - type: Documentation
+    url: https://docs.sentry.io/api/monitors/
+  - type: Documentation
+    url: https://docs.sentry.io/api/prevent/
+  - type: Documentation
+    url: https://docs.sentry.io/api/replays/
+  - type: Documentation
+    url: https://docs.sentry.io/api/scim/
+  - type: Documentation
+    url: https://docs.sentry.io/api/seer/
+  - type: Documentation
+    url: https://docs.sentry.io/api/users/
+- aid: sentry-system:sentry-system-repositories-api
+  name: Sentry Repositories API
+  description: Manage organization repositories
+  humanURL: https://sentry.io
+  baseURL: https://sentry.io/api/0
+  tags:
+  - Repositories
+  properties:
+  - type: OpenAPI
+    url: openapi/sentry-system-repositories-api-openapi.yml
+  - type: Documentation
+    url: https://docs.sentry.io/api/
+  - type: Authentication
+    url: https://docs.sentry.io/api/auth/
+  - type: GettingStarted
+    url: https://docs.sentry.io/api/guides/create-auth-token/
+  - type: RateLimits
+    url: https://docs.sentry.io/api/ratelimits/
+  - type: SDKs
+    url: https://docs.sentry.io/platforms/
+  - type: PostmanCollection
+    url: >-
+      https://www.postman.com/sentryio/sentry-api-collection/documentation/xtzhckg/sentry-api-collection
+  - type: Webhooks
+    url: https://docs.sentry.io/organization/integrations/integration-platform/webhooks/
+  - type: Pagination
+    url: https://docs.sentry.io/api/pagination/
+  - type: Permissions
+    url: https://docs.sentry.io/api/permissions/
+  - type: Reference
+    url: https://docs.sentry.io/api/requests/
+  - type: JSONSchema
+    url: json-schema/sentry-organization-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-project-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-issue-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-event-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-team-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-release-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-alert-rule-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-monitor-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-replay-schema.json
+  - type: JSONLD
+    url: json-ld/sentry-context.jsonld
+  - type: Documentation
+    url: https://docs.sentry.io/api/events/
+  - type: Documentation
+    url: https://docs.sentry.io/api/organizations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/projects/
+  - type: Documentation
+    url: https://docs.sentry.io/api/teams/
+  - type: Documentation
+    url: https://docs.sentry.io/api/releases/
+  - type: Documentation
+    url: https://docs.sentry.io/api/alerts/
+  - type: Documentation
+    url: https://docs.sentry.io/api/crons/
+  - type: Documentation
+    url: https://docs.sentry.io/api/dashboards/
+  - type: Documentation
+    url: https://docs.sentry.io/api/discover/
+  - type: Documentation
+    url: https://docs.sentry.io/api/environments/
+  - type: Documentation
+    url: https://docs.sentry.io/api/explore/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integration/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integrations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/mobile-builds/
+  - type: Documentation
+    url: https://docs.sentry.io/api/monitors/
+  - type: Documentation
+    url: https://docs.sentry.io/api/prevent/
+  - type: Documentation
+    url: https://docs.sentry.io/api/replays/
+  - type: Documentation
+    url: https://docs.sentry.io/api/scim/
+  - type: Documentation
+    url: https://docs.sentry.io/api/seer/
+  - type: Documentation
+    url: https://docs.sentry.io/api/users/
+- aid: sentry-system:sentry-system-scim-members-api
+  name: Sentry SCIM Members API
+  description: Provision and manage organization members via SCIM
+  humanURL: https://sentry.io
+  baseURL: https://sentry.io/api/0
+  tags:
+  - SCIM Members
+  properties:
+  - type: OpenAPI
+    url: openapi/sentry-system-scim-members-api-openapi.yml
+  - type: Documentation
+    url: https://docs.sentry.io/api/
+  - type: Authentication
+    url: https://docs.sentry.io/api/auth/
+  - type: GettingStarted
+    url: https://docs.sentry.io/api/guides/create-auth-token/
+  - type: RateLimits
+    url: https://docs.sentry.io/api/ratelimits/
+  - type: SDKs
+    url: https://docs.sentry.io/platforms/
+  - type: PostmanCollection
+    url: >-
+      https://www.postman.com/sentryio/sentry-api-collection/documentation/xtzhckg/sentry-api-collection
+  - type: Webhooks
+    url: https://docs.sentry.io/organization/integrations/integration-platform/webhooks/
+  - type: Pagination
+    url: https://docs.sentry.io/api/pagination/
+  - type: Permissions
+    url: https://docs.sentry.io/api/permissions/
+  - type: Reference
+    url: https://docs.sentry.io/api/requests/
+  - type: JSONSchema
+    url: json-schema/sentry-organization-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-project-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-issue-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-event-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-team-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-release-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-alert-rule-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-monitor-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-replay-schema.json
+  - type: JSONLD
+    url: json-ld/sentry-context.jsonld
+  - type: Documentation
+    url: https://docs.sentry.io/api/events/
+  - type: Documentation
+    url: https://docs.sentry.io/api/organizations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/projects/
+  - type: Documentation
+    url: https://docs.sentry.io/api/teams/
+  - type: Documentation
+    url: https://docs.sentry.io/api/releases/
+  - type: Documentation
+    url: https://docs.sentry.io/api/alerts/
+  - type: Documentation
+    url: https://docs.sentry.io/api/crons/
+  - type: Documentation
+    url: https://docs.sentry.io/api/dashboards/
+  - type: Documentation
+    url: https://docs.sentry.io/api/discover/
+  - type: Documentation
+    url: https://docs.sentry.io/api/environments/
+  - type: Documentation
+    url: https://docs.sentry.io/api/explore/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integration/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integrations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/mobile-builds/
+  - type: Documentation
+    url: https://docs.sentry.io/api/monitors/
+  - type: Documentation
+    url: https://docs.sentry.io/api/prevent/
+  - type: Documentation
+    url: https://docs.sentry.io/api/replays/
+  - type: Documentation
+    url: https://docs.sentry.io/api/scim/
+  - type: Documentation
+    url: https://docs.sentry.io/api/seer/
+  - type: Documentation
+    url: https://docs.sentry.io/api/users/
+- aid: sentry-system:sentry-system-scim-teams-api
+  name: Sentry SCIM Teams API
+  description: Provision and manage teams via SCIM
+  humanURL: https://sentry.io
+  baseURL: https://sentry.io/api/0
+  tags:
+  - SCIM Teams
+  properties:
+  - type: OpenAPI
+    url: openapi/sentry-system-scim-teams-api-openapi.yml
+  - type: Documentation
+    url: https://docs.sentry.io/api/
+  - type: Authentication
+    url: https://docs.sentry.io/api/auth/
+  - type: GettingStarted
+    url: https://docs.sentry.io/api/guides/create-auth-token/
+  - type: RateLimits
+    url: https://docs.sentry.io/api/ratelimits/
+  - type: SDKs
+    url: https://docs.sentry.io/platforms/
+  - type: PostmanCollection
+    url: >-
+      https://www.postman.com/sentryio/sentry-api-collection/documentation/xtzhckg/sentry-api-collection
+  - type: Webhooks
+    url: https://docs.sentry.io/organization/integrations/integration-platform/webhooks/
+  - type: Pagination
+    url: https://docs.sentry.io/api/pagination/
+  - type: Permissions
+    url: https://docs.sentry.io/api/permissions/
+  - type: Reference
+    url: https://docs.sentry.io/api/requests/
+  - type: JSONSchema
+    url: json-schema/sentry-organization-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-project-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-issue-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-event-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-team-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-release-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-alert-rule-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-monitor-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-replay-schema.json
+  - type: JSONLD
+    url: json-ld/sentry-context.jsonld
+  - type: Documentation
+    url: https://docs.sentry.io/api/events/
+  - type: Documentation
+    url: https://docs.sentry.io/api/organizations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/projects/
+  - type: Documentation
+    url: https://docs.sentry.io/api/teams/
+  - type: Documentation
+    url: https://docs.sentry.io/api/releases/
+  - type: Documentation
+    url: https://docs.sentry.io/api/alerts/
+  - type: Documentation
+    url: https://docs.sentry.io/api/crons/
+  - type: Documentation
+    url: https://docs.sentry.io/api/dashboards/
+  - type: Documentation
+    url: https://docs.sentry.io/api/discover/
+  - type: Documentation
+    url: https://docs.sentry.io/api/environments/
+  - type: Documentation
+    url: https://docs.sentry.io/api/explore/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integration/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integrations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/mobile-builds/
+  - type: Documentation
+    url: https://docs.sentry.io/api/monitors/
+  - type: Documentation
+    url: https://docs.sentry.io/api/prevent/
+  - type: Documentation
+    url: https://docs.sentry.io/api/replays/
+  - type: Documentation
+    url: https://docs.sentry.io/api/scim/
+  - type: Documentation
+    url: https://docs.sentry.io/api/seer/
+  - type: Documentation
+    url: https://docs.sentry.io/api/users/
+- aid: sentry-system:sentry-system-seer-api
+  name: Sentry Seer API
+  description: AI-powered issue analysis and fix suggestions
+  humanURL: https://sentry.io
+  baseURL: https://sentry.io/api/0
+  tags:
+  - Seer
+  properties:
+  - type: OpenAPI
+    url: openapi/sentry-system-seer-api-openapi.yml
+  - type: Documentation
+    url: https://docs.sentry.io/api/
+  - type: Authentication
+    url: https://docs.sentry.io/api/auth/
+  - type: GettingStarted
+    url: https://docs.sentry.io/api/guides/create-auth-token/
+  - type: RateLimits
+    url: https://docs.sentry.io/api/ratelimits/
+  - type: SDKs
+    url: https://docs.sentry.io/platforms/
+  - type: PostmanCollection
+    url: >-
+      https://www.postman.com/sentryio/sentry-api-collection/documentation/xtzhckg/sentry-api-collection
+  - type: Webhooks
+    url: https://docs.sentry.io/organization/integrations/integration-platform/webhooks/
+  - type: Pagination
+    url: https://docs.sentry.io/api/pagination/
+  - type: Permissions
+    url: https://docs.sentry.io/api/permissions/
+  - type: Reference
+    url: https://docs.sentry.io/api/requests/
+  - type: JSONSchema
+    url: json-schema/sentry-organization-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-project-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-issue-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-event-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-team-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-release-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-alert-rule-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-monitor-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-replay-schema.json
+  - type: JSONLD
+    url: json-ld/sentry-context.jsonld
+  - type: Documentation
+    url: https://docs.sentry.io/api/events/
+  - type: Documentation
+    url: https://docs.sentry.io/api/organizations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/projects/
+  - type: Documentation
+    url: https://docs.sentry.io/api/teams/
+  - type: Documentation
+    url: https://docs.sentry.io/api/releases/
+  - type: Documentation
+    url: https://docs.sentry.io/api/alerts/
+  - type: Documentation
+    url: https://docs.sentry.io/api/crons/
+  - type: Documentation
+    url: https://docs.sentry.io/api/dashboards/
+  - type: Documentation
+    url: https://docs.sentry.io/api/discover/
+  - type: Documentation
+    url: https://docs.sentry.io/api/environments/
+  - type: Documentation
+    url: https://docs.sentry.io/api/explore/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integration/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integrations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/mobile-builds/
+  - type: Documentation
+    url: https://docs.sentry.io/api/monitors/
+  - type: Documentation
+    url: https://docs.sentry.io/api/prevent/
+  - type: Documentation
+    url: https://docs.sentry.io/api/replays/
+  - type: Documentation
+    url: https://docs.sentry.io/api/scim/
+  - type: Documentation
+    url: https://docs.sentry.io/api/seer/
+  - type: Documentation
+    url: https://docs.sentry.io/api/users/
+- aid: sentry-system:sentry-system-service-hooks-api
+  name: Sentry Service Hooks API
+  description: Manage project service hooks
+  humanURL: https://sentry.io
+  baseURL: https://sentry.io/api/0
+  tags:
+  - Service Hooks
+  properties:
+  - type: OpenAPI
+    url: openapi/sentry-system-service-hooks-api-openapi.yml
+  - type: Documentation
+    url: https://docs.sentry.io/api/
+  - type: Authentication
+    url: https://docs.sentry.io/api/auth/
+  - type: GettingStarted
+    url: https://docs.sentry.io/api/guides/create-auth-token/
+  - type: RateLimits
+    url: https://docs.sentry.io/api/ratelimits/
+  - type: SDKs
+    url: https://docs.sentry.io/platforms/
+  - type: PostmanCollection
+    url: >-
+      https://www.postman.com/sentryio/sentry-api-collection/documentation/xtzhckg/sentry-api-collection
+  - type: Webhooks
+    url: https://docs.sentry.io/organization/integrations/integration-platform/webhooks/
+  - type: Pagination
+    url: https://docs.sentry.io/api/pagination/
+  - type: Permissions
+    url: https://docs.sentry.io/api/permissions/
+  - type: Reference
+    url: https://docs.sentry.io/api/requests/
+  - type: JSONSchema
+    url: json-schema/sentry-organization-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-project-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-issue-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-event-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-team-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-release-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-alert-rule-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-monitor-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-replay-schema.json
+  - type: JSONLD
+    url: json-ld/sentry-context.jsonld
+  - type: Documentation
+    url: https://docs.sentry.io/api/events/
+  - type: Documentation
+    url: https://docs.sentry.io/api/organizations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/projects/
+  - type: Documentation
+    url: https://docs.sentry.io/api/teams/
+  - type: Documentation
+    url: https://docs.sentry.io/api/releases/
+  - type: Documentation
+    url: https://docs.sentry.io/api/alerts/
+  - type: Documentation
+    url: https://docs.sentry.io/api/crons/
+  - type: Documentation
+    url: https://docs.sentry.io/api/dashboards/
+  - type: Documentation
+    url: https://docs.sentry.io/api/discover/
+  - type: Documentation
+    url: https://docs.sentry.io/api/environments/
+  - type: Documentation
+    url: https://docs.sentry.io/api/explore/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integration/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integrations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/mobile-builds/
+  - type: Documentation
+    url: https://docs.sentry.io/api/monitors/
+  - type: Documentation
+    url: https://docs.sentry.io/api/prevent/
+  - type: Documentation
+    url: https://docs.sentry.io/api/replays/
+  - type: Documentation
+    url: https://docs.sentry.io/api/scim/
+  - type: Documentation
+    url: https://docs.sentry.io/api/seer/
+  - type: Documentation
+    url: https://docs.sentry.io/api/users/
+- aid: sentry-system:sentry-system-sessions-api
+  name: Sentry Sessions API
+  description: Retrieve release health session statistics
+  humanURL: https://sentry.io
+  baseURL: https://sentry.io/api/0
+  tags:
+  - Sessions
+  properties:
+  - type: OpenAPI
+    url: openapi/sentry-system-sessions-api-openapi.yml
+  - type: Documentation
+    url: https://docs.sentry.io/api/
+  - type: Authentication
+    url: https://docs.sentry.io/api/auth/
+  - type: GettingStarted
+    url: https://docs.sentry.io/api/guides/create-auth-token/
+  - type: RateLimits
+    url: https://docs.sentry.io/api/ratelimits/
+  - type: SDKs
+    url: https://docs.sentry.io/platforms/
+  - type: PostmanCollection
+    url: >-
+      https://www.postman.com/sentryio/sentry-api-collection/documentation/xtzhckg/sentry-api-collection
+  - type: Webhooks
+    url: https://docs.sentry.io/organization/integrations/integration-platform/webhooks/
+  - type: Pagination
+    url: https://docs.sentry.io/api/pagination/
+  - type: Permissions
+    url: https://docs.sentry.io/api/permissions/
+  - type: Reference
+    url: https://docs.sentry.io/api/requests/
+  - type: JSONSchema
+    url: json-schema/sentry-organization-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-project-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-issue-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-event-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-team-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-release-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-alert-rule-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-monitor-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-replay-schema.json
+  - type: JSONLD
+    url: json-ld/sentry-context.jsonld
+  - type: Documentation
+    url: https://docs.sentry.io/api/events/
+  - type: Documentation
+    url: https://docs.sentry.io/api/organizations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/projects/
+  - type: Documentation
+    url: https://docs.sentry.io/api/teams/
+  - type: Documentation
+    url: https://docs.sentry.io/api/releases/
+  - type: Documentation
+    url: https://docs.sentry.io/api/alerts/
+  - type: Documentation
+    url: https://docs.sentry.io/api/crons/
+  - type: Documentation
+    url: https://docs.sentry.io/api/dashboards/
+  - type: Documentation
+    url: https://docs.sentry.io/api/discover/
+  - type: Documentation
+    url: https://docs.sentry.io/api/environments/
+  - type: Documentation
+    url: https://docs.sentry.io/api/explore/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integration/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integrations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/mobile-builds/
+  - type: Documentation
+    url: https://docs.sentry.io/api/monitors/
+  - type: Documentation
+    url: https://docs.sentry.io/api/prevent/
+  - type: Documentation
+    url: https://docs.sentry.io/api/replays/
+  - type: Documentation
+    url: https://docs.sentry.io/api/scim/
+  - type: Documentation
+    url: https://docs.sentry.io/api/seer/
+  - type: Documentation
+    url: https://docs.sentry.io/api/users/
+- aid: sentry-system:sentry-system-spike-protection-api
+  name: Sentry Spike Protection API
+  description: Manage spike protection notification actions
+  humanURL: https://sentry.io
+  baseURL: https://sentry.io/api/0
+  tags:
+  - Spike Protection
+  properties:
+  - type: OpenAPI
+    url: openapi/sentry-system-spike-protection-api-openapi.yml
+  - type: Documentation
+    url: https://docs.sentry.io/api/
+  - type: Authentication
+    url: https://docs.sentry.io/api/auth/
+  - type: GettingStarted
+    url: https://docs.sentry.io/api/guides/create-auth-token/
+  - type: RateLimits
+    url: https://docs.sentry.io/api/ratelimits/
+  - type: SDKs
+    url: https://docs.sentry.io/platforms/
+  - type: PostmanCollection
+    url: >-
+      https://www.postman.com/sentryio/sentry-api-collection/documentation/xtzhckg/sentry-api-collection
+  - type: Webhooks
+    url: https://docs.sentry.io/organization/integrations/integration-platform/webhooks/
+  - type: Pagination
+    url: https://docs.sentry.io/api/pagination/
+  - type: Permissions
+    url: https://docs.sentry.io/api/permissions/
+  - type: Reference
+    url: https://docs.sentry.io/api/requests/
+  - type: JSONSchema
+    url: json-schema/sentry-organization-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-project-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-issue-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-event-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-team-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-release-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-alert-rule-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-monitor-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-replay-schema.json
+  - type: JSONLD
+    url: json-ld/sentry-context.jsonld
+  - type: Documentation
+    url: https://docs.sentry.io/api/events/
+  - type: Documentation
+    url: https://docs.sentry.io/api/organizations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/projects/
+  - type: Documentation
+    url: https://docs.sentry.io/api/teams/
+  - type: Documentation
+    url: https://docs.sentry.io/api/releases/
+  - type: Documentation
+    url: https://docs.sentry.io/api/alerts/
+  - type: Documentation
+    url: https://docs.sentry.io/api/crons/
+  - type: Documentation
+    url: https://docs.sentry.io/api/dashboards/
+  - type: Documentation
+    url: https://docs.sentry.io/api/discover/
+  - type: Documentation
+    url: https://docs.sentry.io/api/environments/
+  - type: Documentation
+    url: https://docs.sentry.io/api/explore/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integration/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integrations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/mobile-builds/
+  - type: Documentation
+    url: https://docs.sentry.io/api/monitors/
+  - type: Documentation
+    url: https://docs.sentry.io/api/prevent/
+  - type: Documentation
+    url: https://docs.sentry.io/api/replays/
+  - type: Documentation
+    url: https://docs.sentry.io/api/scim/
+  - type: Documentation
+    url: https://docs.sentry.io/api/seer/
+  - type: Documentation
+    url: https://docs.sentry.io/api/users/
+- aid: sentry-system:sentry-system-teams-api
+  name: Sentry Teams API
+  description: Manage teams within organizations
+  humanURL: https://sentry.io
+  baseURL: https://sentry.io/api/0
+  tags:
+  - Teams
+  properties:
+  - type: OpenAPI
+    url: openapi/sentry-system-teams-api-openapi.yml
+  - type: Documentation
+    url: https://docs.sentry.io/api/
+  - type: Authentication
+    url: https://docs.sentry.io/api/auth/
+  - type: GettingStarted
+    url: https://docs.sentry.io/api/guides/create-auth-token/
+  - type: RateLimits
+    url: https://docs.sentry.io/api/ratelimits/
+  - type: SDKs
+    url: https://docs.sentry.io/platforms/
+  - type: PostmanCollection
+    url: >-
+      https://www.postman.com/sentryio/sentry-api-collection/documentation/xtzhckg/sentry-api-collection
+  - type: Webhooks
+    url: https://docs.sentry.io/organization/integrations/integration-platform/webhooks/
+  - type: Pagination
+    url: https://docs.sentry.io/api/pagination/
+  - type: Permissions
+    url: https://docs.sentry.io/api/permissions/
+  - type: Reference
+    url: https://docs.sentry.io/api/requests/
+  - type: JSONSchema
+    url: json-schema/sentry-organization-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-project-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-issue-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-event-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-team-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-release-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-alert-rule-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-monitor-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-replay-schema.json
+  - type: JSONLD
+    url: json-ld/sentry-context.jsonld
+  - type: Documentation
+    url: https://docs.sentry.io/api/events/
+  - type: Documentation
+    url: https://docs.sentry.io/api/organizations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/projects/
+  - type: Documentation
+    url: https://docs.sentry.io/api/teams/
+  - type: Documentation
+    url: https://docs.sentry.io/api/releases/
+  - type: Documentation
+    url: https://docs.sentry.io/api/alerts/
+  - type: Documentation
+    url: https://docs.sentry.io/api/crons/
+  - type: Documentation
+    url: https://docs.sentry.io/api/dashboards/
+  - type: Documentation
+    url: https://docs.sentry.io/api/discover/
+  - type: Documentation
+    url: https://docs.sentry.io/api/environments/
+  - type: Documentation
+    url: https://docs.sentry.io/api/explore/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integration/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integrations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/mobile-builds/
+  - type: Documentation
+    url: https://docs.sentry.io/api/monitors/
+  - type: Documentation
+    url: https://docs.sentry.io/api/prevent/
+  - type: Documentation
+    url: https://docs.sentry.io/api/replays/
+  - type: Documentation
+    url: https://docs.sentry.io/api/scim/
+  - type: Documentation
+    url: https://docs.sentry.io/api/seer/
+  - type: Documentation
+    url: https://docs.sentry.io/api/users/
+- aid: sentry-system:sentry-system-test-results-api
+  name: Sentry Test Results API
+  description: Retrieve test result metrics and test suites
+  humanURL: https://sentry.io
+  baseURL: https://sentry.io/api/0
+  tags:
+  - Test Results
+  properties:
+  - type: OpenAPI
+    url: openapi/sentry-system-test-results-api-openapi.yml
+  - type: Documentation
+    url: https://docs.sentry.io/api/
+  - type: Authentication
+    url: https://docs.sentry.io/api/auth/
+  - type: GettingStarted
+    url: https://docs.sentry.io/api/guides/create-auth-token/
+  - type: RateLimits
+    url: https://docs.sentry.io/api/ratelimits/
+  - type: SDKs
+    url: https://docs.sentry.io/platforms/
+  - type: PostmanCollection
+    url: >-
+      https://www.postman.com/sentryio/sentry-api-collection/documentation/xtzhckg/sentry-api-collection
+  - type: Webhooks
+    url: https://docs.sentry.io/organization/integrations/integration-platform/webhooks/
+  - type: Pagination
+    url: https://docs.sentry.io/api/pagination/
+  - type: Permissions
+    url: https://docs.sentry.io/api/permissions/
+  - type: Reference
+    url: https://docs.sentry.io/api/requests/
+  - type: JSONSchema
+    url: json-schema/sentry-organization-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-project-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-issue-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-event-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-team-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-release-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-alert-rule-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-monitor-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-replay-schema.json
+  - type: JSONLD
+    url: json-ld/sentry-context.jsonld
+  - type: Documentation
+    url: https://docs.sentry.io/api/events/
+  - type: Documentation
+    url: https://docs.sentry.io/api/organizations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/projects/
+  - type: Documentation
+    url: https://docs.sentry.io/api/teams/
+  - type: Documentation
+    url: https://docs.sentry.io/api/releases/
+  - type: Documentation
+    url: https://docs.sentry.io/api/alerts/
+  - type: Documentation
+    url: https://docs.sentry.io/api/crons/
+  - type: Documentation
+    url: https://docs.sentry.io/api/dashboards/
+  - type: Documentation
+    url: https://docs.sentry.io/api/discover/
+  - type: Documentation
+    url: https://docs.sentry.io/api/environments/
+  - type: Documentation
+    url: https://docs.sentry.io/api/explore/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integration/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integrations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/mobile-builds/
+  - type: Documentation
+    url: https://docs.sentry.io/api/monitors/
+  - type: Documentation
+    url: https://docs.sentry.io/api/prevent/
+  - type: Documentation
+    url: https://docs.sentry.io/api/replays/
+  - type: Documentation
+    url: https://docs.sentry.io/api/scim/
+  - type: Documentation
+    url: https://docs.sentry.io/api/seer/
+  - type: Documentation
+    url: https://docs.sentry.io/api/users/
+- aid: sentry-system:sentry-system-tokens-api
+  name: Sentry Tokens API
+  description: Manage repository upload tokens
+  humanURL: https://sentry.io
+  baseURL: https://sentry.io/api/0
+  tags:
+  - Tokens
+  properties:
+  - type: OpenAPI
+    url: openapi/sentry-system-tokens-api-openapi.yml
+  - type: Documentation
+    url: https://docs.sentry.io/api/
+  - type: Authentication
+    url: https://docs.sentry.io/api/auth/
+  - type: GettingStarted
+    url: https://docs.sentry.io/api/guides/create-auth-token/
+  - type: RateLimits
+    url: https://docs.sentry.io/api/ratelimits/
+  - type: SDKs
+    url: https://docs.sentry.io/platforms/
+  - type: PostmanCollection
+    url: >-
+      https://www.postman.com/sentryio/sentry-api-collection/documentation/xtzhckg/sentry-api-collection
+  - type: Webhooks
+    url: https://docs.sentry.io/organization/integrations/integration-platform/webhooks/
+  - type: Pagination
+    url: https://docs.sentry.io/api/pagination/
+  - type: Permissions
+    url: https://docs.sentry.io/api/permissions/
+  - type: Reference
+    url: https://docs.sentry.io/api/requests/
+  - type: JSONSchema
+    url: json-schema/sentry-organization-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-project-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-issue-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-event-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-team-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-release-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-alert-rule-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-monitor-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-replay-schema.json
+  - type: JSONLD
+    url: json-ld/sentry-context.jsonld
+  - type: Documentation
+    url: https://docs.sentry.io/api/events/
+  - type: Documentation
+    url: https://docs.sentry.io/api/organizations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/projects/
+  - type: Documentation
+    url: https://docs.sentry.io/api/teams/
+  - type: Documentation
+    url: https://docs.sentry.io/api/releases/
+  - type: Documentation
+    url: https://docs.sentry.io/api/alerts/
+  - type: Documentation
+    url: https://docs.sentry.io/api/crons/
+  - type: Documentation
+    url: https://docs.sentry.io/api/dashboards/
+  - type: Documentation
+    url: https://docs.sentry.io/api/discover/
+  - type: Documentation
+    url: https://docs.sentry.io/api/environments/
+  - type: Documentation
+    url: https://docs.sentry.io/api/explore/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integration/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integrations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/mobile-builds/
+  - type: Documentation
+    url: https://docs.sentry.io/api/monitors/
+  - type: Documentation
+    url: https://docs.sentry.io/api/prevent/
+  - type: Documentation
+    url: https://docs.sentry.io/api/replays/
+  - type: Documentation
+    url: https://docs.sentry.io/api/scim/
+  - type: Documentation
+    url: https://docs.sentry.io/api/seer/
+  - type: Documentation
+    url: https://docs.sentry.io/api/users/
+- aid: sentry-system:sentry-system-user-feedback-api
+  name: Sentry User Feedback API
+  description: Manage user feedback submissions
+  humanURL: https://sentry.io
+  baseURL: https://sentry.io/api/0
+  tags:
+  - User Feedback
+  properties:
+  - type: OpenAPI
+    url: openapi/sentry-system-user-feedback-api-openapi.yml
+  - type: Documentation
+    url: https://docs.sentry.io/api/
+  - type: Authentication
+    url: https://docs.sentry.io/api/auth/
+  - type: GettingStarted
+    url: https://docs.sentry.io/api/guides/create-auth-token/
+  - type: RateLimits
+    url: https://docs.sentry.io/api/ratelimits/
+  - type: SDKs
+    url: https://docs.sentry.io/platforms/
+  - type: PostmanCollection
+    url: >-
+      https://www.postman.com/sentryio/sentry-api-collection/documentation/xtzhckg/sentry-api-collection
+  - type: Webhooks
+    url: https://docs.sentry.io/organization/integrations/integration-platform/webhooks/
+  - type: Pagination
+    url: https://docs.sentry.io/api/pagination/
+  - type: Permissions
+    url: https://docs.sentry.io/api/permissions/
+  - type: Reference
+    url: https://docs.sentry.io/api/requests/
+  - type: JSONSchema
+    url: json-schema/sentry-organization-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-project-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-issue-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-event-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-team-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-release-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-alert-rule-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-monitor-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-replay-schema.json
+  - type: JSONLD
+    url: json-ld/sentry-context.jsonld
+  - type: Documentation
+    url: https://docs.sentry.io/api/events/
+  - type: Documentation
+    url: https://docs.sentry.io/api/organizations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/projects/
+  - type: Documentation
+    url: https://docs.sentry.io/api/teams/
+  - type: Documentation
+    url: https://docs.sentry.io/api/releases/
+  - type: Documentation
+    url: https://docs.sentry.io/api/alerts/
+  - type: Documentation
+    url: https://docs.sentry.io/api/crons/
+  - type: Documentation
+    url: https://docs.sentry.io/api/dashboards/
+  - type: Documentation
+    url: https://docs.sentry.io/api/discover/
+  - type: Documentation
+    url: https://docs.sentry.io/api/environments/
+  - type: Documentation
+    url: https://docs.sentry.io/api/explore/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integration/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integrations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/mobile-builds/
+  - type: Documentation
+    url: https://docs.sentry.io/api/monitors/
+  - type: Documentation
+    url: https://docs.sentry.io/api/prevent/
+  - type: Documentation
+    url: https://docs.sentry.io/api/replays/
+  - type: Documentation
+    url: https://docs.sentry.io/api/scim/
+  - type: Documentation
+    url: https://docs.sentry.io/api/seer/
+  - type: Documentation
+    url: https://docs.sentry.io/api/users/
+- aid: sentry-system:sentry-system-users-api
+  name: Sentry Users API
+  description: Retrieve user-related information
+  humanURL: https://sentry.io
+  baseURL: https://sentry.io/api/0
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/sentry-system-users-api-openapi.yml
+  - type: Documentation
+    url: https://docs.sentry.io/api/
+  - type: Authentication
+    url: https://docs.sentry.io/api/auth/
+  - type: GettingStarted
+    url: https://docs.sentry.io/api/guides/create-auth-token/
+  - type: RateLimits
+    url: https://docs.sentry.io/api/ratelimits/
+  - type: SDKs
+    url: https://docs.sentry.io/platforms/
+  - type: PostmanCollection
+    url: >-
+      https://www.postman.com/sentryio/sentry-api-collection/documentation/xtzhckg/sentry-api-collection
+  - type: Webhooks
+    url: https://docs.sentry.io/organization/integrations/integration-platform/webhooks/
+  - type: Pagination
+    url: https://docs.sentry.io/api/pagination/
+  - type: Permissions
+    url: https://docs.sentry.io/api/permissions/
+  - type: Reference
+    url: https://docs.sentry.io/api/requests/
+  - type: JSONSchema
+    url: json-schema/sentry-organization-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-project-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-issue-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-event-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-team-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-release-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-alert-rule-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-monitor-schema.json
+  - type: JSONSchema
+    url: json-schema/sentry-replay-schema.json
+  - type: JSONLD
+    url: json-ld/sentry-context.jsonld
+  - type: Documentation
+    url: https://docs.sentry.io/api/events/
+  - type: Documentation
+    url: https://docs.sentry.io/api/organizations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/projects/
+  - type: Documentation
+    url: https://docs.sentry.io/api/teams/
+  - type: Documentation
+    url: https://docs.sentry.io/api/releases/
+  - type: Documentation
+    url: https://docs.sentry.io/api/alerts/
+  - type: Documentation
+    url: https://docs.sentry.io/api/crons/
+  - type: Documentation
+    url: https://docs.sentry.io/api/dashboards/
+  - type: Documentation
+    url: https://docs.sentry.io/api/discover/
+  - type: Documentation
+    url: https://docs.sentry.io/api/environments/
+  - type: Documentation
+    url: https://docs.sentry.io/api/explore/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integration/
+  - type: Documentation
+    url: https://docs.sentry.io/api/integrations/
+  - type: Documentation
+    url: https://docs.sentry.io/api/mobile-builds/
+  - type: Documentation
+    url: https://docs.sentry.io/api/monitors/
+  - type: Documentation
+    url: https://docs.sentry.io/api/prevent/
+  - type: Documentation
+    url: https://docs.sentry.io/api/replays/
+  - type: Documentation
+    url: https://docs.sentry.io/api/scim/
+  - type: Documentation
+    url: https://docs.sentry.io/api/seer/
+  - type: Documentation
+    url: https://docs.sentry.io/api/users/
 common:
   - type: AgenticAccess
     url: agentic-access/sentry-system-agentic-access.yml
