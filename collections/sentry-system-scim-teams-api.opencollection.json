@@ -1,0 +1,163 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sentry Alerts SCIM Teams API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "SCIM Teams",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Sentry List an organization's paginated teams",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/scim/v2/Groups",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "startIndex",
+                "value": "",
+                "type": "query",
+                "description": "SCIM 1-indexed starting result number."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "SCIM filter expression."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of teams using the SCIM protocol."
+        },
+        {
+          "info": {
+            "name": "Sentry Provision a new team",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/scim/v2/Groups",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new team via SCIM provisioning."
+        },
+        {
+          "info": {
+            "name": "Sentry Query an individual team",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/scim/v2/Groups/:scim_group_id",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "scim_group_id",
+                "value": "",
+                "type": "path",
+                "description": "The SCIM group (team) ID."
+              }
+            ]
+          },
+          "docs": "Returns a specific team using the SCIM protocol."
+        },
+        {
+          "info": {
+            "name": "Sentry Update a team's attributes",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/scim/v2/Groups/:scim_group_id",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "scim_group_id",
+                "value": "",
+                "type": "path",
+                "description": "The SCIM group (team) ID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates team attributes via SCIM, including managing members."
+        },
+        {
+          "info": {
+            "name": "Sentry Delete an individual team",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/scim/v2/Groups/:scim_group_id",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "scim_group_id",
+                "value": "",
+                "type": "path",
+                "description": "The SCIM group (team) ID."
+              }
+            ]
+          },
+          "docs": "Deletes a team via SCIM."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,67 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sentry Alerts Sessions API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Sessions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Sentry Retrieve release health session statistics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/sessions/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "field",
+                "value": "",
+                "type": "query",
+                "description": "The session field to query (e.g., sum(session), count_unique(user))."
+              },
+              {
+                "name": "statsPeriod",
+                "value": "",
+                "type": "query",
+                "description": "Stats period (e.g., 24h, 14d)."
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "query",
+                "description": "Project IDs to filter by."
+              },
+              {
+                "name": "environment",
+                "value": "",
+                "type": "query",
+                "description": "Environment name to filter by."
+              }
+            ]
+          },
+          "docs": "Returns release health session statistics for an organization."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

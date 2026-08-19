@@ -1,0 +1,80 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sentry Alerts Interactions API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Interactions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Sentry List an organization's selectors",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/replays/selectors/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "query",
+                "description": "Project IDs to filter by."
+              },
+              {
+                "name": "statsPeriod",
+                "value": "",
+                "type": "query",
+                "description": "Stats period."
+              }
+            ]
+          },
+          "docs": "Returns a list of DOM selectors tracked across organization replays."
+        },
+        {
+          "info": {
+            "name": "Sentry List clicked nodes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/replays/:replay_id/clicks/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              },
+              {
+                "name": "replay_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the replay."
+              }
+            ]
+          },
+          "docs": "Returns a list of clicked DOM nodes within a replay."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,91 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sentry Alerts External Issues API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "External Issues",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Sentry Create or update an external issue",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sentry.io/api/0/sentry-app-installations/:uuid/external-issues/",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the installation."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates or updates a link between a Sentry issue and an external issue."
+        },
+        {
+          "info": {
+            "name": "Sentry Delete an external issue",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://sentry.io/api/0/sentry-app-installations/:uuid/external-issues/:external_issue_id/",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the installation."
+              },
+              {
+                "name": "external_issue_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the external issue link."
+              }
+            ]
+          },
+          "docs": "Removes a link between a Sentry issue and an external issue."
+        },
+        {
+          "info": {
+            "name": "Retrieve custom integration issue links for a Sentry issue",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/groups/:issue_id/external-issues/",
+            "params": [
+              {
+                "name": "issue_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the Sentry issue."
+              }
+            ]
+          },
+          "docs": "Returns a list of external issue links for a given Sentry issue."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

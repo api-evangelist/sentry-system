@@ -9,28 +9,46 @@ server:
   transport: http
   url: https://mcp.sentry.dev/mcp
   auth:
-    oauth: true            # log in with an existing Sentry organization
-    header_alternative: "Sentry-Bearer <sentry-api-token>"  # for clients supporting custom HTTP headers
+    oauth: true
+    header_alternative: Sentry-Bearer <sentry-api-token>
   local:
-    package: "@sentry/mcp-server"
+    package: '@sentry/mcp-server'
     registry: npm
     repo: https://github.com/getsentry/sentry-mcp
-notes: >-
-  Sentry ships an official, first-party MCP server. The remote hosted transport at
-  https://mcp.sentry.dev/mcp (Cloudflare-based) is the recommended install and is also advertised in
-  sentry.io/.well-known/api-catalog. A stdio server is published to npm as @sentry/mcp-server. The tool
-  set below is a searched snapshot of the published catalog; the live remote server may expose additional
-  tools (Sentry documents ~16, including Seer autofix). Verify with the server's tools/list at runtime.
+notes: Sentry ships an official, first-party MCP server. The remote hosted transport at https://mcp.sentry.dev/mcp
+  (Cloudflare-based) is the recommended install and is also advertised in sentry.io/.well-known/api-catalog.
+  A stdio server is published to npm as @sentry/mcp-server. The tool set below is a searched snapshot
+  of the published catalog; the live remote server may expose additional tools (Sentry documents ~16,
+  including Seer autofix). Verify with the server's tools/list at runtime.
 tools:
-  - {name: list_projects, description: List all accessible Sentry projects for an organization}
-  - {name: create_project, description: Create a new project in Sentry and retrieve its client keys/DSN}
-  - {name: resolve_short_id, description: Retrieve details about an issue using its short ID}
-  - {name: get_sentry_issue, description: Retrieve and analyze a Sentry issue}
-  - {name: get_sentry_event, description: Retrieve and analyze a specific event from an issue}
-  - {name: list_project_issues, description: List issues from a specific project}
-  - {name: list_issue_events, description: List events for a specific issue}
-  - {name: list_error_events_in_project, description: List error events from a specific project}
-  - {name: list_organization_replays, description: List replays from a specific organization}
-  - {name: search_events, description: Natural-language search over events (requires an LLM provider)}
-  - {name: search_issues, description: Natural-language search over issues (requires an LLM provider)}
-  - {name: begin_seer_issue_fix, description: Invoke the Seer AI agent to root-cause and fix an issue}
+- name: list_projects
+  description: List all accessible Sentry projects for an organization
+- name: create_project
+  description: Create a new project in Sentry and retrieve its client keys/DSN
+- name: resolve_short_id
+  description: Retrieve details about an issue using its short ID
+- name: get_sentry_issue
+  description: Retrieve and analyze a Sentry issue
+- name: get_sentry_event
+  description: Retrieve and analyze a specific event from an issue
+- name: list_project_issues
+  description: List issues from a specific project
+- name: list_issue_events
+  description: List events for a specific issue
+- name: list_error_events_in_project
+  description: List error events from a specific project
+- name: list_organization_replays
+  description: List replays from a specific organization
+- name: search_events
+  description: Natural-language search over events (requires an LLM provider)
+- name: search_issues
+  description: Natural-language search over issues (requires an LLM provider)
+- name: begin_seer_issue_fix
+  description: Invoke the Seer AI agent to root-cause and fix an issue
+deployment:
+  mode: remote
+  endpoint: https://mcp.sentry.dev/mcp
+  verified: probed
+  probe: gated
+  checked: '2026-08-12'
+  source: catalog MCP census

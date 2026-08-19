@@ -1,0 +1,104 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sentry Alerts Custom Integrations API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Custom Integrations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Sentry Retrieve the custom integrations created by an organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/organizations/:organization_id_or_slug/sentry-apps/",
+            "params": [
+              {
+                "name": "organization_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the organization."
+              }
+            ]
+          },
+          "docs": "Returns a list of custom integrations built by the organization."
+        },
+        {
+          "info": {
+            "name": "Sentry Retrieve a custom integration by ID or slug",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sentry.io/api/0/sentry-apps/:sentry_app_id_or_slug/",
+            "params": [
+              {
+                "name": "sentry_app_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the custom integration."
+              }
+            ]
+          },
+          "docs": "Returns details for a specific custom integration (Sentry App)."
+        },
+        {
+          "info": {
+            "name": "Sentry Update an existing custom integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://sentry.io/api/0/sentry-apps/:sentry_app_id_or_slug/",
+            "params": [
+              {
+                "name": "sentry_app_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the custom integration."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing custom integration."
+        },
+        {
+          "info": {
+            "name": "Sentry Delete a custom integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://sentry.io/api/0/sentry-apps/:sentry_app_id_or_slug/",
+            "params": [
+              {
+                "name": "sentry_app_id_or_slug",
+                "value": "",
+                "type": "path",
+                "description": "The ID or slug of the custom integration."
+              }
+            ]
+          },
+          "docs": "Deletes a custom integration."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
