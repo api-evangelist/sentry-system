@@ -3,26 +3,18 @@ kin_checks:
   slug: sentry-system
   schema_version: 0.22.0
   scored_at: '2026-09-18'
-  run_ts: 2026-09-18T205255
+  run_ts: 2026-09-18T231945
   note: Actionable checks (missed + partial) in `checks`, plus the ids that did not
     apply in `na`. Everything else in rubric/scoring-0.22.0.yml was earned; counts
     below let you verify that.
   counts:
     total: 136
-    earned: 61
-    partial: 14
-    missed: 36
+    earned: 68
+    partial: 16
+    missed: 27
     na: 25
   checks:
-  - id: description_substantive
-    status: missed
   - id: maintainer_present
-    status: missed
-  - id: human_url_per_api
-    status: missed
-  - id: base_url_per_api
-    status: missed
-  - id: well_known_published
     status: missed
   - id: openapi_3_2
     status: missed
@@ -57,14 +49,6 @@ kin_checks:
     status: missed
   - id: examples_published
     status: missed
-  - id: sdk_count_3
-    status: missed
-  - id: console_or_sandbox
-    status: missed
-  - id: agent_skill_present
-    status: missed
-  - id: compliance_published
-    status: missed
   - id: upsert_outcome_discriminator
     status: missed
   - id: upsert_alternate_key
@@ -76,8 +60,6 @@ kin_checks:
   - id: idempotency
     status: missed
   - id: openapi_examples
-    status: missed
-  - id: agent_skills
     status: missed
   - id: consent_identity
     status: missed
@@ -110,6 +92,9 @@ kin_checks:
     status: partial
     earned: 1.0
     detail: pointer liveness 0.5
+  - id: agent_skill_present
+    status: partial
+    earned: 0.75
   - id: support_channel
     status: partial
     earned: 1.0
@@ -140,6 +125,10 @@ kin_checks:
     status: partial
     earned: 3.5
     detail: 'grade: documented'
+  - id: agent_skills
+    status: partial
+    earned: 1.25
+    detail: 'authorship: derived'
   na:
   - asyncapi_3_x
   - channels_defined
