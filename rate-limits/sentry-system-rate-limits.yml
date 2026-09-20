@@ -1,57 +1,21 @@
-specification: API Commons Rate Limits
-specificationVersion: '0.1'
-schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
-provider: Sentry
-providerId: sentry-system
-created: '2026-05-04'
-# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
-# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
-method: generated
-modified: '2026-05-05'
-reconciled: true
-tags:
-  - Error Tracking
-  - Observability
-  - Rate Limiting
-description: Sentry's REST API enforces two complementary mechanisms — fixed-window requests-per-second
-  and concurrent in-flight requests. Limits are scoped per unique caller + endpoint combination (not per
-  token, so generating extra tokens does not bypass them). Specific numeric thresholds are not published
-  globally and vary per endpoint; current state is exposed via X-Sentry-Rate-Limit-* headers on every
-  response. Sentry recommends webhooks over polling to avoid throttling.
+# Rate limits transcribed from the provider's own documentation — see provenance. Quoted, not derived.
+generated: '2026-09-20'
+method: searched
+source: https://docs.sentry.io/api/ratelimits/
 sources:
-  - https://docs.sentry.io/api/ratelimits/
+- https://docs.sentry.io/api/ratelimits/
+provenance:
+  tool: planning/api-economics/harvest_ratelimits.py
+  run: 20260920T133210
+  grounding: every limit_text was found verbatim in the fetched page text
+published: false
+note: Page describes rate limiting mechanics (per-second fixed window and concurrent limits per caller+endpoint)
+  and headers, but states no numeric limits or HTTP status code.
+limit_count: 0
+limits: []
 headers:
-  limit: X-Sentry-Rate-Limit-Limit
-  remaining: X-Sentry-Rate-Limit-Remaining
-  reset: X-Sentry-Rate-Limit-Reset
-  concurrentLimit: X-Sentry-Rate-Limit-ConcurrentLimit
-  concurrentRemaining: X-Sentry-Rate-Limit-ConcurrentRemaining
-responseCodes:
-  throttled: 429
-limits:
-  - name: Per-caller / per-endpoint rate
-    scope: caller/endpoint
-    metric: requests_per_window
-    limit: see X-Sentry-Rate-Limit-Limit
-    notes: Fixed-window count of requests by caller+endpoint. Reset epoch returned in X-Sentry-Rate-Limit-Reset.
-  - name: Per-caller / per-endpoint concurrency
-    scope: caller/endpoint
-    metric: concurrent_requests
-    limit: see X-Sentry-Rate-Limit-ConcurrentLimit
-    notes: Caps simultaneously open requests by caller+endpoint.
-policies:
-  - name: Caller-scoped enforcement
-    description: Limits are bound to the unique caller identity, not the token. Generating multiple tokens
-      under the same identity does not raise the cap.
-  - name: Header-driven adaptation
-    description: Always read X-Sentry-Rate-Limit-Remaining and X-Sentry-Rate-Limit-Reset to pace traffic.
-      Concurrency caps require parallel-request governance.
-  - name: Prefer webhooks over polling
-    description: Sentry explicitly recommends consuming events via webhooks rather than polling endpoints,
-      to avoid hitting per-endpoint rate limits.
-  - name: Backoff
-    description: On 429, back off until the time indicated by X-Sentry-Rate-Limit-Reset (UTC epoch);
-      retries before that point will continue to be rejected.
-maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+- X-Sentry-Rate-Limit-Limit
+- X-Sentry-Rate-Limit-Remaining
+- X-Sentry-Rate-Limit-Reset
+- X-Sentry-Rate-Limit-ConcurrentLimit
+- X-Sentry-Rate-Limit-ConcurrentRemaining
