@@ -1,0 +1,126 @@
+slug: sentry-system
+provider: Sentry
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 11
+edges:
+- tag: Events
+  spec_file: sentry-system-events-api-openapi.yml
+  capability_id: BC-4220.20
+  capability_id_l1: BC-4220
+  capability_name: Observability Management
+  confidence: 0.85
+  evidence: '"List a project''s error events"; "Retrieve an issue event"; "Debug issues related to source
+    maps for a given event"'
+  reason: These operations expose captured error/telemetry events from running applications — the logs/traces
+    surface of observability management, consistent with the vendor being an error tracking and performance
+    monitoring platform.
+- tag: Monitors
+  spec_file: sentry-system-monitors-api-openapi.yml
+  capability_id: BC-4220.20
+  capability_id_l1: BC-4220
+  capability_name: Observability Management
+  confidence: 0.75
+  evidence: '"Create a monitor", "POST /projects/.../uptime-monitors/ createProjectMonitor", schemas Monitor,
+    UptimeMonitor'
+  reason: Cron and uptime monitors are synthetic monitoring of running services, explicitly within observability
+    management.
+- tag: Releases
+  spec_file: sentry-system-releases-api-openapi.yml
+  capability_id: BC-4210.30
+  capability_id_l1: BC-4210
+  capability_name: Release Engineering Management
+  confidence: 0.75
+  evidence: '"Create a new release for an organization", "Retrieve statuses of release thresholds", schemas
+    Release, Deploy'
+  reason: Creation and versioning of software releases and associated deploys — release engineering, not
+    a commercial or product-launch capability.
+- tag: SCIM Members
+  spec_file: sentry-system-scim-members-api-openapi.yml
+  capability_id: BC-4230.50
+  capability_id_l1: BC-4230
+  capability_name: Tenant Identity Federation
+  confidence: 0.75
+  evidence: '"Provision a new organization member" via /scim/v2/Users, schemas ScimUser, ScimListResponse'
+  reason: SCIM user provisioning endpoints offered to tenants map directly to tenant identity federation,
+    whose definition names 'lifecycle of tenant user accounts via single sign-on and SCIM'.
+- tag: Service Hooks
+  spec_file: sentry-system-service-hooks-api-openapi.yml
+  capability_id: BC-4270.80
+  capability_id_l1: BC-4270
+  capability_name: Webhook & Event Subscription Management
+  confidence: 0.75
+  evidence: POST /projects/{organization_id_or_slug}/{project_id_or_slug}/hooks/ createProjectServiceHook
+    'Register a new service hook'; schema ServiceHook
+  reason: Registration, update and removal of outbound event hooks per project is webhook/event subscription
+    lifecycle management on the platform's integration surface.
+- tag: Test Results
+  spec_file: sentry-system-test-results-api-openapi.yml
+  capability_id: BC-4200.50
+  capability_id_l1: BC-4200
+  capability_name: Software Quality Engineering
+  confidence: 0.72
+  evidence: GET /organizations/{organization_id_or_slug}/prevent/test-results/ listTestResults 'Retrieve
+    paginated list of test results for repository, owner, and organization'; listTestSuites; schema TestResult
+  reason: Reporting of repository test results, test suites and aggregated test metrics is automated test
+    suite stewardship / quality engineering; could alternatively sit under CI management, hence not maximal
+    confidence.
+- tag: Explore
+  spec_file: sentry-system-explore-api-openapi.yml
+  capability_id: BC-4220.20
+  capability_id_l1: BC-4220
+  capability_name: Observability Management
+  confidence: 0.7
+  evidence: '"Query Explore events in table format"; "Query Explore events in timeseries format"'
+  reason: Ad-hoc querying and timeseries aggregation of production event telemetry is analysis of the
+    running service, i.e. observability. Not product usage analytics — the events are error/performance
+    telemetry, not product engagement events.
+- tag: Issue Alerts
+  spec_file: sentry-system-issue-alerts-api-openapi.yml
+  capability_id: BC-4220.30
+  capability_id_l1: BC-4220
+  capability_name: Incident Response Management
+  confidence: 0.7
+  evidence: '"Create an issue alert rule for a project"; schema: IssueAlertRule'
+  reason: Alert rules define the detection and notification conditions that trigger response when application
+    errors spike — incident detection within SaaS platform operations. This is developer/observability
+    alerting, not financial-crime or business alerting.
+- tag: Issues
+  spec_file: sentry-system-issues-api-openapi.yml
+  capability_id: BC-4200.50
+  capability_id_l1: BC-4200
+  capability_name: Software Quality Engineering
+  confidence: 0.7
+  evidence: '"Bulk mutate an organization''s issues"; "Update an issue"; "Remove an issue"; vendor: "helps
+    developers identify, triage, and resolve issues in their applications"'
+  reason: Sentry issues are grouped application defects whose lifecycle (triage, resolve, ignore, bulk
+    mutate) is managed here, which is defect management under software quality engineering. Some overlap
+    with incident response, hence not higher confidence.
+- tag: Metric Alerts
+  spec_file: sentry-system-metric-alerts-api-openapi.yml
+  capability_id: BC-4220.20
+  capability_id_l1: BC-4220
+  capability_name: Observability Management
+  confidence: 0.7
+  evidence: '"Create a metric alert rule for an organization", schema MetricAlertRule'
+  reason: 'CRUD over metric-based alerting rules on application telemetry — observability/monitoring of
+    a running service. Homograph check: these are engineering alerts, not risk or financial-crime alerts.'
+- tag: Repositories
+  spec_file: sentry-system-repositories-api-openapi.yml
+  capability_id: BC-4200.40
+  capability_id_l1: BC-4200
+  capability_name: Software Construction Management
+  confidence: 0.7
+  evidence: '"List repository commits", "Retrieve list of branches for a given owner and repository",
+    "Sync repositories from an integrated org with GitHub"'
+  reason: Operations expose source-control repositories, branches and commits — the source control / implementation
+    practice domain of software construction.
