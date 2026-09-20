@@ -1,281 +1,51 @@
-specification: API Commons Plans
-specificationVersion: '0.1'
-schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
-provider: Sentry
-providerId: sentry-system
-created: '2026-05-04'
-# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
-# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
-method: generated
-modified: '2026-05-05'
-reconciled: true
-tags:
-  - Error Tracking
-  - Observability
-  - Performance Monitoring
-  - APM
-  - Session Replay
-description: Sentry prices on tiered subscriptions with included event/session/log volumes plus per-unit
-  overage. Developer is free for 1 user; Team and Business unlock unlimited users at $26/mo and $80/mo
-  (annual billing) respectively. Both Team and Business publish per-unit overage rates for logs/metrics
-  ($0.50/GB), uptime alerts ($1.00 each), and cron monitors ($0.78 each). Enterprise is custom-priced.
+# Pricing transcribed from the provider's own page — see provenance. Numbers are quoted, not derived.
+generated: '2026-09-20'
+method: searched
+source: https://sentry.io/pricing/
 sources:
-  - https://sentry.io/pricing/
+- https://sentry.io/pricing/
+provenance:
+  tool: planning/api-economics/harvest_pricing.py
+  run: 20260920T120546
+  grounding: every price_text was found verbatim in the fetched page text
+audience: business-product
+pricing_basis: tiered-subscription
+published: true
+note: Sentry pricing page with four tiers plus a cost estimator showing pay-as-you-go per-unit overage
+  rates; annual total for Team shown as $312.00/yr.
+plan_count: 4
+currency: USD
 plans:
-  - id: sentry-system-developer
-    name: Developer
-    type: freemium
-    description: Free tier for a single user. Includes 5,000 errors, 5 GB logs, 5M spans, 50 session
-      replays, 1 uptime monitor, 1 cron monitor. Email alerts and 10 custom dashboards.
-    entries:
-      - label: Subscription
-        name: subscription
-        type: subscription
-        metric: month
-        limit: 1
-        timeFrame: month
-        geo: global
-        unit: 1
-        price: '$0'
-        userMultiplied: false
-      - label: Users
-        name: users
-        type: quota
-        metric: seat
-        limit: 1
-        geo: global
-        unit: 1
-        price: included
-        userMultiplied: false
-      - label: Errors
-        name: errors
-        type: quota
-        metric: errors
-        limit: 5000
-        timeFrame: month
-        geo: global
-        unit: 1
-        price: included
-        userMultiplied: false
-      - label: Logs
-        name: logs
-        type: quota
-        metric: GB
-        limit: 5
-        timeFrame: month
-        geo: global
-        unit: 1
-        price: included
-        userMultiplied: false
-      - label: Spans
-        name: spans
-        type: quota
-        metric: spans
-        limit: 5000000
-        timeFrame: month
-        geo: global
-        unit: 1
-        price: included
-        userMultiplied: false
-      - label: Session Replays
-        name: replays
-        type: quota
-        metric: replays
-        limit: 50
-        timeFrame: month
-        geo: global
-        unit: 1
-        price: included
-        userMultiplied: false
-      - label: Uptime Monitors
-        name: uptime_monitors
-        type: quota
-        metric: monitors
-        limit: 1
-        geo: global
-        unit: 1
-        price: included
-        userMultiplied: false
-      - label: Cron Monitors
-        name: cron_monitors
-        type: quota
-        metric: monitors
-        limit: 1
-        geo: global
-        unit: 1
-        price: included
-        userMultiplied: false
-    elements:
-      - name: Error monitoring
-      - name: Tracing
-      - name: Email alerts
-      - name: 10 custom dashboards
-  - id: sentry-system-team
-    name: Team
-    type: subscription
-    description: Team plan at $26/month (annual billing) with unlimited users. Same baseline volumes
-      as Developer plus third-party integrations, 20 custom dashboards, and an opt-in AI debugging agent
-      (subscription required). Per-unit overage on logs, uptime alerts, and cron monitors.
-    entries:
-      - label: Subscription
-        name: subscription
-        type: subscription
-        metric: month
-        limit: 1
-        timeFrame: month
-        geo: global
-        unit: 1
-        price: '$26/mo (annual billing)'
-        userMultiplied: false
-      - label: Users
-        name: users
-        type: quota
-        metric: seat
-        limit: -1
-        geo: global
-        unit: 1
-        price: included
-        userMultiplied: false
-      - label: Errors
-        name: errors
-        type: quota
-        metric: errors
-        limit: 50000
-        timeFrame: month
-        geo: global
-        unit: 1
-        price: included
-        userMultiplied: false
-      - label: Logs / Metrics overage
-        name: logs_metrics_overage
-        type: metered
-        metric: GB
-        limit: -1
-        timeFrame: month
-        geo: global
-        unit: 1
-        price: '$0.50/GB'
-        userMultiplied: false
-      - label: Uptime Alerts overage
-        name: uptime_alerts_overage
-        type: metered
-        metric: alert
-        limit: -1
-        timeFrame: month
-        geo: global
-        unit: 1
-        price: '$1.00 each'
-        userMultiplied: false
-      - label: Cron Monitors overage
-        name: cron_monitors_overage
-        type: metered
-        metric: monitor
-        limit: -1
-        timeFrame: month
-        geo: global
-        unit: 1
-        price: '$0.78 each'
-        userMultiplied: false
-    elements:
-      - name: All Developer features
-      - name: Unlimited users
-      - name: Third-party integrations
-      - name: 20 custom dashboards
-      - name: AI debugging agent (subscription required)
-  - id: sentry-system-business
-    name: Business
-    type: subscription
-    description: Business plan at $80/month (annual billing) with unlimited users. Same volume baseline
-      and overage rates as Team, plus 90-day insights lookback, unlimited custom dashboards, unlimited
-      metric alerts with anomaly detection, advanced quota management, and SAML + SCIM support.
-    entries:
-      - label: Subscription
-        name: subscription
-        type: subscription
-        metric: month
-        limit: 1
-        timeFrame: month
-        geo: global
-        unit: 1
-        price: '$80/mo (annual billing)'
-        userMultiplied: false
-      - label: Users
-        name: users
-        type: quota
-        metric: seat
-        limit: -1
-        geo: global
-        unit: 1
-        price: included
-        userMultiplied: false
-      - label: Errors
-        name: errors
-        type: quota
-        metric: errors
-        limit: 50000
-        timeFrame: month
-        geo: global
-        unit: 1
-        price: included
-        userMultiplied: false
-      - label: Logs / Metrics overage
-        name: logs_metrics_overage
-        type: metered
-        metric: GB
-        limit: -1
-        timeFrame: month
-        geo: global
-        unit: 1
-        price: '$0.50/GB'
-        userMultiplied: false
-      - label: Uptime Alerts overage
-        name: uptime_alerts_overage
-        type: metered
-        metric: alert
-        limit: -1
-        timeFrame: month
-        geo: global
-        unit: 1
-        price: '$1.00 each'
-        userMultiplied: false
-      - label: Cron Monitors overage
-        name: cron_monitors_overage
-        type: metered
-        metric: monitor
-        limit: -1
-        timeFrame: month
-        geo: global
-        unit: 1
-        price: '$0.78 each'
-        userMultiplied: false
-    elements:
-      - name: All Team features
-      - name: 90-day insights lookback
-      - name: Unlimited custom dashboards
-      - name: Unlimited metric alerts with anomaly detection
-      - name: Advanced quota management
-      - name: SAML + SCIM
-  - id: sentry-system-enterprise
-    name: Enterprise
-    type: enterprise
-    description: Custom-priced plan with technical account manager, dedicated customer support, and customizable
-      limits across all services.
-    entries:
-      - label: Subscription
-        name: subscription
-        type: subscription
-        metric: month
-        limit: 1
-        timeFrame: month
-        geo: global
-        unit: 1
-        price: custom
-        userMultiplied: false
-    elements:
-      - name: All Business features
-      - name: Customizable limits
-      - name: Technical Account Manager
-      - name: Dedicated support
-maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+- name: developer
+  price_text: $0
+  price: 0
+  currency: USD
+  period: month
+  included_quota: One user, Error Monitoring and Tracing, 10 custom dashboards, MCP access; 5k errors,
+    5GB logs, 5GB application metrics, 5M spans, 50 replays, 1 uptime monitor, 1 cron monitor, 1GB attachments
+- name: team
+  price_text: $26/mo
+  price: 26
+  currency: USD
+  period: month
+  included_quota: When billed annually with default pre-paid data; Unlimited users, API & third-party
+    integrations, 20 custom dashboards; 50k errors, 5GB logs, 5GB app metrics, 5M spans, 50 replays
+  overage: +$0.50/GB additional logs and metrics; +$1.00/uptime alert additional; +$0.78/monitor additional;
+    +$0.25/hr UI profiling; +$0.0315/hr continuous profiling; errors 50K–100K $0.0003625, 100K–500K $0.0002188,
+    500K–10M $0.0001875, 10M–20M $0.0001625, 20M+ $0.0001500 per error
+- name: business
+  price_text: $80/mo
+  price: 80
+  currency: USD
+  period: month
+  included_quota: When billed annually with default pre-paid data; Team features + Unlimited custom dashboards,
+    Advanced quota management, SAML + SCIM support
+  overage: +$0.50/GB additional logs and metrics; +$1.00/uptime alert additional; +$0.78/monitor additional;
+    +$0.25/hr UI profiling; +$0.0315/hr continuous profiling
+- name: enterprise
+  price_text: Custom
+  period: none
+  included_quota: Business features + Technical account manager, Dedicated customer support
+rate_limit_statements:
+- Each plan includes a base quota. Any usage above your quota is billed at pay-as-you-go rates.
+- Volumes above the slider maximums are supported on pay-as-you-go plans.
