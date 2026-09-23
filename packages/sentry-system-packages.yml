@@ -1,23 +1,36 @@
-generated: '2026-06-20'
+generated: '2026-09-18'
 method: searched
-source: https://docs.sentry.io/platforms/
+source: >-
+  https://docs.sentry.io/platforms/ for the SDK matrix; version and published read live from each
+  registry's own metadata endpoint on 2026-09-18 (registry.npmjs.org, pypi.org/pypi/<pkg>/json,
+  rubygems.org/api/v1, repo.packagist.org/p2, repo1.maven.org maven-metadata.xml,
+  api.nuget.org/v3-flatcontainer + registration5, proxy.golang.org, crates.io/api/v1, hex.pm/api).
 notes: >-
   Sentry publishes first-party SDKs across 20+ platforms. This captures the primary official client
   libraries and tooling per registry; per-framework subpackages (e.g. @sentry/react, @sentry/nextjs)
   are numerous and share the @sentry npm scope. See docs.sentry.io/platforms/ for the full matrix.
+  CURRENCY: every one of these 15 packages published a release within the last month of the probe date
+  — the whole JavaScript line moved on 2026-09-16, sentry-sdk on 2026-09-15, the Java SDK on 2026-09-16.
+  There is no abandonment signal anywhere in this SDK estate.
+checked: '2026-09-18'
 packages:
-  - {language: javascript, registry: npm, name: "@sentry/node", url: "https://www.npmjs.com/package/@sentry/node", install: "npm install @sentry/node", official: true}
-  - {language: javascript, registry: npm, name: "@sentry/browser", url: "https://www.npmjs.com/package/@sentry/browser", install: "npm install @sentry/browser", official: true}
-  - {language: javascript, registry: npm, name: "@sentry/react", url: "https://www.npmjs.com/package/@sentry/react", install: "npm install @sentry/react", official: true}
-  - {language: javascript, registry: npm, name: "@sentry/nextjs", url: "https://www.npmjs.com/package/@sentry/nextjs", install: "npm install @sentry/nextjs", official: true}
-  - {language: javascript, registry: npm, name: "@sentry/cli", url: "https://www.npmjs.com/package/@sentry/cli", install: "npm install @sentry/cli", official: true}
-  - {language: javascript, registry: npm, name: "@sentry/mcp-server", url: "https://www.npmjs.com/package/@sentry/mcp-server", install: "npx @sentry/mcp-server", official: true}
-  - {language: python, registry: pypi, name: sentry-sdk, url: "https://pypi.org/project/sentry-sdk/", install: "pip install sentry-sdk", official: true}
-  - {language: python, registry: pypi, name: sentry-cli, url: "https://pypi.org/project/sentry-cli/", install: "pip install sentry-cli", official: true}
-  - {language: ruby, registry: rubygems, name: sentry-ruby, url: "https://rubygems.org/gems/sentry-ruby", install: "gem install sentry-ruby", official: true}
-  - {language: php, registry: packagist, name: "sentry/sentry", url: "https://packagist.org/packages/sentry/sentry", install: "composer require sentry/sentry", official: true}
-  - {language: java, registry: maven-central, name: "io.sentry:sentry", url: "https://central.sonatype.com/artifact/io.sentry/sentry", install: "implementation 'io.sentry:sentry:8.+'", official: true}
-  - {language: dotnet, registry: nuget, name: Sentry, url: "https://www.nuget.org/packages/Sentry", install: "dotnet add package Sentry", official: true}
-  - {language: go, registry: pkg.go.dev, name: "github.com/getsentry/sentry-go", url: "https://pkg.go.dev/github.com/getsentry/sentry-go", install: "go get github.com/getsentry/sentry-go", official: true}
-  - {language: rust, registry: crates.io, name: sentry, url: "https://crates.io/crates/sentry", install: "cargo add sentry", official: true}
-  - {language: elixir, registry: hex, name: sentry, url: "https://hex.pm/packages/sentry", install: "{:sentry, \"~> 10.0\"}", official: true}
+  - {language: javascript, registry: npm, name: "@sentry/node", url: "https://www.npmjs.com/package/@sentry/node", install: "npm install @sentry/node", official: true, version: "10.75.0", published: '2026-09-16'}
+  - {language: javascript, registry: npm, name: "@sentry/browser", url: "https://www.npmjs.com/package/@sentry/browser", install: "npm install @sentry/browser", official: true, version: "10.75.0", published: '2026-09-16'}
+  - {language: javascript, registry: npm, name: "@sentry/react", url: "https://www.npmjs.com/package/@sentry/react", install: "npm install @sentry/react", official: true, version: "10.75.0", published: '2026-09-16'}
+  - {language: javascript, registry: npm, name: "@sentry/nextjs", url: "https://www.npmjs.com/package/@sentry/nextjs", install: "npm install @sentry/nextjs", official: true, version: "10.75.0", published: '2026-09-16'}
+  - {language: javascript, registry: npm, name: "@sentry/cli", url: "https://www.npmjs.com/package/@sentry/cli", install: "npm install @sentry/cli", official: true, version: "3.8.0", published: '2026-09-16', note: 'The CLI binary distribution; the command surface is captured in cli/sentry-system-cli.yml.'}
+  - {language: javascript, registry: npm, name: "@sentry/mcp-server", url: "https://www.npmjs.com/package/@sentry/mcp-server", install: "npx @sentry/mcp-server", official: true, version: "0.39.0", published: '2026-08-27', note: 'The local-stdio MCP server. The hosted remote server at https://mcp.sentry.dev/mcp is the recommended install — see mcp/sentry-system-mcp.yml.'}
+  - {language: python, registry: pypi, name: sentry-sdk, url: "https://pypi.org/project/sentry-sdk/", install: "pip install sentry-sdk", official: true, version: "2.69.2", published: '2026-09-15'}
+  - {language: python, registry: pypi, name: sentry-cli, url: "https://pypi.org/project/sentry-cli/", install: "pip install sentry-cli", official: true, version: "3.8.0", published: '2026-09-16'}
+  - {language: ruby, registry: rubygems, name: sentry-ruby, url: "https://rubygems.org/gems/sentry-ruby", install: "gem install sentry-ruby", official: true, version: "7.0.0", published: '2026-09-01'}
+  - {language: php, registry: packagist, name: "sentry/sentry", url: "https://packagist.org/packages/sentry/sentry", install: "composer require sentry/sentry", official: true, version: "4.31.0", published: '2026-08-27'}
+  - {language: java, registry: maven-central, name: "io.sentry:sentry", url: "https://central.sonatype.com/artifact/io.sentry/sentry", install: "implementation 'io.sentry:sentry:8.57.0'", official: true, version: "8.57.0", published: '2026-09-16'}
+  - {language: dotnet, registry: nuget, name: Sentry, url: "https://www.nuget.org/packages/Sentry", install: "dotnet add package Sentry", official: true, version: "6.11.0", published: '2026-09-11'}
+  - {language: go, registry: pkg.go.dev, name: "github.com/getsentry/sentry-go", url: "https://pkg.go.dev/github.com/getsentry/sentry-go", install: "go get github.com/getsentry/sentry-go", official: true, version: "v0.49.0", published: '2026-08-26'}
+  - {language: rust, registry: crates.io, name: sentry, url: "https://crates.io/crates/sentry", install: "cargo add sentry", official: true, version: "0.49.2", published: '2026-08-26'}
+  - {language: elixir, registry: hex, name: sentry, url: "https://hex.pm/packages/sentry", install: "{:sentry, \"~> 13.0\"}", official: true, version: "13.5.1", published: '2026-09-02'}
+counts:
+  packages: 15
+  official: 15
+  with_version: 15
+  registries: 10

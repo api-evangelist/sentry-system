@@ -1,12 +1,12 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Sentry Alerts Monitors API
-  description: The Alerts API provides endpoints for managing alert rules in Sentry, including creating, retrieving, updating, and deleting metric alert rules and issue alert rules, as well as managing spike protection notification actions.
+  title: Sentry System Monitors API
   version: 0.0.1
   contact:
     name: Sentry Support
     url: https://sentry.io/support/
     email: support@sentry.io
+  description: 'Operations tagged Monitors across 2 of this provider''s published API definitions: sentry-crons-openapi.yml, sentry-monitors-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://sentry.io/api/0
   description: Sentry Production API
@@ -172,6 +172,9 @@ paths:
           description: Unauthorized.
         '403':
           description: Forbidden.
+    servers:
+    - url: https://sentry.io/api/0
+      description: Sentry Production API
   /organizations/{organization_id_or_slug}/monitors/{monitor_id_or_slug}/:
     get:
       operationId: retrieveMonitor
@@ -264,6 +267,9 @@ paths:
           description: Unauthorized.
         '404':
           description: Monitor not found.
+    servers:
+    - url: https://sentry.io/api/0
+      description: Sentry Production API
   /projects/{organization_id_or_slug}/{project_id_or_slug}/monitors/{monitor_id_or_slug}/:
     get:
       operationId: retrieveMonitorForProject
@@ -342,6 +348,9 @@ paths:
           description: Unauthorized.
         '404':
           description: Monitor not found.
+    servers:
+    - url: https://sentry.io/api/0
+      description: Sentry Production API
   /projects/{organization_id_or_slug}/{project_id_or_slug}/uptime-monitors/:
     post:
       operationId: createProjectMonitor
@@ -383,6 +392,9 @@ paths:
           description: Bad request.
         '401':
           description: Unauthorized.
+    servers:
+    - url: https://sentry.io/api/0
+      description: Sentry Production API
   /organizations/{organization_id_or_slug}/uptime-monitors/{monitor_id}/:
     get:
       operationId: fetchMonitor
@@ -456,13 +468,16 @@ paths:
           description: Unauthorized.
         '404':
           description: Monitor not found.
+    servers:
+    - url: https://sentry.io/api/0
+      description: Sentry Production API
 components:
   parameters:
-    MonitorId:
-      name: monitor_id
+    MonitorIdOrSlug:
+      name: monitor_id_or_slug
       in: path
       required: true
-      description: The ID of the monitor.
+      description: The ID or slug of the monitor.
       schema:
         type: string
     ProjectIdOrSlug:
@@ -479,37 +494,14 @@ components:
       description: The ID or slug of the organization.
       schema:
         type: string
-    MonitorIdOrSlug:
-      name: monitor_id_or_slug
+    MonitorId:
+      name: monitor_id
       in: path
       required: true
-      description: The ID or slug of the monitor.
+      description: The ID of the monitor.
       schema:
         type: string
   schemas:
-    UptimeMonitor:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        url:
-          type: string
-          format: uri
-        status:
-          type: string
-        intervalSeconds:
-          type: integer
-        projectSlug:
-          type: string
-        dateCreated:
-          type: string
-          format: date-time
-      required:
-      - id
-      - name
-      - url
     Monitor:
       type: object
       properties:
@@ -576,8 +568,34 @@ components:
       - name
       - type
       - config
+    UptimeMonitor:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        url:
+          type: string
+          format: uri
+        status:
+          type: string
+        intervalSeconds:
+          type: integer
+        projectSlug:
+          type: string
+        dateCreated:
+          type: string
+          format: date-time
+      required:
+      - id
+      - name
+      - url
   securitySchemes:
     BearerAuth:
       type: http
       scheme: bearer
       description: Authentication token for the Sentry API.
+x-refined-from:
+- sentry-crons-openapi.yml
+- sentry-monitors-openapi.yml

@@ -1,0 +1,45 @@
+generated: '2026-09-18'
+method: probed
+source: https://sandbox.sentry.io/
+provider: Sentry
+providerId: sentry-system
+shape: hosted-product-console
+description: >-
+  Sentry runs a fully hosted, no-signup product sandbox at https://sandbox.sentry.io/ — a live Sentry
+  UI pre-populated with a running demo organization (Issues feed, Explore, Dashboards, Insights,
+  Settings) built from real demo applications. It is linked directly from sentry.io's own navigation
+  ("Sandbox" under Resources), which is what establishes it as first-party rather than a look-alike.
+console:
+  url: https://sandbox.sentry.io/
+  signup_required: false
+  login_required: false
+  status: 200
+  checked: '2026-09-18'
+  surfaces: [Issues, Explore, Dashboards, Insights, Settings, User Feedback, Alerts]
+  linked_from: https://sentry.io/welcome/
+  note: >-
+    Probed anonymously on 2026-09-18 and returned a populated application shell, not a marketing page
+    or a login wall.
+api_sandbox:
+  available: false
+  note: >-
+    HONEST GAP, and it is the interesting finding here. The sandbox is a UI console, not an API test
+    mode. Sentry publishes NO test-vs-live key prefixes, no test DSN, no fixture/trigger tooling and no
+    time-simulation facility for the Web API — there is no documented way to exercise a write endpoint
+    without touching a real organization. An agent that wants a safe target must create its own throwaway
+    Sentry project on the free Developer plan and point at that. This is the gap behind the `dry_run_mode`
+    miss in kin/checks: nothing in the contract or the docs offers a rehearsal.
+  probes:
+  - {url: 'https://docs.sentry.io/product/sandbox/', status: 404}
+  - {url: 'https://sentry.io/_/sandbox/', status: 404}
+  - {url: 'https://sandbox.sentry.io/', status: 200, verdict: hosted UI console, no API credentials issued}
+adjacent:
+  free_tier:
+    name: Developer
+    url: https://sentry.io/pricing/
+    note: Free for one user; the closest thing to a disposable API test target Sentry offers.
+  self_hosted:
+    url: https://docs.sentry.io/server/
+    note: >-
+      A self-hosted Sentry install is the only way to get a throwaway environment that serves the same
+      Web API surface, and it is a real one — the server is open source.

@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Sentry Alerts Events API
-  description: The Alerts API provides endpoints for managing alert rules in Sentry, including creating, retrieving, updating, and deleting metric alert rules and issue alert rules, as well as managing spike protection notification actions.
+  title: Sentry and Issues Events API
+  description: The Events and Issues API provides endpoints for managing error events and issues in Sentry, including listing, retrieving, updating, and bulk-mutating issues and their associated events, tags, and hashes.
   version: 0.0.1
   contact:
     name: Sentry Support
@@ -171,13 +171,6 @@ paths:
           description: Event not found.
 components:
   parameters:
-    OrganizationIdOrSlug:
-      name: organization_id_or_slug
-      in: path
-      required: true
-      description: The ID or slug of the organization.
-      schema:
-        type: string
     ProjectIdOrSlug:
       name: project_id_or_slug
       in: path
@@ -190,6 +183,13 @@ components:
       in: path
       required: true
       description: The ID of the issue.
+      schema:
+        type: string
+    OrganizationIdOrSlug:
+      name: organization_id_or_slug
+      in: path
+      required: true
+      description: The ID or slug of the organization.
       schema:
         type: string
   schemas:

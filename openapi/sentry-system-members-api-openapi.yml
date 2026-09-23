@@ -1,12 +1,12 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Sentry Alerts Members API
-  description: The Alerts API provides endpoints for managing alert rules in Sentry, including creating, retrieving, updating, and deleting metric alert rules and issue alert rules, as well as managing spike protection notification actions.
+  title: Sentry System Members API
   version: 0.0.1
   contact:
     name: Sentry Support
     url: https://sentry.io/support/
     email: support@sentry.io
+  description: 'Operations tagged Members across 2 of this provider''s published API definitions: sentry-organizations-openapi.yml, sentry-teams-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://sentry.io/api/0
   description: Sentry Production API
@@ -86,6 +86,9 @@ paths:
           description: Unauthorized.
         '403':
           description: Forbidden.
+    servers:
+    - url: https://sentry.io/api/0
+      description: Sentry Production API
   /organizations/{organization_id_or_slug}/members/{member_id}/:
     get:
       operationId: retrieveOrganizationMember
@@ -162,6 +165,9 @@ paths:
           description: Forbidden.
         '404':
           description: Member not found.
+    servers:
+    - url: https://sentry.io/api/0
+      description: Sentry Production API
   /teams/{organization_id_or_slug}/{team_id_or_slug}/members/:
     get:
       operationId: listTeamMembers
@@ -190,6 +196,9 @@ paths:
           description: Unauthorized.
         '404':
           description: Team not found.
+    servers:
+    - url: https://sentry.io/api/0
+      description: Sentry Production API
   /organizations/{organization_id_or_slug}/members/{member_id}/teams/{team_id_or_slug}/:
     post:
       operationId: addMemberToTeam
@@ -258,6 +267,9 @@ paths:
           description: Unauthorized.
         '403':
           description: Forbidden.
+    servers:
+    - url: https://sentry.io/api/0
+      description: Sentry Production API
   /organizations/{organization_id_or_slug}/users/{user_id}/teams/:
     get:
       operationId: listUserTeams
@@ -286,22 +298,11 @@ paths:
           description: Unauthorized.
         '404':
           description: User not found.
+    servers:
+    - url: https://sentry.io/api/0
+      description: Sentry Production API
 components:
   parameters:
-    MemberId_2:
-      name: member_id
-      in: path
-      required: true
-      description: The ID of the organization member.
-      schema:
-        type: string
-    TeamIdOrSlug:
-      name: team_id_or_slug
-      in: path
-      required: true
-      description: The ID or slug of the team.
-      schema:
-        type: string
     MemberId:
       name: member_id
       in: path
@@ -316,7 +317,63 @@ components:
       description: The ID or slug of the organization.
       schema:
         type: string
+    TeamIdOrSlug:
+      name: team_id_or_slug
+      in: path
+      required: true
+      description: The ID or slug of the team.
+      schema:
+        type: string
+    MemberId_2:
+      name: member_id
+      in: path
+      required: true
+      description: The ID of the organization member.
+      schema:
+        type: string
   schemas:
+    OrganizationMember:
+      type: object
+      properties:
+        id:
+          type: string
+        email:
+          type: string
+          format: email
+        name:
+          type: string
+        role:
+          type: string
+        roleName:
+          type: string
+        pending:
+          type: boolean
+        expired:
+          type: boolean
+        dateCreated:
+          type: string
+          format: date-time
+        user:
+          type: object
+          nullable: true
+          properties:
+            id:
+              type: string
+            name:
+              type: string
+            username:
+              type: string
+            email:
+              type: string
+              format: email
+        teams:
+          type: array
+          items:
+            type: string
+      required:
+      - id
+      - email
+      - role
     Team:
       type: object
       properties:
@@ -370,50 +427,11 @@ components:
       required:
       - id
       - email
-    OrganizationMember:
-      type: object
-      properties:
-        id:
-          type: string
-        email:
-          type: string
-          format: email
-        name:
-          type: string
-        role:
-          type: string
-        roleName:
-          type: string
-        pending:
-          type: boolean
-        expired:
-          type: boolean
-        dateCreated:
-          type: string
-          format: date-time
-        user:
-          type: object
-          nullable: true
-          properties:
-            id:
-              type: string
-            name:
-              type: string
-            username:
-              type: string
-            email:
-              type: string
-              format: email
-        teams:
-          type: array
-          items:
-            type: string
-      required:
-      - id
-      - email
-      - role
   securitySchemes:
     BearerAuth:
       type: http
       scheme: bearer
       description: Authentication token for the Sentry API.
+x-refined-from:
+- sentry-organizations-openapi.yml
+- sentry-teams-openapi.yml

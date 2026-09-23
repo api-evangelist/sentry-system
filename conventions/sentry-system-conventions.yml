@@ -1,4 +1,4 @@
-generated: '2026-06-20'
+generated: '2026-09-18'
 method: searched
 source: https://docs.sentry.io/api/ + openapi/*.yml
 authentication:
@@ -16,7 +16,21 @@ pagination:
   docs: https://docs.sentry.io/api/pagination/
 idempotency:
   supported: false
-  note: No idempotency-key header is documented; writes are not declared idempotent beyond HTTP method semantics.
+  coverage: none          # machine verdict, roadmap#243 — full | partial | none
+  mechanism: null
+  header: null
+  scope: []
+  docs: null
+  checked: '2026-09-18'
+  note: >-
+    No Idempotency-Key header (or any replay-protection mechanism) is documented anywhere in
+    docs.sentry.io/api/, and none of the 43 OpenAPI documents in this repo declares one as a parameter.
+    Replay safety rests entirely on HTTP method semantics: PUT/DELETE operations such as updateIssue and
+    deleteProject are naturally idempotent for a repeated identical request, while every POST
+    (createProject, createOrganizationRelease, createMonitor, addOrganizationMember, startSeerIssueFix)
+    can duplicate on a retried timeout. The mitigation an agent actually has is read-before-retry — GET
+    the resource it intended to create before re-POSTing. Coverage is `none`, not `partial`: method
+    semantics are not a mechanism the provider published.
 rate_limiting:
   signaled_via: [X-Sentry-Rate-Limit-Limit, X-Sentry-Rate-Limit-Remaining, X-Sentry-Rate-Limit-Reset, Retry-After]
   status: 429
@@ -37,3 +51,116 @@ identifiers:
 webhooks:
   supported: true
   docs: https://docs.sentry.io/organization/integrations/integration-platform/webhooks/
+
+dry_run:
+  supported: false
+  coverage: none
+  checked: '2026-09-18'
+  note: >-
+    No preview, validate-only, or dry-run parameter is documented on any write operation, and there is
+    no API test mode — the hosted sandbox at sandbox.sentry.io is a UI console that issues no API
+    credentials (see sandbox/sentry-system-sandbox.yml). An agent cannot rehearse a Sentry write; it can
+    only perform it, or perform it against its own throwaway project or a self-hosted install.
+
+reversibility:
+  grade: documented          # documented (a reversal path exists) | verified (path + a stated window) | na
+  coverage: partial
+  window_published: false
+  checked: '2026-09-18'
+  source: >-
+    openapi/*.yml operation descriptions (Sentry's own published text) +
+    https://docs.sentry.io/organization/integrations/integration-platform/webhooks/issues/
+  summary: >-
+    Most Sentry writes have a reversal operation, and NOT ONE of them carries a published window. Sentry
+    states no restore period, no soft-delete retention and no grace interval for any destructive
+    operation, so an agent can tell whether an action can be undone but never for how long. One
+    operation goes further and declares itself one-way in its own description: deleteProject reads
+    "Schedules a project for deletion. This action is irreversible." That is a rare and genuinely useful
+    thing for a contract to say, and it is why this grades `documented` rather than `verified` — the
+    reversal paths are real, the windows are absent.
+  write_surfaces:
+  - surface: issue state
+    forward: {operationId: updateIssue, method: PUT, path: '/issues/{issue_id}/'}
+    reversal: {operationId: updateIssue, how: 'PUT the prior status back, e.g. {"status": "unresolved"}'}
+    window: null
+    reversible: true
+    note: >-
+      The fully reversible one. Sentry's issue webhook documents the state machine both directions —
+      created, resolved, assigned, archived, unresolved — and updateIssue modifies only the attributes
+      submitted, so a status flip is a clean undo.
+  - surface: issue deletion
+    forward: {operationId: removeIssue, method: DELETE, path: '/issues/{issue_id}/'}
+    reversal: null
+    window: null
+    reversible: false
+    note: 'No restore operation. Distinct from resolving — an agent must never use removeIssue as an undo for updateIssue.'
+  - surface: project
+    forward: {operationId: createProject, method: POST, path: '/teams/{organization_id_or_slug}/{team_id_or_slug}/projects/'}
+    reversal: {operationId: deleteProject, method: DELETE, path: '/projects/{organization_id_or_slug}/{project_id_or_slug}/'}
+    window: null
+    reversible: false
+    declared_irreversible: true
+    evidence: 'deleteProject description: "Schedules a project for deletion. This action is irreversible."'
+    note: >-
+      deleteProject reverses a create, but is itself one-way and says so. "Schedules" implies a queue,
+      not a grace period an agent may rely on — no restore endpoint exists.
+  - surface: team
+    forward: {operationId: createTeam, method: POST, path: '/organizations/{organization_id_or_slug}/teams/'}
+    reversal: {operationId: deleteTeam, method: DELETE, path: '/teams/{organization_id_or_slug}/{team_id_or_slug}/'}
+    window: null
+    reversible: false
+    note: '"Schedules a team for deletion" — scheduled, but with no documented window and no restore.'
+  - surface: team membership
+    forward: {operationId: addMemberToTeam, method: POST, path: '/organizations/{organization_id_or_slug}/members/{member_id}/teams/{team_id_or_slug}/'}
+    reversal: {operationId: removeMemberFromTeam, method: DELETE, path: '/organizations/{organization_id_or_slug}/members/{member_id}/teams/{team_id_or_slug}/'}
+    window: null
+    reversible: true
+  - surface: organization membership
+    forward: {operationId: addOrganizationMember, method: POST, path: '/organizations/{organization_id_or_slug}/members/'}
+    reversal: {operationId: deleteOrganizationMember, method: DELETE, path: '/organizations/{organization_id_or_slug}/members/{member_id}/'}
+    window: null
+    reversible: true
+    note: 'Reversible in the sense that the grant is removed; a re-invite is a new invitation, not a restore.'
+  - surface: project team access
+    forward: {operationId: addTeamToProject, method: POST, path: '/projects/{organization_id_or_slug}/{project_id_or_slug}/teams/{team_id_or_slug}/'}
+    reversal: {operationId: removeTeamFromProject, method: DELETE, path: '/projects/{organization_id_or_slug}/{project_id_or_slug}/teams/{team_id_or_slug}/'}
+    window: null
+    reversible: true
+  - surface: release
+    forward: {operationId: createOrganizationRelease, method: POST, path: '/organizations/{organization_id_or_slug}/releases/'}
+    reversal: {operationId: deleteOrganizationRelease, method: DELETE, path: '/organizations/{organization_id_or_slug}/releases/{version}/'}
+    window: null
+    reversible: true
+  - surface: deploy
+    forward: {operationId: createReleaseDeploy, method: POST, path: '/organizations/{organization_id_or_slug}/releases/{version}/deploys/'}
+    reversal: null
+    window: null
+    reversible: false
+    note: 'No delete operation for a deploy exists in the published contract — a recorded deploy is permanent.'
+  - surface: cron monitor
+    forward: {operationId: createMonitor, method: POST, path: '/organizations/{organization_id_or_slug}/monitors/'}
+    reversal: {operationId: deleteMonitor, method: DELETE, path: '/organizations/{organization_id_or_slug}/monitors/{monitor_id_or_slug}/'}
+    window: null
+    reversible: true
+    note: 'Supports selective environment deletion via the `environment` query parameter.'
+  - surface: client key (DSN)
+    forward: {operationId: createProjectClientKey, method: POST, path: '/projects/{organization_id_or_slug}/{project_id_or_slug}/keys/'}
+    reversal: {operationId: deleteProjectClientKey, method: DELETE, path: '/projects/{organization_id_or_slug}/{project_id_or_slug}/keys/{key_id}/'}
+    window: null
+    reversible: true
+  - surface: Seer autofix run
+    forward: {operationId: startSeerIssueFix, method: POST, path: '/issues/{issue_id}/seer/autofix/'}
+    reversal: null
+    window: null
+    reversible: false
+    note: >-
+      The consequential one. A Seer coding run can open a pull request in an external code host
+      (seer.pr_created carries data.details.pull_requests[] with repo_name and url). Nothing in the
+      Sentry API reverses a write that landed outside Sentry.
+  cross_links:
+    errors: errors/sentry-system-problem-types.yml
+    lifecycle: lifecycle/sentry-system-lifecycle.yml
+    authentication: authentication/sentry-system-authentication.yml
+    rate_limits: rate-limits/sentry-system-rate-limits.yml
+    webhooks: asyncapi/sentry-system-webhooks.yml
+    sandbox: sandbox/sentry-system-sandbox.yml

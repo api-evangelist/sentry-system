@@ -1,13 +1,58 @@
-generated: '2026-06-20'
-method: derived
-source: openapi/*.yml + https://docs.sentry.io/api/
+generated: '2026-09-18'
+method: searched
+source: >-
+  openapi/*.yml + https://docs.sentry.io/api/ + the well-known documents saved under well-known/.
+  2026-09-18: re-probed sentry.io and mcp.sentry.dev; added the RFC 7591 / RFC 9728 declarations the
+  MCP host serves, and corrected the SCIM entry (its id and its stale spec filename).
 standards:
   - {id: oauth2, conforms: true, evidence: "RFC 8414 authorization-server metadata at sentry.io/.well-known/oauth-authorization-server (authorization_code + refresh_token, 25 scopes)"}
   - {id: oauth2-pkce, conforms: true, evidence: "code_challenge_methods_supported: [S256]"}
   - {id: oidc, conforms: true, evidence: "openid/email/profile scopes advertised; openid-configuration endpoint present (org-scoped redirect)"}
   - {id: rfc9116-security-txt, conforms: true, evidence: "signed /.well-known/security.txt with Contact/Policy/Encryption"}
-  - {id: rfc9727-api-catalog, conforms: true, evidence: "/.well-known/api-catalog linkset advertises the REST API and MCP server"}
-  - {id: scim2, conforms: true, evidence: "openapi/sentry-scim-openapi.yml exposes SCIM 2.0 Users/Groups provisioning (Business plan + SAML2)"}
+  - {id: rfc9727-api-catalog, conforms: true, evidence: "/.well-known/api-catalog linkset advertises the REST API and MCP server; re-probed 2026-09-18, HTTP 200 application/linkset+json"}
+  - id: rfc9728-protected-resource-metadata
+    conforms: true
+    evidence: >-
+      https://mcp.sentry.dev/.well-known/oauth-protected-resource/mcp returns HTTP 200 with
+      resource=https://mcp.sentry.dev/mcp, authorization_servers=[https://mcp.sentry.dev],
+      scopes_supported=[org:read, project:write, team:write, event:write], bearer_methods_supported=[header].
+      Saved verbatim at well-known/sentry-system-mcp-oauth-protected-resource.json. Note the bare
+      /.well-known/oauth-protected-resource path 404s — only the resource-suffixed form is served.
+  - id: rfc7591-dynamic-client-registration
+    conforms: true
+    evidence: >-
+      https://mcp.sentry.dev/.well-known/oauth-authorization-server declares
+      registration_endpoint=https://mcp.sentry.dev/oauth/register (and client_id_metadata_document_supported),
+      so an agent can register itself against the MCP server with no portal form. Saved verbatim at
+      well-known/sentry-system-mcp-oauth-authorization-server.json. The PRIMARY host's document
+      (sentry.io/.well-known/oauth-authorization-server) carries NO registration_endpoint — dynamic
+      registration exists on the MCP surface only.
+  - id: mcp
+    conforms: true
+    evidence: >-
+      First-party remote MCP server at https://mcp.sentry.dev/mcp (OAuth-gated; tools/list returned
+      HTTP 401 unauthenticated on 2026-09-18) plus a local-stdio build published to npm as
+      @sentry/mcp-server. See mcp/sentry-system-mcp.yml.
+  - id: scim
+    conforms: true
+    version: '2.0'
+    domain_standard: true
+    evidence: >-
+      SCIM 2.0 (RFC 7643/7644) is declared by the contract, not merely named in prose:
+      openapi/sentry-system-scim-members-api-openapi.yml serves /organizations/{org}/scim/v2/Users
+      and openapi/sentry-system-scim-teams-api-openapi.yml serves .../scim/v2/Groups, the provisioning
+      request body REQUIRES the SCIM `schemas` array, listing is SCIM-shaped (1-indexed startIndex,
+      count, a `filter` expression such as `userName eq "..."`, and a ScimListResponse envelope), and
+      Sentry's own reference documents the schema URN value
+      urn:ietf:params:scim:schemas:core:2.0:User.
+    docs: https://docs.sentry.io/api/scim/
+    urn_evidence: https://docs.sentry.io/api/scim/provision-a-new-organization-member/
+    availability: Business plan with SAML2 enabled.
+    id_note: >-
+      Recorded as `scim`, NOT `scim2`. 0-working/derive-domain-standards.py maps conformance ids
+      through a fixed CONFORMANCE_IDS vocabulary that contains `scim` and not `scim2`, so the prior
+      id made a true, contract-backed declaration invisible to the 4-point
+      domain_standard_conformance check. 375 providers in all/* still carry `id: scim2`.
   - {id: cursor-pagination, conforms: true, evidence: "Link-header cursor pagination documented and present across specs (docs.sentry.io/api/pagination/)"}
   - {id: rfc9457-problem-details, conforms: false, evidence: "errors use a native {detail} JSON envelope, not application/problem+json"}
   - {id: rfc8594-sunset-header, conforms: false, evidence: "no Sunset/Deprecation header policy documented; no deprecated operations in specs"}

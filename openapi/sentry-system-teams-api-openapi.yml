@@ -1,12 +1,12 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Sentry Alerts Teams API
-  description: The Alerts API provides endpoints for managing alert rules in Sentry, including creating, retrieving, updating, and deleting metric alert rules and issue alert rules, as well as managing spike protection notification actions.
+  title: Sentry System Teams API
   version: 0.0.1
   contact:
     name: Sentry Support
     url: https://sentry.io/support/
     email: support@sentry.io
+  description: 'Operations tagged Teams across 2 of this provider''s published API definitions: sentry-api-openapi.yml, sentry-teams-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://sentry.io/api/0
   description: Sentry Production API
@@ -81,6 +81,9 @@ paths:
           description: Forbidden.
         '409':
           description: A team with this slug already exists.
+    servers:
+    - url: https://sentry.io/api/0
+      description: Sentry Production API
   /teams/{organization_id_or_slug}/{team_id_or_slug}/:
     get:
       operationId: retrieveTeam
@@ -159,6 +162,9 @@ paths:
           description: Forbidden.
         '404':
           description: Team not found.
+    servers:
+    - url: https://sentry.io/api/0
+      description: Sentry Production API
   /teams/{organization_id_or_slug}/{team_id_or_slug}/projects/:
     get:
       operationId: listTeamProjects
@@ -187,6 +193,9 @@ paths:
           description: Unauthorized.
         '404':
           description: Team not found.
+    servers:
+    - url: https://sentry.io/api/0
+      description: Sentry Production API
   /projects/{organization_id_or_slug}/{project_id_or_slug}/teams/:
     get:
       operationId: listProjectTeams
@@ -220,8 +229,42 @@ paths:
           description: Unauthorized.
         '404':
           description: Project not found.
+    servers:
+    - url: https://sentry.io/api/0
+      description: Sentry Production API
 components:
   schemas:
+    Team:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier of the team.
+        slug:
+          type: string
+          description: The URL-friendly slug of the team.
+        name:
+          type: string
+          description: The human-readable name of the team.
+        dateCreated:
+          type: string
+          format: date-time
+        isMember:
+          type: boolean
+        memberCount:
+          type: integer
+        avatar:
+          type: object
+          properties:
+            avatarType:
+              type: string
+            avatarUuid:
+              type: string
+              nullable: true
+      required:
+      - id
+      - slug
+      - name
     Team_2:
       type: object
       properties:
@@ -246,6 +289,25 @@ components:
             avatarUuid:
               type: string
               nullable: true
+      required:
+      - id
+      - slug
+      - name
+    Project:
+      type: object
+      properties:
+        id:
+          type: string
+        slug:
+          type: string
+        name:
+          type: string
+        platform:
+          type: string
+          nullable: true
+        dateCreated:
+          type: string
+          format: date-time
       required:
       - id
       - slug
@@ -291,64 +353,7 @@ components:
       - id
       - slug
       - name
-    Project:
-      type: object
-      properties:
-        id:
-          type: string
-        slug:
-          type: string
-        name:
-          type: string
-        platform:
-          type: string
-          nullable: true
-        dateCreated:
-          type: string
-          format: date-time
-      required:
-      - id
-      - slug
-      - name
-    Team:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The unique identifier of the team.
-        slug:
-          type: string
-          description: The URL-friendly slug of the team.
-        name:
-          type: string
-          description: The human-readable name of the team.
-        dateCreated:
-          type: string
-          format: date-time
-        isMember:
-          type: boolean
-        memberCount:
-          type: integer
-        avatar:
-          type: object
-          properties:
-            avatarType:
-              type: string
-            avatarUuid:
-              type: string
-              nullable: true
-      required:
-      - id
-      - slug
-      - name
   parameters:
-    TeamIdOrSlug:
-      name: team_id_or_slug
-      in: path
-      required: true
-      description: The ID or slug of the team.
-      schema:
-        type: string
     OrganizationIdOrSlug:
       name: organization_id_or_slug
       in: path
@@ -356,8 +361,23 @@ components:
       description: The ID or slug of the organization.
       schema:
         type: string
+    TeamIdOrSlug:
+      name: team_id_or_slug
+      in: path
+      required: true
+      description: The ID or slug of the team.
+      schema:
+        type: string
   securitySchemes:
     BearerAuth:
       type: http
       scheme: bearer
-      description: Authentication token for the Sentry API.
+      description: Authentication token. Create auth tokens in Sentry via Settings > Auth Tokens or using the API.
+    DSN:
+      type: apiKey
+      in: header
+      name: X-Sentry-Auth
+      description: DSN-based authentication for event submission.
+x-refined-from:
+- sentry-api-openapi.yml
+- sentry-teams-openapi.yml

@@ -1,0 +1,118 @@
+generated: '2026-09-18'
+method: derived
+source: >-
+  mcp/sentry-system-mcp.yml (searched tool list) bound to openapi/*.yml operationIds in this repo.
+  The live mcp.sentry.dev/mcp tools/list is auth-gated (POST returned HTTP 401 on 2026-09-18), so the
+  tool set is the published catalog, not a live introspection, and the bindings are by name and
+  semantics rather than by a machine-read inputSchema. Confidence is recorded accordingly.
+provider: Sentry
+providerId: sentry-system
+
+surfaces:
+  openapi:
+    path: openapi/
+    documents: 43
+    operations: 188
+    gated: false
+  mcp:
+    url: https://mcp.sentry.dev/mcp
+    transport: streamable-http
+    gated: true
+    gate: 'OAuth — tools/list returns HTTP 401 unauthenticated; RFC 9728 protected-resource metadata at /.well-known/oauth-protected-resource/mcp'
+    scopes: [org:read, project:write, team:write, event:write]
+    local_alternative: 'npx @sentry/mcp-server (npm @sentry/mcp-server)'
+  graphql:
+    present: false
+
+crosswalk:
+- tool: list_projects
+  category: projects
+  rest: [listOrganizationProjects]
+  binding: one-to-one
+  confidence: high
+- tool: create_project
+  category: projects
+  rest: [createProject, createProjectClientKey]
+  binding: composite
+  confidence: high
+  note: >-
+    The tool is documented as creating a project AND returning its client keys/DSN, which is two REST
+    calls — createProject under a team, then createProjectClientKey (or listProjectClientKeys) on the
+    new project.
+- tool: resolve_short_id
+  category: issues
+  rest: [resolveShortId]
+  binding: one-to-one
+  confidence: high
+  note: 'GET /organizations/{organization_id_or_slug}/shortids/{short_id}/'
+- tool: get_sentry_issue
+  category: issues
+  rest: [retrieveIssue]
+  binding: one-to-one
+  confidence: high
+- tool: get_sentry_event
+  category: events
+  rest: [retrieveIssueEvent]
+  binding: one-to-one
+  confidence: medium
+- tool: list_project_issues
+  category: issues
+  rest: [listOrganizationIssues]
+  binding: one-to-one
+  confidence: medium
+  note: >-
+    Sentry's issue listing is organization-scoped with a project filter; the tool's project scoping maps
+    onto the query parameters of listOrganizationIssues rather than a distinct per-project operation.
+- tool: list_issue_events
+  category: events
+  rest: [listIssueEvents]
+  binding: one-to-one
+  confidence: high
+- tool: list_error_events_in_project
+  category: events
+  rest: [listProjectEvents]
+  binding: one-to-one
+  confidence: high
+- tool: list_organization_replays
+  category: replays
+  rest: [listOrganizationReplays]
+  binding: one-to-one
+  confidence: medium
+- tool: begin_seer_issue_fix
+  category: seer
+  rest: [startSeerIssueFix]
+  binding: one-to-one
+  confidence: high
+  note: retrieveSeerIssueFixState polls the run the tool starts.
+
+mcp_only:
+- tool: search_events
+  reason: >-
+    Natural-language search. The tool requires an LLM provider and translates prose into Sentry's
+    search/Discover query syntax; there is no REST operation that accepts natural language. The nearest
+    REST surface is the Discover/Explore query API, which takes structured query parameters.
+- tool: search_issues
+  reason: >-
+    Same shape as search_events for the issue stream — the natural-language translation step has no REST
+    equivalent; listOrganizationIssues takes an already-formed Sentry search query.
+
+rest_only:
+  note: >-
+    The overwhelming majority of the REST surface has no MCP tool. The server covers read-oriented
+    triage plus two writes (create_project, begin_seer_issue_fix); everything else — alerts, monitors,
+    releases, deploys, dashboards, teams, members, SCIM, integrations, client keys, debug files,
+    service hooks — is REST-only.
+  uncovered_families: [alerts, issue-alerts, metric-alerts, monitors, check-ins, releases, deploys, dashboards, discover, teams, members, scim-members, scim-teams, integrations, installations, client-keys, debug-files, service-hooks, data-forwarders, environments, filters, repositories, commits, sessions, spike-protection, mobile-builds, test-results, tokens, user-feedback, external-issues, external-teams, external-users, recording-segments, custom-integrations, interactions, explore]
+  approx_operations_without_a_tool: 178
+
+coverage:
+  mcp_tools_published: 12
+  tools_bound_to_rest: 10
+  tools_mcp_only: 2
+  rest_operations_total: 188
+  rest_operations_with_a_tool: 11
+  rest_coverage_pct: 5.9
+  caveat: >-
+    Sentry's docs describe roughly 16 tools on the live server; this crosswalk covers the 12 in the
+    searched catalog. Re-derive from an authenticated tools/list to get exact inputSchemas and the full
+    tool count.

@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Sentry Alerts Metric Alerts API
   description: The Alerts API provides endpoints for managing alert rules in Sentry, including creating, retrieving, updating, and deleting metric alert rules and issue alert rules, as well as managing spike protection notification actions.
@@ -198,13 +198,6 @@ paths:
           description: Alert rule not found.
 components:
   parameters:
-    OrganizationIdOrSlug:
-      name: organization_id_or_slug
-      in: path
-      required: true
-      description: The ID or slug of the organization.
-      schema:
-        type: string
     AlertRuleId:
       name: alert_rule_id
       in: path
@@ -212,6 +205,13 @@ components:
       description: The ID of the metric alert rule.
       schema:
         type: integer
+    OrganizationIdOrSlug:
+      name: organization_id_or_slug
+      in: path
+      required: true
+      description: The ID or slug of the organization.
+      schema:
+        type: string
   schemas:
     MetricAlertRule:
       type: object

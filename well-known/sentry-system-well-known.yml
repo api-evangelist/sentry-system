@@ -1,21 +1,73 @@
-generated: '2026-06-20'
-method: searched
+generated: '2026-09-18'
+method: probed
 host: https://sentry.io
-documents:
-  - path: /.well-known/security.txt          # RFC 9116
-    status: 200
-    file: sentry-system-security.txt
-  - path: /.well-known/oauth-authorization-server  # RFC 8414
-    status: 200
-    file: sentry-system-oauth-authorization-server.json
-  - path: /.well-known/api-catalog             # RFC 9727 linkset (points at /api/0/ and mcp.sentry.dev/mcp)
-    status: 200
-    file: sentry-system-api-catalog.json
-  - path: /.well-known/openid-configuration    # redirects to /auth/login/.well-known/ (302, org-scoped)
-    status: 302
-  - path: /.well-known/ai-plugin.json
-    status: 301
 notes: >-
   Sentry exposes a public RFC 8414 OAuth 2.0 authorization-server document declaring PKCE (S256),
   authorization_code + refresh_token grants, and 25 scopes. The api-catalog linkset advertises both the
   REST API (https://sentry.io/api/0/) and the remote MCP server (https://mcp.sentry.dev/mcp).
+  2026-09-18 re-probe added the MCP host mcp.sentry.dev, which serves its OWN RFC 8414
+  authorization-server metadata (with a registration_endpoint — RFC 7591 dynamic client
+  registration) and an RFC 9728 protected-resource document at the resource-suffixed path
+  /.well-known/oauth-protected-resource/mcp. The bare /.well-known/oauth-protected-resource path 404s;
+  only the suffixed form is served. docs.sentry.io serves no /.well-known documents (its 404s return
+  the docs SPA shell, not a document).
+hosts:
+- host: https://sentry.io
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    file: sentry-system-security.txt
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    file: sentry-system-oauth-authorization-server.json
+  - path: /.well-known/api-catalog
+    status: 200
+    file: sentry-system-api-catalog.json
+  - path: /.well-known/openid-configuration
+    status: 302
+  - path: /.well-known/ai-plugin.json
+    status: 301
+  - path: /.well-known/agent-card.json
+    status: 200
+    note: >-
+      NOT a document. The marketing SPA answers 200 with an HTML shell for every /.well-known/* path
+      it does not serve; body begins <!DOCTYPE html>. Recorded as a miss, no AgentCard pointer emitted.
+  - path: /.well-known/agent.json
+    status: 200
+    note: Same SPA catch-all HTML shell as agent-card.json. Not a document.
+- host: https://mcp.sentry.dev
+  documents:
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    file: sentry-system-mcp-oauth-authorization-server.json
+  - path: /.well-known/oauth-protected-resource/mcp
+    status: 200
+    file: sentry-system-mcp-oauth-protected-resource.json
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+- host: https://docs.sentry.io
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+x-shape-fix:
+  converted: '2026-08-20'
+  from: documents
+  note: >-
+    Rewritten into hosts[] -> documents[], the only shape well_known_docs() in score.rb reads. A served
+    .well-known surface recorded in any other shape scores as absent.

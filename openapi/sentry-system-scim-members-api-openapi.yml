@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Sentry Alerts SCIM Members API
-  description: The Alerts API provides endpoints for managing alert rules in Sentry, including creating, retrieving, updating, and deleting metric alert rules and issue alert rules, as well as managing spike protection notification actions.
+  title: Sentry SCIM SCIM Members API
+  description: The SCIM API provides endpoints for federated identity management in Sentry, enabling automated provisioning and deprovisioning of organization members and teams using the System for Cross-Domain Identity Management standard. Requires a Business Plan with SAML2 enabled.
   version: 0.0.1
   contact:
     name: Sentry Support
@@ -197,13 +197,6 @@ paths:
           description: User not found.
 components:
   parameters:
-    OrganizationIdOrSlug:
-      name: organization_id_or_slug
-      in: path
-      required: true
-      description: The ID or slug of the organization.
-      schema:
-        type: string
     ScimUserId:
       name: scim_user_id
       in: path
@@ -211,28 +204,14 @@ components:
       description: The SCIM user ID.
       schema:
         type: string
+    OrganizationIdOrSlug:
+      name: organization_id_or_slug
+      in: path
+      required: true
+      description: The ID or slug of the organization.
+      schema:
+        type: string
   schemas:
-    ScimListResponse:
-      type: object
-      properties:
-        schemas:
-          type: array
-          items:
-            type: string
-        totalResults:
-          type: integer
-        startIndex:
-          type: integer
-        itemsPerPage:
-          type: integer
-        Resources:
-          type: array
-          items:
-            type: object
-      required:
-      - schemas
-      - totalResults
-      - Resources
     ScimUser:
       type: object
       properties:
@@ -273,8 +252,29 @@ components:
       - id
       - userName
       - active
+    ScimListResponse:
+      type: object
+      properties:
+        schemas:
+          type: array
+          items:
+            type: string
+        totalResults:
+          type: integer
+        startIndex:
+          type: integer
+        itemsPerPage:
+          type: integer
+        Resources:
+          type: array
+          items:
+            type: object
+      required:
+      - schemas
+      - totalResults
+      - Resources
   securitySchemes:
     BearerAuth:
       type: http
       scheme: bearer
-      description: Authentication token for the Sentry API.
+      description: Bearer token authentication. Sentry SaaS customers must be on a Business Plan with SAML2 enabled.

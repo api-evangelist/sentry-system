@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Sentry Alerts Filters API
-  description: The Alerts API provides endpoints for managing alert rules in Sentry, including creating, retrieving, updating, and deleting metric alert rules and issue alert rules, as well as managing spike protection notification actions.
+  title: Sentry Projects Filters API
+  description: The Projects API provides endpoints for managing Sentry projects, including creating, retrieving, updating, and deleting projects, as well as managing client keys, debug files, service hooks, filters, and user feedback.
   version: 0.0.1
   contact:
     name: Sentry Support
@@ -80,18 +80,18 @@ paths:
           description: Forbidden.
 components:
   parameters:
-    OrganizationIdOrSlug:
-      name: organization_id_or_slug
-      in: path
-      required: true
-      description: The ID or slug of the organization.
-      schema:
-        type: string
     ProjectIdOrSlug:
       name: project_id_or_slug
       in: path
       required: true
       description: The ID or slug of the project.
+      schema:
+        type: string
+    OrganizationIdOrSlug:
+      name: organization_id_or_slug
+      in: path
+      required: true
+      description: The ID or slug of the organization.
       schema:
         type: string
   securitySchemes:

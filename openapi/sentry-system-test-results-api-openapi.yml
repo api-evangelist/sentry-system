@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Sentry Alerts Test Results API
-  description: The Alerts API provides endpoints for managing alert rules in Sentry, including creating, retrieving, updating, and deleting metric alert rules and issue alert rules, as well as managing spike protection notification actions.
+  title: Sentry Prevent Test Results API
+  description: The Prevent API provides endpoints for managing repository integrations and test results in Sentry, including syncing repositories, managing branches, generating upload tokens, and retrieving test result metrics and test suites.
   version: 0.0.1
   contact:
     name: Sentry Support
@@ -19,7 +19,7 @@ paths:
   /organizations/{organization_id_or_slug}/prevent/test-results/:
     get:
       operationId: listTestResults
-      summary: Sentry Retrieve paginated list of test results for repository, owner, and organization
+      summary: Sentry Retrieve paginated list of test results for repository, owner, and…
       description: Returns paginated test results for the organization.
       tags:
       - Test Results
@@ -49,7 +49,7 @@ paths:
   /organizations/{organization_id_or_slug}/prevent/test-results/metrics/:
     get:
       operationId: retrieveTestResultMetrics
-      summary: Sentry Retrieve aggregated test result metrics for repository, owner, and organization
+      summary: Sentry Retrieve aggregated test result metrics for repository, owner, and…
       description: Returns aggregated test result metrics.
       tags:
       - Test Results
@@ -124,14 +124,6 @@ paths:
         '401':
           description: Unauthorized.
 components:
-  parameters:
-    OrganizationIdOrSlug:
-      name: organization_id_or_slug
-      in: path
-      required: true
-      description: The ID or slug of the organization.
-      schema:
-        type: string
   schemas:
     TestResult:
       type: object
@@ -159,6 +151,14 @@ components:
       - id
       - name
       - status
+  parameters:
+    OrganizationIdOrSlug:
+      name: organization_id_or_slug
+      in: path
+      required: true
+      description: The ID or slug of the organization.
+      schema:
+        type: string
   securitySchemes:
     BearerAuth:
       type: http

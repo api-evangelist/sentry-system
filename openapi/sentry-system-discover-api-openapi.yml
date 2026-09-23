@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Sentry Alerts Discover API
-  description: The Alerts API provides endpoints for managing alert rules in Sentry, including creating, retrieving, updating, and deleting metric alert rules and issue alert rules, as well as managing spike protection notification actions.
+  title: Sentry Discover API
+  description: The Discover and Performance API provides endpoints for managing saved queries in Sentry, allowing you to create, list, retrieve, edit, and delete organization-level Discover saved queries for slicing and analyzing error and transaction event data.
   version: 0.0.1
   contact:
     name: Sentry Support
@@ -202,13 +202,6 @@ paths:
           description: Saved query not found.
 components:
   parameters:
-    OrganizationIdOrSlug:
-      name: organization_id_or_slug
-      in: path
-      required: true
-      description: The ID or slug of the organization.
-      schema:
-        type: string
     QueryId:
       name: query_id
       in: path
@@ -216,6 +209,13 @@ components:
       description: The ID of the saved query.
       schema:
         type: integer
+    OrganizationIdOrSlug:
+      name: organization_id_or_slug
+      in: path
+      required: true
+      description: The ID or slug of the organization.
+      schema:
+        type: string
   schemas:
     SavedQuery:
       type: object

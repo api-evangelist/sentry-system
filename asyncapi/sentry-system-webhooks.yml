@@ -1,0 +1,142 @@
+generated: '2026-09-18'
+method: searched
+source: https://docs.sentry.io/organization/integrations/integration-platform/webhooks/
+type: Webhooks
+provider: Sentry
+providerId: sentry-system
+asyncapi_published: false
+asyncapi_probe:
+  note: >-
+    Sentry publishes NO AsyncAPI document. Probed 2026-09-18 — docs.sentry.io/asyncapi.yaml 404,
+    docs.sentry.io/asyncapi.json 404, getsentry/sentry-docs and getsentry/sentry raw asyncapi.yaml 404.
+    sentry.io/asyncapi.yaml answers HTTP 200 but with content-type text/html and a <!DOCTYPE html>
+    body — the marketing SPA catch-all, NOT a spec. A prior round wired
+    `asyncapi/sentry-webhooks-asyncapi.yml` as type AsyncAPI; that file never existed on disk and the
+    pointer has been replaced by this searched webhook catalog (roadmap#376).
+  probes:
+  - {url: 'https://docs.sentry.io/asyncapi.yaml', status: 404}
+  - {url: 'https://docs.sentry.io/asyncapi.json', status: 404}
+  - {url: 'https://sentry.io/asyncapi.yaml', status: 200, content_type: text/html, verdict: spa-shell-not-a-spec}
+  - {url: 'https://raw.githubusercontent.com/getsentry/sentry-docs/master/asyncapi.yaml', status: 404}
+  - {url: 'https://raw.githubusercontent.com/getsentry/sentry/master/asyncapi.yaml', status: 404}
+
+description: >-
+  Sentry's event surface is the Integration Platform webhook system. A public or internal Sentry
+  integration subscribes to one or more resources; Sentry POSTs a JSON payload to the integration's
+  configured webhook URL. There is no polling contract, no streaming endpoint and no message broker —
+  outbound HTTP webhooks are the whole event surface.
+
+delivery:
+  style: outbound-http-webhook
+  method: POST
+  content_type: application/json
+  timeout: 1s
+  timeout_note: Webhooks should respond within 1 second; anything slower is treated as a timeout.
+  subscription: >-
+    Configured per integration in Settings > Developer Settings (internal) or on the public
+    integration's definition. Each resource is subscribed to individually.
+  docs: https://docs.sentry.io/organization/integrations/integration-platform/webhooks/
+
+headers:
+- name: Content-Type
+  value: application/json
+- name: Request-ID
+  description: Unique identifier for the delivery, for tracking and debugging.
+- name: Sentry-Hook-Resource
+  description: Which resource triggered the delivery (see resources[] below).
+- name: Sentry-Hook-Timestamp
+  description: Delivery timestamp.
+- name: Sentry-Hook-Signature
+  description: HMAC-SHA256 of the raw JSON body, keyed with the integration's Client Secret.
+
+security:
+  signature:
+    algorithm: HMAC-SHA256
+    header: Sentry-Hook-Signature
+    key: the integration's Client Secret
+    signed_payload: the JSON-serialized request body
+    verification_docs: https://docs.sentry.io/organization/integrations/integration-platform/webhooks/
+    note: Sentry publishes JavaScript and Python verification snippets on the webhooks page.
+
+envelope:
+  fields:
+  - {name: action, type: string, description: The action that corresponds with the resource in the header.}
+  - {name: installation, type: object, description: 'Object carrying the installation uuid, so a delivery can be mapped to an install.'}
+  - {name: data, type: object, description: Resource-specific payload; shape differs per resource and can be customized via UI components.}
+  - {name: actor, type: object, description: 'Who triggered it — a user, the integration application, or Sentry itself (type user|application).'}
+
+resources:
+- resource: installation
+  name: Installation
+  docs: https://docs.sentry.io/organization/integrations/integration-platform/webhooks/installation/
+  actions: [created, deleted]
+  data_key: installation
+  note: Delivered to public integrations on install and uninstall.
+- resource: event_alert
+  name: Issue Alerts
+  docs: https://docs.sentry.io/organization/integrations/integration-platform/webhooks/issue-alerts/
+  actions: [triggered]
+  data_key: event
+  fields: [data.event.url, data.event.web_url, data.event.issue_url, data.event.issue_id, data.triggered_rule, data.issue_alert.title, data.issue_alert.settings]
+  note: Delivered to integrations exposed as issue-alert actions.
+- resource: metric_alert
+  name: Metric Alerts
+  docs: https://docs.sentry.io/organization/integrations/integration-platform/webhooks/metric-alerts/
+  actions: [critical, warning, resolved]
+  data_key: metric_alert
+  fields: [data.metric_alert.alert_rule, data.metric_alert.alert_rule.triggers, data.description_text, data.description_title, data.web_url]
+- resource: activity_alert
+  name: Activity Alerts
+  docs: https://docs.sentry.io/organization/integrations/integration-platform/webhooks/activity-alerts/
+  actions: [triggered]
+  data_key: activity
+  activity_types: [seer_root_cause_started, seer_root_cause_completed, seer_solution_started, seer_solution_completed, seer_coding_started, seer_coding_completed, seer_pr_created, seer_pr_iteration_started, seer_pr_iteration_completed]
+  fields: [data.issue, data.activity.type, data.activity.details, data.alert.title, data.alert.url, data.alert.web_url]
+- resource: issue
+  name: Issues
+  docs: https://docs.sentry.io/organization/integrations/integration-platform/webhooks/issues/
+  actions: [created, resolved, assigned, archived, unresolved]
+  data_key: issue
+  fields: [data.issue.url, data.issue.web_url, data.issue.project_url, data.issue.status, data.issue.substatus, data.issue.statusDetails]
+  substatuses: [archived_until_escalating, archived_until_condition_met, archived_forever, escalating, ongoing, regressed, new]
+  rest_binding: {operationId: updateIssue, note: 'The same status transitions this webhook reports are the ones updateIssue (PUT /issues/{issue_id}/) performs.'}
+- resource: comment
+  name: Comments
+  docs: https://docs.sentry.io/organization/integrations/integration-platform/webhooks/comments/
+  actions: [created, updated, deleted]
+  fields: [data.comment, data.project_slug, data.comment_id, data.issue_id, data.timestamp]
+- resource: error
+  name: Errors
+  docs: https://docs.sentry.io/organization/integrations/integration-platform/webhooks/errors/
+  actions: [created]
+  data_key: error
+  fields: [data.error.url, data.error.web_url, data.error.issue_url, data.error.user]
+  availability: Business and Enterprise plans only.
+- resource: seer
+  name: Seer
+  docs: https://docs.sentry.io/organization/integrations/integration-platform/webhooks/seer/
+  actions: [root_cause_started, root_cause_completed, solution_started, solution_completed, coding_started, coding_completed, pr_created]
+  event_names: [seer.root_cause_started, seer.root_cause_completed, seer.solution_started, seer.solution_completed, seer.coding_started, seer.coding_completed, seer.pr_created]
+  fields: [data.run_id, data.group_id]
+  rest_binding: {operationId: startSeerIssueFix, note: 'These events track the run started by POST /issues/{issue_id}/seer/autofix/ (startSeerIssueFix); retrieveSeerIssueFixState polls the same state.'}
+- resource: preprod_artifact
+  name: Preprod Artifacts
+  docs: https://docs.sentry.io/organization/integrations/integration-platform/webhooks/preprod-artifacts/
+  actions: [size_analysis_completed, build_distribution_completed]
+  event_names: [preprod_artifact.size_analysis_completed, preprod_artifact.build_distribution_completed]
+  fields: [data.buildId, data.organizationSlug, data.projectSlug, data.platform, data.state, data.appInfo]
+  states: [COMPLETED, FAILED]
+  requires: 'project:read permission or higher; select preprod_artifact as the webhook type on an internal integration.'
+
+counts:
+  resources: 9
+  actions: 30
+
+related:
+  service_hooks:
+    note: >-
+      Separate from the Integration Platform, Sentry's REST API also exposes project-level service hooks
+      (a legacy per-project webhook), captured in the OpenAPI as the Service Hooks API.
+    spec: openapi/sentry-system-service-hooks-api-openapi.yml
+    operations: [listProjectServiceHooks, createProjectServiceHook, retrieveProjectServiceHook, updateProjectServiceHook, deleteProjectServiceHook]
+  docs_index: https://docs.sentry.io/organization/integrations/integration-platform/

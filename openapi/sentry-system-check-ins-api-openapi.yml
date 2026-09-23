@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Sentry Alerts Check-Ins API
-  description: The Alerts API provides endpoints for managing alert rules in Sentry, including creating, retrieving, updating, and deleting metric alert rules and issue alert rules, as well as managing spike protection notification actions.
+  title: Sentry Crons Check Ins API
+  description: The Crons API provides endpoints for managing cron job monitors in Sentry, including creating, retrieving, updating, and deleting monitors, managing monitor environments, and retrieving check-in history for tracked scheduled tasks.
   version: 0.0.1
   contact:
     name: Sentry Support
@@ -13,7 +13,7 @@ servers:
 security:
 - BearerAuth: []
 tags:
-- name: Check-Ins
+- name: Check Ins
   description: View monitor check-in history
 paths:
   /organizations/{organization_id_or_slug}/monitors/{monitor_id_or_slug}/checkins/:
@@ -22,7 +22,7 @@ paths:
       summary: Sentry Retrieve check-ins for a monitor
       description: Returns a list of check-ins for a specific monitor.
       tags:
-      - Check-Ins
+      - Check Ins
       parameters:
       - $ref: '#/components/parameters/OrganizationIdOrSlug'
       - $ref: '#/components/parameters/MonitorIdOrSlug'
@@ -50,7 +50,7 @@ paths:
       summary: Sentry Retrieve check-ins for a monitor by project
       description: Returns a list of check-ins for a monitor scoped to a project.
       tags:
-      - Check-Ins
+      - Check Ins
       parameters:
       - $ref: '#/components/parameters/OrganizationIdOrSlug'
       - $ref: '#/components/parameters/ProjectIdOrSlug'
@@ -74,6 +74,28 @@ paths:
         '404':
           description: Monitor not found.
 components:
+  parameters:
+    MonitorIdOrSlug:
+      name: monitor_id_or_slug
+      in: path
+      required: true
+      description: The ID or slug of the monitor.
+      schema:
+        type: string
+    ProjectIdOrSlug:
+      name: project_id_or_slug
+      in: path
+      required: true
+      description: The ID or slug of the project.
+      schema:
+        type: string
+    OrganizationIdOrSlug:
+      name: organization_id_or_slug
+      in: path
+      required: true
+      description: The ID or slug of the organization.
+      schema:
+        type: string
   schemas:
     CheckIn:
       type: object
@@ -101,28 +123,6 @@ components:
       - id
       - status
       - dateCreated
-  parameters:
-    MonitorIdOrSlug:
-      name: monitor_id_or_slug
-      in: path
-      required: true
-      description: The ID or slug of the monitor.
-      schema:
-        type: string
-    ProjectIdOrSlug:
-      name: project_id_or_slug
-      in: path
-      required: true
-      description: The ID or slug of the project.
-      schema:
-        type: string
-    OrganizationIdOrSlug:
-      name: organization_id_or_slug
-      in: path
-      required: true
-      description: The ID or slug of the organization.
-      schema:
-        type: string
   securitySchemes:
     BearerAuth:
       type: http

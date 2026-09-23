@@ -1,0 +1,62 @@
+generated: '2026-09-18'
+method: generated
+source: >-
+  arazzo/*.yml (the repo's verified 2-source workflows) + openapi/*.yml. Every operationId named in
+  every skill below was grep-verified against the 188 operationIds in this repo's OpenAPI documents on
+  2026-09-18; none is invented.
+provider: Sentry
+providerId: sentry-system
+api: Sentry Web API
+base_url: https://sentry.io/api/0
+notes: >-
+  Sentry publishes no Agent Skills of its own (getsentry AGENTS.md files are contributor instructions
+  for the Sentry codebase, not consumer-facing operating instructions for the Web API), so these are
+  GENERATED from this repo's Arazzo workflows and specs. Each skill carries the cross-cutting rules an
+  agent needs at call time: auth, scopes, pagination via the RFC 5988 Link header, the absence of an
+  idempotency-key mechanism, the per-caller/per-endpoint rate limiter, the reversal path for each
+  write, and the preference for webhooks over polling.
+skills:
+- file: sentry-system-triage-and-resolve-issue.md
+  name: sentry-triage-and-resolve-issue
+  summary: Find a high-priority unresolved issue, read detail and events, assign and resolve it.
+  operations: [listOrganizationIssues, retrieveIssue, listIssueEvents, updateIssue]
+  writes: true
+  reversible: true
+- file: sentry-system-provision-project-and-key.md
+  name: sentry-provision-project-and-key
+  summary: Create a project under a team and mint the client key (DSN).
+  operations: [createProject, retrieveProject, createProjectClientKey, listProjectClientKeys]
+  writes: true
+  reversible: false
+  reversal_note: 'deleteProject is declared irreversible by the contract itself.'
+- file: sentry-system-cut-release-and-record-deploy.md
+  name: sentry-cut-release-and-record-deploy
+  summary: Register a release and record a deploy against it.
+  operations: [createOrganizationRelease, retrieveOrganizationRelease, createReleaseDeploy, listReleaseDeploys]
+  writes: true
+  reversible: partial
+  reversal_note: 'deleteOrganizationRelease exists; no reversal for a deploy.'
+- file: sentry-system-create-cron-monitor.md
+  name: sentry-create-cron-monitor
+  summary: Create a cron monitor for a scheduled job and verify its check-ins.
+  operations: [createMonitor, retrieveMonitor, listMonitorCheckIns]
+  writes: true
+  reversible: partial
+  reversal_note: 'deleteMonitor exists; no restore window documented.'
+- file: sentry-system-run-seer-autofix.md
+  name: sentry-run-seer-autofix
+  summary: Start a Seer AI root-cause/fix run on an issue and follow it to completion.
+  operations: [listSeerModels, startSeerIssueFix, retrieveSeerIssueFixState]
+  writes: true
+  reversible: false
+  reversal_note: 'A Seer coding run can open a pull request in an external code host; nothing in this API reverses that.'
+- file: sentry-system-invite-member-and-onboard.md
+  name: sentry-invite-member-and-onboard
+  summary: Invite a user into the organization and add them to a team.
+  operations: [addOrganizationMember, retrieveOrganizationMember, addMemberToTeam, listTeamMembers]
+  writes: true
+  reversible: true
+  reversal_note: 'removeMemberFromTeam and deleteOrganizationMember reverse both writes.'
+counts:
+  skills: 6
+  distinct_operations: 22

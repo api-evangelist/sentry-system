@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Sentry Alerts Service Hooks API
-  description: The Alerts API provides endpoints for managing alert rules in Sentry, including creating, retrieving, updating, and deleting metric alert rules and issue alert rules, as well as managing spike protection notification actions.
+  title: Sentry Projects Service Hooks API
+  description: The Projects API provides endpoints for managing Sentry projects, including creating, retrieving, updating, and deleting projects, as well as managing client keys, debug files, service hooks, filters, and user feedback.
   version: 0.0.1
   contact:
     name: Sentry Support
@@ -163,11 +163,11 @@ paths:
           description: Service hook not found.
 components:
   parameters:
-    OrganizationIdOrSlug:
-      name: organization_id_or_slug
+    HookId:
+      name: hook_id
       in: path
       required: true
-      description: The ID or slug of the organization.
+      description: The ID of the service hook.
       schema:
         type: string
     ProjectIdOrSlug:
@@ -177,11 +177,11 @@ components:
       description: The ID or slug of the project.
       schema:
         type: string
-    HookId:
-      name: hook_id
+    OrganizationIdOrSlug:
+      name: organization_id_or_slug
       in: path
       required: true
-      description: The ID of the service hook.
+      description: The ID or slug of the organization.
       schema:
         type: string
   schemas:
