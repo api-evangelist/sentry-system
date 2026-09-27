@@ -479,40 +479,44 @@ paths:
       description: Sentry Production API
 components:
   schemas:
-    Organization:
+    Project:
       type: object
       properties:
         id:
           type: string
-          description: The unique identifier of the organization.
+          description: The unique identifier of the project.
         slug:
           type: string
-          description: The URL-friendly slug of the organization.
+          description: The URL-friendly slug of the project.
         name:
           type: string
-          description: The human-readable name of the organization.
+          description: The human-readable name of the project.
+        platform:
+          type: string
+          nullable: true
+          description: The platform identifier (e.g., python, javascript).
         dateCreated:
           type: string
           format: date-time
-          description: When the organization was created.
-        status:
-          type: object
-          properties:
-            id:
-              type: string
-            name:
-              type: string
-        isEarlyAdopter:
+          description: When the project was created.
+        isBookmarked:
           type: boolean
-          description: Whether the organization is an early adopter.
-        avatar:
-          type: object
-          properties:
-            avatarType:
-              type: string
-            avatarUuid:
-              type: string
-              nullable: true
+        isMember:
+          type: boolean
+        features:
+          type: array
+          items:
+            type: string
+        firstEvent:
+          type: string
+          format: date-time
+          nullable: true
+        firstTransactionEvent:
+          type: boolean
+        hasAccess:
+          type: boolean
+        organization:
+          $ref: '#/components/schemas/Organization'
       required:
       - id
       - slug
@@ -581,90 +585,44 @@ components:
       - id
       - title
       - status
-    Project:
+    Organization:
       type: object
       properties:
         id:
           type: string
-          description: The unique identifier of the project.
+          description: The unique identifier of the organization.
         slug:
           type: string
-          description: The URL-friendly slug of the project.
+          description: The URL-friendly slug of the organization.
         name:
           type: string
-          description: The human-readable name of the project.
-        platform:
-          type: string
-          nullable: true
-          description: The platform identifier (e.g., python, javascript).
+          description: The human-readable name of the organization.
         dateCreated:
           type: string
           format: date-time
-          description: When the project was created.
-        isBookmarked:
+          description: When the organization was created.
+        status:
+          type: object
+          properties:
+            id:
+              type: string
+            name:
+              type: string
+        isEarlyAdopter:
           type: boolean
-        isMember:
-          type: boolean
-        features:
-          type: array
-          items:
-            type: string
-        firstEvent:
-          type: string
-          format: date-time
-          nullable: true
-        firstTransactionEvent:
-          type: boolean
-        hasAccess:
-          type: boolean
-        organization:
-          $ref: '#/components/schemas/Organization'
+          description: Whether the organization is an early adopter.
+        avatar:
+          type: object
+          properties:
+            avatarType:
+              type: string
+            avatarUuid:
+              type: string
+              nullable: true
       required:
       - id
       - slug
       - name
-    Event:
-      type: object
-      properties:
-        eventID:
-          type: string
-          description: The unique identifier of the event.
-        context:
-          type: object
-          description: Additional context data attached to the event.
-        dateCreated:
-          type: string
-          format: date-time
-        dateReceived:
-          type: string
-          format: date-time
-        entries:
-          type: array
-          items:
-            type: object
-        message:
-          type: string
-        title:
-          type: string
-        platform:
-          type: string
-        tags:
-          type: array
-          items:
-            type: object
-            properties:
-              key:
-                type: string
-              value:
-                type: string
-        type:
-          type: string
-        groupID:
-          type: string
-          description: The issue ID this event belongs to.
-      required:
-      - eventID
-      - dateCreated
     Issue_2:
       type: object
       properties:
@@ -725,19 +683,61 @@ components:
       - id
       - title
       - status
+    Event:
+      type: object
+      properties:
+        eventID:
+          type: string
+          description: The unique identifier of the event.
+        context:
+          type: object
+          description: Additional context data attached to the event.
+        dateCreated:
+          type: string
+          format: date-time
+        dateReceived:
+          type: string
+          format: date-time
+        entries:
+          type: array
+          items:
+            type: object
+        message:
+          type: string
+        title:
+          type: string
+        platform:
+          type: string
+        tags:
+          type: array
+          items:
+            type: object
+            properties:
+              key:
+                type: string
+              value:
+                type: string
+        type:
+          type: string
+        groupID:
+          type: string
+          description: The issue ID this event belongs to.
+      required:
+      - eventID
+      - dateCreated
   parameters:
-    IssueId:
-      name: issue_id
-      in: path
-      required: true
-      description: The ID of the issue.
-      schema:
-        type: string
     OrganizationIdOrSlug:
       name: organization_id_or_slug
       in: path
       required: true
       description: The ID or slug of the organization.
+      schema:
+        type: string
+    IssueId:
+      name: issue_id
+      in: path
+      required: true
+      description: The ID of the issue.
       schema:
         type: string
     ProjectIdOrSlug:

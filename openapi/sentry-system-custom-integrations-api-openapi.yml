@@ -116,6 +116,21 @@ paths:
         '404':
           description: Integration not found.
 components:
+  parameters:
+    OrganizationIdOrSlug:
+      name: organization_id_or_slug
+      in: path
+      required: true
+      description: The ID or slug of the organization.
+      schema:
+        type: string
+    SentryAppIdOrSlug:
+      name: sentry_app_id_or_slug
+      in: path
+      required: true
+      description: The ID or slug of the custom integration.
+      schema:
+        type: string
   schemas:
     SentryApp:
       type: object
@@ -160,21 +175,6 @@ components:
       - uuid
       - slug
       - name
-  parameters:
-    SentryAppIdOrSlug:
-      name: sentry_app_id_or_slug
-      in: path
-      required: true
-      description: The ID or slug of the custom integration.
-      schema:
-        type: string
-    OrganizationIdOrSlug:
-      name: organization_id_or_slug
-      in: path
-      required: true
-      description: The ID or slug of the organization.
-      schema:
-        type: string
   securitySchemes:
     BearerAuth:
       type: http

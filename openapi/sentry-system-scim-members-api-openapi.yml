@@ -212,6 +212,27 @@ components:
       schema:
         type: string
   schemas:
+    ScimListResponse:
+      type: object
+      properties:
+        schemas:
+          type: array
+          items:
+            type: string
+        totalResults:
+          type: integer
+        startIndex:
+          type: integer
+        itemsPerPage:
+          type: integer
+        Resources:
+          type: array
+          items:
+            type: object
+      required:
+      - schemas
+      - totalResults
+      - Resources
     ScimUser:
       type: object
       properties:
@@ -252,27 +273,6 @@ components:
       - id
       - userName
       - active
-    ScimListResponse:
-      type: object
-      properties:
-        schemas:
-          type: array
-          items:
-            type: string
-        totalResults:
-          type: integer
-        startIndex:
-          type: integer
-        itemsPerPage:
-          type: integer
-        Resources:
-          type: array
-          items:
-            type: object
-      required:
-      - schemas
-      - totalResults
-      - Resources
   securitySchemes:
     BearerAuth:
       type: http

@@ -345,6 +345,14 @@ paths:
     - url: https://sentry.io/api/0
       description: Sentry Production API
 components:
+  parameters:
+    OrganizationIdOrSlug:
+      name: organization_id_or_slug
+      in: path
+      required: true
+      description: The ID or slug of the organization.
+      schema:
+        type: string
   schemas:
     Organization:
       type: object
@@ -380,6 +388,31 @@ components:
             avatarUuid:
               type: string
               nullable: true
+      required:
+      - id
+      - slug
+      - name
+    Project:
+      type: object
+      properties:
+        id:
+          type: string
+        slug:
+          type: string
+        name:
+          type: string
+        platform:
+          type: string
+          nullable: true
+        dateCreated:
+          type: string
+          format: date-time
+        isBookmarked:
+          type: boolean
+        isMember:
+          type: boolean
+        hasAccess:
+          type: boolean
       required:
       - id
       - slug
@@ -433,39 +466,6 @@ components:
       - id
       - slug
       - name
-    Project:
-      type: object
-      properties:
-        id:
-          type: string
-        slug:
-          type: string
-        name:
-          type: string
-        platform:
-          type: string
-          nullable: true
-        dateCreated:
-          type: string
-          format: date-time
-        isBookmarked:
-          type: boolean
-        isMember:
-          type: boolean
-        hasAccess:
-          type: boolean
-      required:
-      - id
-      - slug
-      - name
-  parameters:
-    OrganizationIdOrSlug:
-      name: organization_id_or_slug
-      in: path
-      required: true
-      description: The ID or slug of the organization.
-      schema:
-        type: string
   securitySchemes:
     BearerAuth:
       type: http

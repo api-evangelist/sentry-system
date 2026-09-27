@@ -201,21 +201,6 @@ paths:
         '404':
           description: Saved query not found.
 components:
-  parameters:
-    QueryId:
-      name: query_id
-      in: path
-      required: true
-      description: The ID of the saved query.
-      schema:
-        type: integer
-    OrganizationIdOrSlug:
-      name: organization_id_or_slug
-      in: path
-      required: true
-      description: The ID or slug of the organization.
-      schema:
-        type: string
   schemas:
     SavedQuery:
       type: object
@@ -264,6 +249,21 @@ components:
       - id
       - name
       - fields
+  parameters:
+    OrganizationIdOrSlug:
+      name: organization_id_or_slug
+      in: path
+      required: true
+      description: The ID or slug of the organization.
+      schema:
+        type: string
+    QueryId:
+      name: query_id
+      in: path
+      required: true
+      description: The ID of the saved query.
+      schema:
+        type: integer
   securitySchemes:
     BearerAuth:
       type: http

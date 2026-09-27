@@ -155,7 +155,7 @@ paths:
           description: Dashboard not found.
 components:
   schemas:
-    DashboardSummary:
+    Dashboard:
       type: object
       properties:
         id:
@@ -174,10 +174,10 @@ components:
               type: string
             email:
               type: string
-        widgetDisplay:
+        widgets:
           type: array
           items:
-            type: string
+            $ref: '#/components/schemas/Widget'
       required:
       - id
       - title
@@ -234,7 +234,7 @@ components:
       - title
       - displayType
       - queries
-    Dashboard:
+    DashboardSummary:
       type: object
       properties:
         id:
@@ -253,26 +253,26 @@ components:
               type: string
             email:
               type: string
-        widgets:
+        widgetDisplay:
           type: array
           items:
-            $ref: '#/components/schemas/Widget'
+            type: string
       required:
       - id
       - title
   parameters:
-    DashboardId:
-      name: dashboard_id
-      in: path
-      required: true
-      description: The ID of the dashboard.
-      schema:
-        type: string
     OrganizationIdOrSlug:
       name: organization_id_or_slug
       in: path
       required: true
       description: The ID or slug of the organization.
+      schema:
+        type: string
+    DashboardId:
+      name: dashboard_id
+      in: path
+      required: true
+      description: The ID of the dashboard.
       schema:
         type: string
   securitySchemes:

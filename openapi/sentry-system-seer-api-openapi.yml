@@ -96,20 +96,6 @@ paths:
           description: Issue or fix state not found.
 components:
   schemas:
-    SeerModel:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        description:
-          type: string
-        isAvailable:
-          type: boolean
-      required:
-      - id
-      - name
     SeerAutofixState:
       type: object
       properties:
@@ -156,19 +142,33 @@ components:
       required:
       - status
       - createdAt
+    SeerModel:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        isAvailable:
+          type: boolean
+      required:
+      - id
+      - name
   parameters:
-    IssueId:
-      name: issue_id
-      in: path
-      required: true
-      description: The ID of the issue.
-      schema:
-        type: string
     OrganizationIdOrSlug:
       name: organization_id_or_slug
       in: path
       required: true
       description: The ID or slug of the organization.
+      schema:
+        type: string
+    IssueId:
+      name: issue_id
+      in: path
+      required: true
+      description: The ID of the issue.
       schema:
         type: string
   securitySchemes:

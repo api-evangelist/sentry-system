@@ -39,6 +39,14 @@ paths:
         '403':
           description: Forbidden.
 components:
+  parameters:
+    OrganizationIdOrSlug:
+      name: organization_id_or_slug
+      in: path
+      required: true
+      description: The ID or slug of the organization.
+      schema:
+        type: string
   schemas:
     Installation:
       type: object
@@ -67,14 +75,6 @@ components:
       required:
       - uuid
       - app
-  parameters:
-    OrganizationIdOrSlug:
-      name: organization_id_or_slug
-      in: path
-      required: true
-      description: The ID or slug of the organization.
-      schema:
-        type: string
   securitySchemes:
     BearerAuth:
       type: http
