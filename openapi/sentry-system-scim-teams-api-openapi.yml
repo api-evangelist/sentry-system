@@ -184,27 +184,6 @@ paths:
           description: Team not found.
 components:
   schemas:
-    ScimListResponse:
-      type: object
-      properties:
-        schemas:
-          type: array
-          items:
-            type: string
-        totalResults:
-          type: integer
-        startIndex:
-          type: integer
-        itemsPerPage:
-          type: integer
-        Resources:
-          type: array
-          items:
-            type: object
-      required:
-      - schemas
-      - totalResults
-      - Resources
     ScimGroup:
       type: object
       properties:
@@ -233,19 +212,40 @@ components:
       required:
       - id
       - displayName
+    ScimListResponse:
+      type: object
+      properties:
+        schemas:
+          type: array
+          items:
+            type: string
+        totalResults:
+          type: integer
+        startIndex:
+          type: integer
+        itemsPerPage:
+          type: integer
+        Resources:
+          type: array
+          items:
+            type: object
+      required:
+      - schemas
+      - totalResults
+      - Resources
   parameters:
-    OrganizationIdOrSlug:
-      name: organization_id_or_slug
-      in: path
-      required: true
-      description: The ID or slug of the organization.
-      schema:
-        type: string
     ScimGroupId:
       name: scim_group_id
       in: path
       required: true
       description: The SCIM group (team) ID.
+      schema:
+        type: string
+    OrganizationIdOrSlug:
+      name: organization_id_or_slug
+      in: path
+      required: true
+      description: The ID or slug of the organization.
       schema:
         type: string
   securitySchemes:

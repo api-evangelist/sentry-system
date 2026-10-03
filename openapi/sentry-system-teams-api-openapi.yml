@@ -233,21 +233,6 @@ paths:
     - url: https://sentry.io/api/0
       description: Sentry Production API
 components:
-  parameters:
-    OrganizationIdOrSlug:
-      name: organization_id_or_slug
-      in: path
-      required: true
-      description: The ID or slug of the organization.
-      schema:
-        type: string
-    TeamIdOrSlug:
-      name: team_id_or_slug
-      in: path
-      required: true
-      description: The ID or slug of the team.
-      schema:
-        type: string
   schemas:
     Team:
       type: object
@@ -261,53 +246,6 @@ components:
         name:
           type: string
           description: The human-readable name of the team.
-        dateCreated:
-          type: string
-          format: date-time
-        isMember:
-          type: boolean
-        memberCount:
-          type: integer
-        avatar:
-          type: object
-          properties:
-            avatarType:
-              type: string
-            avatarUuid:
-              type: string
-              nullable: true
-      required:
-      - id
-      - slug
-      - name
-    Project:
-      type: object
-      properties:
-        id:
-          type: string
-        slug:
-          type: string
-        name:
-          type: string
-        platform:
-          type: string
-          nullable: true
-        dateCreated:
-          type: string
-          format: date-time
-      required:
-      - id
-      - slug
-      - name
-    Team_2:
-      type: object
-      properties:
-        id:
-          type: string
-        slug:
-          type: string
-        name:
-          type: string
         dateCreated:
           type: string
           format: date-time
@@ -368,6 +306,68 @@ components:
       - id
       - slug
       - name
+    Team_2:
+      type: object
+      properties:
+        id:
+          type: string
+        slug:
+          type: string
+        name:
+          type: string
+        dateCreated:
+          type: string
+          format: date-time
+        isMember:
+          type: boolean
+        memberCount:
+          type: integer
+        avatar:
+          type: object
+          properties:
+            avatarType:
+              type: string
+            avatarUuid:
+              type: string
+              nullable: true
+      required:
+      - id
+      - slug
+      - name
+    Project:
+      type: object
+      properties:
+        id:
+          type: string
+        slug:
+          type: string
+        name:
+          type: string
+        platform:
+          type: string
+          nullable: true
+        dateCreated:
+          type: string
+          format: date-time
+      required:
+      - id
+      - slug
+      - name
+  parameters:
+    OrganizationIdOrSlug:
+      name: organization_id_or_slug
+      in: path
+      required: true
+      description: The ID or slug of the organization.
+      schema:
+        type: string
+    TeamIdOrSlug:
+      name: team_id_or_slug
+      in: path
+      required: true
+      description: The ID or slug of the team.
+      schema:
+        type: string
   securitySchemes:
     BearerAuth:
       type: http

@@ -196,21 +196,6 @@ paths:
         '404':
           description: User not found.
 components:
-  parameters:
-    ScimUserId:
-      name: scim_user_id
-      in: path
-      required: true
-      description: The SCIM user ID.
-      schema:
-        type: string
-    OrganizationIdOrSlug:
-      name: organization_id_or_slug
-      in: path
-      required: true
-      description: The ID or slug of the organization.
-      schema:
-        type: string
   schemas:
     ScimListResponse:
       type: object
@@ -273,6 +258,21 @@ components:
       - id
       - userName
       - active
+  parameters:
+    OrganizationIdOrSlug:
+      name: organization_id_or_slug
+      in: path
+      required: true
+      description: The ID or slug of the organization.
+      schema:
+        type: string
+    ScimUserId:
+      name: scim_user_id
+      in: path
+      required: true
+      description: The SCIM user ID.
+      schema:
+        type: string
   securitySchemes:
     BearerAuth:
       type: http

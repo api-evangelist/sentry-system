@@ -232,6 +232,21 @@ paths:
     - url: https://sentry.io/api/0
       description: Sentry Production API
 components:
+  parameters:
+    OrganizationIdOrSlug:
+      name: organization_id_or_slug
+      in: path
+      required: true
+      description: The ID or slug of the organization.
+      schema:
+        type: string
+    Version:
+      name: version
+      in: path
+      required: true
+      description: The version identifier of the release.
+      schema:
+        type: string
   schemas:
     Release:
       type: object
@@ -276,6 +291,30 @@ components:
       required:
       - version
       - dateCreated
+    Deploy:
+      type: object
+      properties:
+        id:
+          type: string
+        environment:
+          type: string
+        name:
+          type: string
+          nullable: true
+        url:
+          type: string
+          nullable: true
+        dateStarted:
+          type: string
+          format: date-time
+          nullable: true
+        dateFinished:
+          type: string
+          format: date-time
+          nullable: true
+      required:
+      - id
+      - environment
     Release_2:
       type: object
       properties:
@@ -335,45 +374,6 @@ components:
       required:
       - version
       - dateCreated
-    Deploy:
-      type: object
-      properties:
-        id:
-          type: string
-        environment:
-          type: string
-        name:
-          type: string
-          nullable: true
-        url:
-          type: string
-          nullable: true
-        dateStarted:
-          type: string
-          format: date-time
-          nullable: true
-        dateFinished:
-          type: string
-          format: date-time
-          nullable: true
-      required:
-      - id
-      - environment
-  parameters:
-    OrganizationIdOrSlug:
-      name: organization_id_or_slug
-      in: path
-      required: true
-      description: The ID or slug of the organization.
-      schema:
-        type: string
-    Version:
-      name: version
-      in: path
-      required: true
-      description: The version identifier of the release.
-      schema:
-        type: string
   securitySchemes:
     BearerAuth:
       type: http

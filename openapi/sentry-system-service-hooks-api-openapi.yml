@@ -163,6 +163,13 @@ paths:
           description: Service hook not found.
 components:
   parameters:
+    ProjectIdOrSlug:
+      name: project_id_or_slug
+      in: path
+      required: true
+      description: The ID or slug of the project.
+      schema:
+        type: string
     OrganizationIdOrSlug:
       name: organization_id_or_slug
       in: path
@@ -175,13 +182,6 @@ components:
       in: path
       required: true
       description: The ID of the service hook.
-      schema:
-        type: string
-    ProjectIdOrSlug:
-      name: project_id_or_slug
-      in: path
-      required: true
-      description: The ID or slug of the project.
       schema:
         type: string
   schemas:
