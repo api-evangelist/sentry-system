@@ -154,33 +154,22 @@ paths:
         '404':
           description: Dashboard not found.
 components:
+  parameters:
+    DashboardId:
+      name: dashboard_id
+      in: path
+      required: true
+      description: The ID of the dashboard.
+      schema:
+        type: string
+    OrganizationIdOrSlug:
+      name: organization_id_or_slug
+      in: path
+      required: true
+      description: The ID or slug of the organization.
+      schema:
+        type: string
   schemas:
-    Dashboard:
-      type: object
-      properties:
-        id:
-          type: string
-        title:
-          type: string
-        dateCreated:
-          type: string
-          format: date-time
-        createdBy:
-          type: object
-          properties:
-            id:
-              type: string
-            name:
-              type: string
-            email:
-              type: string
-        widgets:
-          type: array
-          items:
-            $ref: '#/components/schemas/Widget'
-      required:
-      - id
-      - title
     DashboardSummary:
       type: object
       properties:
@@ -204,6 +193,32 @@ components:
           type: array
           items:
             type: string
+      required:
+      - id
+      - title
+    Dashboard:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        dateCreated:
+          type: string
+          format: date-time
+        createdBy:
+          type: object
+          properties:
+            id:
+              type: string
+            name:
+              type: string
+            email:
+              type: string
+        widgets:
+          type: array
+          items:
+            $ref: '#/components/schemas/Widget'
       required:
       - id
       - title
@@ -260,21 +275,6 @@ components:
       - title
       - displayType
       - queries
-  parameters:
-    DashboardId:
-      name: dashboard_id
-      in: path
-      required: true
-      description: The ID of the dashboard.
-      schema:
-        type: string
-    OrganizationIdOrSlug:
-      name: organization_id_or_slug
-      in: path
-      required: true
-      description: The ID or slug of the organization.
-      schema:
-        type: string
   securitySchemes:
     BearerAuth:
       type: http

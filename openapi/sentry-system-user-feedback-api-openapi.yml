@@ -85,21 +85,6 @@ paths:
         '401':
           description: Unauthorized.
 components:
-  parameters:
-    ProjectIdOrSlug:
-      name: project_id_or_slug
-      in: path
-      required: true
-      description: The ID or slug of the project.
-      schema:
-        type: string
-    OrganizationIdOrSlug:
-      name: organization_id_or_slug
-      in: path
-      required: true
-      description: The ID or slug of the organization.
-      schema:
-        type: string
   schemas:
     UserFeedback:
       type: object
@@ -122,6 +107,21 @@ components:
       - id
       - eventID
       - comments
+  parameters:
+    ProjectIdOrSlug:
+      name: project_id_or_slug
+      in: path
+      required: true
+      description: The ID or slug of the project.
+      schema:
+        type: string
+    OrganizationIdOrSlug:
+      name: organization_id_or_slug
+      in: path
+      required: true
+      description: The ID or slug of the organization.
+      schema:
+        type: string
   securitySchemes:
     BearerAuth:
       type: http

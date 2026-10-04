@@ -197,21 +197,6 @@ paths:
         '404':
           description: Alert rule not found.
 components:
-  parameters:
-    OrganizationIdOrSlug:
-      name: organization_id_or_slug
-      in: path
-      required: true
-      description: The ID or slug of the organization.
-      schema:
-        type: string
-    AlertRuleId:
-      name: alert_rule_id
-      in: path
-      required: true
-      description: The ID of the metric alert rule.
-      schema:
-        type: integer
   schemas:
     MetricAlertRule:
       type: object
@@ -268,6 +253,21 @@ components:
       - id
       - name
       - aggregate
+  parameters:
+    AlertRuleId:
+      name: alert_rule_id
+      in: path
+      required: true
+      description: The ID of the metric alert rule.
+      schema:
+        type: integer
+    OrganizationIdOrSlug:
+      name: organization_id_or_slug
+      in: path
+      required: true
+      description: The ID or slug of the organization.
+      schema:
+        type: string
   securitySchemes:
     BearerAuth:
       type: http

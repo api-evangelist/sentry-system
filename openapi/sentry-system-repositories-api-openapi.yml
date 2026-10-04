@@ -223,33 +223,6 @@ paths:
       description: Sentry Production API
 components:
   schemas:
-    Commit:
-      type: object
-      properties:
-        id:
-          type: string
-        message:
-          type: string
-        dateCreated:
-          type: string
-          format: date-time
-        author:
-          type: object
-          properties:
-            name:
-              type: string
-            email:
-              type: string
-              format: email
-        repository:
-          type: object
-          properties:
-            id:
-              type: string
-            name:
-              type: string
-      required:
-      - id
     Repository:
       type: object
       properties:
@@ -277,6 +250,33 @@ components:
       required:
       - id
       - name
+    Commit:
+      type: object
+      properties:
+        id:
+          type: string
+        message:
+          type: string
+        dateCreated:
+          type: string
+          format: date-time
+        author:
+          type: object
+          properties:
+            name:
+              type: string
+            email:
+              type: string
+              format: email
+        repository:
+          type: object
+          properties:
+            id:
+              type: string
+            name:
+              type: string
+      required:
+      - id
     PreventRepository:
       type: object
       properties:

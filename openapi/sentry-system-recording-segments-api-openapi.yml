@@ -74,29 +74,6 @@ paths:
         '404':
           description: Segment not found.
 components:
-  parameters:
-    ReplayId:
-      name: replay_id
-      in: path
-      required: true
-      description: The ID of the replay.
-      schema:
-        type: string
-        format: uuid
-    OrganizationIdOrSlug:
-      name: organization_id_or_slug
-      in: path
-      required: true
-      description: The ID or slug of the organization.
-      schema:
-        type: string
-    ProjectIdOrSlug:
-      name: project_id_or_slug
-      in: path
-      required: true
-      description: The ID or slug of the project.
-      schema:
-        type: string
   schemas:
     RecordingSegment:
       type: object
@@ -114,6 +91,29 @@ components:
       required:
       - id
       - segmentId
+  parameters:
+    ReplayId:
+      name: replay_id
+      in: path
+      required: true
+      description: The ID of the replay.
+      schema:
+        type: string
+        format: uuid
+    ProjectIdOrSlug:
+      name: project_id_or_slug
+      in: path
+      required: true
+      description: The ID or slug of the project.
+      schema:
+        type: string
+    OrganizationIdOrSlug:
+      name: organization_id_or_slug
+      in: path
+      required: true
+      description: The ID or slug of the organization.
+      schema:
+        type: string
   securitySchemes:
     BearerAuth:
       type: http

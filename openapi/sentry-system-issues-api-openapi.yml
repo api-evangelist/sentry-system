@@ -478,71 +478,29 @@ paths:
     - url: https://sentry.io/api/0
       description: Sentry Production API
 components:
+  parameters:
+    IssueId:
+      name: issue_id
+      in: path
+      required: true
+      description: The ID of the issue.
+      schema:
+        type: string
+    OrganizationIdOrSlug:
+      name: organization_id_or_slug
+      in: path
+      required: true
+      description: The ID or slug of the organization.
+      schema:
+        type: string
+    ProjectIdOrSlug:
+      name: project_id_or_slug
+      in: path
+      required: true
+      description: The ID or slug of the project.
+      schema:
+        type: string
   schemas:
-    Issue:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The unique identifier of the issue.
-        shortId:
-          type: string
-          description: The short ID for the issue (e.g., PROJECT-123).
-        title:
-          type: string
-          description: The title of the issue.
-        culprit:
-          type: string
-          description: The function or module where the issue originated.
-        permalink:
-          type: string
-          format: uri
-        level:
-          type: string
-          enum:
-          - fatal
-          - error
-          - warning
-          - info
-          - debug
-        status:
-          type: string
-          enum:
-          - resolved
-          - unresolved
-          - ignored
-        platform:
-          type: string
-        firstSeen:
-          type: string
-          format: date-time
-        lastSeen:
-          type: string
-          format: date-time
-        count:
-          type: string
-          description: The total number of events for this issue.
-        userCount:
-          type: integer
-          description: The number of unique users affected.
-        project:
-          $ref: '#/components/schemas/Project'
-        type:
-          type: string
-          enum:
-          - error
-          - default
-        metadata:
-          type: object
-          properties:
-            type:
-              type: string
-            value:
-              type: string
-      required:
-      - id
-      - title
-      - status
     Project:
       type: object
       properties:
@@ -623,6 +581,112 @@ components:
       - id
       - slug
       - name
+    Issue:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier of the issue.
+        shortId:
+          type: string
+          description: The short ID for the issue (e.g., PROJECT-123).
+        title:
+          type: string
+          description: The title of the issue.
+        culprit:
+          type: string
+          description: The function or module where the issue originated.
+        permalink:
+          type: string
+          format: uri
+        level:
+          type: string
+          enum:
+          - fatal
+          - error
+          - warning
+          - info
+          - debug
+        status:
+          type: string
+          enum:
+          - resolved
+          - unresolved
+          - ignored
+        platform:
+          type: string
+        firstSeen:
+          type: string
+          format: date-time
+        lastSeen:
+          type: string
+          format: date-time
+        count:
+          type: string
+          description: The total number of events for this issue.
+        userCount:
+          type: integer
+          description: The number of unique users affected.
+        project:
+          $ref: '#/components/schemas/Project'
+        type:
+          type: string
+          enum:
+          - error
+          - default
+        metadata:
+          type: object
+          properties:
+            type:
+              type: string
+            value:
+              type: string
+      required:
+      - id
+      - title
+      - status
+    Event:
+      type: object
+      properties:
+        eventID:
+          type: string
+          description: The unique identifier of the event.
+        context:
+          type: object
+          description: Additional context data attached to the event.
+        dateCreated:
+          type: string
+          format: date-time
+        dateReceived:
+          type: string
+          format: date-time
+        entries:
+          type: array
+          items:
+            type: object
+        message:
+          type: string
+        title:
+          type: string
+        platform:
+          type: string
+        tags:
+          type: array
+          items:
+            type: object
+            properties:
+              key:
+                type: string
+              value:
+                type: string
+        type:
+          type: string
+        groupID:
+          type: string
+          description: The issue ID this event belongs to.
+      required:
+      - eventID
+      - dateCreated
     Issue_2:
       type: object
       properties:
@@ -683,70 +747,6 @@ components:
       - id
       - title
       - status
-    Event:
-      type: object
-      properties:
-        eventID:
-          type: string
-          description: The unique identifier of the event.
-        context:
-          type: object
-          description: Additional context data attached to the event.
-        dateCreated:
-          type: string
-          format: date-time
-        dateReceived:
-          type: string
-          format: date-time
-        entries:
-          type: array
-          items:
-            type: object
-        message:
-          type: string
-        title:
-          type: string
-        platform:
-          type: string
-        tags:
-          type: array
-          items:
-            type: object
-            properties:
-              key:
-                type: string
-              value:
-                type: string
-        type:
-          type: string
-        groupID:
-          type: string
-          description: The issue ID this event belongs to.
-      required:
-      - eventID
-      - dateCreated
-  parameters:
-    IssueId:
-      name: issue_id
-      in: path
-      required: true
-      description: The ID of the issue.
-      schema:
-        type: string
-    OrganizationIdOrSlug:
-      name: organization_id_or_slug
-      in: path
-      required: true
-      description: The ID or slug of the organization.
-      schema:
-        type: string
-    ProjectIdOrSlug:
-      name: project_id_or_slug
-      in: path
-      required: true
-      description: The ID or slug of the project.
-      schema:
-        type: string
   securitySchemes:
     BearerAuth:
       type: http

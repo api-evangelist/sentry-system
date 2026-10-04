@@ -162,28 +162,6 @@ paths:
         '404':
           description: Service hook not found.
 components:
-  parameters:
-    ProjectIdOrSlug:
-      name: project_id_or_slug
-      in: path
-      required: true
-      description: The ID or slug of the project.
-      schema:
-        type: string
-    OrganizationIdOrSlug:
-      name: organization_id_or_slug
-      in: path
-      required: true
-      description: The ID or slug of the organization.
-      schema:
-        type: string
-    HookId:
-      name: hook_id
-      in: path
-      required: true
-      description: The ID of the service hook.
-      schema:
-        type: string
   schemas:
     ServiceHook:
       type: object
@@ -208,6 +186,28 @@ components:
       - id
       - url
       - events
+  parameters:
+    HookId:
+      name: hook_id
+      in: path
+      required: true
+      description: The ID of the service hook.
+      schema:
+        type: string
+    ProjectIdOrSlug:
+      name: project_id_or_slug
+      in: path
+      required: true
+      description: The ID or slug of the project.
+      schema:
+        type: string
+    OrganizationIdOrSlug:
+      name: organization_id_or_slug
+      in: path
+      required: true
+      description: The ID or slug of the organization.
+      schema:
+        type: string
   securitySchemes:
     BearerAuth:
       type: http
