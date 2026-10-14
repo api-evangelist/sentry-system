@@ -4,6 +4,7 @@ checked:
 - https://github.com/open-telemetry/opentelemetry.io/blob/main/data/ecosystem/vendors.yaml
 - https://github.com/open-telemetry/opentelemetry.io/blob/main/data/registry/
 - https://sentry.io/integrations/
+- https://www.twilio.com/docs/segment/connections/destinations/catalog/sentry
 marketplace_apps:
 - marketplace: own
   channel: partner-built
@@ -37,6 +38,29 @@ edges:
     detected: '2026-10-13'
   detected_by: sweep-observability.py
   detected: '2026-10-13'
+- partner_name: Twilio Segment
+  partner: segment
+  partner_match: aggregator
+  marketplace: coverage
+  channel: partner-built
+  direction: partner-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://www.twilio.com/docs/segment/connections/destinations/catalog/sentry
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - sentry
+      status: PUBLIC
+      partner_owned: false
+      connection_modes:
+      - device:web
+      accepted_methods:
+      - Identify
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
 source:
 - https://github.com/open-telemetry/opentelemetry.io/blob/main/data/ecosystem/vendors.yaml
 - https://github.com/open-telemetry/opentelemetry.io/blob/main/data/registry/
