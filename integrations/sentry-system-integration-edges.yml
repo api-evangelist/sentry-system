@@ -1,8 +1,10 @@
 generated: '2026-10-13'
 method: searched
 checked:
+- https://github.com/marketplace?type=actions
 - https://github.com/open-telemetry/opentelemetry.io/blob/main/data/ecosystem/vendors.yaml
 - https://github.com/open-telemetry/opentelemetry.io/blob/main/data/registry/
+- https://marketplace.atlassian.com/
 - https://sentry.io/integrations/
 - https://www.twilio.com/docs/segment/connections/destinations/catalog/sentry
 marketplace_apps:
@@ -61,6 +63,43 @@ edges:
       - Identify
   detected_by: sweep-cdp.py
   first_seen: '2026-10-14'
+- partner_name: GitHub Marketplace (actions)
+  partner: github-actions
+  partner_match: aggregator
+  type: marketplace
+  marketplace: github-actions
+  channel: partner-built
+  relationship: platform-app
+  direction: third-party
+  evidence: https://github.com/marketplace/actions/sentry-release
+  listing_count: 5
+  apps:
+  - Sentry Release
+  - action-github-app-token
+  - Only Robots
+  - action-migrations
+  - Sentry Prevent
+  publisher_name: Sentry
+  badges:
+  - Verified creator
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+- partner_name: Atlassian Marketplace
+  partner: atlassian
+  partner_match: aggregator
+  type: marketplace
+  marketplace: atlassian
+  channel: partner-built
+  relationship: platform-app
+  direction: third-party
+  evidence: https://marketplace.atlassian.com/vendors/1212484/sentry
+  listing_count: 2
+  apps:
+  - Sentry for Jira
+  - Sentry for Bitbucket
+  publisher_name: Sentry
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
 source:
 - https://github.com/open-telemetry/opentelemetry.io/blob/main/data/ecosystem/vendors.yaml
 - https://github.com/open-telemetry/opentelemetry.io/blob/main/data/registry/
