@@ -302,35 +302,6 @@ paths:
     - url: https://sentry.io/api/0
       description: Sentry Production API
 components:
-  parameters:
-    MemberId:
-      name: member_id
-      in: path
-      required: true
-      description: The ID of the member to retrieve.
-      schema:
-        type: string
-    OrganizationIdOrSlug:
-      name: organization_id_or_slug
-      in: path
-      required: true
-      description: The ID or slug of the organization.
-      schema:
-        type: string
-    MemberId_2:
-      name: member_id
-      in: path
-      required: true
-      description: The ID of the organization member.
-      schema:
-        type: string
-    TeamIdOrSlug:
-      name: team_id_or_slug
-      in: path
-      required: true
-      description: The ID or slug of the team.
-      schema:
-        type: string
   schemas:
     OrganizationMember:
       type: object
@@ -374,6 +345,31 @@ components:
       - id
       - email
       - role
+    TeamMember:
+      type: object
+      properties:
+        id:
+          type: string
+        email:
+          type: string
+          format: email
+        name:
+          type: string
+        role:
+          type: string
+        teamRole:
+          type: string
+          nullable: true
+        pending:
+          type: boolean
+        expired:
+          type: boolean
+        dateCreated:
+          type: string
+          format: date-time
+      required:
+      - id
+      - email
     Team:
       type: object
       properties:
@@ -402,31 +398,35 @@ components:
       - id
       - slug
       - name
-    TeamMember:
-      type: object
-      properties:
-        id:
-          type: string
-        email:
-          type: string
-          format: email
-        name:
-          type: string
-        role:
-          type: string
-        teamRole:
-          type: string
-          nullable: true
-        pending:
-          type: boolean
-        expired:
-          type: boolean
-        dateCreated:
-          type: string
-          format: date-time
-      required:
-      - id
-      - email
+  parameters:
+    MemberId:
+      name: member_id
+      in: path
+      required: true
+      description: The ID of the member to retrieve.
+      schema:
+        type: string
+    OrganizationIdOrSlug:
+      name: organization_id_or_slug
+      in: path
+      required: true
+      description: The ID or slug of the organization.
+      schema:
+        type: string
+    TeamIdOrSlug:
+      name: team_id_or_slug
+      in: path
+      required: true
+      description: The ID or slug of the team.
+      schema:
+        type: string
+    MemberId_2:
+      name: member_id
+      in: path
+      required: true
+      description: The ID of the organization member.
+      schema:
+        type: string
   securitySchemes:
     BearerAuth:
       type: http

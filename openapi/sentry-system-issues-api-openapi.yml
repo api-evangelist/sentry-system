@@ -479,18 +479,18 @@ paths:
       description: Sentry Production API
 components:
   parameters:
-    IssueId:
-      name: issue_id
-      in: path
-      required: true
-      description: The ID of the issue.
-      schema:
-        type: string
     OrganizationIdOrSlug:
       name: organization_id_or_slug
       in: path
       required: true
       description: The ID or slug of the organization.
+      schema:
+        type: string
+    IssueId:
+      name: issue_id
+      in: path
+      required: true
+      description: The ID of the issue.
       schema:
         type: string
     ProjectIdOrSlug:
@@ -645,48 +645,6 @@ components:
       - id
       - title
       - status
-    Event:
-      type: object
-      properties:
-        eventID:
-          type: string
-          description: The unique identifier of the event.
-        context:
-          type: object
-          description: Additional context data attached to the event.
-        dateCreated:
-          type: string
-          format: date-time
-        dateReceived:
-          type: string
-          format: date-time
-        entries:
-          type: array
-          items:
-            type: object
-        message:
-          type: string
-        title:
-          type: string
-        platform:
-          type: string
-        tags:
-          type: array
-          items:
-            type: object
-            properties:
-              key:
-                type: string
-              value:
-                type: string
-        type:
-          type: string
-        groupID:
-          type: string
-          description: The issue ID this event belongs to.
-      required:
-      - eventID
-      - dateCreated
     Issue_2:
       type: object
       properties:
@@ -747,6 +705,48 @@ components:
       - id
       - title
       - status
+    Event:
+      type: object
+      properties:
+        eventID:
+          type: string
+          description: The unique identifier of the event.
+        context:
+          type: object
+          description: Additional context data attached to the event.
+        dateCreated:
+          type: string
+          format: date-time
+        dateReceived:
+          type: string
+          format: date-time
+        entries:
+          type: array
+          items:
+            type: object
+        message:
+          type: string
+        title:
+          type: string
+        platform:
+          type: string
+        tags:
+          type: array
+          items:
+            type: object
+            properties:
+              key:
+                type: string
+              value:
+                type: string
+        type:
+          type: string
+        groupID:
+          type: string
+          description: The issue ID this event belongs to.
+      required:
+      - eventID
+      - dateCreated
   securitySchemes:
     BearerAuth:
       type: http

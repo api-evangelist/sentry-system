@@ -84,21 +84,6 @@ paths:
         '404':
           description: Release not found.
 components:
-  parameters:
-    OrganizationIdOrSlug:
-      name: organization_id_or_slug
-      in: path
-      required: true
-      description: The ID or slug of the organization.
-      schema:
-        type: string
-    Version:
-      name: version
-      in: path
-      required: true
-      description: The version identifier of the release.
-      schema:
-        type: string
   schemas:
     Commit:
       type: object
@@ -127,6 +112,21 @@ components:
               type: string
       required:
       - id
+  parameters:
+    Version:
+      name: version
+      in: path
+      required: true
+      description: The version identifier of the release.
+      schema:
+        type: string
+    OrganizationIdOrSlug:
+      name: organization_id_or_slug
+      in: path
+      required: true
+      description: The ID or slug of the organization.
+      schema:
+        type: string
   securitySchemes:
     BearerAuth:
       type: http

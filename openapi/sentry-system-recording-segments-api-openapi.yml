@@ -74,23 +74,6 @@ paths:
         '404':
           description: Segment not found.
 components:
-  schemas:
-    RecordingSegment:
-      type: object
-      properties:
-        id:
-          type: integer
-        replayId:
-          type: string
-          format: uuid
-        segmentId:
-          type: integer
-        dateAdded:
-          type: string
-          format: date-time
-      required:
-      - id
-      - segmentId
   parameters:
     ReplayId:
       name: replay_id
@@ -114,6 +97,23 @@ components:
       description: The ID or slug of the organization.
       schema:
         type: string
+  schemas:
+    RecordingSegment:
+      type: object
+      properties:
+        id:
+          type: integer
+        replayId:
+          type: string
+          format: uuid
+        segmentId:
+          type: integer
+        dateAdded:
+          type: string
+          format: date-time
+      required:
+      - id
+      - segmentId
   securitySchemes:
     BearerAuth:
       type: http

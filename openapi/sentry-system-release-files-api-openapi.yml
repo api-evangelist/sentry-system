@@ -156,28 +156,6 @@ paths:
         '404':
           description: File not found.
 components:
-  parameters:
-    OrganizationIdOrSlug:
-      name: organization_id_or_slug
-      in: path
-      required: true
-      description: The ID or slug of the organization.
-      schema:
-        type: string
-    FileId:
-      name: file_id
-      in: path
-      required: true
-      description: The ID of the file.
-      schema:
-        type: string
-    Version:
-      name: version
-      in: path
-      required: true
-      description: The version identifier of the release.
-      schema:
-        type: string
   schemas:
     ReleaseFile:
       type: object
@@ -201,6 +179,28 @@ components:
       required:
       - id
       - name
+  parameters:
+    FileId:
+      name: file_id
+      in: path
+      required: true
+      description: The ID of the file.
+      schema:
+        type: string
+    Version:
+      name: version
+      in: path
+      required: true
+      description: The version identifier of the release.
+      schema:
+        type: string
+    OrganizationIdOrSlug:
+      name: organization_id_or_slug
+      in: path
+      required: true
+      description: The ID or slug of the organization.
+      schema:
+        type: string
   securitySchemes:
     BearerAuth:
       type: http

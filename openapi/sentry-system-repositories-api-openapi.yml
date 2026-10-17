@@ -223,33 +223,6 @@ paths:
       description: Sentry Production API
 components:
   schemas:
-    Repository:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        url:
-          type: string
-          nullable: true
-        provider:
-          type: object
-          properties:
-            id:
-              type: string
-            name:
-              type: string
-        status:
-          type: string
-        dateCreated:
-          type: string
-          format: date-time
-        externalSlug:
-          type: string
-      required:
-      - id
-      - name
     Commit:
       type: object
       properties:
@@ -277,6 +250,33 @@ components:
               type: string
       required:
       - id
+    Repository:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        url:
+          type: string
+          nullable: true
+        provider:
+          type: object
+          properties:
+            id:
+              type: string
+            name:
+              type: string
+        status:
+          type: string
+        dateCreated:
+          type: string
+          format: date-time
+        externalSlug:
+          type: string
+      required:
+      - id
+      - name
     PreventRepository:
       type: object
       properties:

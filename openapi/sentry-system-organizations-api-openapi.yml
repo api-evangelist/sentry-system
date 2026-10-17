@@ -345,14 +345,6 @@ paths:
     - url: https://sentry.io/api/0
       description: Sentry Production API
 components:
-  parameters:
-    OrganizationIdOrSlug:
-      name: organization_id_or_slug
-      in: path
-      required: true
-      description: The ID or slug of the organization.
-      schema:
-        type: string
   schemas:
     Organization:
       type: object
@@ -466,6 +458,14 @@ components:
       - id
       - slug
       - name
+  parameters:
+    OrganizationIdOrSlug:
+      name: organization_id_or_slug
+      in: path
+      required: true
+      description: The ID or slug of the organization.
+      schema:
+        type: string
   securitySchemes:
     BearerAuth:
       type: http
