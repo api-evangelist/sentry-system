@@ -149,3 +149,122 @@
     builder: Pipedream repo (component)
   status: not-a-workflow
   arazzo: null
+- slug: sentry-system-airbyte
+  label: Airbyte
+  partner: airbyte
+  partner_name: Airbyte
+  type: marketplace
+  marketplace: airbyte-registry
+  channel: elt-connector
+  evidence: https://docs.airbyte.com/integrations/sources/sentry
+  source: edge
+  relationship: ipaas-bridge
+  contract_reference:
+    register: Airbyte connector registry (connectors.airbyte.com cloud_registry.json + oss_registry.json)
+    spec_file: null
+    role: elt-connector:airbyte-certified
+    registered_name: Sentry
+    matched_domain: sentry.io
+    matched_by: domain
+    detected_by: sweep-data-integration.py
+    detected: '2026-10-18'
+    signal_note: one edge per (provider, platform); connectors, streams, packages and usage are context, never read
+    connectors:
+    - airbyte/source-sentry
+    support_level:
+    - certified
+    release_stage:
+    - generally_available
+    in_cloud: true
+    builder: Airbyte (certified)
+    standard: Airbyte certified connector
+    certified_products:
+    - product: Airbyte certified source
+      type: source
+      lapsed: false
+      cloud: true
+  status: pending-generation
+  arazzo: null
+- slug: sentry-system-fivetran
+  label: Fivetran
+  partner: fivetran
+  partner_name: Fivetran
+  type: marketplace
+  marketplace: fivetran-connectors
+  channel: elt-connector
+  evidence: https://fivetran.com/docs/connectors/applications/sentry
+  source: edge
+  relationship: ipaas-bridge
+  contract_reference:
+    register: Fivetran connectors (fivetran.com/docs/connectors, docs-sitemap.xml + Partner-Built program)
+    spec_file: null
+    role: elt-connector:fivetran
+    registered_name: Sentry
+    matched_domain: sentry.io
+    matched_by: domain
+    detected_by: sweep-data-integration.py
+    detected: '2026-10-18'
+    signal_note: one edge per (provider, platform); connectors, streams, packages and usage are context, never read
+    connector_paths:
+    - connectors/applications/sentry
+    vendor_link: https://sentry.io/
+    builder: Fivetran
+  status: pending-generation
+  arazzo: null
+- slug: sentry-system-meltano
+  label: Meltano
+  partner: meltano
+  partner_name: Meltano
+  type: marketplace
+  marketplace: meltano-hub
+  channel: elt-connector
+  evidence: https://hub.meltano.com/extractors/tap-sentry--airbyte
+  source: edge
+  relationship: ipaas-bridge
+  contract_reference:
+    register: Meltano Hub (github.com/meltano/hub _data/meltano extractors + loaders)
+    spec_file: null
+    role: elt-connector:meltano-hub
+    registered_name: Sentry
+    matched_domain: sentry.io
+    matched_by: domain
+    detected_by: sweep-data-integration.py
+    detected: '2026-10-18'
+    signal_note: one edge per (provider, platform); connectors, streams, packages and usage are context, never read
+    plugins:
+    - tap-sentry--airbyte
+    - tap-sentry--valulucchesi
+    maintenance_status:
+    - beta
+    - unknown
+    quality:
+    - silver
+    builder: 'community (Meltano Hub variant maintainers: airbyte, valulucchesi)'
+  status: pending-partner-spec
+  arazzo: null
+- slug: sentry-system-microsoft-teams-own
+  label: Microsoft Teams (own)
+  partner: microsoft-teams
+  partner_name: Microsoft Teams (own)
+  category: Microsoft Teams app
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://appsource.microsoft.com/en-us/product/office/WA200002106
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: sentry-system-slack-own
+  label: Slack (own)
+  partner: slack
+  partner_name: Slack (own)
+  category: Slack app
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://slack.com/marketplace/A011MFBJEUU-sentry
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
