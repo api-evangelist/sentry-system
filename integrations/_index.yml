@@ -268,3 +268,224 @@
   relationship: platform-app
   status: not-a-workflow
   arazzo: null
+- slug: sentry-system-go-module-proxy
+  label: Go module proxy
+  partner_name: Go module proxy
+  category: official SDK (Go)
+  type: register
+  channel: package-registry
+  evidence: https://pkg.go.dev/github.com/getsentry/sentry-go
+  source: edge
+  relationship: distribution-channel
+  contract_reference:
+    register: Go module proxy (public registry JSON)
+    spec_file: null
+    language: Go
+    packages:
+    - name: github.com/getsentry/sentry-go
+      version: v0.50.0
+      released: '2026-10-08'
+      released_field: Time
+      lapsed: false
+      page: https://pkg.go.dev/github.com/getsentry/sentry-go
+      repo_leg: github-org:getsentry
+      publisher_leg: org:getsentry
+      matched_by: github-org
+    current: true
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months'
+    detected_by: sweep-official-sdks.py
+    detected: '2026-10-18'
+  status: not-a-workflow
+  arazzo: null
+- slug: sentry-system-maven-central
+  label: Maven Central
+  partner: maven-central
+  partner_name: Maven Central
+  category: official SDK (Java/JVM)
+  type: register
+  channel: package-registry
+  evidence: https://central.sonatype.com/artifact/io.sentry/sentry
+  source: edge
+  relationship: distribution-channel
+  contract_reference:
+    register: Maven Central (public registry JSON)
+    spec_file: null
+    language: Java/JVM
+    packages:
+    - name: io.sentry:sentry
+      version: 8.61.0
+      released: '2026-10-14'
+      released_field: lastUpdated
+      lapsed: false
+      page: https://central.sonatype.com/artifact/io.sentry/sentry
+      repo_leg: github-org:getsentry
+      publisher_leg: groupId:sentry.io
+      matched_by: domain
+    current: true
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months'
+    detected_by: sweep-official-sdks.py
+    detected: '2026-10-18'
+  status: not-a-workflow
+  arazzo: null
+- slug: sentry-system-npm-registry
+  label: npm registry
+  partner: npm
+  partner_name: npm registry
+  category: official SDK (JavaScript/TypeScript)
+  type: register
+  channel: package-registry
+  evidence: https://www.npmjs.com/package/@sentry/browser
+  source: edge
+  relationship: distribution-channel
+  contract_reference:
+    register: npm registry (public registry JSON)
+    spec_file: null
+    language: JavaScript/TypeScript
+    packages:
+    - name: '@sentry/browser'
+      version: 11.8.0
+      released: '2026-10-15'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@sentry/browser
+      repo_leg: github-org:getsentry
+      publisher_leg: email:sentry.io
+      matched_by: domain
+    - name: '@sentry/cli'
+      version: 3.8.0
+      released: '2026-09-16'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@sentry/cli
+      repo_leg: domain:sentry.io
+      publisher_leg: email:sentry.io
+      matched_by: domain
+    - name: '@sentry/nextjs'
+      version: 11.8.0
+      released: '2026-10-15'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@sentry/nextjs
+      repo_leg: github-org:getsentry
+      publisher_leg: email:sentry.io
+      matched_by: domain
+    - name: '@sentry/node'
+      version: 11.8.0
+      released: '2026-10-15'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@sentry/node
+      repo_leg: github-org:getsentry
+      publisher_leg: email:sentry.io
+      matched_by: domain
+    - name: '@sentry/react'
+      version: 11.8.0
+      released: '2026-10-15'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@sentry/react
+      repo_leg: github-org:getsentry
+      publisher_leg: email:sentry.io
+      matched_by: domain
+    current: true
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months'
+    detected_by: sweep-official-sdks.py
+    detected: '2026-10-18'
+  status: not-a-workflow
+  arazzo: null
+- slug: sentry-system-nuget-gallery
+  label: NuGet Gallery
+  partner: nuget
+  partner_name: NuGet Gallery
+  category: official SDK (.NET)
+  type: register
+  channel: package-registry
+  evidence: https://www.nuget.org/packages/Sentry
+  source: edge
+  relationship: distribution-channel
+  contract_reference:
+    register: NuGet Gallery (public registry JSON)
+    spec_file: null
+    language: .NET
+    packages:
+    - name: Sentry
+      version: 14.12.1-dump1
+      released: '1900-01-01'
+      released_field: published
+      lapsed: true
+      page: https://www.nuget.org/packages/Sentry
+      repo_leg: domain:sentry.io
+      publisher_leg: org:sentry
+      matched_by: domain
+    current: false
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months'
+    detected_by: sweep-official-sdks.py
+    detected: '2026-10-18'
+  status: not-a-workflow
+  arazzo: null
+- slug: sentry-system-pypi
+  label: PyPI
+  partner: pypi
+  partner_name: PyPI
+  category: official SDK (Python)
+  type: register
+  channel: package-registry
+  evidence: https://pypi.org/project/sentry-cli/
+  source: edge
+  relationship: distribution-channel
+  contract_reference:
+    register: PyPI (public registry JSON)
+    spec_file: null
+    language: Python
+    packages:
+    - name: sentry-cli
+      version: 3.8.0
+      released: '2026-09-16'
+      released_field: upload_time
+      lapsed: false
+      page: https://pypi.org/project/sentry-cli/
+      repo_leg: github-org:getsentry
+      publisher_leg: email:sentry.io
+      matched_by: domain
+    current: true
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months'
+    detected_by: sweep-official-sdks.py
+    detected: '2026-10-18'
+  status: not-a-workflow
+  arazzo: null
+- slug: sentry-system-rubygems
+  label: RubyGems
+  partner: rubygems
+  partner_name: RubyGems
+  category: official SDK (Ruby)
+  type: register
+  channel: package-registry
+  evidence: https://rubygems.org/gems/sentry-ruby
+  source: edge
+  relationship: distribution-channel
+  contract_reference:
+    register: RubyGems (public registry JSON)
+    spec_file: null
+    language: Ruby
+    packages:
+    - name: sentry-ruby
+      version: 7.1.0
+      released: '2026-09-29'
+      released_field: version_created_at
+      lapsed: false
+      page: https://rubygems.org/gems/sentry-ruby
+      repo_leg: github-org:getsentry
+      publisher_leg: org:sentry
+      matched_by: github-org
+    current: true
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months'
+    detected_by: sweep-official-sdks.py
+    detected: '2026-10-18'
+  status: not-a-workflow
+  arazzo: null
