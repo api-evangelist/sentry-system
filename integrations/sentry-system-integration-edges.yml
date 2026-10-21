@@ -47,6 +47,7 @@ checked:
 - https://www.antler.co/portfolio
 - https://www.techstars.com/portfolio
 - https://www.ycombinator.com/companies
+- google-play/integrations/google-play-integration-edges.yml
 marketplace_apps:
 - marketplace: own
   channel: partner-built
@@ -874,6 +875,33 @@ edges:
     detected: '2026-10-20'
   detected_by: sweep-agent-skills.py
   first_seen: '2026-10-20'
+- partner_name: 500 Global
+  partner: 500-global
+  partner_match: register
+  type: register
+  channel: standard-directory
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://500.co/companies
+  category: accelerator portfolio participation
+  contract_reference:
+    register: 500 Global portfolio (500.co/companies; the page's own JSON 500.co/api/startups)
+    standard: null
+    spec_file: null
+    role: accelerator-portfolio-company
+    registered_name: Sentry
+    register_id: https://500.co/companies
+    register_country: United States
+    register_website: sentry.io
+    matched_domain: sentry.io
+    matched_by: domain
+    signal_note: 'participation only: the accelerator''s own portfolio register lists the company (cohort / investment);
+      an ownership and participation record, not conformance or certification'
+    detected_by: sweep-accelerator-portfolios.py
+    detected: '2026-10-21'
+    year: '2015'
+  detected_by: sweep-accelerator-portfolios.py
+  first_seen: '2026-10-21'
 - partner_name: Okta (own)
   partner: okta
   partner_match: mirror
@@ -976,33 +1004,25 @@ edges:
   category: IDE / developer extension marketplace listing
   badges:
   - Verified namespace
-- partner_name: 500 Global
-  partner: 500-global
-  partner_match: register
-  type: register
-  channel: standard-directory
-  relationship: standard-participant
-  direction: partner-built
-  evidence: https://500.co/companies
-  category: accelerator portfolio participation
-  contract_reference:
-    register: 500 Global portfolio (500.co/companies; the page's own JSON 500.co/api/startups)
-    standard: null
-    spec_file: null
-    role: accelerator-portfolio-company
-    registered_name: Sentry
-    register_id: https://500.co/companies
-    register_country: United States
-    register_website: sentry.io
-    matched_domain: sentry.io
-    matched_by: domain
-    signal_note: 'participation only: the accelerator''s own portfolio register lists the company (cohort / investment);
-      an ownership and participation record, not conformance or certification'
-    detected_by: sweep-accelerator-portfolios.py
-    detected: '2026-10-21'
-    year: '2015'
-  detected_by: sweep-accelerator-portfolios.py
-  first_seen: '2026-10-21'
+- partner_name: Google Play Developer (Google Play SDK Index)
+  partner: google-play
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: Google Play SDK Index
+  evidence: https://play.google.com/sdks/details/io-sentry-sentry-android
+  mirror_of: google-play/integrations/google-play-integration-edges.yml
+  apps:
+  - Sentry Android
+  listing_count: 1
+  detected: '2026-10-21'
+  detected_by: mirror-platform-listings.py
+  category: mobile SDK (analytics)
+  publisher_verified:
+  - Registered in Google Play SDK Console
 source:
 - https://github.com/open-telemetry/opentelemetry.io/blob/main/data/ecosystem/vendors.yaml
 - https://github.com/open-telemetry/opentelemetry.io/blob/main/data/registry/
