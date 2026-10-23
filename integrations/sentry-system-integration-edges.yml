@@ -56,6 +56,9 @@ checked:
 - https://packagist.org/packages
 - https://pub.dev/api
 - discord/integrations/discord-integration-edges.yml
+- https://aur.archlinux.org/cgit/aur.git/tree/.SRCINFO
+- https://aur.archlinux.org/packages-meta-ext-v1.json.gz
+- https://aur.archlinux.org/rpc/v5/info
 marketplace_apps:
 - marketplace: own
   channel: partner-built
@@ -1342,6 +1345,40 @@ edges:
   category: Moderation and Tools
   publisher_verified:
   - discord-verified-app
+- partner_name: Arch User Repository (AUR)
+  partner: null
+  partner_match: null
+  type: register
+  direction: provider-built
+  category: official CLI (Arch User Repository (AUR))
+  evidence: https://aur.archlinux.org/packages/sentry-cli-bin
+  channel: package-registry
+  relationship: distribution-channel
+  contract_reference:
+    register: Arch User Repository (AUR) (public package index)
+    spec_file: null
+    packages:
+    - name: sentry-cli-bin
+      kind: aur
+      version: 2.31.0-1
+      released: '2024-04-13'
+      released_field: AUR LastModified
+      out_of_date: true
+      lapsed: true
+      page: https://aur.archlinux.org/packages/sentry-cli-bin
+      upstream: https://github.com/getsentry/sentry-cli
+      cli: 'AUR description: A command-line utility to work with sentry.io'
+      repo_leg: github-org:getsentry
+      publisher_leg: artifact-github-org:getsentry
+      matched_by: github-org
+    current: false
+    signal_note: 'the provider''s own command-line tool packaged for Arch Linux (community-maintained PKGBUILD whose
+      upstream and source artifact are the provider''s): distribution, not an integration; lapsed = flagged out-of-date
+      or not updated in 24 months'
+    detected_by: sweep-aur-vendor-cli-packages.py
+    detected: '2026-10-23'
+  detected_by: sweep-aur-vendor-cli-packages.py
+  first_seen: '2026-10-23'
 source:
 - https://github.com/open-telemetry/opentelemetry.io/blob/main/data/ecosystem/vendors.yaml
 - https://github.com/open-telemetry/opentelemetry.io/blob/main/data/registry/
