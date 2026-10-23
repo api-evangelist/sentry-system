@@ -52,6 +52,9 @@ checked:
 - vercel/integrations/vercel-integration-edges.yml
 - https://github.com/raycast/extensions/tree/84f9ac51336a8c69f70974a75bc067c0feae3658/extensions
 - https://www.raycast.com/api/v1/store_listings
+- https://hex.pm/api
+- https://packagist.org/packages
+- https://pub.dev/api
 marketplace_apps:
 - marketplace: own
   channel: partner-built
@@ -1103,6 +1106,222 @@ edges:
   detected_by: sweep-raycast-store-extensions.py
   first_seen: '2026-10-22'
   direction: partner-built
+- partner_name: Hex
+  partner: hex-pm
+  partner_match: register
+  type: register
+  direction: provider-built
+  category: official SDK (Elixir/Erlang)
+  evidence: https://hex.pm/packages/sentry
+  channel: package-registry
+  relationship: distribution-channel
+  contract_reference:
+    register: Hex (public registry JSON)
+    spec_file: null
+    language: Elixir/Erlang
+    packages:
+    - name: sentry
+      version: 14.0.0
+      released: '2026-10-08'
+      released_field: inserted_at
+      lapsed: false
+      page: https://hex.pm/packages/sentry
+      repo_leg: github-org:getsentry
+      publisher_leg: org:sentry
+      matched_by: github-org
+    current: true
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months'
+    detected_by: sweep-php-dart-elixir-package-registries.py
+    detected: '2026-10-22'
+  detected_by: sweep-php-dart-elixir-package-registries.py
+  first_seen: '2026-10-22'
+- partner_name: Packagist
+  partner: packagist
+  partner_match: register
+  type: register
+  direction: provider-built
+  category: official SDK (PHP)
+  evidence: https://packagist.org/packages/sentry/sdk
+  channel: package-registry
+  relationship: distribution-channel
+  contract_reference:
+    register: Packagist (public registry JSON)
+    spec_file: null
+    language: PHP
+    packages:
+    - name: sentry/sdk
+      version: 3.6.0
+      released: '2023-12-04'
+      released_field: time
+      lapsed: true
+      page: https://packagist.org/packages/sentry/sdk
+      repo_leg: github-org:getsentry
+      publisher_leg: email:sentry.io
+      matched_by: domain
+    - name: sentry/sentry
+      version: 4.34.0
+      released: '2026-10-08'
+      released_field: time
+      lapsed: false
+      page: https://packagist.org/packages/sentry/sentry
+      repo_leg: github-org:getsentry
+      publisher_leg: email:sentry.io
+      matched_by: domain
+    - name: sentry/sentry-agent
+      version: 1.0.0
+      released: '2026-06-10'
+      released_field: time
+      lapsed: false
+      page: https://packagist.org/packages/sentry/sentry-agent
+      repo_leg: github-org:getsentry
+      publisher_leg: email:sentry.io
+      matched_by: domain
+    - name: sentry/sentry-laravel
+      version: 4.29.0
+      released: '2026-10-08'
+      released_field: time
+      lapsed: false
+      page: https://packagist.org/packages/sentry/sentry-laravel
+      repo_leg: github-org:getsentry
+      publisher_leg: email:sentry.io
+      matched_by: domain
+    - name: sentry/sentry-symfony
+      version: 5.14.0
+      released: '2026-10-08'
+      released_field: time
+      lapsed: false
+      page: https://packagist.org/packages/sentry/sentry-symfony
+      repo_leg: github-org:getsentry
+      publisher_leg: email:sentry.io
+      matched_by: domain
+    current: true
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months'
+    detected_by: sweep-php-dart-elixir-package-registries.py
+    detected: '2026-10-22'
+  detected_by: sweep-php-dart-elixir-package-registries.py
+  first_seen: '2026-10-22'
+- partner_name: pub.dev
+  partner: pub-dev
+  partner_match: register
+  type: register
+  direction: provider-built
+  category: official SDK (Dart/Flutter)
+  evidence: https://pub.dev/packages/sentry
+  channel: package-registry
+  relationship: distribution-channel
+  contract_reference:
+    register: pub.dev (public registry JSON)
+    spec_file: null
+    language: Dart/Flutter
+    packages:
+    - name: sentry
+      version: 10.2.0
+      released: '2026-10-22'
+      released_field: published
+      lapsed: false
+      page: https://pub.dev/packages/sentry
+      repo_leg: not required (verified publisher)
+      publisher_leg: verified-publisher:sentry.io
+      matched_by: domain
+    - name: sentry_dart_plugin
+      version: 3.4.0
+      released: '2026-05-28'
+      released_field: published
+      lapsed: false
+      page: https://pub.dev/packages/sentry_dart_plugin
+      repo_leg: not required (verified publisher)
+      publisher_leg: verified-publisher:sentry.io
+      matched_by: domain
+    - name: sentry_dio
+      version: 10.2.0
+      released: '2026-10-22'
+      released_field: published
+      lapsed: false
+      page: https://pub.dev/packages/sentry_dio
+      repo_leg: not required (verified publisher)
+      publisher_leg: verified-publisher:sentry.io
+      matched_by: domain
+    - name: sentry_drift
+      version: 10.2.0
+      released: '2026-10-22'
+      released_field: published
+      lapsed: false
+      page: https://pub.dev/packages/sentry_drift
+      repo_leg: not required (verified publisher)
+      publisher_leg: verified-publisher:sentry.io
+      matched_by: domain
+    - name: sentry_file
+      version: 10.2.0
+      released: '2026-10-22'
+      released_field: published
+      lapsed: false
+      page: https://pub.dev/packages/sentry_file
+      repo_leg: not required (verified publisher)
+      publisher_leg: verified-publisher:sentry.io
+      matched_by: domain
+    - name: sentry_flutter
+      version: 10.2.0
+      released: '2026-10-22'
+      released_field: published
+      lapsed: false
+      page: https://pub.dev/packages/sentry_flutter
+      repo_leg: not required (verified publisher)
+      publisher_leg: verified-publisher:sentry.io
+      matched_by: domain
+    - name: sentry_hive
+      version: 10.2.0
+      released: '2026-10-22'
+      released_field: published
+      lapsed: false
+      page: https://pub.dev/packages/sentry_hive
+      repo_leg: not required (verified publisher)
+      publisher_leg: verified-publisher:sentry.io
+      matched_by: domain
+    - name: sentry_isar
+      version: 10.2.0
+      released: '2026-10-22'
+      released_field: published
+      lapsed: false
+      page: https://pub.dev/packages/sentry_isar
+      repo_leg: not required (verified publisher)
+      publisher_leg: verified-publisher:sentry.io
+      matched_by: domain
+    - name: sentry_link
+      version: 10.2.0
+      released: '2026-10-22'
+      released_field: published
+      lapsed: false
+      page: https://pub.dev/packages/sentry_link
+      repo_leg: not required (verified publisher)
+      publisher_leg: verified-publisher:sentry.io
+      matched_by: domain
+    - name: sentry_logging
+      version: 10.2.0
+      released: '2026-10-22'
+      released_field: published
+      lapsed: false
+      page: https://pub.dev/packages/sentry_logging
+      repo_leg: not required (verified publisher)
+      publisher_leg: verified-publisher:sentry.io
+      matched_by: domain
+    - name: sentry_sqflite
+      version: 10.2.0
+      released: '2026-10-22'
+      released_field: published
+      lapsed: false
+      page: https://pub.dev/packages/sentry_sqflite
+      repo_leg: not required (verified publisher)
+      publisher_leg: verified-publisher:sentry.io
+      matched_by: domain
+    current: true
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months'
+    detected_by: sweep-php-dart-elixir-package-registries.py
+    detected: '2026-10-22'
+  detected_by: sweep-php-dart-elixir-package-registries.py
+  first_seen: '2026-10-22'
 source:
 - https://github.com/open-telemetry/opentelemetry.io/blob/main/data/ecosystem/vendors.yaml
 - https://github.com/open-telemetry/opentelemetry.io/blob/main/data/registry/
