@@ -1,4 +1,4 @@
-# Sentry (sentry-system)
+# Sentry
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,521 +64,321 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Sentry is an open-source error tracking and performance monitoring platform that helps developers identify, triage, and resolve issues in their applications in real-time.
+Sentry is an open-source error tracking and performance monitoring platform that helps developers identify, triage, and resolve issues in their applications in real-time. Its Web API at https://sentry.io/api/0 covers issues and events, releases and deploys, alerting, dashboards and Discover queries, session replays, cron and uptime monitors, mobile build size analysis, SCIM 2.0 provisioning, and the Seer AI agent that root-causes an issue and can open a pull request. Sentry also runs a first-party remote MCP server at https://mcp.sentry.dev/mcp and ships official SDKs for 20+ platforms.
+
+**Areas:** APM · Application Monitoring · Bug Tracking · Developer Tools · Error Tracking · Observability · Performance Monitoring · Real-Time Monitoring · Monitoring
+
+## Sentry on APIs.io
+
+Everything profiled for Sentry is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/sentry-system/](https://apis.io/providers/sentry-system/)** — or go straight to one of the APIs or properties below.
+
+### APIs (45)
+
+- [Sentry Alerts API](https://apis.io/apis/sentry-system/sentry-system-alerts-api/) — Manage alerts (beta)
+- [Sentry Check-Ins API](https://apis.io/apis/sentry-system/sentry-system-check-ins-api/) — View monitor check-in history
+- [Sentry Client Keys API](https://apis.io/apis/sentry-system/sentry-system-client-keys-api/) — Manage project client keys (DSNs)
+- [Sentry Commits API](https://apis.io/apis/sentry-system/sentry-system-commits-api/) — Manage commits associated with releases
+- [Sentry Custom Integrations API](https://apis.io/apis/sentry-system/sentry-system-custom-integrations-api/) — Manage custom integrations
+- [Sentry Dashboards API](https://apis.io/apis/sentry-system/sentry-system-dashboards-api/) — Manage custom dashboards and their widgets
+- [Sentry Data Forwarders API](https://apis.io/apis/sentry-system/sentry-system-data-forwarders-api/) — Manage data forwarding configurations
+- [Sentry Debug Files API](https://apis.io/apis/sentry-system/sentry-system-debug-files-api/) — Manage debug information files
+- [Sentry Deploys API](https://apis.io/apis/sentry-system/sentry-system-deploys-api/) — Manage deployments of releases
+- [Sentry Discover API](https://apis.io/apis/sentry-system/sentry-system-discover-api/) — Manage saved Discover queries
+- [Sentry Environments API](https://apis.io/apis/sentry-system/sentry-system-environments-api/) — Manage project and organization environments
+- [Sentry Events API](https://apis.io/apis/sentry-system/sentry-system-events-api/) — Access and manage error and transaction events
+- [Sentry Explore API](https://apis.io/apis/sentry-system/sentry-system-explore-api/) — Query and analyze event data
+- [Sentry External Issues API](https://apis.io/apis/sentry-system/sentry-system-external-issues-api/) — Manage external issue links
+- [Sentry External Teams API](https://apis.io/apis/sentry-system/sentry-system-external-teams-api/) — Manage external team mappings
+- [Sentry External Users API](https://apis.io/apis/sentry-system/sentry-system-external-users-api/) — Manage external user mappings
+- [Sentry Filters API](https://apis.io/apis/sentry-system/sentry-system-filters-api/) — Manage inbound data filters
+- [Sentry Installations API](https://apis.io/apis/sentry-system/sentry-system-installations-api/) — Manage integration installations
+- [Sentry Integrations API](https://apis.io/apis/sentry-system/sentry-system-integrations-api/) — Manage third-party integrations
+- [Sentry Interactions API](https://apis.io/apis/sentry-system/sentry-system-interactions-api/) — View user interactions within replays
+- [Sentry Issue Alerts API](https://apis.io/apis/sentry-system/sentry-system-issue-alerts-api/) — Manage issue alert rules at the project level
+- [Sentry Issues API](https://apis.io/apis/sentry-system/sentry-system-issues-api/) — Manage error issues
+- [Sentry Members API](https://apis.io/apis/sentry-system/sentry-system-members-api/) — Manage organization members and their roles
+- [Sentry Metric Alerts API](https://apis.io/apis/sentry-system/sentry-system-metric-alerts-api/) — Manage metric alert rules at the organization level
+- [Sentry Mobile Builds API](https://apis.io/apis/sentry-system/sentry-system-mobile-builds-api/) — Analyze mobile application build artifacts
+- [Sentry Monitors API](https://apis.io/apis/sentry-system/sentry-system-monitors-api/) — Manage cron job monitors
+- [Sentry Organizations API](https://apis.io/apis/sentry-system/sentry-system-organizations-api/) — Manage Sentry organizations
+- [Sentry Projects API](https://apis.io/apis/sentry-system/sentry-system-projects-api/) — Manage projects within organizations
+- [Sentry Recording Segments API](https://apis.io/apis/sentry-system/sentry-system-recording-segments-api/) — Access replay recording segments
+- [Sentry Release Files API](https://apis.io/apis/sentry-system/sentry-system-release-files-api/) — Manage files associated with releases
+- [Sentry Releases API](https://apis.io/apis/sentry-system/sentry-system-releases-api/) — Manage software releases
+- [Sentry Replays API](https://apis.io/apis/sentry-system/sentry-system-replays-api/) — Manage session replays
+- [Sentry Repositories API](https://apis.io/apis/sentry-system/sentry-system-repositories-api/) — Manage organization repositories
+- [Sentry SCIM Members API](https://apis.io/apis/sentry-system/sentry-system-scim-members-api/) — Provision and manage organization members via SCIM
+- [Sentry SCIM Teams API](https://apis.io/apis/sentry-system/sentry-system-scim-teams-api/) — Provision and manage teams via SCIM
+- [Sentry Seer API](https://apis.io/apis/sentry-system/sentry-system-seer-api/) — AI-powered issue analysis and fix suggestions
+- [Sentry Service Hooks API](https://apis.io/apis/sentry-system/sentry-system-service-hooks-api/) — Manage project service hooks
+- [Sentry Sessions API](https://apis.io/apis/sentry-system/sentry-system-sessions-api/) — Retrieve release health session statistics
+- [Sentry Spike Protection API](https://apis.io/apis/sentry-system/sentry-system-spike-protection-api/) — Manage spike protection notification actions
+- [Sentry Teams API](https://apis.io/apis/sentry-system/sentry-system-teams-api/) — Manage teams within organizations
+- [Sentry Test Results API](https://apis.io/apis/sentry-system/sentry-system-test-results-api/) — Retrieve test result metrics and test suites
+- [Sentry Tokens API](https://apis.io/apis/sentry-system/sentry-system-tokens-api/) — Manage repository upload tokens
+- [Sentry User Feedback API](https://apis.io/apis/sentry-system/sentry-system-user-feedback-api/) — Manage user feedback submissions
+- [Sentry SDK API](https://apis.io/apis/sentry-system/sentry-sdk-api/) — Sentry provides official SDKs for 22+ platforms including JavaScript, Python, PHP, .NET, Java, Go, Ruby, Rust, Android, Apple, React Native, Unity, and…
+- [Sentry Integration Platform API](https://apis.io/apis/sentry-system/sentry-integration-platform-api/) — The Sentry Integration Platform API enables building public and internal integrations with Sentry. Supports OAuth2 with PKCE, device authorization flow for…
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### Arazzo workflows (12)
+
+Multi-step workflows that chain operations into a business task.
+
+- [Sentry Capture User Feedback for an Event](https://apis.io/arazzos/sentry-system/sentry-system-capture-user-feedback-workflow/)
+- [Sentry Create a Cron Monitor and Verify Check-ins](https://apis.io/arazzos/sentry-system/sentry-system-create-cron-monitor-workflow/)
+- [Sentry Create a Metric Alert Rule](https://apis.io/arazzos/sentry-system/sentry-system-create-metric-alert-workflow/)
+- [Sentry Create a Team and Add a Member](https://apis.io/arazzos/sentry-system/sentry-system-create-team-add-member-workflow/)
+- [Sentry Cut a Release and Record a Deploy](https://apis.io/arazzos/sentry-system/sentry-system-cut-release-deploy-workflow/)
+- [Sentry Grant a Team Access to a Project](https://apis.io/arazzos/sentry-system/sentry-system-grant-team-project-access-workflow/)
+- [Sentry Investigate an Issue's Tags](https://apis.io/arazzos/sentry-system/sentry-system-investigate-issue-tags-workflow/)
+- [Sentry Invite a Member and Onboard to a Team](https://apis.io/arazzos/sentry-system/sentry-system-invite-member-onboard-team-workflow/)
+- [Sentry Provision a Project and Client Key](https://apis.io/arazzos/sentry-system/sentry-system-provision-project-key-workflow/)
+- [Sentry Run a Seer AI Autofix on an Issue](https://apis.io/arazzos/sentry-system/sentry-system-seer-autofix-issue-workflow/)
+- [Sentry Sync Prevent Repositories](https://apis.io/arazzos/sentry-system/sentry-system-sync-prevent-repos-workflow/)
+- [Sentry Triage and Resolve an Issue](https://apis.io/arazzos/sentry-system/sentry-system-triage-resolve-issue-workflow/)
+
+#### AsyncAPI (1)
+
+Event-driven and webhook contracts.
+
+- [Sentry System Webhooks](https://apis.io/asyncapis/sentry-system/sentry-system-webhooks/)
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [sentry](https://apis.io/servers/sentry-system/sentry/)
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Sentry System Agentic Access](https://apis.io/agentic-access/sentry-system/sentry-system-agentic-access/)
+
+#### JSON Schema (54)
+
+The data models the API reads and writes.
+
+- [Sentry Alert Rule](https://apis.io/schemas/sentry-system/sentry-alert-rule/)
+- [Sentry Event](https://apis.io/schemas/sentry-system/sentry-event/)
+- [Sentry Issue](https://apis.io/schemas/sentry-system/sentry-issue/)
+- [Sentry Monitor](https://apis.io/schemas/sentry-system/sentry-monitor/)
+- [Sentry Organization](https://apis.io/schemas/sentry-system/sentry-organization/)
+- [Sentry Project](https://apis.io/schemas/sentry-system/sentry-project/)
+- [Sentry Release](https://apis.io/schemas/sentry-system/sentry-release/)
+- [Sentry Replay](https://apis.io/schemas/sentry-system/sentry-replay/)
+- [CheckIn](https://apis.io/schemas/sentry-system/sentry-system-checkin/)
+- [ClientKey](https://apis.io/schemas/sentry-system/sentry-system-clientkey/)
+- [Commit](https://apis.io/schemas/sentry-system/sentry-system-commit/)
+- [Dashboard](https://apis.io/schemas/sentry-system/sentry-system-dashboard/)
+- [DashboardSummary](https://apis.io/schemas/sentry-system/sentry-system-dashboardsummary/)
+- [DataForwarder](https://apis.io/schemas/sentry-system/sentry-system-dataforwarder/)
+- [DebugFile](https://apis.io/schemas/sentry-system/sentry-system-debugfile/)
+- [Deploy](https://apis.io/schemas/sentry-system/sentry-system-deploy/)
+- [Environment](https://apis.io/schemas/sentry-system/sentry-system-environment/)
+- [Event](https://apis.io/schemas/sentry-system/sentry-system-event/)
+- [ExternalIssue](https://apis.io/schemas/sentry-system/sentry-system-externalissue/)
+- [Installation](https://apis.io/schemas/sentry-system/sentry-system-installation/)
+- [Integration](https://apis.io/schemas/sentry-system/sentry-system-integration/)
+- [Issue](https://apis.io/schemas/sentry-system/sentry-system-issue/)
+- [IssueAlertRule](https://apis.io/schemas/sentry-system/sentry-system-issuealertrule/)
+- [MetricAlertRule](https://apis.io/schemas/sentry-system/sentry-system-metricalertrule/)
+- [Monitor](https://apis.io/schemas/sentry-system/sentry-system-monitor/)
+- …and 29 more published on APIs.io
+
+#### JSON Structure (1)
+
+Data models expressed in JSON Structure.
+
+- [Sentry System Structure](https://apis.io/json-structure/sentry-system/sentry-system-structure/)
+
+#### JSON-LD (1)
+
+Linked-data contexts for the provider's vocabulary.
+
+- [Sentry Context](https://apis.io/jsonld/sentry-system/sentry-context/)
+
+#### Vocabulary (1)
+
+The provider's domain terms, defined.
+
+- [Sentry Domain Vocabulary](https://apis.io/vocabularies/sentry-system/sentry-system-vocabulary/)
+
+#### Collections (86)
+
+Postman and Open Collection request collections.
+
+- [Sentry Alerts API](https://apis.io/collections/sentry-system/open-sentry-alerts/)
+- [Sentry API](https://apis.io/collections/sentry-system/open-sentry-api/)
+- [Sentry Crons API](https://apis.io/collections/sentry-system/open-sentry-crons/)
+- [Sentry Dashboards API](https://apis.io/collections/sentry-system/open-sentry-dashboards/)
+- [Sentry Discover API](https://apis.io/collections/sentry-system/open-sentry-discover/)
+- [Sentry Environments API](https://apis.io/collections/sentry-system/open-sentry-environments/)
+- [Sentry Events and Issues API](https://apis.io/collections/sentry-system/open-sentry-events-issues/)
+- [Sentry Explore API](https://apis.io/collections/sentry-system/open-sentry-explore/)
+- [Sentry Integration Platform API](https://apis.io/collections/sentry-system/open-sentry-integration-platform/)
+- [Sentry Integrations API](https://apis.io/collections/sentry-system/open-sentry-integrations/)
+- [Sentry Mobile Builds API](https://apis.io/collections/sentry-system/open-sentry-mobile-builds/)
+- [Sentry Monitors API](https://apis.io/collections/sentry-system/open-sentry-monitors/)
+- [Sentry Organizations API](https://apis.io/collections/sentry-system/open-sentry-organizations/)
+- [Sentry Prevent API](https://apis.io/collections/sentry-system/open-sentry-prevent/)
+- [Sentry Projects API](https://apis.io/collections/sentry-system/open-sentry-projects/)
+- [Sentry Releases API](https://apis.io/collections/sentry-system/open-sentry-releases/)
+- [Sentry Replays API](https://apis.io/collections/sentry-system/open-sentry-replays/)
+- [Sentry SCIM API](https://apis.io/collections/sentry-system/open-sentry-scim/)
+- [Sentry Seer API](https://apis.io/collections/sentry-system/open-sentry-seer/)
+- [Sentry Alerts API](https://apis.io/collections/sentry-system/open-sentry-system-alerts-api/)
+- [Sentry Alerts Check-Ins API](https://apis.io/collections/sentry-system/open-sentry-system-check-ins-api/)
+- [Sentry Alerts Client Keys API](https://apis.io/collections/sentry-system/open-sentry-system-client-keys-api/)
+- [Sentry Alerts Commits API](https://apis.io/collections/sentry-system/open-sentry-system-commits-api/)
+- [Sentry Alerts Custom Integrations API](https://apis.io/collections/sentry-system/open-sentry-system-custom-integrations-api/)
+- [Sentry Alerts Dashboards API](https://apis.io/collections/sentry-system/open-sentry-system-dashboards-api/)
+- …and 61 more published on APIs.io
+
+#### Overlays (64)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Sentry System Alerts Api Phrasing Overlay](https://apis.io/overlays/sentry-system/sentry-system-alerts-api-phrasing-overlay/)
+- [Sentry System Alerts Overlay](https://apis.io/overlays/sentry-system/sentry-system-alerts-overlay/)
+- [Sentry System Api Overlay](https://apis.io/overlays/sentry-system/sentry-system-api-overlay/)
+- [Sentry System Check Ins Api Phrasing Overlay](https://apis.io/overlays/sentry-system/sentry-system-check-ins-api-phrasing-overlay/)
+- [Sentry System Client Keys Api Phrasing Overlay](https://apis.io/overlays/sentry-system/sentry-system-client-keys-api-phrasing-overlay/)
+- [Sentry System Commits Api Phrasing Overlay](https://apis.io/overlays/sentry-system/sentry-system-commits-api-phrasing-overlay/)
+- [Sentry System Crons Overlay](https://apis.io/overlays/sentry-system/sentry-system-crons-overlay/)
+- [Sentry System Custom Integrations Api Phrasing Overlay](https://apis.io/overlays/sentry-system/sentry-system-custom-integrations-api-phrasing-overlay/)
+- [Sentry System Dashboards Api Phrasing Overlay](https://apis.io/overlays/sentry-system/sentry-system-dashboards-api-phrasing-overlay/)
+- [Sentry System Dashboards Overlay](https://apis.io/overlays/sentry-system/sentry-system-dashboards-overlay/)
+- [Sentry System Data Forwarders Api Phrasing Overlay](https://apis.io/overlays/sentry-system/sentry-system-data-forwarders-api-phrasing-overlay/)
+- [Sentry System Debug Files Api Phrasing Overlay](https://apis.io/overlays/sentry-system/sentry-system-debug-files-api-phrasing-overlay/)
+- [Sentry System Deploys Api Phrasing Overlay](https://apis.io/overlays/sentry-system/sentry-system-deploys-api-phrasing-overlay/)
+- [Sentry System Discover Api Phrasing Overlay](https://apis.io/overlays/sentry-system/sentry-system-discover-api-phrasing-overlay/)
+- [Sentry System Discover Overlay](https://apis.io/overlays/sentry-system/sentry-system-discover-overlay/)
+- [Sentry System Environments Api Phrasing Overlay](https://apis.io/overlays/sentry-system/sentry-system-environments-api-phrasing-overlay/)
+- [Sentry System Environments Overlay](https://apis.io/overlays/sentry-system/sentry-system-environments-overlay/)
+- [Sentry System Events Api Phrasing Overlay](https://apis.io/overlays/sentry-system/sentry-system-events-api-phrasing-overlay/)
+- [Sentry System Events Issues Overlay](https://apis.io/overlays/sentry-system/sentry-system-events-issues-overlay/)
+- [Sentry System Explore Api Phrasing Overlay](https://apis.io/overlays/sentry-system/sentry-system-explore-api-phrasing-overlay/)
+- [Sentry System Explore Overlay](https://apis.io/overlays/sentry-system/sentry-system-explore-overlay/)
+- [Sentry System External Issues Api Phrasing Overlay](https://apis.io/overlays/sentry-system/sentry-system-external-issues-api-phrasing-overlay/)
+- [Sentry System External Teams Api Phrasing Overlay](https://apis.io/overlays/sentry-system/sentry-system-external-teams-api-phrasing-overlay/)
+- [Sentry System External Users Api Phrasing Overlay](https://apis.io/overlays/sentry-system/sentry-system-external-users-api-phrasing-overlay/)
+- [Sentry System Filters Api Phrasing Overlay](https://apis.io/overlays/sentry-system/sentry-system-filters-api-phrasing-overlay/)
+- …and 39 more published on APIs.io
+
+#### Governance rules (1)
+
+Spectral rulesets for the provider's contracts.
+
+- [Sentry — jsonschema rules](https://apis.io/rules/sentry-system/sentry-system-jsonschema-spectral-rules/)
+
+#### Security (4)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Sentry System Authentication](https://apis.io/security/sentry-system/sentry-system-authentication/)
+- [Sentry System Domain Security](https://apis.io/security/sentry-system/sentry-system-domain-security/)
+- [Sentry System Trust Center](https://apis.io/security/sentry-system/sentry-system-trust-center/)
+- [Sentry System Vulnerability Disclosure](https://apis.io/security/sentry-system/sentry-system-vulnerability-disclosure/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Sentry System Scopes](https://apis.io/scopes/sentry-system/sentry-system-scopes/)
+
+#### Plans and pricing (2)
+
+Published plans, tiers and prices.
+
+- [Sentry System Plans Pricing](https://apis.io/plans/sentry-system/sentry-system-plans-pricing/)
+- [Sentry System Price Estimates](https://apis.io/plans/sentry-system/sentry-system-price-estimates/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Sentry System Rate Limits](https://apis.io/rate-limits/sentry-system/sentry-system-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Sentry System Finops](https://apis.io/finops/sentry-system/sentry-system-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-**APIs.json:** [https://sentry.io/apis.json](https://sentry.io/apis.json)
-
-## Tags
-
-- APM
-- Application Monitoring
-- Bug Tracking
-- Developer Tools
-- Error Tracking
-- Observability
-- Performance Monitoring
-- Real-Time Monitoring
-
-## Timestamps
-
-- **Created:** 2024-01-15
-- **Modified:** 2026-05-19
-
-## APIs
-
-### Sentry API
-
-The Sentry API provides programmatic access to Sentry's error tracking, performance monitoring, and organizational data. It allows developers to manage projects, issues, releases, and more.
-
-- **Human URL:** [https://sentry.io](https://sentry.io)
-- **Base URL:** `https://sentry.io/api/0`
-
-#### Tags
-
-- Error Tracking
-- Monitoring
-- Observability
-- Performance
-
-#### Properties
-
-- [Documentation](https://docs.sentry.io/api/)
-- [OpenAPI](https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [OpenAPI](openapi/sentry-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/sentry-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sentry-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Authentication](https://docs.sentry.io/api/auth/)
-- [Getting Started](https://docs.sentry.io/api/guides/create-auth-token/)
-- [Rate Limits](https://docs.sentry.io/api/ratelimits/)
-- [S D Ks](https://docs.sentry.io/platforms/)
-- [Postman Collection](https://www.postman.com/sentryio/sentry-api-collection/documentation/xtzhckg/sentry-api-collection) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Webhooks](https://docs.sentry.io/organization/integrations/integration-platform/webhooks/)
-- [Pagination](https://docs.sentry.io/api/pagination/)
-- [Permissions](https://docs.sentry.io/api/permissions/)
-- [Reference](https://docs.sentry.io/api/requests/)
-- [JSON Schema](json-schema/sentry-organization-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/sentry-project-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/sentry-issue-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/sentry-event-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/sentry-team-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/sentry-release-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/sentry-alert-rule-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/sentry-monitor-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/sentry-replay-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON-LD](json-ld/sentry-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
-
-### Sentry Events and Issues API
-
-The Events and Issues API provides endpoints for managing error events and issues in Sentry, including listing, retrieving, updating, and bulk-mutating issues and their associated events, tags, and hashes.
-
-- **Human URL:** [https://docs.sentry.io/api/events/](https://docs.sentry.io/api/events/)
-- **Base URL:** `https://sentry.io/api/0`
-
-#### Tags
-
-- Debugging
-- Error Tracking
-- Events
-- Issues
-
-#### Properties
-
-- [Documentation](https://docs.sentry.io/api/events/)
-- [OpenAPI](https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [OpenAPI](openapi/sentry-events-issues-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/sentry-events-issues.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sentry-events-issues.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Sentry Organizations API
-
-The Organizations API provides endpoints for managing Sentry organizations, including retrieving and updating organization details, managing members and their roles, listing projects and repositories, and resolving event and short IDs.
-
-- **Human URL:** [https://docs.sentry.io/api/organizations/](https://docs.sentry.io/api/organizations/)
-- **Base URL:** `https://sentry.io/api/0`
-
-#### Tags
-
-- Administration
-- Members
-- Organizations
-
-#### Properties
-
-- [Documentation](https://docs.sentry.io/api/organizations/)
-- [OpenAPI](https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [OpenAPI](openapi/sentry-organizations-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/sentry-organizations.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sentry-organizations.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Sentry Projects API
-
-The Projects API provides endpoints for managing Sentry projects, including creating, retrieving, updating, and deleting projects, as well as managing client keys, debug files, service hooks, filters, and user feedback.
-
-- **Human URL:** [https://docs.sentry.io/api/projects/](https://docs.sentry.io/api/projects/)
-- **Base URL:** `https://sentry.io/api/0`
-
-#### Tags
-
-- Configuration
-- Management
-- Projects
-
-#### Properties
-
-- [Documentation](https://docs.sentry.io/api/projects/)
-- [OpenAPI](https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [OpenAPI](openapi/sentry-projects-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/sentry-projects.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sentry-projects.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Sentry Teams API
-
-The Teams API provides endpoints for managing teams within Sentry organizations, including creating, retrieving, updating, and deleting teams, managing team members and their roles, and listing projects associated with teams.
-
-- **Human URL:** [https://docs.sentry.io/api/teams/](https://docs.sentry.io/api/teams/)
-- **Base URL:** `https://sentry.io/api/0`
-
-#### Tags
-
-- Collaboration
-- Members
-- Teams
-
-#### Properties
-
-- [Documentation](https://docs.sentry.io/api/teams/)
-- [OpenAPI](https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [OpenAPI](openapi/sentry-teams-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/sentry-teams.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sentry-teams.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Sentry Releases API
-
-The Releases API provides endpoints for managing software releases in Sentry, including creating and managing releases, uploading release files, listing commits, managing deployments, and retrieving release health session statistics.
-
-- **Human URL:** [https://docs.sentry.io/api/releases/](https://docs.sentry.io/api/releases/)
-- **Base URL:** `https://sentry.io/api/0`
-
-#### Tags
-
-- Deployments
-- Releases
-- Version Management
-
-#### Properties
-
-- [Documentation](https://docs.sentry.io/api/releases/)
-- [OpenAPI](https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [OpenAPI](openapi/sentry-releases-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/sentry-releases.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sentry-releases.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Sentry Alerts API
-
-The Alerts API provides endpoints for managing alert rules in Sentry, including creating, retrieving, updating, and deleting metric alert rules and issue alert rules, as well as managing spike protection notification actions.
-
-- **Human URL:** [https://docs.sentry.io/api/alerts/](https://docs.sentry.io/api/alerts/)
-- **Base URL:** `https://sentry.io/api/0`
-
-#### Tags
-
-- Alerts
-- Monitoring
-- Notifications
-
-#### Properties
-
-- [Documentation](https://docs.sentry.io/api/alerts/)
-- [OpenAPI](https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [OpenAPI](openapi/sentry-alerts-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/sentry-alerts.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sentry-alerts.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Sentry Crons API
-
-The Crons API provides endpoints for managing cron job monitors in Sentry, including creating, retrieving, updating, and deleting monitors, managing monitor environments, and retrieving check-in history for tracked scheduled tasks.
-
-- **Human URL:** [https://docs.sentry.io/api/crons/](https://docs.sentry.io/api/crons/)
-- **Base URL:** `https://sentry.io/api/0`
-
-#### Tags
-
-- Crons
-- Monitoring
-- Scheduled Tasks
-
-#### Properties
-
-- [Documentation](https://docs.sentry.io/api/crons/)
-- [OpenAPI](https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [OpenAPI](openapi/sentry-crons-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/sentry-crons.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sentry-crons.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Sentry Dashboards API
-
-The Dashboards API provides endpoints for managing custom dashboards in Sentry organizations, including creating, listing, retrieving, editing, and deleting dashboards for visualizing error and performance data.
-
-- **Human URL:** [https://docs.sentry.io/api/dashboards/](https://docs.sentry.io/api/dashboards/)
-- **Base URL:** `https://sentry.io/api/0`
-
-#### Tags
-
-- Analytics
-- Dashboards
-- Visualization
-
-#### Properties
-
-- [Documentation](https://docs.sentry.io/api/dashboards/)
-- [OpenAPI](https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [OpenAPI](openapi/sentry-dashboards-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/sentry-dashboards.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sentry-dashboards.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Sentry Discover API
-
-The Discover and Performance API provides endpoints for managing saved queries in Sentry, allowing you to create, list, retrieve, edit, and delete organization-level Discover saved queries for slicing and analyzing error and transaction event data.
-
-- **Human URL:** [https://docs.sentry.io/api/discover/](https://docs.sentry.io/api/discover/)
-- **Base URL:** `https://sentry.io/api/0`
-
-#### Tags
-
-- Analytics
-- Discover
-- Performance
-- Queries
-
-#### Properties
-
-- [Documentation](https://docs.sentry.io/api/discover/)
-- [OpenAPI](https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [OpenAPI](openapi/sentry-discover-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/sentry-discover.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sentry-discover.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Sentry Environments API
-
-The Environments API provides endpoints for managing environments in Sentry, including listing project and organization environments, retrieving individual project environment details, and updating project environment settings.
-
-- **Human URL:** [https://docs.sentry.io/api/environments/](https://docs.sentry.io/api/environments/)
-- **Base URL:** `https://sentry.io/api/0`
-
-#### Tags
-
-- Configuration
-- Environments
-- Management
-
-#### Properties
-
-- [Documentation](https://docs.sentry.io/api/environments/)
-- [OpenAPI](https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [OpenAPI](openapi/sentry-environments-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/sentry-environments.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sentry-environments.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Sentry Explore API
-
-The Explore API provides endpoints for querying and analyzing event data in Sentry, allowing you to slice and dice events in both table and timeseries formats for flexible data analysis and visualization.
-
-- **Human URL:** [https://docs.sentry.io/api/explore/](https://docs.sentry.io/api/explore/)
-- **Base URL:** `https://sentry.io/api/0`
-
-#### Tags
-
-- Analytics
-- Events
-- Explore
-
-#### Properties
-
-- [Documentation](https://docs.sentry.io/api/explore/)
-- [OpenAPI](https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [OpenAPI](openapi/sentry-explore-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/sentry-explore.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sentry-explore.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Sentry Integration Platform API
-
-The Integration Platform API provides endpoints for managing custom integrations in Sentry, including creating and updating external issues, managing integration configurations, listing installations, and retrieving organization-level custom integration details.
-
-- **Human URL:** [https://docs.sentry.io/api/integration/](https://docs.sentry.io/api/integration/)
-- **Base URL:** `https://sentry.io/api/0`
-
-#### Tags
-
-- Integrations
-- Platform
-- Webhooks
-
-#### Properties
-
-- [Documentation](https://docs.sentry.io/api/integration/)
-- [OpenAPI](https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [OpenAPI](openapi/sentry-integration-platform-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/sentry-integration-platform.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sentry-integration-platform.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Sentry Integrations API
-
-The Integrations API provides endpoints for managing third-party integrations within Sentry organizations, including creating and managing data forwarders, handling external user and team records, and controlling integration configurations.
-
-- **Human URL:** [https://docs.sentry.io/api/integrations/](https://docs.sentry.io/api/integrations/)
-- **Base URL:** `https://sentry.io/api/0`
-
-#### Tags
-
-- Configuration
-- Data Forwarding
-- Integrations
-
-#### Properties
-
-- [Documentation](https://docs.sentry.io/api/integrations/)
-- [OpenAPI](https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [OpenAPI](openapi/sentry-integrations-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/sentry-integrations.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sentry-integrations.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Sentry Mobile Builds API
-
-The Mobile Builds API provides endpoints for analyzing mobile application artifacts in Sentry, including retrieving install information and size analysis results for mobile build artifacts.
-
-- **Human URL:** [https://docs.sentry.io/api/mobile-builds/](https://docs.sentry.io/api/mobile-builds/)
-- **Base URL:** `https://sentry.io/api/0`
-
-#### Tags
-
-- Artifacts
-- Builds
-- Mobile
-
-#### Properties
-
-- [Documentation](https://docs.sentry.io/api/mobile-builds/)
-- [OpenAPI](https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [OpenAPI](openapi/sentry-mobile-builds-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/sentry-mobile-builds.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sentry-mobile-builds.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Sentry Monitors API
-
-The Monitors and Alerts API provides beta endpoints for managing monitors and alerts in Sentry, including creating, retrieving, updating, and deleting monitors and alerts, as well as bulk operations at the organization level.
-
-- **Human URL:** [https://docs.sentry.io/api/monitors/](https://docs.sentry.io/api/monitors/)
-- **Base URL:** `https://sentry.io/api/0`
-
-#### Tags
-
-- Alerts
-- Monitors
-- Uptime
-
-#### Properties
-
-- [Documentation](https://docs.sentry.io/api/monitors/)
-- [OpenAPI](https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [OpenAPI](openapi/sentry-monitors-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/sentry-monitors.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sentry-monitors.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Sentry Prevent API
-
-The Prevent API provides endpoints for managing repository integrations and test results in Sentry, including syncing repositories, managing branches, generating upload tokens, and retrieving test result metrics and test suites.
-
-- **Human URL:** [https://docs.sentry.io/api/prevent/](https://docs.sentry.io/api/prevent/)
-- **Base URL:** `https://sentry.io/api/0`
-
-#### Tags
-
-- Quality Assurance
-- Repositories
-- Testing
-
-#### Properties
-
-- [Documentation](https://docs.sentry.io/api/prevent/)
-- [OpenAPI](https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [OpenAPI](openapi/sentry-prevent-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/sentry-prevent.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sentry-prevent.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Sentry Replays API
-
-The Replays API provides endpoints for managing session replays in Sentry, including listing, retrieving, and deleting replay instances, accessing recording segments, listing clicked nodes and selectors, and retrieving replay counts for issues or transactions.
-
-- **Human URL:** [https://docs.sentry.io/api/replays/](https://docs.sentry.io/api/replays/)
-- **Base URL:** `https://sentry.io/api/0`
-
-#### Tags
-
-- Replays
-- Session Recording
-- User Experience
-
-#### Properties
-
-- [Documentation](https://docs.sentry.io/api/replays/)
-- [OpenAPI](https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [OpenAPI](openapi/sentry-replays-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/sentry-replays.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sentry-replays.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Sentry SCIM API
-
-The SCIM API provides endpoints for federated identity management in Sentry, enabling automated provisioning and deprovisioning of organization members and teams using the System for Cross-Domain Identity Management standard. Requires a Business Plan with SAML2 enabled.
-
-- **Human URL:** [https://docs.sentry.io/api/scim/](https://docs.sentry.io/api/scim/)
-- **Base URL:** `https://sentry.io/api/0`
-
-#### Tags
-
-- Enterprise
-- Identity Management
-- Provisioning
-- SCIM
-
-#### Properties
-
-- [Documentation](https://docs.sentry.io/api/scim/)
-- [OpenAPI](https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [OpenAPI](openapi/sentry-scim-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/sentry-scim.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sentry-scim.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Sentry Seer API
-
-The Seer API provides endpoints for AI-powered issue analysis in Sentry, including listing available AI models, starting AI-assisted issue fixes, and retrieving the state of ongoing fix analyses.
-
-- **Human URL:** [https://docs.sentry.io/api/seer/](https://docs.sentry.io/api/seer/)
-- **Base URL:** `https://sentry.io/api/0`
-
-#### Tags
-
-- AI
-- Automation
-- Issue Analysis
-
-#### Properties
-
-- [Documentation](https://docs.sentry.io/api/seer/)
-- [OpenAPI](https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [OpenAPI](openapi/sentry-seer-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/sentry-seer.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sentry-seer.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Sentry Users API
-
-The Users API provides endpoints for retrieving user-related information in Sentry, including listing the organizations that the authenticated user belongs to.
-
-- **Human URL:** [https://docs.sentry.io/api/users/](https://docs.sentry.io/api/users/)
-- **Base URL:** `https://sentry.io/api/0`
-
-#### Tags
-
-- Accounts
-- Authentication
-- Users
-
-#### Properties
-
-- [Documentation](https://docs.sentry.io/api/users/)
-- [OpenAPI](https://github.com/getsentry/sentry-api-schema/blob/main/openapi-derefed.json) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [OpenAPI](openapi/sentry-users-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/sentry-users.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sentry-users.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-## Common Properties
-
-- [Arazzo Workflows](arazzo/) — [Arazzo Specification](https://spec.openapis.org/arazzo/latest.html)
-- [Portal](https://sentry.io/)
 - [Website](https://sentry.io/)
 - [Documentation](https://docs.sentry.io/)
-- [Getting Started](https://docs.sentry.io/product/sentry-basics/)
-- [Authentication](https://docs.sentry.io/api/auth/)
+- [Getting started](https://docs.sentry.io/product/sentry-basics/)
 - [Pricing](https://sentry.io/pricing/)
-- [Blog](https://blog.sentry.io/)
-- [GitHub Organization](https://github.com/getsentry)
-- [Discord](https://discord.gg/sentry)
-- [Sign Up](https://sentry.io/signup/)
-- [Login](https://sentry.io/auth/login/)
 - [Support](https://sentry.zendesk.com/hc/en-us/)
-- [Forum](https://forum.sentry.io/)
 - [Changelog](https://sentry.io/changelog/)
+- [Blog](https://blog.sentry.io/)
 - [Security](https://sentry.io/security/)
-- [Community](https://sentry.io/community/)
-- [Self- Hosted](https://docs.sentry.io/server/)
-- [Developer  Documentation](https://develop.sentry.dev/)
-- [C L I](https://docs.sentry.io/cli/)
-- [S D Ks](https://docs.sentry.io/platforms/)
-- [Status Page](https://status.sentry.io/)
-- [Terms of Service](https://sentry.io/terms/)
-- [Privacy Policy](https://sentry.io/privacy/)
-- [Integrations](https://sentry.io/integrations/)
-- [L L Ms Txt](https://docs.sentry.io/llms.txt)
+- [Compliance](https://sentry.io/security/)
+- [Terms of service](https://sentry.io/terms/)
+- [Privacy policy](https://sentry.io/privacy/)
+- [GitHub](https://github.com/getsentry)
+- [Status](https://status.sentry.io/)
 
-## Maintainers
+## API Evangelist rating
 
-**Email:** kin@apievangelist.com
+**Kin Score 79.0** — exemplar · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 96.7 |
+| Contract quality | 70.2 |
+| Contract governance | 28.0 |
+| Operational transparency | 52.6 |
+| Developer ergonomics | 92.3 |
+| Access clarity | 85.5 |
+
+**Agent readiness 50.2** — agent-ready (gated down from agent-native)
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | verified |
+| Auth Clarity | served (partial credit) |
+| Idempotency | — |
+| Error Semantics | derived (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | yes |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | yes |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | served (partial credit) |
+| Protected Resource Metadata | verified |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | partial |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 45.1** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/sentry-system/](https://apis.io/providers/sentry-system/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Sentry: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/sentry-system/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
