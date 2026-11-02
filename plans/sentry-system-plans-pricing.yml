@@ -1,0 +1,92 @@
+# Pricing transcribed from the provider's own page — see provenance. Numbers are quoted, not derived.
+generated: '2026-09-20'
+method: searched
+source: https://sentry.io/pricing/
+sources:
+- https://sentry.io/pricing/
+provenance:
+  tool: planning/api-economics/harvest_pricing.py
+  run: 20260920T120546
+  grounding: every price_text was found verbatim in the fetched page text
+audience: business-product
+pricing_basis: tiered-subscription
+delivery:
+  delivery: managed
+  method: page
+  read: '2026-09-20'
+  managed_tier: team
+published: true
+note: Sentry pricing page with four tiers plus a cost estimator showing pay-as-you-go per-unit overage
+  rates; annual total for Team shown as $312.00/yr.
+plan_count: 4
+currency: USD
+plans:
+- name: developer
+  price_text: $0
+  price: 0
+  currency: USD
+  period: month
+  included_quota: One user, Error Monitoring and Tracing, 10 custom dashboards, MCP access; 5k errors,
+    5GB logs, 5GB application metrics, 5M spans, 50 replays, 1 uptime monitor, 1 cron monitor, 1GB attachments
+- name: team
+  price_text: $26/mo
+  price: 26
+  currency: USD
+  period: month
+  included_quota: When billed annually with default pre-paid data; Unlimited users, API & third-party
+    integrations, 20 custom dashboards; 50k errors, 5GB logs, 5GB app metrics, 5M spans, 50 replays
+  overage: +$0.50/GB additional logs and metrics; +$1.00/uptime alert additional; +$0.78/monitor additional;
+    +$0.25/hr UI profiling; +$0.0315/hr continuous profiling; errors 50K–100K $0.0003625, 100K–500K $0.0002188,
+    500K–10M $0.0001875, 10M–20M $0.0001625, 20M+ $0.0001500 per error
+- name: business
+  price_text: $80/mo
+  price: 80
+  currency: USD
+  period: month
+  included_quota: When billed annually with default pre-paid data; Team features + Unlimited custom dashboards,
+    Advanced quota management, SAML + SCIM support
+  overage: +$0.50/GB additional logs and metrics; +$1.00/uptime alert additional; +$0.78/monitor additional;
+    +$0.25/hr UI profiling; +$0.0315/hr continuous profiling
+- name: enterprise
+  price_text: Custom
+  period: none
+  included_quota: Business features + Technical account manager, Dedicated customer support
+rate_limit_statements:
+- Each plan includes a base quota. Any usage above your quota is billed at pay-as-you-go rates.
+- Volumes above the slider maximums are supported on pay-as-you-go plans.
+x-canonical:
+  generated: '2026-11-01'
+  vocabulary: engine/economics/plans-canonical.yml
+  models:
+  - free
+  - hybrid
+  units: []
+  plans:
+  - name: developer
+    access: other
+    model: free
+    model_how: derived
+    units: []
+    periods:
+    - month
+  - name: team
+    access: other
+    model: hybrid
+    model_how: derived
+    units: []
+    periods:
+    - month
+  - name: business
+    access: other
+    model: hybrid
+    model_how: derived
+    units: []
+    periods:
+    - month
+  - name: enterprise
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods:
+    - none
